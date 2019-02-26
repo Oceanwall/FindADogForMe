@@ -1,0 +1,13 @@
+/* Image CSS */
+.dog-logo {
+  height: 30px;
+  width: 30px;
+  background: url("../images/favicon.ico");
+  background-position: center;
+  background-size: contain;
+}
+
+/* Typography CSS */
+.display-spacing {
+  letter-spacing: 2px;
+}
