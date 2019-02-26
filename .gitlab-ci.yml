@@ -1,0 +1,9 @@
+before_script:
+    - date
+    - uname -a
+    - printenv | sort
+
+python:
+    image: gpdowning/python
+    script:
+    - cd backend/testing
