@@ -4,11 +4,11 @@ const REPO_NAME = "findadogforme";
 
 const FIRST_NAMES = ["Samarth", "Matthew", "Bryan", "Keven", "Daniel"];
 const LAST_NAMES = ["Desai", "Zhao", "Yang", "Chen", "Ho"];
-const IDENTIFIERS = [["37949934+SamarthDesai01@users.noreply.github.com", "samarthdesai01"],
+const IDENTIFIERS = [["37949934+SamarthDesai01@users.noreply.github.com", "samarthdesai01@gmail.com", "samarthdesai01"],
                      ["matthew.zhao@utexas.edu", "oceanwall"],
-                     ["bryanyang16"],
-                     ["wc9245"],
-                     ["Triplestop"],];
+                     ["bryanyang16", "bryany360@gmail.com"],
+                     ["wc9245", "kevenchen@wireless-10-145-28-148.public.utexas.edu"],
+                     ["Triplestop", "danielho@cs.utexas.edu"]];
 
 window.onload = async function() {
     let member_info = [];
@@ -79,4 +79,11 @@ window.onload = async function() {
     */
 
     console.log(member_info);
+
+    for (let member of member_info) {
+      document.getElementById(`${member["first_name"]}-Commits`).innerHTML = member.commits;
+      document.getElementById(`${member["first_name"]}-Issues`).innerHTML = member.issues;
+      document.getElementById(`${member["first_name"]}-UT`).innerHTML = member.unit_tests;
+    }
+
 }
