@@ -1,20 +1,45 @@
 /* Image CSS */
 .dog-logo {
-  height: 30px;
-  width: 30px;
-  background: url("../images/favicon.ico");
-  background-position: center;
-  background-size: contain;
-}
-
-/* Typography CSS */
-.display-spacing {
-  letter-spacing: 2px;
-}
-
-@media (max-width: 992px) {
+    height: 30px;
+    width: 30px;
+    background: url("../images/favicon.ico");
+    background-position: center;
+    background-size: contain;
+  }
+  
+  /* Typography CSS */
+  .display-spacing {
+    letter-spacing: 2px;
+  }
+  
+  
+  .dog-image-1 {
+    background: url("../images/placeholder_doggo.jpg");
+  }
+  .dog-image-2 {
+    background: url("../images/placeholder_doggo.jpg");
+  }
+  .dog-image-3 {
+    background: url("../images/placeholder_doggo2.jpeg");
+  }
+  
+  .carousel-image {
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .description-font {
+    font-size: 21px;
+  }
+  
+  
+  @media (max-width: 992px) {
     .container {
         width: 100%;
         max-width: none;
     }
-}
+    .description-font {
+        font-size: 16px;
+      }
+  }
