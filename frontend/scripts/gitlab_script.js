@@ -86,4 +86,7 @@ window.onload = async function() {
       document.getElementById(`${member["first_name"]}-UT`).innerHTML = member.unit_tests;
     }
 
+    document.getElementById("Total-Commits").innerHTML = total_commits;
+    document.getElementById("Total-Issues").innerHTML = total_issues;
+    document.getElementById("Total-UT").innerHTML = total_unit_tests;
 }
