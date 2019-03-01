@@ -40,13 +40,35 @@
   font-size: 18px;
 }
 
+.about-member-1 {
+  background: url("../images/matthew.jpg");
+}
+/* .about-member-2 {
+  background: url();
+}
+.about-member-3 {
+  background: url();
+}
+.about-member-4 {
+  background: url();
+}
+.about-member-5 {
+  background: url();
+} */
 
-  @media (max-width: 992px) {
-    .container {
-        width: 100%;
-        max-width: none;
-    }
-    .description-font {
-        font-size: 16px;
-      }
+.about-card-image {
+  background-position: center;
+  background-size: cover;
+  height: 200px;
+}
+
+
+@media (max-width: 992px) {
+  .container {
+      width: 100%;
+      max-width: none;
   }
+  .description-font {
+      font-size: 16px;
+    }
+}
