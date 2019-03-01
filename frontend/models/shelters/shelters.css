@@ -1,0 +1,15 @@
+.shelter1-dog-image-1 {
+  background: url("../../images/shelter1-doggo-1.jpg");
+}
+.shelter1-dog-image-2 {
+  background: url("../../images/shelter1-doggo-2.jpg");
+}
+.shelter1-dog-image-3 {
+  background: url("../../images/shelter1-doggo-3.jpg");
+}
+
+.shelter-carousel-image {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}

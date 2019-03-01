@@ -6,34 +6,41 @@
     background-position: center;
     background-size: contain;
   }
-  
-  /* Typography CSS */
-  .display-spacing {
-    letter-spacing: 2px;
-  }
-  
-  
-  .dog-image-1 {
-    background: url("../images/placeholder_doggo.jpg");
-  }
-  .dog-image-2 {
-    background: url("../images/placeholder_doggo.jpg");
-  }
-  .dog-image-3 {
-    background: url("../images/placeholder_doggo2.jpeg");
-  }
-  
-  .carousel-image {
-    height: 500px;
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .description-font {
-    font-size: 21px;
-  }
-  
-  
+
+/* Typography CSS */
+.display-spacing {
+  letter-spacing: 2px;
+}
+
+
+.dog-image-1 {
+  background: url("../images/placeholder_doggo.jpg");
+}
+.dog-image-2 {
+  background: url("../images/placeholder_doggo.jpg");
+}
+.dog-image-3 {
+  background: url("../images/placeholder_doggo2.jpeg");
+}
+
+.carousel-image {
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+}
+
+.description-font {
+  font-size: 21px;
+}
+
+.info-bold {
+  font-weight: 600;
+}
+.info-general {
+  font-size: 18px;
+}
+
+
   @media (max-width: 992px) {
     .container {
         width: 100%;

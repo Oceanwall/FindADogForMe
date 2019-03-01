@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../styles/global.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../../scripts/global.js"></script>
+    <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="stylesheet" href="shelters.css">
+
+    <!-- Favicon, change as desired -->
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+
+    <title>Find a Dog for Me!</title>
+
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="../../index.html">
+          Find a Dog for Me
+          <div class="ml-2 d-inline-block align-top dog-logo"></div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto ml-2">
+            <li class="nav-item">
+              <a class="nav-link ml-1" href="../../index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link ml-1" href="../shelters/shelters.html">Shelters</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ml-1" href="../dogs/dogs.html">Dogs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ml-1" href="../breeds/breeds.html">Breeds</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ml-1" href="../activities/activities.html">Activities</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ml-1" href="../../about.html">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="row mt-3">
+        <div class="col-12 col-md-6">
+          <h1 class="text-center display-3">Austin Pets Alive</h1>
+          <div class="mt-4 info-general"><span class="info-bold">Contact Information:</span> adopt@austinpetsalive.org</div>
+          <div class="mt-2 info-general"><span class="info-bold">Shelter Location:</span> Austin, Texas</div>
+          <div class="mt-2 info-general"><span class="info-bold">Shelter Breeds:</span> </div>
+        </div>
+        <div class="col-12 col-md-5 offset-md-1">
+          <h4 class="text-center mb-3">Hosted dogs</h4>
+
+          <div id="shelterCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#shelterCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#shelterCarousel" data-slide-to="1"></li>
+              <li data-target="#shelterCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="shelter-carousel-image shelter1-dog-image-1"></div>
+              </div>
+              <div class="carousel-item">
+                <div class="shelter-carousel-image shelter1-dog-image-2"></div>
+              </div>
+              <div class="carousel-item">
+                <div class="shelter-carousel-image shelter1-dog-image-3"></div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#shelterCarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#shelterCarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div>Breeds Hosted</div>
+      <div class="row mt-3">
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo2.jpeg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>Dogs Hosted</div>
+      <div class="row mt-3">
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo2.jpeg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>Nearby Activities</div>
+      <div class="row mt-3">
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="card" style="width: 100%">
+            <img class="card-img-top" src="../../images/placeholder_doggo2.jpeg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
