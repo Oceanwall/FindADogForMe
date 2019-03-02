@@ -17,7 +17,7 @@ def get_breeds():
     breed_list = []
     payload = {"key" : PETFINDER_KEY, "animal" : "dog", "format" : "json"}
     response = requests.get(API_URL + "breed.list?", params=payload)
-    
+
     if response.status_code == 200:
         response_obj = json.loads(response.text)
         breed_dict = response_obj["petfinder"]["breeds"]["breed"]
@@ -45,11 +45,11 @@ def shelters_by_breed(breed, offset=0, count=25):
     payload = {"key" : PETFINDER_KEY, "animal" : "dog", "breed" : breed,
                "offset" : str(offset), "count" : str(count), "format" : "json"}
     response = requests.get(API_URL + "shelter.listByBreed", params=payload)
-    
+
     if response.status_code == 200:
         response_obj = json.loads(response.text)
         shelter_dict = response_obj["petfinder"]['shelters']
-        pp.pprint(shelter_dict)
+        # pp.pprint(shelter_dict)
         # TODO: Once this call gets fixed, I'll move the dict elements into the
         #       list
         return shelter_list
@@ -74,11 +74,11 @@ def find_shelters(location, offset=0, count=25):
     payload = {"key" : PETFINDER_KEY, "location" : str(location),
                "offset" : str(offset), "count" : str(count), "format" : "json"}
     response = requests.get(API_URL + "shelter.find", params=payload)
-    
+
     if response.status_code == 200:
         response_obj = json.loads(response.text)
         shelter_dict = response_obj["petfinder"]['shelters']
-        pp.pprint(shelter_dict)
+        # pp.pprint(shelter_dict)
 
         # TODO: Check for case where shelter_dict has no results, decide what to
         #       return in that case
@@ -88,7 +88,24 @@ def find_shelters(location, offset=0, count=25):
         # TODO: Decide whether we throw an error or just an empty dictionary
         return shelter_dict
 
-#find_shelters(78705)
+# TODO: When giving out shelters, make sure that they host dogs
+def get_shelter_information(location, offset = 0, count = 25):
+    shelter_dict = find_shelters(location, offset, count)['shelter']
+    shelter_data = []
+
+    for shelter in shelter_dict:
+        shelter_info = {}
+        shelter_info["id"] = shelter["id"]['$t']
+        shelter_info["name"] = shelter["name"]['$t']
+        shelter_info["city"] = shelter["city"]['$t']
+        shelter_info["state"] = shelter["state"]['$t']
+        shelter_info["email"] = shelter["email"]['$t']
+        shelter_data.append(shelter_info)
+
+    return shelter_data
+
+
+# print(get_shelter_information(78705))
 
 def find_pet(breed, sex, location, offset=0, count=25):
     """
@@ -104,11 +121,11 @@ def find_pet(breed, sex, location, offset=0, count=25):
                "sex" : sex, "location" : str(location), "offset" : str(offset),
                "count" : str(count), "format" : "json"}
     response = requests.get(API_URL + "pet.find", params=payload)
-    
+
     if response.status_code == 200:
         response_obj = json.loads(response.text)
         pet_dict = response_obj["petfinder"]["pets"]
-        pp.pprint(pet_dict)
+        # pp.pprint(pet_dict)
 
         # TODO: Check for case where pet_dict has no results, decide what to
         #       return in that case
@@ -120,7 +137,7 @@ def find_pet(breed, sex, location, offset=0, count=25):
 
 #find_pet("Retriever", "M", 78705, count=1)
 
-def get_pets_by_shelter(shelter_id, offset=0, count=25): 
+def get_pets_by_shelter(shelter_id, offset=0, count=25):
     """
     Returns a user specified number of pets for a certain shelter. INCLUDES ALL
     TYPES OF ANIMALS
@@ -132,11 +149,11 @@ def get_pets_by_shelter(shelter_id, offset=0, count=25):
     payload = {"key" : PETFINDER_KEY, "id" : shelter_id,
                "offset" : str(offset), "count" : str(count), "format" : "json"}
     response = requests.get(API_URL + "shelter.getPets", params=payload)
-    
+
     if response.status_code == 200:
         response_obj = json.loads(response.text)
         pets_dict = response_obj["petfinder"]
-        pp.pprint(pets_dict)
+        # pp.pprint(pets_dict)
 
         # TODO: Check for case where shelter_dict has no results, decide what to
         #       return in that case
@@ -146,7 +163,7 @@ def get_pets_by_shelter(shelter_id, offset=0, count=25):
         # TODO: Decide whether we throw an error or just an empty dictionary
         return pets_dict
 
-#get_pets_by_shelter("TX1218", count=3)
+# print(get_pets_by_shelter("TX1218", count=3))
 
 def find_breeds_in_shelter(shelter_id):
     """
@@ -168,4 +185,42 @@ def find_breeds_in_shelter(shelter_id):
 
     return breed_set
 
-print(find_breeds_in_shelter("TX1218"))
+# print(find_breeds_in_shelter("TX365"))
+
+# Gets pictures of shelter animals
+def pet_details_from_shelter(shelter_id, offset = 0, count = 50):
+    """
+    shelter_id - string, shelter id
+    offset - int, offset into the result set
+    count - int, how many records to return for this call
+    """
+    pet_data = []
+    for pet in get_pets_by_shelter(shelter_id, offset, 2 * count)["pets"]["pet"]:
+        if pet["animal"]["$t"] == "Dog":
+            pet_info = {}
+            pet_info["name"] = pet["name"]["$t"]
+            pet_info["shelter_id"] = pet["shelterId"]["$t"]
+            pet_info["id"] = pet["id"]["$t"]
+            pet_info["size"] = pet["size"]["$t"]
+            pet_info["sex"] = pet["sex"]["$t"]
+            pet_info["description"] = pet["description"]["$t"]
+            pet_info["age"] = pet["age"]["$t"]
+            pet_info["pictures"] = []
+
+            if isinstance(pet["breeds"]["breed"], dict):
+                pet_info["breed"] = pet["breeds"]["breed"]["$t"]
+            else:
+                pet_info["breed"] = pet["breeds"]["breed"][0]["$t"]
+
+            pic_id = 0
+            for picture in pet["media"]["photos"]["photo"]:
+                if int(picture['@id']) > pic_id and picture['@size'] == 'x':
+                    pic_id += 1
+                    pet_info["pictures"].append(picture["$t"])
+
+            pet_data.append(pet_info)
+
+    return pet_data
+
+
+print(pet_details_from_shelter("TX1069", count=25))

@@ -1,0 +1,82 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Shelter Information:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(Hidden) Shelter ID: TX1218
+Shelter Name: Austin Pets Alive
+Shelter City: Austin
+Shelter State: TX
+Shelter Email: adopt@austinpetsalive.org
+Shelter Breeds: Plott Hound, Akita, Rottweiler, Chocolate Labrador Retriever, Terrier, Boxer, Husky, Foxhound, Bullmastiff, American Bulldog
+Shelter Dog Image 1: http://photos.petfinder.com/photos/pets/38441885/1/?bust=1550643971&width=500&-x.jpg
+Shelter Dog Image 2: http://photos.petfinder.com/photos/pets/38441994/1/?bust=1550644358&width=500&-x.jpg
+Shelter Dog Image 3: http://photos.petfinder.com/photos/pets/38442288/1/?bust=1550643961&width=500&-x.jpg
+
+(Hidden) Shelter ID: TX1069
+Shelter Name: Homeward Bound Dog Rescue
+Shelter City: Austin
+Shelter State: TX
+Shelter Email: sagdinfo@aol.com
+Shelter Breeds: Great Dane, Terrier, German Shepherd Dog, Shepherd, Chihuahua, Scottish Terrier
+Shelter Dog Image 1: http://photos.petfinder.com/photos/pets/43441369/2/?bust=1543825900&width=500&-x.jpg
+Shelter Dog Image 2: http://photos.petfinder.com/photos/pets/43395778/1/?bust=1543400305&width=500&-x.jpg
+Shelter Dog Image 3: http://photos.petfinder.com/photos/pets/44067935/1/?bust=1550777168&width=500&-x.jpg
+
+(Hidden) Shelter ID: TX365
+Shelter Name: Cocker Spaniel Rescue of Austin/San Antonio
+Shelter City: Austin
+Shelter State: TX
+Shelter Email: woof@austincockerrescue.org
+Shelter Breeds: Cockapoo, Cocker Spaniel
+Shelter Dog Image 1: http://photos.petfinder.com/photos/pets/41535841/1/?bust=1525290035&width=500&-x.jpg
+Shelter Dog Image 2: http://photos.petfinder.com/photos/pets/43229796/1/?bust=1541620301&width=500&-x.jpg
+Shelter Dog Image 3: http://photos.petfinder.com/photos/pets/43852935/4/?bust=1548380664&width=500&-x.jpg
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dog Information:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(Hidden) Dog ID: 38441885
+(Hidden): Shelter ID: TX1218
+Dog Name: Sparky
+Shelter Name: Austin Pets Alive
+Dog Breed: Pit Bull Terrier
+Dog Age: Adult
+Dog Size: XL
+Dog Description: Short, stocky and totally adorable, Sparky is a loyal and affectionate friend who would love to be the next resident of your household. He's currently living in a foster home and they can attest that he'll make a lucky family very happy when he moves in! Sparky's foster mom says he's one of the most cuddly dogs she's ever known and has the perfect activity level. He enjoys long walks or short jogs, but he doesn't need to be constantly burning off extra energy. He can also entertain himself and he loves to toss his toys in the air and then go track them down. He also enjoys a round of tug of war and kind of playing fetch - Sparky will bring you a toy, you throw it, he will go sit with it for a while, then bring you a different toy, or just throw the toy to himself because why not? Feel free to try to teach him the rest of the rules of the game! Sparky also has excellent manners in the home. He's house and crate-trained but does great left alone outside of one and hasn't show any destructive tendencies. But he really prefers having his favorite people around, even if he's just chilling nearby while they work. Sparky takes some time to warm up to new people, but once he trusts you, he's as loyal and kind as can be. He's very affectionate and loves to curl up with his favorite humans and definitely thinks he's a lap dog. He loves to lay his head in his person's lap while they stroke his head or just snuggle on the bed or couch. If there's only a tiny little space there for him, Sparky says he can make it work! He also walks well on leash and knows 'sit' and 'come'. Sparky will make a fantastic companion to the right family. Come meet him and see if this big cuddlebug is right for yours! 2/28/19 4:40 AM
+Dog Image 1: http://photos.petfinder.com/photos/pets/38441885/1/?bust=1550643971&width=500&-x.jpg
+Dog Image 2: http://photos.petfinder.com/photos/pets/38441885/2/?bust=1550644472&width=500&-x.jpg
+Dog Image 3: http://photos.petfinder.com/photos/pets/38441885/3/?bust=1550644893&width=500&-x.jpg
+
+(Hidden) Dog ID: 38441994
+(Hidden): Shelter ID: TX1218
+Dog Name: Rio
+Shelter Name: Austin Pets Alive
+Dog Breed: American Bulldog
+Dog Age: Adult
+Dog Size: XL
+Dog Description: This handsome tall drink of water is Rio! His interests include fetch, swimming, fetch, treats, fetch, and gently leaning into your leg for pets. We should also mention that he loves playing fetch and will regularly do leaps and flips in the air trying to catch the ball. And he's really great at bringing the ball back to you and dropping it. If he thinks you don't see the ball on the ground, he'll politely pick it up and set it in your lap. Rio manages to keep the game going with even the laziest of tennis ball throwers! True to his name, Rio also really LOVES being in the water! Whether you're hosing him off or taking him for a dip in a pool or creek, he'll take all the water time he can get. And while he is incredibly energetic when playing with a ball or in the water, when he's all tuckered out, he's happy to hang out with his person and snuggling. Rio can be aloof with people he doesn't know, but he warms up quickly and before long he's asking for belly rubs and cuddles. Rio's a big guy, but he is very easy to walk on leash and enjoys going a nice quiet walk around the neighborhood, taking in all the sights and smells while staying by your side at a nice pace. He's also a smart pup who sits politely for treats and recently became TOP Dog Ready, which means he has already learned all the skills in his training plan in APA!'s Total Obedience Program. The Total Obedience Program (TOP) is modeled after the AKC's Canine Good Citizen (CGC) test. As a TOP dog, Rio has a personalized training plan and works with a volunteer trainer several times a week to help him learn the skills to become the best dog he can be! Dogs in the program learn skills including sitting calmly when approached by strangers, calmly walking past another dog, staying in a sit or down until told 'free,' and coming when called. In addition, Rio has also learned 'Place'. Rio has worked hard to become a wonderful companion, and as a part of APA's Total Obedience Program you can work with APA staff to continue to build a training relationship with Rio after adoption and master all the TOP dog skills together. Check out a video on APA's CGC program, on which the TOP was based: https://vimeo.com/89434193 Rio's an easy friend who's easy to please and he's more than ready to move on to his forever home. Come meet this handsome guy today!
+Dog Image 1: http://photos.petfinder.com/photos/pets/38441994/1/?bust=1550644358&width=500&-x.jpg
+Dog Image 2: http://photos.petfinder.com/photos/pets/38441994/2/?bust=1550644767&width=500&-x.jpg
+Dog Image 3: http://photos.petfinder.com/photos/pets/38441994/3/?bust=1550645138&width=500&-x.jpg
+
+(Hidden) Dog ID: 38442288
+(Hidden): Shelter ID: TX1218
+Dog Name: Faraon
+Shelter Name: Austin Pets Alive
+Dog Breed: Chow Chow
+Dog Age: Adult
+Dog Size: XL
+Dog Description: This honorable gentleman is loyal, loving, curious, and very attentive! Much like a Boy Scout, our Faraon enjoys going on adventures. Exploring with him is easy; he's great on a leash, responds when called and enjoys carrying supplies for the team. After some exploring, Faraon likes to relax, and you'll often find him chilling on the carpet or in his crate, but never on the furniture. His respect for household objects would make anyone proud. Faraon's intelligence, eagerness to please and his sweet-tooth have made him a joy to train. Not only does Faraon know basic commands such as 'Sit,' 'Down,' 'Stay,' 'Relax'; but also 'Home,' 'Heel,' 'Spin,' and 'Touch'! With this smart pup's insatiable appetite for learning, it's no surprise that Faraon has excelled in APA!'s Total Obedience Program (TOP), which is modeled after the AKC's Canine Good Citizen (CGC) test. As a TOP Dog, Faraon has a personalized training plan and works with a volunteer trainer several times a week to help him learn the skills to become the best dog he can be! Faraon is now TOP Dog Ready, which means he has already learned all the skills in his training plan, including walking nicely on leash, sitting calmly when approached by strangers, calmly walking past another dog, staying in a sit or down until told 'free,' coming when called and 'place, which means he will go to a special spot in your home on command. Faraon has worked hard to become a wonderful companion, and as a part of APA's Total Obedience Program you can work with APA staff to continue to build a training relationship with Faraon after adoption and master all the TOP dog skills together. Check out a video on APA's CGC program, on which the TOP was based: https://vimeo.com/89434193 Faraon is a model dog that would love nothing more than to be your one and only. Come meet this amazing pup!
+Dog Image 1: http://photos.petfinder.com/photos/pets/38442288/1/?bust=1550643961&width=500&-x.jpg
+Dog Image 2: http://photos.petfinder.com/photos/pets/38442288/2/?bust=1550644463&width=500&-x.jpg
+Dog Image 3: http://photos.petfinder.com/photos/pets/38442288/3/?bust=1550644883&width=500&-x.jpg
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Breed Information:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Activities Information:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
