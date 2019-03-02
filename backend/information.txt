@@ -76,6 +76,38 @@ Dog Image 3: http://photos.petfinder.com/photos/pets/38442288/3/?bust=1550644883
 Breed Information:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Breed Title: Akita
+(Private) Id: 6
+Breed Temperament: Docile, Alert, Responsive, Dignified, Composed, Friendly, Receptive, Faithful, Courageous
+Breed Life-span: 10 - 14 years
+Breed Group: Working
+Breed Origin: Hunting bears
+Breed Height: 24 - 28 inches
+Breed Image 1: https://images.dog.ceo/breeds/akita/512px-Akita_inu.jpeg
+Breed Image 2: https://images.dog.ceo/breeds/akita/Akita_Inu_dog.jpg
+Breed Image 3: https://images.dog.ceo/breeds/akita/Akita_hiking_in_Shpella_e_Pëllumbasit.JPG
+
+Breed Title: Golden Retriever
+(Private) Id: 121
+Breed Temperament: Intelligent, Kind, Reliable, Friendly, Trustworthy, Confident
+Breed Life-span: 10 - 12 years
+Breed Group: Sporting
+Breed Origin: Retrieving
+Breed Height: 21.5 - 24 inches
+Breed Image 1: https://images.dog.ceo/breeds/retriever-golden/n02099601_118.jpg
+Breed Image 2: https://images.dog.ceo/breeds/retriever-golden/n02099601_3494.jpg
+Breed Image 3: https://images.dog.ceo/breeds/retriever-golden/n02099601_4678.jpg
+
+Breed Title: Alaskan Malamute
+(Private) Id: 9
+Breed Temperament: Friendly, Affectionate, Devoted, Loyal, Dignified, Playful
+Breed Life-span: 12 - 15 years
+Breed Group: Working
+Breed Origin: Hauling heavy freight, Sled pulling
+Breed Height: 23 - 25 inches
+Breed Image 1: https://images.dog.ceo/breeds/malamute/n02110063_4739.jpg
+Breed Image 2: https://images.dog.ceo/breeds/malamute/n02110063_9259.jpg
+Breed Image 3: https://images.dog.ceo/breeds/malamute/n02110063_13126.jpg
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Activities Information:
