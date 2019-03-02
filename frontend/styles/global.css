@@ -41,27 +41,26 @@
 }
 
 .about-member-1 {
+  background: url("../images/bryan.jpg");
+}
+ .about-member-2 {
   background: url("../images/matthew.jpg");
 }
-/* .about-member-2 {
-  background: url();
-}
 .about-member-3 {
-  background: url();
+  background: url("../images/matthew.jpg");
 }
 .about-member-4 {
-  background: url();
+  background: url("../images/matthew.jpg");
 }
 .about-member-5 {
-  background: url();
-} */
+  background: url("../images/matthew.jpg");
+} 
 
 .about-card-image {
   background-position: center;
   background-size: cover;
   height: 200px;
 }
-
 
 @media (max-width: 992px) {
   .container {
