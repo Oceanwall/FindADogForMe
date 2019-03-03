@@ -59,8 +59,13 @@ window.onload = async function() {
     let issue_info = await issues_response.json();
 
     for (let issue of issue_info) {
-        member_map.get(issue.author.username).issues++;
-        total_issues++;
+        if (member_map.has(issue.author.username)) {
+          member_map.get(issue.author.username).issues++;
+          total_issues++;
+        }
+        else {
+          console.log("Unknown issue author: " + issue.author.username);
+        }
     }
 
     /*
@@ -69,7 +74,7 @@ window.onload = async function() {
     ~~~~~~~~~~~~~~~~~~~~
     */
 
-    // TODO
+    // TODO - Possibly entered manually?
 
 
     /*
