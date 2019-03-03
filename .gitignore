@@ -1,3 +1,5 @@
 .env
 .DS_STORE
+static/.DS_STORE
 frontend/.DS_STORE
+backend/.DS_STORE
