@@ -1,0 +1,35 @@
+.sparky-image-1 {
+  background: url("http://photos.petfinder.com/photos/pets/38441885/1/?bust=1550643971&width=500&-x.jpg");
+}
+.sparky-image-2 {
+  background: url("http://photos.petfinder.com/photos/pets/38441885/2/?bust=1550644472&width=500&-x.jpg");
+}
+.sparky-image-3 {
+  background: url("http://photos.petfinder.com/photos/pets/38441885/2/?bust=1550644472&width=500&-x.jpg");
+}
+
+.rio-image-1 {
+  background: url("http://photos.petfinder.com/photos/pets/38441994/1/?bust=1550644358&width=500&-x.jpg");
+}
+.rio-image-2 {
+  background: url("http://photos.petfinder.com/photos/pets/38441994/2/?bust=1550644767&width=500&-x.jpg");
+}
+.rio-image-3 {
+  background: url("http://photos.petfinder.com/photos/pets/38441994/3/?bust=1550645138&width=500&-x.jpg");
+}
+
+.faraon-image-1 {
+  background: url("http://photos.petfinder.com/photos/pets/38442288/1/?bust=1550643961&width=500&-x.jpg");
+}
+.faraon-image-2 {
+  background: url("http://photos.petfinder.com/photos/pets/38442288/2/?bust=1550644463&width=500&-x.jpg");
+}
+.faraon-image-3 {
+  background: url("http://photos.petfinder.com/photos/pets/38442288/3/?bust=1550644883&width=500&-x.jpg");
+}
+
+.carousel-image {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}

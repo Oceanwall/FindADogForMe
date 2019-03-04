@@ -1,0 +1,35 @@
+.akita-image-1 {
+  background: url("../../images/shelter1-doggo-1.jpg");
+}
+.akita-image-2 {
+  background: url("../../images/shelter1-doggo-2.jpg");
+}
+.akita-image-3 {
+  background: url("../../images/shelter1-doggo-3.jpg");
+}
+
+.golden-image-1 {
+  background: url("../../images/shelter1-doggo-1.jpg");
+}
+.golden-image-2 {
+  background: url("../../images/shelter1-doggo-2.jpg");
+}
+.golden-image-3 {
+  background: url("../../images/shelter1-doggo-3.jpg");
+}
+
+.alaskan-image-1 {
+  background: url("../../images/shelter1-doggo-1.jpg");
+}
+.alaskan-image-2 {
+  background: url("../../images/shelter1-doggo-2.jpg");
+}
+.alaskan-image-3 {
+  background: url("../../images/shelter1-doggo-3.jpg");
+}
+
+.carousel-image {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
