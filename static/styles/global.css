@@ -51,10 +51,12 @@
 }
 .about-member-4 {
   background: url("../images/keven.jpg");
+  background-position: top !important;
 }
 .about-member-5 {
   background: url("../images/matthew.jpg");
-} 
+  filter: brightness(120%);
+}
 
 .about-card-image {
   background-position: center;

@@ -4,11 +4,11 @@ const REPO_NAME = "findadogforme";
 
 const FIRST_NAMES = ["Samarth", "Matthew", "Bryan", "Keven", "Daniel"];
 const LAST_NAMES = ["Desai", "Zhao", "Yang", "Chen", "Ho"];
-const IDENTIFIERS = [["37949934+SamarthDesai01@users.noreply.github.com", "samarthdesai01@gmail.com", "samarthdesai01"],
-                     ["matthew.zhao@utexas.edu", "oceanwall"],
-                     ["bryanyang16", "bryany360@gmail.com"],
-                     ["wc9245", "kevenchen@wireless-10-145-28-148.public.utexas.edu"],
-                     ["Triplestop", "danielho@cs.utexas.edu"]];
+const IDENTIFIERS = [["Samarth Desai", "37949934+SamarthDesai01@users.noreply.github.com", "samarthdesai01@gmail.com", "samarthdesai01"],
+                     ["Matthew Zhao", "matthew.zhao@utexas.edu", "oceanwall"],
+                     ["Bryan Yang", "bryanyang16", "bryany360@gmail.com"],
+                     ["Keven Chen", "wc9245"],
+                     ["Daniel Ho", "Triplestop", "danielho@cs.utexas.edu"]];
 
 window.onload = async function() {
     let member_info = [];
@@ -44,8 +44,17 @@ window.onload = async function() {
 
     // TODO: GitLab API doesn't identify users by username but rather by author email
     for (let commit of commit_info) {
-        member_map.get(commit.author_email).commits++;
-        total_commits++;
+      if (member_map.has(commit.author_email)) {
+          member_map.get(commit.author_email).commits++;
+          total_commits++;
+      }
+      else if (member_map.has(commit.author_name)) {
+          member_map.get(commit.author_name).commits++;
+          total_commits++;
+      }
+      else {
+        console.log("Unknown commiter: " + commit.author_name);
+      }
     }
 
     /*
