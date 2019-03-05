@@ -80,11 +80,12 @@ def get_meetups_near_area(query, latitude, longitude, range):
         }
 
     response = requests.get(MEETUP_URL, params=payload)
-    print(response.status_code)
+    # print(response.status_code)
 
 
     if response.status_code == 200:
         response_obj = json.loads(response.text)
+        # print(response_obj)
         activity_data = []
 
         for event in response_obj["events"]:
@@ -100,7 +101,7 @@ def get_meetups_near_area(query, latitude, longitude, range):
 
             if "venue" in event:
                 activity_datum["venue_name"] = event["venue"]["name"]
-            if "description" in activity_data:
+            if "description" in event:
                 activity_datum["description"] = event["description"]
 
             activity_data.append(activity_datum)

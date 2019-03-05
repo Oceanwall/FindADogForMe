@@ -109,6 +109,53 @@ Breed Image 1: https://images.dog.ceo/breeds/malamute/n02110063_4739.jpg
 Breed Image 2: https://images.dog.ceo/breeds/malamute/n02110063_9259.jpg
 Breed Image 3: https://images.dog.ceo/breeds/malamute/n02110063_13126.jpg
 
+Breed Title: American Pit Bull Terrier
+[ { 'bred_for': 'Fighting',
+    'breed_group': 'Terrier',
+    'country_code': 'US',
+    'height': {'imperial': '17 - 21', 'metric': '43 - 53'},
+    'id': 15,
+    'life_span': '10 - 15 years',
+    'name': 'American Pit Bull Terrier',
+    'temperament': 'Strong Willed, Stubborn, Friendly, Clownish, Affectionate, '
+                   'Loyal, Obedient, Intelligent, Courageous',
+    'weight': {'imperial': '30 - 60', 'metric': '14 - 27'}}]
+[ 'https://images.dog.ceo/breeds/bulldog-boston/n02096585_1976.jpg',
+  'https://images.dog.ceo/breeds/bulldog-boston/n02096585_4662.jpg',
+  'https://images.dog.ceo/breeds/bulldog-french/n02108915_1866.jpg',
+  'https://images.dog.ceo/breeds/bulldog-french/n02108915_2681.jpg',
+  'https://images.dog.ceo/breeds/bullterrier-staffordshire/n02093256_2405.jpg']
+
+Breed Title: American Bulldog
+[ { 'breed_group': 'Working',
+    'height': {'imperial': '22 - 27', 'metric': '56 - 69'},
+    'id': 10,
+    'life_span': '10 - 12 years',
+    'name': 'American Bulldog',
+    'temperament': 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, '
+                   'Dominant',
+    'weight': {'imperial': '60 - 120', 'metric': '27 - 54'}}]
+[ 'https://images.dog.ceo/breeds/bulldog-boston/n02096585_1179.jpg',
+  'https://images.dog.ceo/breeds/bulldog-boston/n02096585_12372.jpg',
+  'https://images.dog.ceo/breeds/bulldog-boston/n02096585_7101.jpg',
+  'https://images.dog.ceo/breeds/bulldog-french/n02108915_2326.jpg',
+  'https://images.dog.ceo/breeds/bulldog-french/n02108915_9899.jpg']
+
+Breed Title: Chow Chow
+[ { 'bred_for': 'Guardian, cart pulling, hunting',
+    'breed_group': 'Non-Sporting',
+    'height': {'imperial': '17 - 20', 'metric': '43 - 51'},
+    'id': 81,
+    'life_span': '12 - 15 years',
+    'name': 'Chow Chow',
+    'temperament': 'Aloof, Loyal, Independent, Quiet',
+    'weight': {'imperial': '40 - 70', 'metric': '18 - 32'}}]
+[ 'https://images.dog.ceo/breeds/chow/n02112137_1251.jpg',
+  'https://images.dog.ceo/breeds/chow/n02112137_1976.jpg',
+  'https://images.dog.ceo/breeds/chow/n02112137_3570.jpg',
+  'https://images.dog.ceo/breeds/chow/n02112137_7751.jpg',
+  'https://images.dog.ceo/breeds/chow/n02112137_9159.jpg']
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Activities Information:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -165,3 +212,549 @@ Photo URL: https://www.nps.gov/common/uploads/structured_data/3C7DAC12-1DD8-B71B
 Photo URL: https://www.nps.gov/common/uploads/structured_data/3C7DAED8-1DD8-B71B-0BAAC47C56428D9C.jpg
 Photo URL: https://www.nps.gov/common/uploads/structured_data/A1F5E6C0-1DD8-B71B-0B23C3B88803DB0B.jpg
 -------------------------------------------------
+
+
+Meetup Activities
+-------------------------------------------------
+[ { 'date': '2019-03-10',
+    'description': '<p>Get in a total-body workout while having a blast with '
+                   'your dog! We incorporate strength, cardio, and agility, '
+                   'along with basic training and lots of fun for your dog. '
+                   'Appropriate for all fitness levels - both human and '
+                   'canine.</p> <p>The highlight is our Down &amp; Dirty '
+                   'Obstacle Course that you complete with your dog! Your '
+                   'first class is free.</p> <p>We meet on the east side of '
+                   'Phil Hardberger Park off of Blanco Rd in the center of the '
+                   "island by the picnic tables. (You'll see it as soon as you "
+                   'pull in).</p> <p>Please, only one dog per person.</p> ',
+    'id': 'wdczqqyzfbnb',
+    'location': 'San Antonio, TX',
+    'name': 'Work out with your dog!',
+    'time': '09:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/meetup-group-KcWYCKBR/events/wdczqqyzfbnb/',
+    'venue_name': 'Phil Hardberger '},
+  { 'date': '2019-03-07',
+    'description': "<p>Every Thursday AM we'll romp at the\xa0U.C. Dog Park "
+                   'with our\xa0sighthounds during the week!\xa0\xa0Come join '
+                   'us if you can!</p> <p>There is a small dog section and a '
+                   'large dog section, so if you have big ones you can go in '
+                   'the big dog section and we can still visit via the divided '
+                   'chain link fence!</p> <p>Hope to see you there!</p> <p>The '
+                   "IG's love the small dog section and it's pretty big for "
+                   "them.\xa0\xa0During the week it's just about like having a "
+                   'private park.</p> <p>Suzy, SASH Organizer</p> <p>C '
+                   '#[masked]</p> <p>E-Mail:\xa0 <a '
+                   'href="mailto:[masked]">[masked]</a></p> ',
+    'id': 'rnnkflyzfbkb',
+    'location': 'Cibolo, TX',
+    'name': 'EXPLORING UNIVERAL CITY DOG PARK DURING THE WEEK - EVERY THURSDAY '
+            'AM!',
+    'time': '10:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/sasighthounds/events/rnnkflyzfbkb/',
+    'venue_name': 'Universal City Dog Park '},
+  { 'date': '2019-03-16',
+    'description': '<p>The fun event is for 2 days. The cost is regular '
+                   "membership (if you already have a pass then it's covered) "
+                   'and $5.00 per dogs on a leash. There are events from '
+                   '10pm-2pm each day. They provide dog waste bags. Pools of '
+                   'water will be strategically placed around the gardens. The '
+                   'decorations will be up for the holidays so plan to take '
+                   'pictures.</p> ',
+    'id': '259395831',
+    'location': 'Cibolo, TX',
+    'name': "Dog Day's at the San Antonio Botanical Garden",
+    'time': '09:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/sasighthounds/events/259395831/',
+    'venue_name': 'San Antonio Botanical Gardens '},
+  { 'date': '2019-03-09',
+    'description': "<p>Every Saturday morning we'll play at\xa0Phil Hardberger "
+                   'Dog Park West\xa0(not the Dog Park off Blanco)\xa0with '
+                   'our\xa0sighthounds!\xa0\xa0Come join us if you can!\xa0 '
+                   'Hoping to see new faces &amp; old faces coming out.\xa0\xa0'
+                   "We'll have a GREYT time.</p> <p>(This takes the place of "
+                   'Saturday afternoon due to the heat in the afternoon).</p> '
+                   '<p>Map:\xa0 <a '
+                   'href="http://www.sanantonio.gov/parksandrec/pdfs/hardbergerMap022012.pdf">&lt;/a&gt;</a><a '
+                   'href="http://www.sanantonio.gov/parksandrec/pdfs/hardbergerMap022012.pdf" '
+                   'class="linkified">http://www.sanantonio.gov/parksandrec/pdfs/hardbergerMap022012.pdf</a></p> '
+                   '<p>NOTE: Dog Park written in RED is the Phil Hardberger '
+                   'Dog Park West</p> <p>There is a small dog section and a '
+                   'large dog section, so if you have big ones you can go in '
+                   'the big dog section and we can still visit via the divided '
+                   'chain link fence!</p> <p>Hope to see you there!</p> '
+                   '<p>Suzy, SASH Organizer</p> <p>C #[masked]</p> '
+                   '<p>E-Mail:\xa0 &lt;a '
+                   'href="mailto:[masked]"&gt;[masked]</p> ',
+    'id': 'xdtvmlyzfbmb',
+    'location': 'Cibolo, TX',
+    'name': 'PLAYING AT PHIL HARDBERGER DOG PARK WEST EVERY SATURDAY MORNING',
+    'time': '10:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/sasighthounds/events/xdtvmlyzfbmb/'},
+  { 'date': '2019-04-27',
+    'description': '<p>This is 2.6 mile walk with dogs and their people along '
+                   "the streets of Alamo Heights. We'll be walking through the "
+                   'neighborhood, which is paved and partly shaded. This is a '
+                   'stroller friendly event. Water will be provided, but '
+                   'please bring additional water and poop bags.</p> <p>7:45 '
+                   'a.m. - Registration starts</p> <p>8:15 a.m. - Costume '
+                   'Contest, and you must be registered for the parade to '
+                   'enter the contest. 6 categories:<br/>Best in Show<br/>Top '
+                   'Dog<br/>Most Creative<br/>Most Patriotic<br/>Best Fiesta '
+                   'Flair<br/>Best Matched Human and Dog</p> <p>9:15 a.m. - '
+                   'Pet parade starts.</p> <p>Online Registration: <a '
+                   'href="https://www.therapyanimalssa.org/about/fiesta-pooch-parade/parade-reg-credit-2019.html" '
+                   'class="linkified">https://www.therapyanimalssa.org/about/fiesta-pooch-parade/parade-reg-credit-2019.html</a></p> '
+                   '<p>Website: <a '
+                   'href="https://www.therapyanimalssa.org/about/fiesta-pooch-parade/parade-sponsors-2019.html" '
+                   'class="linkified">https://www.therapyanimalssa.org/about/fiesta-pooch-parade/parade-sponsors-2019.html</a></p> '
+                   '<p>Facebook: <a '
+                   'href="https://www.facebook.com/therapyanimalsa/" '
+                   'class="linkified">https://www.facebook.com/therapyanimalsa/</a></p> ',
+    'id': '257684812',
+    'location': 'San Antonio, TX',
+    'name': 'Fiesta Pooch Parade 2019',
+    'time': '08:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/sanaturehounds-com/events/257684812/',
+    'venue_name': 'Alamo Heights Swimming Pool'},
+  { 'date': '2019-03-16',
+    'description': '<p>Fest of Tails, now in its 13th year, is a free '
+                   'family-friendlykite festival and dog fair! This years '
+                   'event is set for Saturday, March 16,\xa02019 from 9 am - 4 '
+                   'pm at McAllister Park.</p> <p>Come out and celebrate the '
+                   'arrival of spring with family fun in the park! This event '
+                   'welcomes kite and dog enthusiasts from near and far!</p> '
+                   '<p>Dogs of all sizes and breeds, along with a sky full of '
+                   'kites, fill the park with a beautiful scene on this day of '
+                   'free community fun! All guests are encouraged to bring a '
+                   'blanket and lawn chair to watch the spectacular sky views '
+                   'and to enjoy meeting new furry friends.</p> <p>Fest of '
+                   'Tails has events and activities for the entire family. '
+                   'McAllister Park will be filled with live entertainment, '
+                   'various food options, kids rides and games, kite making '
+                   'workshops, and much more. For all dog enthusiasts, pet '
+                   'products and pet adoptions will be available, and '
+                   'information on pet registration, vaccinations, and more, '
+                   'will also be available through various participating '
+                   'animal welfare organizations.</p> <p>In continuation with '
+                   'tradition, we also welcome the return of the GIANT KITE '
+                   'exhibition from Go Big Or Go Home, and the always popular, '
+                   'Pooch Parade and Costume Contest, which will consist of '
+                   'Best Dressed, Best Dog/Owner, and Best in Show. '
+                   '(Pooch-Parade Participants - Please see details and '
+                   'sign-up application below)</p> <p>FEST OF TAILS each year, '
+                   'from all over the Central-Texas region, consisting of '
+                   'kite-flyers, k9 enthusiasts, bicyclists, and '
+                   'park-lovers.</p> <p>As always, Fest of Tails is 100% FREE '
+                   'to the public, and we encourage families to bring the '
+                   'kids, and the pups, and come enjoy a day of family fun in '
+                   'the park</p> <p>The event is free, all-ages, and open to '
+                   'the public. For more information, and to enter the Pooch '
+                   'Parade Costume Contest, please hop on over to our '
+                   'website:www.saparksfoundation.org/fest-of-tails\xa0</p> '
+                   '<p>Registration deadline for the Pooch Parade '
+                   'is:<br/>Friday, March 15th at 5pm!</p> ',
+    'id': '258575242',
+    'location': 'San Antonio, TX',
+    'name': '13th Annual Fest of Tails - Kite Festival and Dog Fair',
+    'time': '09:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/San-Antonio-Lowriders/events/258575242/',
+    'venue_name': 'McAllister Dog Park'},
+  { 'date': '2019-03-23',
+    'description': '<p>Every month there is something new to experience with '
+                   'the Chi Amigos! \xa0Whether it is sharing a cup of coffee '
+                   'and our Amigos together, a super fun costume contest, or '
+                   'even just giggling over Chisicles, we love doing it '
+                   'together as a supercharged pack of ...</p> '
+                   '<p>\xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 '
+                   'CHI AMIGOS! \xa0</p> ',
+    'id': 'rnbpvlyzfbfc',
+    'location': 'Cedar Park, TX',
+    'name': 'Get to know your Chi Amigos!',
+    'time': '09:30',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/TheChiAmigos/events/rnbpvlyzfbfc/',
+    'venue_name': 'Cedar Bark Park'},
+  { 'date': '2019-03-17',
+    'description': '<p>Lovers of all kinds unite under one WOOF for the '
+                   "ultimate Puppy Party! PrideBites, Bumble and Tito's "
+                   'Handmade Vodka are coming together to throw the ultimate '
+                   'DOG FRIENDLY bash benefitting Austin Pets Alive! Bring '
+                   'your well behaved leashed dog(s) down and celebrate! Feel '
+                   'free to dress your dog up in green :) **Must be 21 and up '
+                   'to attend**</p> <p>Get your free ticket at EventBrite: <a '
+                   'href="https://www.eventbrite.com/e/54880417807?aff=efbneb" '
+                   'class="linkified">https://www.eventbrite.com/e/54880417807?aff=efbneb</a></p> '
+                   '<p>Come on down to the Lustre Pearl on Rainey St. (one '
+                   'block from the Convention Center) for doggy photo booths, '
+                   'St. Patrick Day surprises, awesome drawings and more! '
+                   'Complimentary doggie snack samples from Austin based '
+                   'Grocery Pup!</p> <p>Most importantly, this event will also '
+                   'be full of adoptable puppies from local rescue group '
+                   'Austin Pets Alive! Come and give them some love, or even a '
+                   'forever home :)</p> <p>Show Bumble on your phone at the '
+                   "door to get a complimentary Tito's Handmade Vodka drink! "
+                   'Limited number of drink tickets available. Download Bumble '
+                   'here --&gt; bit.ly/GetBumbleApp"</p> <p>**Must be 21 and '
+                   'up to attend**</p> ',
+    'id': '259449462',
+    'location': 'Austin, TX',
+    'name': 'SXSW 5th Annual Puppy Party',
+    'time': '12:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/dogsofatx/events/259449462/',
+    'venue_name': 'Lustre Pearl Rainey'},
+  { 'date': '2019-03-17',
+    'id': 'slljnmyzfbwb',
+    'location': 'Austin, TX',
+    'name': 'Schnauzer Play at Yard Bar',
+    'time': '14:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/austin-schnauzers/events/slljnmyzfbwb/'},
+  { 'date': '2019-04-07',
+    'description': "<p>Bring your Bassets out and let's form a pack!</p> ",
+    'id': 'jxscmqyzgbkb',
+    'location': 'Austin, TX',
+    'name': 'Basset Hounds at Yard Bar',
+    'time': '13:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/austin-basset-hounds/events/jxscmqyzgbkb/',
+    'venue_name': 'Yard Bar'},
+  { 'date': '2019-04-27',
+    'id': '258534394',
+    'location': 'San Antonio, TX',
+    'name': 'KING WILLIAM FAIR',
+    'time': '08:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/safun4evry1/events/258534394/'},
+  { 'date': '2019-03-13',
+    'id': '258685020',
+    'location': 'San Antonio, TX',
+    'name': 'Yappy Hour *Free*',
+    'time': '18:30',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/Mix-Mingle-SA-Singles/events/258685020/'},
+  { 'date': '2019-03-31',
+    'description': '<p>Bring your Frenchie babes to play while having some '
+                   'great drinks and Brazilian street food!<br/>**They will '
+                   'have michelada and mimosa drink specials for us from '
+                   '12-2!<br/><a '
+                   'href="https://craftsmanbar.com/boteco-espeteria" '
+                   'class="linkified">https://craftsmanbar.com/boteco-espeteria</a><br/><a '
+                   'href="https://craftsmanbar.com/cocktails" '
+                   'class="linkified">https://craftsmanbar.com/cocktails</a><br/><a '
+                   'href="https://craftsmanbar.com/tiki-bar" '
+                   'class="linkified">https://craftsmanbar.com/tiki-bar</a></p> ',
+    'id': '259239900',
+    'location': 'Austin, TX',
+    'name': 'Frenchie meetup at Craftsman!',
+    'time': '12:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/austinfrenchies/events/259239900/',
+    'venue_name': 'Craftsman'},
+  { 'date': '2019-03-16',
+    'description': '<p>Were celebrating 18 years of everything outdoors! This '
+                   'year we will be at Emma Long Park. Bring your swimsuit, we '
+                   'will swim Bring your strong arm, we will play sand '
+                   'volleyball. Giveaways included, and one lucky winner will '
+                   'get to go to Big Bend for free. Members will be entered '
+                   'into a drawing to win a spot on our annual Big Bend Fall '
+                   'campout. If you want to stay the whole weekend with us, '
+                   'then sign up for our Birthday Campout. It is only open to '
+                   'members. The birthday party itself is open to the publc, '
+                   'so bring a friend! The club will be grilling up lots of '
+                   'yummy meats for everyone. You just bring a side dish to '
+                   'share and of course your CHAIR!! Day Fees into the park '
+                   'are required, and pets must be on leash. Adult beverages '
+                   'are allowed in plastic or cans and only encouraged by '
+                   'responsible adults. Open to the public, the kids, the '
+                   'dogs, your neighbors, your friends and family. Come hang '
+                   'out with us and see what fun we have.</p> ',
+    'id': '259451779',
+    'location': 'Austin, TX',
+    'name': '18th Birthday Party and Meet and Greet',
+    'time': '11:00',
+    'type': 'meetup',
+    'url': 'https://www.meetup.com/Hill-Country-Outdoors-Meetup/events/259451779/',
+    'venue_name': 'Emma Long Metropolitan Park'}]
+-------------------------------------------------
+
+Eventbrite Events
+[ { 'description': 'When you are dawg tired or having a ruff day, contact '
+                   'DogRover, a friend of your best friend. Your trusted '
+                   'neighborhood DogRover team member offers friendly pet '
+                   'sitting and walking services.\n'
+                   'DogRover offers friendly professional services to all '
+                   'domesticated animals. Some of our services allow your '
+                   'loved ones to remain in their familiar environment while '
+                   'you are away. This service is very useful for our canine '
+                   'and feline friends, who often suffer from anxiety while on '
+                   'travel. This service has several options ranging from a '
+                   '10-minute helping hand to a cuddle & snuggle over-night '
+                   'stay.\n'
+                   'We also pride ourselves on our pet walking services. The '
+                   'slotted time is fully dedicated to our friends with paws. '
+                   'For those friends who do not live within the same home, '
+                   "their walks will be solo. Our friend's safety is of our "
+                   'highest priority as we are very attentive to their needs '
+                   'and behaviors.\xa0\n'
+                   'Here at DogRover, our aim is to create friendships that '
+                   'will last fur-ever. Call or email us today for more '
+                   'information on our available simple plans and hot '
+                   'diggety-dog rates. Email: DogRover@gmail.com Phone/Text: '
+                   '254-226-2986.\n'
+                   'OFFICE\xa0HOURS: Sunday - Saturday 5:30AM - 9:30PMSERVICE '
+                   'HOURS: 6:00AM - 9:00PM; over-night til 5:30AMPlan slots '
+                   'available:\xa0(1) 6:00AM – 7:30AM, (2) 5:30PM – 6:30PM, '
+                   'and (3) 8:00PM – 9:00PM;\xa0Over-night:\xa09:00PM – 5:30AM',
+    'end': '2019-10-08T03:00:00Z',
+    'free': False,
+    'id': '38329427349',
+    'logo': 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F36190928%2F163057267607%2F1%2Foriginal.jpg?h=200&w=450&auto=compress&rect=0%2C0%2C1280%2C640&s=0880a9920fcb0cd65ef4de9af6fa487b',
+    'name': {'html': 'ATX Dog Rover ', 'text': 'ATX Dog Rover '},
+    'start': '2017-10-06T05:00:00Z',
+    'type': 'eventbrite',
+    'url': 'https://www.eventbrite.com/e/atx-dog-rover-tickets-38329427349?aff=ebapi'},
+  { 'description': '\n'
+                   'Nulo Pet Food Presents: Rescue Me! Join us at Yard Bar for '
+                   'the 2nd Annual unofficial SXSW Dog-Friendly Day Party that '
+                   'aims to “rescue” us locals from SXSW, while spotlighting, '
+                   'raising funds, and increasing awareness of Austin Humane '
+                   'Society dog and cat rescue. \n'
+                   '\n'
+                   '\n'
+                   '\n'
+                   '\n'
+                   '\n'
+                   'Sunday, March 10, 2019 \n'
+                   '\n'
+                   '\n'
+                   '12-4PM\n'
+                   '\n'
+                   '\n'
+                   '\n'
+                   '\n'
+                   '\n'
+                   'Nulo Pet Food\n'
+                   '\n'
+                   '\n'
+                   'Austin Humane Society\n'
+                   '\n'
+                   '\n'
+                   'Austin Sunshine Run\n'
+                   '\n'
+                   '\n'
+                   '\n'
+                   '\n'
+                   '\n'
+                   'Live Music\n'
+                   '\n'
+                   '\n'
+                   'Featured Cocktail- the Rescue Me, benefiting Austin Humane '
+                   'Society\n'
+                   '\n'
+                   '\n'
+                   'Beer Specials\n'
+                   '\n'
+                   '\n'
+                   'On-site adoptions from Austin Humane Society\n'
+                   '\n'
+                   '\n'
+                   'FREE Nulo starter kit for ALL on-site adoptions\n',
+    'end': '2019-03-10T21:00:00Z',
+    'free': True,
+    'id': '57054680084',
+    'logo': 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F57161092%2F198519380835%2F1%2Foriginal.20190220-233919?h=200&w=450&auto=compress&rect=0%2C18%2C1316%2C658&s=9ecb7eefb58325bbc7f3311b8afa1337',
+    'name': { 'html': 'Nulo Presents: Rescue Me',
+              'text': 'Nulo Presents: Rescue Me'},
+    'start': '2019-03-10T17:00:00Z',
+    'type': 'eventbrite',
+    'url': 'https://www.eventbrite.com/e/nulo-presents-rescue-me-tickets-57054680084?aff=ebapi'},
+  { 'description': 'Lovers of all kinds unite under one WOOF for the ultimate '
+                   "Puppy Party!\xa0PrideBites, Bumble\xa0and Tito's\xa0"
+                   'Handmade Vodka are coming together to throw the ultimate '
+                   'DOG FRIENDLY bash benefitting Austin Pets Alive!\xa0Bring '
+                   'your well behaved leashed dog(s) down and celebrate! Feel '
+                   'free to dress your dog up in green :)\xa0**Must be 21 and '
+                   'up to attend**\n'
+                   'Come on down to the Lustre Pearl\xa0on Rainey St. (one '
+                   'block from the Convention Center) for doggy photo booths, '
+                   'St. Patrick Day surprises, awesome drawings and more! '
+                   'Complimentary doggie snack samples from Austin based '
+                   'Grocery Pup!\xa0\n'
+                   'Most importantly, this event will also be full of '
+                   'adoptable puppies from local rescue group\xa0Austin Pets '
+                   'Alive!\xa0Come and give them some love, or even a forever '
+                   'home :)\n'
+                   'Show Bumble on your phone at the door to get a '
+                   "complimentary Tito's Handmade Vodka drink! Limited number "
+                   'of drink tickets available.\xa0Download Bumble here --> '
+                   'bit.ly/GetBumbleApp"\n'
+                   '**Must be 21 and up to attend**\n',
+    'end': '2019-03-17T21:00:00Z',
+    'free': True,
+    'id': '54880417807',
+    'logo': 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F56462941%2F101620038501%2F1%2Foriginal.20190208-015909?h=200&w=450&auto=compress&rect=0%2C0%2C2160%2C1080&s=3be6493fb9ae7e57bf98216ed9e14c99',
+    'name': {'html': 'SXSW Puppy Party 2019', 'text': 'SXSW Puppy Party 2019'},
+    'start': '2019-03-17T17:00:00Z',
+    'type': 'eventbrite',
+    'url': 'https://www.eventbrite.com/e/sxsw-puppy-party-2019-registration-54880417807?aff=ebapi'},
+  { 'description': 'Are you committed to keeping the Hill Country’s rolling '
+                   'hills and quality of life\xa0here forever? An avid hiker '
+                   'or biker of the Violet Crown Trail, excited by a first of '
+                   'its kind regional trail system? Curious about the work of '
+                   'Hill Country Conservancy?\n'
+                   '\xa0\n'
+                   'Join us for our HCC Walk & Talk!\n'
+                   '\xa0\n'
+                   'You’re invited to join George Cofer, Hill Country '
+                   'Conservancy’s CEO and founding Executive Director, for a '
+                   'hike along the Violet Crown Trail. You’ll have the '
+                   'opportunity to chat with George about all things HCC – '
+                   'conservation, the Violet Crown Trail, life in the Hill '
+                   'Country and more! We encourage individuals who are both '
+                   'familiar and unfamiliar with HCC to Walk & Talk with our '
+                   'fearless leader.\n'
+                   'This event is\xa0free\xa0to attend! Please click the '
+                   '“Register” button to indicate the number of RSVPs.\n'
+                   'ABOUT GEORGE COFER\n'
+                   'George Cofer is a sixth-generation Austinite and '
+                   'fifth-generation Texas rancher.\xa0 His love of the great '
+                   'outdoors and conservation of the natural environment come '
+                   'from being blessed by the opportunity to spend his '
+                   'childhood summers on a working cattle ranch along the Frio '
+                   'River in Uvalde County and from his outdoor experiences as '
+                   'an Eagle Scout.\xa0George is the founder and CEO of Hill '
+                   'Country Conservancy and has been a leader in helping to '
+                   'preserve almost 50,000 acres in Central Texas.\n'
+                   '\xa0\n'
+                   'MORE INFORMATION\n'
+                   'Please RSVP using the “register” button. You will receive '
+                   'a confirmation email upon submission and informational '
+                   'email the week of the hike.\n'
+                   'In case of inclement weather, an email will be sent with '
+                   'an alternate meeting location.\n'
+                   '– Please wear closed-toe shoes and weather appropriate '
+                   'clothing.\n'
+                   '– BYOWB (Bring Your Own Water Bottle) – the 290 trailhead '
+                   'is equipped with a water fountain.\n'
+                   '– This is a family friendly event.\n'
+                   '– Dogs are welcome on the trail, but must remain on a '
+                   'leash.\n'
+                   '– Anticipated time on the trail is 1-1.5 hours.\n',
+    'end': '2019-03-29T15:15:00Z',
+    'free': False,
+    'id': '54919672218',
+    'logo': 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F55161800%2F693909602%2F1%2Foriginal.20181214-215322?h=200&w=450&auto=compress&rect=0%2C22%2C1920%2C960&s=8d66a5fbb6eee0b24d55d4aa367c22ed',
+    'name': { 'html': 'March HCC Walk &amp; Talk',
+              'text': 'March HCC Walk & Talk'},
+    'start': '2019-03-29T13:50:00Z',
+    'type': 'eventbrite',
+    'url': 'https://www.eventbrite.com/e/march-hcc-walk-talk-registration-54919672218?aff=ebapi'},
+  { 'description': 'Are you committed to keeping the Hill Country’s rolling '
+                   'hills and quality of life\xa0here forever? An avid hiker '
+                   'or biker of the Violet Crown Trail, excited by a first of '
+                   'its kind regional trail system? Curious about the work of '
+                   'Hill Country Conservancy?\n'
+                   '\xa0\n'
+                   'Join us for our HCC Walk & Talk!\n'
+                   '\xa0\n'
+                   'You’re invited to join George Cofer, Hill Country '
+                   'Conservancy’s CEO and founding Executive Director, for a '
+                   'hike along the Violet Crown Trail. You’ll have the '
+                   'opportunity to chat with George about all things HCC – '
+                   'conservation, the Violet Crown Trail, life in the Hill '
+                   'Country and more! We encourage individuals who are both '
+                   'familiar and unfamiliar with HCC to Walk & Talk with our '
+                   'fearless leader.\n'
+                   'This event is\xa0free\xa0to attend! Please click the '
+                   '“Register” button to indicate the number of RSVPs.\n'
+                   'ABOUT GEORGE COFER\n'
+                   'George Cofer is a sixth-generation Austinite and '
+                   'fifth-generation Texas rancher.\xa0 His love of the great '
+                   'outdoors and conservation of the natural environment come '
+                   'from being blessed by the opportunity to spend his '
+                   'childhood summers on a working cattle ranch along the Frio '
+                   'River in Uvalde County and from his outdoor experiences as '
+                   'an Eagle Scout.\xa0George is the founder and CEO of Hill '
+                   'Country Conservancy and has been a leader in helping to '
+                   'preserve almost 50,000 acres in Central Texas.\n'
+                   '\xa0\n'
+                   'MORE INFORMATION\n'
+                   'Please RSVP using the “register” button. You will receive '
+                   'a confirmation email upon submission and informational '
+                   'email the week of the hike.\n'
+                   'In case of inclement weather, an email will be sent with '
+                   'an alternate meeting location.\n'
+                   '– Please wear closed-toe shoes and weather appropriate '
+                   'clothing.\n'
+                   '– BYOWB (Bring Your Own Water Bottle)\n'
+                   '– This is a family friendly event.\n'
+                   '– Dogs are welcome on the trail, but must remain on a '
+                   'leash.\n'
+                   '– Anticipated time on the trail is 1-1.5 hours.',
+    'end': '2019-04-16T16:15:00Z',
+    'free': False,
+    'id': '58106454971',
+    'logo': 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F57890845%2F693909602%2F1%2Foriginal.20181214-215322?h=200&w=450&auto=compress&rect=0%2C22%2C1920%2C960&s=a278b4dc9a361afc86cfa4cd275ae68a',
+    'name': { 'html': 'April 16th HCC Walk &amp; Talk',
+              'text': 'April 16th HCC Walk & Talk'},
+    'start': '2019-04-16T14:50:00Z',
+    'type': 'eventbrite',
+    'url': 'https://www.eventbrite.com/e/april-16th-hcc-walk-talk-registration-58106454971?aff=ebapi'},
+  { 'description': 'Are you committed to keeping the Hill Country’s rolling '
+                   'hills and quality of life\xa0here forever? An avid hiker '
+                   'or biker of the Violet Crown Trail, excited by a first of '
+                   'its kind regional trail system? Curious about the work of '
+                   'Hill Country Conservancy?\n'
+                   '\xa0\n'
+                   'Join us for our HCC Walk & Talk!\n'
+                   '\xa0\n'
+                   'You’re invited to join George Cofer, Hill Country '
+                   'Conservancy’s CEO and founding Executive Director, for a '
+                   'hike along the Violet Crown Trail. You’ll have the '
+                   'opportunity to chat with George about all things HCC – '
+                   'conservation, the Violet Crown Trail, life in the Hill '
+                   'Country and more! We encourage individuals who are both '
+                   'familiar and unfamiliar with HCC to Walk & Talk with our '
+                   'fearless leader.\n'
+                   'This event is\xa0free\xa0to attend! Please click the '
+                   '“Register” button to indicate the number of RSVPs.\n'
+                   'ABOUT GEORGE COFER\n'
+                   'George Cofer is a sixth-generation Austinite and '
+                   'fifth-generation Texas rancher.\xa0 His love of the great '
+                   'outdoors and conservation of the natural environment come '
+                   'from being blessed by the opportunity to spend his '
+                   'childhood summers on a working cattle ranch along the Frio '
+                   'River in Uvalde County and from his outdoor experiences as '
+                   'an Eagle Scout.\xa0George is the founder and CEO of Hill '
+                   'Country Conservancy and has been a leader in helping to '
+                   'preserve almost 50,000 acres in Central Texas.\n'
+                   '\xa0\n'
+                   'MORE INFORMATION\n'
+                   'Please RSVP using the “register” button. You will receive '
+                   'a confirmation email upon submission and informational '
+                   'email the week of the hike.\n'
+                   'In case of inclement weather, an email will be sent with '
+                   'an alternate meeting location.\n'
+                   '– Please wear closed-toe shoes and weather appropriate '
+                   'clothing.\n'
+                   '– BYOWB (Bring Your Own Water Bottle)\n'
+                   '– This is a family friendly event.\n'
+                   '– Dogs are welcome on the trail, but must remain on a '
+                   'leash.\n'
+                   '– Anticipated time on the trail is 1-1.5 hours.',
+    'end': '2019-04-05T14:15:00Z',
+    'free': False,
+    'id': '54974720870',
+    'logo': 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F55231890%2F693909602%2F1%2Foriginal.20181214-215322?h=200&w=450&auto=compress&rect=0%2C22%2C1920%2C960&s=de348db1d98b5c8dfd0be0ac003f144a',
+    'name': { 'html': 'April 5th HCC Walk &amp; Talk',
+              'text': 'April 5th HCC Walk & Talk'},
+    'start': '2019-04-05T12:50:00Z',
+    'type': 'eventbrite',
+    'url': 'https://www.eventbrite.com/e/april-5th-hcc-walk-talk-registration-54974720870?aff=ebapi'}]

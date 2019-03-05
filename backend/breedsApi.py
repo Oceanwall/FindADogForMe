@@ -1,7 +1,10 @@
 import os
 import json
+import pprint
 import requests
 from dotenv import load_dotenv
+
+pp = pprint.PrettyPrinter(indent=2)
 
 THE_DOG_API_KEY = os.getenv("THE_DOG_API_KEY")
 THE_DOG_API_URL = "https://api.thedogapi.com/v1/"
@@ -51,5 +54,5 @@ def get_breed_pictures(breed):
 
 
 
-# print (get_breed_information("Alaskan Malamute"))
-# print (get_breed_pictures("Alaskan Malamute"))
+pp.pprint(get_breed_information("Chow Chow"))
+pp.pprint(get_breed_pictures("Chow Chow"))
