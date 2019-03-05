@@ -69,19 +69,25 @@ window.onload = async function() {
     ~~~~~~~~~~~~~~~~~
     */
 
-    // TODO: Pagination
-    let issues_response = await fetch(`${BASE_URL}${repo_info.id}/issues`);
+    page_number = 1;
+    let issues_response = await fetch(`${BASE_URL}${repo_info.id}/issues?per_page=100&page=` + page_number);
     let issue_info = await issues_response.json();
 
-    for (let issue of issue_info) {
-        if (member_map.has(issue.author.username)) {
-          member_map.get(issue.author.username).issues++;
-          total_issues++;
+    do {
+        for (let issue of issue_info) {
+            if (member_map.has(issue.author.username)) {
+              member_map.get(issue.author.username).issues++;
+              total_issues++;
+            }
+            else {
+              console.log("Unknown issue author: " + issue.author.username);
+            }
         }
-        else {
-          console.log("Unknown issue author: " + issue.author.username);
-        }
-    }
+
+        ++page_number;
+        issues_response = await fetch(`${BASE_URL}${repo_info.id}/issues?per_page=100&page=` + page_number);
+        issue_info = await issues_response.json();
+    } while (issue_info.length > 0);
 
     /*
     ~~~~~~~~~~~~~~~~~~~~
