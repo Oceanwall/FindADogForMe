@@ -1,0 +1,33 @@
+.palo-image-1 {
+  background: url("../../images/palo_1.jpg");
+}
+.palo-image-2 {
+  background: url("../../images/palo_2.jpg");
+}
+.palo-image-3 {
+  background: url("../../images/palo_3.jpg");
+}
+
+.rio-grande-image-1 {
+  background: url("../../images/rio_grande_1.jpg");
+}
+.rio-grande-image-2 {
+  background: url("../../images/rio_grande_2.jpg");
+}
+.rio-image-3 {
+  background: url("../../images/rio_grande_3.jpg");
+}
+
+.san-antonio-image-1 {
+  background: url("../../images/san_antonio_1.jpg");
+}
+.san-antonio-image-2 {
+  background: url("../../images/san_antonio_2.jpg");}
+.san-antonio-image-3 {
+  background: url("../../images/san_antonio_3.jpg");}
+
+.carousel-image {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
