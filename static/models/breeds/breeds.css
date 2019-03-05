@@ -1,31 +1,31 @@
-.akita-image-1 {
-  background: url("../../images/akita_inu_1.jpg");
+.pitbull-image-1 {
+  background: url("https://images.dog.ceo/breeds/bulldog-french/n02108915_1866.jpg");
 }
-.akita-image-2 {
-  background: url("../../images/akita_inu_2.jpeg");
+.pitbull-image-2 {
+  background: url("https://images.dog.ceo/breeds/bulldog-french/n02108915_2681.jpg");
 }
-.akita-image-3 {
-  background: url("../../images/akita_inu_3.jpg");
-}
-
-.golden-image-1 {
-  background: url("../../images/golden_retriever_1.jpg");
-}
-.golden-image-2 {
-  background: url("../../images/golden_retriever_2.jpg");
-}
-.golden-image-3 {
-  background: url("../../images/golden_retriever_3.jpeg");
+.pitbull-image-3 {
+  background: url("https://images.dog.ceo/breeds/bullterrier-staffordshire/n02093256_2405.jpg");
 }
 
-.alaskan-image-1 {
-  background: url("../../images/alaskan_1.jpg");
+.bulldog-image-1 {
+  background: url("https://images.dog.ceo/breeds/bulldog-boston/n02096585_12372.jpg");
 }
-.alaskan-image-2 {
-  background: url("../../images/alaskan_2.jpg");
+.bulldog-image-2 {
+  background: url("https://images.dog.ceo/breeds/bulldog-french/n02108915_9899.jpg");
 }
-.alaskan-image-3 {
-  background: url("../../images/alaskan_3.jpeg");
+.bulldog-image-3 {
+  background: url("https://images.dog.ceo/breeds/bulldog-french/n02108915_2326.jpg");
+}
+
+.chow-image-1 {
+  background: url("https://images.dog.ceo/breeds/chow/n02112137_1251.jpg");
+}
+.chow-image-2 {
+  background: url("https://images.dog.ceo/breeds/chow/n02112137_1976.jpg");
+}
+.chow-image-3 {
+  background: url("https://images.dog.ceo/breeds/chow/n02112137_9159.jpg");
 }
 
 .carousel-image {
