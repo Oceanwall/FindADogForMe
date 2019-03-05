@@ -38,24 +38,30 @@ window.onload = async function() {
     ~~~~~~~~~~~~~~~~~
     */
 
-    // TODO: Pagination
-    let commits_response = await fetch(`${BASE_URL}${repo_info.id}/repository/commits`);
+    let page_number = 1;
+    let commits_response = await fetch(`${BASE_URL}${repo_info.id}/repository/commits?per_page=100&page=` + page_number);
     let commit_info = await commits_response.json();
 
-    // TODO: GitLab API doesn't identify users by username but rather by author email
-    for (let commit of commit_info) {
-      if (member_map.has(commit.author_email)) {
-          member_map.get(commit.author_email).commits++;
-          total_commits++;
-      }
-      else if (member_map.has(commit.author_name)) {
-          member_map.get(commit.author_name).commits++;
-          total_commits++;
-      }
-      else {
-        console.log("Unknown commiter: " + commit.author_name);
-      }
-    }
+    do {
+        // TODO: GitLab API doesn't identify users by username but rather by author email
+        for (let commit of commit_info) {
+          if (member_map.has(commit.author_email)) {
+              member_map.get(commit.author_email).commits++;
+              total_commits++;
+          }
+          else if (member_map.has(commit.author_name)) {
+              member_map.get(commit.author_name).commits++;
+              total_commits++;
+          }
+          else {
+            console.log("Unknown commiter: " + commit.author_name);
+          }
+        }
+
+        ++page_number;
+        commits_response = await fetch(`${BASE_URL}${repo_info.id}/repository/commits?per_page=100&page=` + page_number);
+        commit_info = await commits_response.json();
+    } while (commit_info.length > 0);
 
     /*
     ~~~~~~~~~~~~~~~~~
