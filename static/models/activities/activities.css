@@ -26,6 +26,26 @@
 .san-antonio-image-3 {
   background: url("../../images/san_antonio_3.jpg");}
 
+.nulo-image-1 {
+  background: url("../../images/nulo.jpeg");
+}
+.nulo-image-2 {
+  background: url("../../images/nulo_1.jpg");
+}
+.nulo-image-3 {
+  background: url("../../images/nulo_2.jpg");
+}
+
+.sxsw-image-1{
+  background: url("../../images/sxsw_puppy_party.jpeg");
+}
+.sxsw-image-2{
+  background: url("../../images/sxsw_1.jpg");
+}
+.sxsw-image-3{
+  background: url("../../images/sxsw_2.jpg");
+}
+
 .carousel-image {
   height: 300px;
   background-size: cover;
