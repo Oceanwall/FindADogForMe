@@ -1,31 +1,31 @@
 class Activity(db.Model):
     """
     Represents information about an activity.
-    id
-    type
-    url
-    name
-    description
-    latitude
-    longitude
-    location
-    is_active
-    image_1
-    image_2
-    image_3
-    image_4
+    id (lowercase string)
+    type (lowercase string)
+    url (string)
+    name (string)
+    description (string)
+    latitude (number)
+    longitude (number)
+    location (string)
+    is_active (boolean)
+    image_1 (string)
+    image_2 (string)
+    image_3 (string)
+    image_4 (string)
     ~~~~~~~~~~~(National Parks Only)~~~~~~~~~~~
-    designation
-    weather
-    directions
+    designation (string)
+    weather (string)
+    directions (string)
     ~~~~~~~~~~~((Meetup / Eventbrite Only)~~~~~~~~~~~
-    date
+    date (string)
     """
 
 class Breed(db.Model):
     """
     Represents information about a breed.
-    name (string)
+    name (lowercase string)
     group (string)
     min_height (number)
     max_height (number)
@@ -44,30 +44,30 @@ class Breed(db.Model):
 class Dog(db.Model):
     """
     Represents information about a dog.
-    id
-    shelter_id
-    name
-    breed
-    age
-    size
-    sex
-    description
-    image_1
-    image_2
-    image_3
-    image_4
+    id (number)
+    shelter_id (string)
+    name (string)
+    breed (lowercase string)
+    age (number)
+    size (string)
+    sex (string)
+    description (string)
+    image_1 (string)
+    image_2 (string)
+    image_3 (string)
+    image_4 (string)
     """
 
 class Shelter(db.Model):
     """
     Represents information about a shelter.
-    id
-    name
-    latitude
-    longitude
-    city
-    state
-    zipcode
-    phone
-    address
+    id (string)
+    name (string)
+    latitude (number)
+    longitude (number)
+    city (string)
+    state (string)
+    zipcode (number)
+    phone (string)
+    address (string)
     """

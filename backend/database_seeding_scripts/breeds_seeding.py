@@ -81,7 +81,7 @@ def build_breed(info):
         num_images = len(breed_images)
 
         breed = {
-            "name": info["name"] if "name" in info else None,
+            "name": info["name"].lower() if "name" in info else None,
             "group": info["breed_group"] if "breed_group" in info else None,
             "min_height": height[0],
             "max_height": height[len(height) - 1],

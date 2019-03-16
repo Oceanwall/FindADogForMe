@@ -115,7 +115,7 @@ def get_shelter_information(location, offset = 0, count = 25):
     return shelter_data
 
 
-print(get_shelter_information(78705))
+# print(get_shelter_information(78705))
 
 def find_pet(breed, sex, location, offset=0, count=25):
     """
@@ -223,14 +223,15 @@ def pet_details_from_shelter(shelter_id, offset = 0, count = 50):
                 pet_info["breed"] = pet["breeds"]["breed"][0]["$t"]
 
             pic_id = 0
-            for picture in pet["media"]["photos"]["photo"]:
-                if int(picture['@id']) > pic_id and picture['@size'] == 'x':
-                    pic_id += 1
-                    pet_info["pictures"].append(picture["$t"])
+            if "photos" in pet["media"]:
+                for picture in pet["media"]["photos"]["photo"]:
+                    if int(picture['@id']) > pic_id and picture['@size'] == 'x':
+                        pic_id += 1
+                        pet_info["pictures"].append(picture["$t"])
 
             pet_data.append(pet_info)
 
     return pet_data
 
 
-# print(pet_details_from_shelter("TX1069", count=25))
+print(pet_details_from_shelter("TX1069", count=25))
