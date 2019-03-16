@@ -34,8 +34,8 @@ def get_breed_information(breed):
 def get_breed_pictures(breed):
     if ' ' in breed:
         breed_words = breed.split()
-        main_breed = breed_words[1]
-        sub_breed = breed_words[0]
+        main_breed = breed_words[len(breed_words) - 1]
+        sub_breed = breed_words[len(breed_words) - 2]
 
         response = requests.get(DOG_IMAGES_API_URL + main_breed + "/" + sub_breed + "/images/random/5")
         if response.status_code == 200:
@@ -44,7 +44,18 @@ def get_breed_pictures(breed):
         else:
             breed = main_breed
 
-    # Fall through
+    # Fall through 1
+    response = requests.get(DOG_IMAGES_API_URL + breed + "/images/random/5")
+    if response.status_code == 200:
+        response_obj = json.loads(response.text)
+        return response_obj['message']
+    else:
+        if (sub_breed):
+            breed = sub_breed
+        else:
+            return None
+
+    # Fall through 2
     response = requests.get(DOG_IMAGES_API_URL + breed + "/images/random/5")
     if response.status_code == 200:
         response_obj = json.loads(response.text)
@@ -54,5 +65,5 @@ def get_breed_pictures(breed):
 
 
 
-pp.pprint(get_breed_information("Chow Chow"))
-pp.pprint(get_breed_pictures("Chow Chow"))
+# pp.pprint(get_breed_information("Chow Chow"))
+pp.pprint(get_breed_pictures("Rhodesian Ridgeback"))

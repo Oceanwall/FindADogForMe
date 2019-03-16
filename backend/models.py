@@ -25,17 +25,20 @@ class Activity(db.Model):
 class Breed(db.Model):
     """
     Represents information about a breed.
-    name
-    group
-    height
-    lifespan
-    temperament
-    weight
-    image_1
-    image_2
-    image_3
-    image_4
-    is_active
+    name (string)
+    group (string)
+    min_height (number)
+    max_height (number)
+    min_lifespan (number)
+    max_lifespan (number)
+    temperament (string)
+    min_weight (number)
+    max_weight (number)
+    image_1 (string)
+    image_2 (string)
+    image_3 (string)
+    image_4 (string)
+    is_active (boolean)
     """
 
 class Dog(db.Model):
