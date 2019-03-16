@@ -92,6 +92,7 @@ def find_shelters(location, offset=0, count=25):
 def get_shelter_information(location, offset = 0, count = 25):
     shelter_dict = find_shelters(location, offset, count)['shelter']
     shelter_data = []
+    # print(shelter_dict)
 
     for shelter in shelter_dict:
         shelter_info = {}
@@ -99,13 +100,22 @@ def get_shelter_information(location, offset = 0, count = 25):
         shelter_info["name"] = shelter["name"]['$t']
         shelter_info["city"] = shelter["city"]['$t']
         shelter_info["state"] = shelter["state"]['$t']
+        shelter_info["zip"] = shelter["zip"]['$t']
         shelter_info["email"] = shelter["email"]['$t']
+        shelter_info["latitude"] = shelter["latitude"]['$t']
+        shelter_info["longitude"] = shelter["longitude"]['$t']
+
+        if '$t' in shelter["phone"]:
+            shelter_info["phone"] = shelter["phone"]['$t']
+        if '$t' in shelter["address1"]:
+            shelter_info["address"] = shelter["address1"]['$t']
+
         shelter_data.append(shelter_info)
 
     return shelter_data
 
 
-# print(get_shelter_information(78705))
+print(get_shelter_information(78705))
 
 def find_pet(breed, sex, location, offset=0, count=25):
     """

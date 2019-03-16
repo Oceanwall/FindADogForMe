@@ -35,6 +35,7 @@ def get_events_near_area(query, address, range):
 
     if response.status_code == 200:
         response_obj = json.loads(response.text)
+        # print(response_obj)
         activity_data = []
 
         for event in response_obj["events"]:
@@ -55,7 +56,7 @@ def get_events_near_area(query, address, range):
 
             activity_data.append(activity_datum)
 
-        pp.pprint(activity_data)
+        # pp.pprint(activity_data)
         return activity_data
 
     else:
@@ -113,5 +114,5 @@ def get_meetups_near_area(query, latitude, longitude, range):
         pp.pprint("request failed")
 
 
-get_meetups_near_area("dog-friendly, pet-friendly", 30.2672, 97.7431, 100)
-# get_events_near_area("dog-friendly, pet-friendly", "austin", "100mi")
+# get_meetups_near_area("dog-friendly, pet-friendly", 30.2672, 97.7431, 100)
+get_events_near_area("dog-friendly, pet-friendly", "austin", "100mi")
