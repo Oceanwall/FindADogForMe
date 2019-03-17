@@ -74,31 +74,39 @@ def build_breed(info):
     TODO
     """
 
+    if "temperament" not in info:
+        return
     breed_images = get_breed_images(info["name"])
-    if breed_images is not None:
-        height = info["height"]["imperial"].split()
-        lifespan = info["life_span"].replace(" years", "").split()
-        weight = info["weight"]["imperial"].split()
-        num_images = len(breed_images)
+    if breed_images is None:
+        return
 
-        breed = {
-            "name": info["name"].lower() if "name" in info else None,
-            "group": info["breed_group"] if "breed_group" in info else None,
-            "min_height": height[0],
-            "max_height": height[len(height) - 1],
-            "min_lifespan": lifespan[0],
-            "max_lifespan": lifespan[len(lifespan) - 1],
-            "temperament": info["temperament"] if "temperament" in info else None,
-            "min_weight": weight[0],
-            "max_weight": weight[len(weight) - 1],
-            "image_1": breed_images[0] if num_images >= 1 else None,
-            "image_2": breed_images[1] if num_images >= 2 else None,
-            "image_3": breed_images[2] if num_images >= 3 else None,
-            "image_4": breed_images[3] if num_images >= 4 else None,
-            "is_active": True
-        }
+    height = info["height"]["imperial"].split()
+    lifespan = info["life_span"].replace(" years", "").split()
+    weight = info["weight"]["imperial"].split()
+    num_images = len(breed_images)
 
-        print(breed)
+    breed = {
+        "name": info["name"].lower() if "name" in info else None,
+        "group": info["breed_group"] if "breed_group" in info else None,
+        "min_height": height[0],
+        "max_height": height[len(height) - 1],
+        "min_lifespan": lifespan[0],
+        "max_lifespan": lifespan[len(lifespan) - 1],
+        "temperament": info["temperament"],
+        "min_weight": weight[0],
+        "max_weight": weight[len(weight) - 1],
+        "image_1": breed_images[0] if num_images >= 1 else None,
+        "image_2": breed_images[1] if num_images >= 2 else None,
+        "image_3": breed_images[2] if num_images >= 3 else None,
+        "image_4": breed_images[3] if num_images >= 4 else None,
+        "is_active": True if "Active" in info["temperament"] or
+            "Adventurous" in info["temperament"] or
+            "Energetic" in info["temperament"] or
+            "Outgoing" in info["temperament"] or
+            "Lively" in info["temperament"] or
+            "Agile" in info["temperament"] or
+            "Athletic" in info["temperament"] else False
+    }
 
     # TODO: Add breed to database, commit database
 
