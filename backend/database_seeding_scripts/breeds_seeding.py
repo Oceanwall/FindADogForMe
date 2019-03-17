@@ -2,6 +2,7 @@ import os
 import json
 import requests
 from dotenv import load_dotenv
+load_dotenv()
 
 THE_DOG_API_KEY = os.getenv("THE_DOG_API_KEY")
 THE_DOG_API_URL = "https://api.thedogapi.com/v1/"

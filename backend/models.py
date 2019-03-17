@@ -11,7 +11,6 @@ class Activity(db.Model):
     location (string)
     is_active (boolean)
     is_free (boolean)
-    cost(number)
     image_1 (string)
     image_2 (string)
     image_3 (string)
