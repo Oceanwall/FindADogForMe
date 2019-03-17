@@ -49,7 +49,7 @@ class Dog(db.Model):
     shelter_id (string)
     name (string)
     breed (lowercase string)
-    age (number)
+    age (string)
     size (string)
     sex (string)
     description (string)
