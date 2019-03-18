@@ -74,7 +74,7 @@ def build_breed(info):
     TODO
     """
 
-    if "temperament" not in info:
+    if "temperament" not in info or "name" not in info:
         return
     breed_images = get_breed_images(info["name"])
     if breed_images is None:
@@ -86,7 +86,7 @@ def build_breed(info):
     num_images = len(breed_images)
 
     breed = {
-        "name": info["name"].lower() if "name" in info else None,
+        "name": info["name"].lower(),
         "group": info["breed_group"] if "breed_group" in info else None,
         "min_height": height[0],
         "max_height": height[len(height) - 1],
@@ -108,6 +108,8 @@ def build_breed(info):
             "Athletic" in info["temperament"] else False
     }
 
+    return breed
+
     # TODO: Add breed to database, commit database
 
 def main():
@@ -116,9 +118,9 @@ def main():
     """
 
     breeds_data = get_all_breeds()
+    breeds = set()
     for breed in breeds_data:
-        build_breed(breed)
-
+        t = build_breed(breed)
     print("Breeds seeded!")
 
 if __name__ == "__main__":
