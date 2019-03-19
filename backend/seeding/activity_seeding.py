@@ -1,8 +1,13 @@
 import os
+import sys
 import json
 import requests
 from dotenv import load_dotenv
 load_dotenv()
+
+sys.path.append("../")
+from app import db
+from models import Activity
 
 PARKS_KEY = os.getenv("NATIONAL_PARKS_API_KEY")
 EVENTBRITE_KEY = os.getenv("EVENTBRITE_API_KEY")
@@ -25,7 +30,8 @@ def delete_activities():
     """
     TODO
     """
-    pass
+    Activity.query.delete()
+    db.session.commit()
 
 
 def get_all_parks():
@@ -53,29 +59,30 @@ def build_park(info):
     location = info["latLong"].replace("lat:", "").replace("long:", "").replace(",", "").split()
     main_address = info["addresses"][0]
 
-    park = {
-        "id": info["id"],
-        "type": "park",
-        "url": info["url"],
-        "name": info["name"],
-        "description": info["description"],
-        "latitude": location[0],
-        "longitude": location[1],
-        "location": main_address["line3"] + ", " + main_address["city"] + ", " + main_address["stateCode"],
-        "is_active": True,
-        "is_free": True if info["entranceFees"][0]["cost"] == 0 else False,
+    park = Activity(
+        id = info["id"],
+        type = "park",
+        url = info["url"],
+        name = info["name"],
+        description = info["description"],
+        latitude = location[0],
+        longitude = location[1],
+        location = main_address["line3"] + ", " + main_address["city"] + ", " + main_address["stateCode"],
+        is_active = True,
+        is_free = True if info["entranceFees"][0]["cost"] == 0 else False,
         # "cost": info["entranceFees"][0]["cost"],
-        "image_1": info["images"][0]["url"],
-        "image_2": info["images"][1]["url"],
-        "image_3": info["images"][2]["url"],
-        "image_4": info["images"][3]["url"],
-        "designation": info["designation"],
-        "weather": info["weatherInfo"],
-        "directions": info["directionsInfo"],
-        "date": None,
-    }
+        image_1 = info["images"][0]["url"],
+        image_2 = info["images"][1]["url"],
+        image_3 = info["images"][2]["url"],
+        image_4 = info["images"][3]["url"],
+        designation = info["designation"],
+        weather = info["weatherInfo"],
+        directions = info["directionsInfo"],
+        date = None
+        )
 
-    # TODO: Add park to database, commit database
+    db.session.add(park)
+    db.session.commit()
 
 
 
@@ -133,26 +140,31 @@ def build_event(info):
     if (address_data is None):
         return
 
-    event = {
-        "id": info["id"],
-        "type": "eventbrite",
-        "url": info["url"],
-        "name": info["name"]['text'],
-        "description": info["description"]['html'],
-        "latitude": address_data["latitude"],
-        "longitude": address_data["longitude"],
-        "location": address_data["address"]["localized_address_display"],
-        "is_active": True if info["category_id"] is 108 or 107 or 109 or 111 or 119 else False,
-        "is_free": info["is_free"],
-        "image_1": info["logo"]["url"] if "logo" in info else None,
-        "image_2": None,
-        "image_3": None,
-        "image_4": None,
-        "designation": None,
-        "weather": None,
-        "directions": None,
-        "date": info["end"],
-    }
+    event = Activity(
+        id = info["id"],
+        type = "eventbrite",
+        url = info["url"],
+        name = info["name"]['text'],
+        description = info["description"]['html'],
+        latitude = address_data["latitude"],
+        longitude = address_data["longitude"],
+        location = address_data["address"]["localized_address_display"],
+        is_active = True if info["category_id"] is 108 or 107 or 109 or 111 or 119 else False,
+        is_free = info["is_free"],
+        image_1 = info["logo"]["url"] if "logo" in info else None,
+        image_2 = None,
+        image_3 = None,
+        image_4 = None,
+        designation = None,
+        weather = None,
+        directions = None,
+        # UTC date is also an option
+        date = info["end"]["local"]
+        )
+
+
+    db.session.add(event)
+    db.session.commit()
 
 
 def get_all_meetups():
@@ -202,32 +214,36 @@ def build_meetup(info):
     if "description" not in info:
         return
 
-    meetup = {
-        "id": info["id"],
-        "type": "meetup",
-        "url": info["link"],
-        "name": info["name"],
-        "description": info["description"],
-        "latitude": info["group"]["lat"],
-        "longitude": info["group"]["lon"],
-        "location": info["group"]["localized_location"],
-        "is_active": True,
-        "is_free": False,
-        "image_1": info["featured_photo"]["photo_link"] if "featured_photo" in info else None,
-        "image_2": None,
-        "image_3": None,
-        "image_4": None,
-        "designation": None,
-        "weather": None,
-        "directions": None,
-        "date": info["local_date"],
-    }
+    meetup = Activity(
+        id = info["id"],
+        type = "meetup",
+        url = info["link"],
+        name = info["name"],
+        description = info["description"],
+        latitude = info["group"]["lat"],
+        longitude = info["group"]["lon"],
+        location = info["group"]["localized_location"],
+        is_active = True,
+        is_free = False,
+        image_1 = info["featured_photo"]["photo_link"] if "featured_photo" in info else None,
+        image_2 = None,
+        image_3 = None,
+        image_4 = None,
+        designation = None,
+        weather = None,
+        directions = None,
+        date = info["local_date"]
+    )
+
+    db.session.add(meetup)
+    db.session.commit()
 
 
 def main():
     """
     Seeds database with information on activities (national parks, eventbrite, meetup).
     """
+    delete_activities()
 
     # National Parks
     parks_data = get_all_parks()

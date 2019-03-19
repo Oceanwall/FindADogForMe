@@ -1,30 +1,97 @@
 from app import db
 
-# class Activity(db.Model):
-#     """
-#     Represents information about an activity.
-#     id (lowercase string)
-#     type (lowercase string)
-#     url (string)
-#     name (string)
-#     description (string)
-#     latitude (number)
-#     longitude (number)
-#     location (string)
-#     is_active (boolean)
-#     is_free (boolean)
-#     image_1 (string)
-#     image_2 (string)
-#     image_3 (string)
-#     image_4 (string)
-#     ~~~~~~~~~~~(National Parks Only)~~~~~~~~~~~
-#     designation (string)
-#     weather (string)
-#     directions (string)
-#     ~~~~~~~~~~~((Meetup / Eventbrite Only)~~~~~~~~~~~
-#     date (string)
-#     """
-#
+class Activity(db.Model):
+    """
+    Represents information about an activity.
+    id (lowercase string)
+    type (lowercase string (TODO: maybe enum?)
+    url (string)
+    name (string)
+    description (string)
+    latitude (number)
+    longitude (number)
+    location (string)
+    is_active (boolean)
+    is_free (boolean)
+    image_1 (string)
+    image_2 (string)
+    image_3 (string)
+    image_4 (string)
+    ~~~~~~~~~~~(National Parks Only)~~~~~~~~~~~
+    designation (string)
+    weather (string)
+    directions (string)
+    ~~~~~~~~~~~((Meetup / Eventbrite Only)~~~~~~~~~~~
+    date (string)
+    """
+
+    __tablename__ = "activity"
+    id = db.Column(db.String(50), primary_key=True, nullable=False)
+    type = db.Column(db.String(50), primary_key=True, nullable=False)
+    url = db.Column(db.String(255))
+    name = db.Column(db.String(255))
+    description = db.Column(db.Text)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+    location = db.Column(db.String(255))
+    is_active = db.Column(db.Boolean)
+    is_free = db.Column(db.Boolean)
+    image_1 = db.Column(db.String(1000))
+    image_2 = db.Column(db.String(1000))
+    image_3 = db.Column(db.String(1000))
+    image_4 = db.Column(db.String(1000))
+    designation = db.Column(db.String(255))
+    weather = db.Column(db.Text)
+    directions = db.Column(db.Text)
+    date = db.Column(db.String(1000))
+
+    def __init__(self, id, type, url, name, description, latitude, longitude,
+                location, is_active, is_free, image_1, image_2, image_3, image_4,
+                designation, weather, directions, date):
+        self.id = id
+        self.type = type
+        self.url = url
+        self.name = name
+        self.description = description
+        self.latitude = latitude
+        self.longitude = longitude
+        self.location = location
+        self.is_active = is_active
+        self.is_free = is_free
+        self.image_1 = image_1
+        self.image_2 = image_2
+        self.image_3 = image_3
+        self.image_4 = image_4
+        self.designation = designation
+        self.weather = weather
+        self.directions = directions
+        self.date = date
+
+    def __repr__(self):
+        return '<id {} type {}>'.format(self.id, self.type)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "type": self.type,
+            "url": self.url,
+            "name": self.name,
+            "description": self.description,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "location": self.location,
+            "is_active": self.is_active,
+            "is_free": self.is_free,
+            "image_1": self.image_1,
+            "image_2": self.image_2,
+            "image_3": self.image_3,
+            "image_4": self.image_4,
+            "designation": self.designation,
+            "weather": self.weather,
+            "directions": self.directions,
+            "date": self.date,
+        }
+
 # class Breed(db.Model):
 #     """
 #     Represents information about a breed.
