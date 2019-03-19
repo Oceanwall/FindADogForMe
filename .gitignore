@@ -4,3 +4,4 @@ static/.DS_STORE
 frontend/.DS_STORE
 backend/.DS_STORE
 __pycache__/
+/node_modules
