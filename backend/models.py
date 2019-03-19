@@ -92,25 +92,80 @@ class Activity(db.Model):
             "date": self.date,
         }
 
-# class Breed(db.Model):
-#     """
-#     Represents information about a breed.
-#     name (lowercase string)
-#     group (string)
-#     min_height (number)
-#     max_height (number)
-#     min_lifespan (number)
-#     max_lifespan (number)
-#     temperament (string)
-#     min_weight (number)
-#     max_weight (number)
-#     image_1 (string)
-#     image_2 (string)
-#     image_3 (string)
-#     image_4 (string)
-#     is_active (boolean)
-#     """
-#
+class Breed(db.Model):
+    """
+    Represents information about a breed.
+    name (lowercase string)
+    group (string)
+    min_height (number)
+    max_height (number)
+    min_lifespan (number)
+    max_lifespan (number)
+    temperament (string)
+    min_weight (number)
+    max_weight (number)
+    image_1 (string)
+    image_2 (string)
+    image_3 (string)
+    image_4 (string)
+    is_active (boolean)
+    """
+
+    __tablename__ = "breed"
+    name = db.Column(db.String(255), primary_key=True, nullable=False)
+    group = db.Column(db.String(255))
+    min_height = db.Column(db.Float)
+    max_height = db.Column(db.Float)
+    min_lifespan = db.Column(db.Float)
+    max_lifespan = db.Column(db.Float)
+    temperament = db.Column(db.String(1000))
+    min_weight = db.Column(db.Integer)
+    max_weight = db.Column(db.Integer)
+    image_1 = db.Column(db.String(1000))
+    image_2 = db.Column(db.String(1000))
+    image_3 = db.Column(db.String(1000))
+    image_4 = db.Column(db.String(1000))
+    is_active = db.Column(db.Boolean)
+
+    def __init__(self, name, group, min_height, max_height, min_lifespan,
+                max_lifespan, temperament, min_weight, max_weight,
+                image_1, image_2, image_3, image_4, is_active):
+        self.name = name
+        self.group = group
+        self.min_height = min_height
+        self.max_height = max_height
+        self.min_lifespan = min_lifespan
+        self.max_lifespan = max_lifespan
+        self.temperament = temperament
+        self.min_weight = min_weight
+        self.max_weight = max_weight
+        self.image_1 = image_1
+        self.image_2 = image_2
+        self.image_3 = image_3
+        self.image_4 = image_4
+        self.is_active = is_active
+
+    def __repr__(self):
+        return '<name {}>'.format(self.name)
+
+    def serialize(self):
+        return {
+            "name": self.name,
+            "group": self.group,
+            "min_height": self.min_height,
+            "max_height": self.max_height,
+            "min_lifespan": self.min_lifespan,
+            "max_lifespan": self.max_lifespan,
+            "temperament": self.temperament,
+            "min_weight": self.min_weight,
+            "max_weight": self.max_weight,
+            "image_1": self.image_1,
+            "image_2": self.image_2,
+            "image_3": self.image_3,
+            "image_4": self.image_4,
+            "is_active": self.is_active
+        }
+
 # class Dog(db.Model):
 #     """
 #     Represents information about a dog.

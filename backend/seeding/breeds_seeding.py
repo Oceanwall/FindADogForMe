@@ -1,8 +1,13 @@
 import os
+import sys
 import json
 import requests
 from dotenv import load_dotenv
 load_dotenv()
+
+sys.path.append("../")
+from app import db
+from models import Breed
 
 THE_DOG_API_KEY = os.getenv("THE_DOG_API_KEY")
 THE_DOG_API_URL = "https://api.thedogapi.com/v1/"
@@ -12,8 +17,8 @@ def delete_breeds():
     """
     TODO
     """
-
-    pass
+    Breed.query.delete()
+    db.session.commit()
 
 def get_all_breeds():
     """
@@ -85,42 +90,47 @@ def build_breed(info):
     weight = info["weight"]["imperial"].split()
     num_images = len(breed_images)
 
-    breed = {
-        "name": info["name"].lower(),
-        "group": info["breed_group"] if "breed_group" in info else None,
-        "min_height": height[0],
-        "max_height": height[len(height) - 1],
-        "min_lifespan": lifespan[0],
-        "max_lifespan": lifespan[len(lifespan) - 1],
-        "temperament": info["temperament"],
-        "min_weight": weight[0],
-        "max_weight": weight[len(weight) - 1],
-        "image_1": breed_images[0] if num_images >= 1 else None,
-        "image_2": breed_images[1] if num_images >= 2 else None,
-        "image_3": breed_images[2] if num_images >= 3 else None,
-        "image_4": breed_images[3] if num_images >= 4 else None,
-        "is_active": True if "Active" in info["temperament"] or
+    if weight[0] == "up":
+        weight[0] = weight[len(weight) - 1]
+
+    breed = Breed(
+        name = info["name"].lower(),
+        group = info["breed_group"] if "breed_group" in info else None,
+        min_height = height[0],
+        max_height = height[len(height) - 1],
+        min_lifespan = lifespan[0],
+        max_lifespan = lifespan[len(lifespan) - 1],
+        temperament = info["temperament"],
+        min_weight = weight[0],
+        max_weight = weight[len(weight) - 1],
+        image_1 = breed_images[0] if num_images >= 1 else None,
+        image_2 = breed_images[1] if num_images >= 2 else None,
+        image_3 = breed_images[2] if num_images >= 3 else None,
+        image_4 = breed_images[3] if num_images >= 4 else None,
+        is_active = True if "Active" in info["temperament"] or
             "Adventurous" in info["temperament"] or
             "Energetic" in info["temperament"] or
             "Outgoing" in info["temperament"] or
             "Lively" in info["temperament"] or
             "Agile" in info["temperament"] or
             "Athletic" in info["temperament"] else False
-    }
+        )
 
-    return breed
+    db.session.add(breed)
+    db.session.commit()
 
-    # TODO: Add breed to database, commit database
+
 
 def main():
     """
     Seeds database with information on dog breeds.
     """
 
+    delete_breeds()
+
     breeds_data = get_all_breeds()
-    breeds = set()
     for breed in breeds_data:
-        t = build_breed(breed)
+        build_breed(breed)
     print("Breeds seeded!")
 
 if __name__ == "__main__":
