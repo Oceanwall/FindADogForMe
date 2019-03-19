@@ -3,3 +3,4 @@
 static/.DS_STORE
 frontend/.DS_STORE
 backend/.DS_STORE
+__pycache__/

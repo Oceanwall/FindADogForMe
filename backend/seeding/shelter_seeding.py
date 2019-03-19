@@ -1,8 +1,13 @@
 import os
+import sys
 import json
 import requests
 import pprint
 from dotenv import load_dotenv
+
+sys.path.append("../")
+from app import db
+from models import Shelter
 
 load_dotenv()
 pp = pprint.PrettyPrinter(indent=2)
@@ -15,7 +20,8 @@ def delete_shelters():
     """
     TODO
     """
-    pass
+    Shelter.query.delete()
+    db.session.commit()
 
 
 
@@ -69,19 +75,20 @@ def build_shelter(shelter):
     else:
         address = None
 
-    curr_shelter = {
-        'id':shelter['id']['$t'],
-        'name':shelter['name']['$t'],
-        'latitude':float(shelter['latitude']['$t']),
-        'longitude':float(shelter['longitude']['$t']),
-        'city':shelter['city']['$t'],
-        'state':shelter['state']['$t'],
-        'zipcode':int(shelter['zip']['$t']),
-        'phone': phone_number,
-        'address': address
-    }
-    
-    return curr_shelter
+    curr_shelter = Shelter(
+        id = shelter['id']['$t'],
+        name = shelter['name']['$t'],
+        latitude = float(shelter['latitude']['$t']),
+        longitude = float(shelter['longitude']['$t']),
+        city = shelter['city']['$t'],
+        state = shelter['state']['$t'],
+        zipcode = int(shelter['zip']['$t']),
+        phone = phone_number,
+        address = address
+        )
+
+    db.session.add(curr_shelter)
+    db.session.commit()
 
 
 
@@ -89,14 +96,11 @@ def main():
     """
     Seeds database with records of local shelters based on Texas Zip Codes
     """
-    i = 0
+    delete_shelters()
+
     shelter_dict = get_shelters()
-    print(len(shelter_dict))
     for shelter in shelter_dict:
         t = build_shelter(shelter)
-        if t is not None:
-            i += 1
-    print(i)
     print("Shelter seeding complete!")
 
 if __name__ == "__main__":
