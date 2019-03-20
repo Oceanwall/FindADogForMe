@@ -244,6 +244,7 @@ def main():
     Seeds database with information on activities (national parks, eventbrite, meetup).
     """
     delete_activities()
+    print("Previous activities deleted from database!")
 
     # National Parks
     parks_data = get_all_parks()

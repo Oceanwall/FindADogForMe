@@ -123,6 +123,7 @@ def main():
     Seeds database with records of local dogs based on Texas Zip Codes
     """
     delete_dogs()
+    print("Previos dogs deleted from database!")
 
     dog_dict = get_dogs()
     for dog in dog_dict:

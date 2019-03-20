@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_restless import APIManager
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -11,10 +12,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# "from models import ..." causes circular dependency error
+# DO NOT MOVE THIS IMPORT STATEMENT; otherwise, causes circular dependency.
 import models
 
-app.route("/")
+manager = APIManager(app, flask_sqlalchemy_db=db)
+
+@app.route("/")
 def hello():
     return "Hello World!"
 

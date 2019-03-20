@@ -26,8 +26,8 @@ class Activity(db.Model):
     """
 
     __tablename__ = "activity"
-    id = db.Column(db.String(50), primary_key=True, nullable=False)
-    type = db.Column(db.String(50), primary_key=True, nullable=False)
+    id = db.Column(db.Unicode, primary_key=True, nullable=False)
+    type = db.Column(db.Unicode, primary_key=True, nullable=False)
     url = db.Column(db.String(255))
     name = db.Column(db.String(255))
     description = db.Column(db.Text)
@@ -112,7 +112,7 @@ class Breed(db.Model):
     """
 
     __tablename__ = "breed"
-    name = db.Column(db.String(255), primary_key=True, nullable=False)
+    name = db.Column(db.Unicode, primary_key=True, nullable=False)
     group = db.Column(db.String(255))
     min_height = db.Column(db.Float)
     max_height = db.Column(db.Float)
@@ -184,10 +184,10 @@ class Dog(db.Model):
     """
 
     __tablename__ = "dog"
-    id = db.Column(db.String(50), primary_key=True, nullable=False)
-    shelter_id = db.Column(db.String(50))
+    id = db.Column(db.Unicode, primary_key=True, nullable=False)
+    shelter_id = db.Column(db.Unicode, db.ForeignKey('shelter.id'), nullable=False)
     name = db.Column(db.String(50))
-    breed = db.Column(db.String(255))
+    breed = db.Column(db.Unicode, db.ForeignKey('breed.name'), nullable=False)
     age = db.Column(db.String(50))
     size = db.Column(db.String(50))
     sex = db.Column(db.String(50))
@@ -245,7 +245,7 @@ class Shelter(db.Model):
     """
 
     __tablename__ = "shelter"
-    id = db.Column(db.String(25), primary_key=True, nullable=False)
+    id = db.Column(db.Unicode, primary_key=True, nullable=False)
     name = db.Column(db.String(255))
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)

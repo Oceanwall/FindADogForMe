@@ -7,7 +7,6 @@ seed:
 re_seed:
 	python3 activity_seeding.py
 	python3 pets_seeding.py
-	python3 shelter_seeding.py
 
 schema_update:
 	python3 manage.py db migrate

@@ -125,8 +125,8 @@ def main():
     """
     Seeds database with information on dog breeds.
     """
-
     delete_breeds()
+    print("Previous breeds deleted from database!")
 
     breeds_data = get_all_breeds()
     for breed in breeds_data:

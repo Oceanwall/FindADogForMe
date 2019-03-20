@@ -97,6 +97,7 @@ def main():
     Seeds database with records of local shelters based on Texas Zip Codes
     """
     delete_shelters()
+    print("Previous shelters deleted from database!")
 
     shelter_dict = get_shelters()
     for shelter in shelter_dict:
