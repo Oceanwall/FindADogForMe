@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import MemberCard from "./MemberCard";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import CardDeck from "react-bootstrap/CardDeck";
+import Bryan from "./../images/bryan.jpg";
+import Daniel from "./../images/daniel.png";
+import Samarth from "./../images/samarth.jpg";
+import Matthew from "./../images/matthew.jpg";
+import Keven from "./../images/keven.jpg";
 
 class About extends Component {
   state = {
@@ -15,7 +18,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         tests: 0,
-        img: "../images/bryan.jpg"
+        img: Bryan
       },
       {
         name: "Samarth Desai",
@@ -24,7 +27,8 @@ class About extends Component {
         responsibility: "Worked mainly on the backend portion of the project",
         commits: 0,
         issues: 0,
-        tests: 0
+        tests: 0,
+        img: Samarth
       },
       {
         name: "Daniel Ho",
@@ -32,7 +36,8 @@ class About extends Component {
         responsibility: "Front-end",
         commits: 0,
         issues: 0,
-        tests: 0
+        tests: 0,
+        img: Daniel
       },
       {
         name: "Keven Chen",
@@ -40,7 +45,8 @@ class About extends Component {
         responsibility: " I work on frontend stuff.",
         commits: 0,
         issues: 0,
-        tests: 0
+        tests: 0,
+        img: Keven
       },
       {
         name: "Matthew Zhao",
@@ -50,7 +56,8 @@ class About extends Component {
           "Currently a Fullstack Engineer, primarily responsible for Backend.",
         commits: 0,
         issues: 0,
-        tests: 0
+        tests: 0,
+        img: Matthew
       }
     ]
   };
@@ -63,58 +70,58 @@ class About extends Component {
       );
     });
     return (
-      <div class="row mt-4">
-        <div class="col-md-4 offset-md-1 col-10 offset-1">
-          <h2 class="text-center">Description and Motivation</h2>
-          <p class="mt-3">
-            As shelters become increasingly crowded at alarming rates, it's
-            become clear that the adoption process must be optimized. Our intent
-            is to go beyond simple data aggregation in facilitating the adoption
-            of dogs from shelters.
-          </p>
-          <p>
-            We aim to provide a simple, yet powerful pet recommendation tool to
-            match owners with specific breeds and dogs. By asking a user for
-            their preferences, we narrow down their opinions and find their
-            perfect match.
-          </p>
-          <p>
-            Moreover, to further encourage prospective adopters, we promote a
-            wide range of activities that can be performed with their new furry
-            companions, such as nearby state and national parks and events
-            happening in nearby locations.
-          </p>
+      <div>
+        <div class="row mt-4">
+          <div class="col-md-4 offset-md-1 col-10 offset-1">
+            <h2 class="text-center">Description and Motivation</h2>
+            <p class="mt-3">
+              As shelters become increasingly crowded at alarming rates, it's
+              become clear that the adoption process must be optimized. Our
+              intent is to go beyond simple data aggregation in facilitating the
+              adoption of dogs from shelters.
+            </p>
+            <p>
+              We aim to provide a simple, yet powerful pet recommendation tool
+              to match owners with specific breeds and dogs. By asking a user
+              for their preferences, we narrow down their opinions and find
+              their perfect match.
+            </p>
+            <p>
+              Moreover, to further encourage prospective adopters, we promote a
+              wide range of activities that can be performed with their new
+              furry companions, such as nearby state and national parks and
+              events happening in nearby locations.
+            </p>
+          </div>
+          <div class="col-md-4 offset-md-2 col-10 offset-1">
+            <h2 class="text-center">Data Sources</h2>
+            <div class="text-center mt-5">
+              <a href="https://www.petfinder.com/developers/api-docs">
+                Petfinder
+              </a>
+            </div>
+            <div class="text-center mt-2">
+              <a href="https://thedogapi.com/">TheDogAPI</a>
+            </div>
+            <div class="text-center mt-2">
+              <a href="https://dog.ceo/dog-api/documentation/">Dog API</a>
+            </div>
+            <div class="text-center mt-2">
+              <a href="https://www.eventbrite.com/platform/docs/introduction">
+                Eventbrite
+              </a>
+            </div>
+            <div class="text-center mt-2">
+              <a href="https://www.meetup.com/meetup_api/">Meetup</a>
+            </div>
+            <div class="text-center mt-2">
+              <a href="https://www.nps.gov/subjects/developer/api-documentation.htm">
+                National Park Service
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4 offset-md-2 col-10 offset-1">
-          <h2 class="text-center">Data Sources</h2>
-          <div class="text-center mt-5">
-            <a href="https://www.petfinder.com/developers/api-docs">
-              Petfinder
-            </a>
-          </div>
-          <div class="text-center mt-2">
-            <a href="https://thedogapi.com/">TheDogAPI</a>
-          </div>
-          <div class="text-center mt-2">
-            <a href="https://dog.ceo/dog-api/documentation/">Dog API</a>
-          </div>
-          <div class="text-center mt-2">
-            <a href="https://www.eventbrite.com/platform/docs/introduction">
-              Eventbrite
-            </a>
-          </div>
-          <div class="text-center mt-2">
-            <a href="https://www.meetup.com/meetup_api/">Meetup</a>
-          </div>
-          <div class="text-center mt-2">
-            <a href="https://www.nps.gov/subjects/developer/api-documentation.htm">
-              National Park Service
-            </a>
-          </div>
-        </div>
-        <Row>
-          <h2 class="text-center mt-4">Stats</h2>
-        </Row>
+        <h2 class="text-center mt-4">Stats</h2>
         <CardDeck>{memberCards}</CardDeck>
 
         <table class="table table-striped mt-5">

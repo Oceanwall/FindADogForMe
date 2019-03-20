@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import Button from "react-bootstrap/Button";
 
 class Home extends Component {
   render() {
     return (
-      <h1>Home Page</h1>
-      //Carousel
-
-      //Button
+      <div>
+        <h1> Home Page </h1>
+        <Button href="/dogs">Find a Friend!</Button>
+      </div>
     );
   }
 }
