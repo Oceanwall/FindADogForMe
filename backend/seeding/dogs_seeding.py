@@ -143,7 +143,7 @@ def build_dog(pet):
         image_2 = images["image_2"],
         image_3 = images["image_3"],
         image_4 = images["image_4"],
-        )
+    )
 
     db.session.add(dog)
     db.session.commit()
