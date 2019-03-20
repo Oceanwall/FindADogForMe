@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import MemberCard from "./MemberCard";
 import CardDeck from "react-bootstrap/CardDeck";
-import Bryan from "./../images/bryan.jpg";
-import Daniel from "./../images/daniel.png";
-import Samarth from "./../images/samarth.jpg";
-import Matthew from "./../images/matthew.jpg";
-import Keven from "./../images/keven.jpg";
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import LogoCard from "./LogoCard";
 
 class About extends Component {
   state = {
@@ -21,7 +19,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         tests: 0,
-        img: Bryan
+        img: "/images/bryan.jpg"
       },
       samarthdesai01: {
         name: "Samarth Desai",
@@ -31,7 +29,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         tests: 0,
-        img: Samarth
+        img: "/images/samarth.jpg"
       },
       Triplestop: {
         name: "Daniel Ho",
@@ -40,7 +38,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         tests: 0,
-        img: Daniel
+        img: "/images/daniel.png"
       },
       wc9245: {
         name: "Keven Chen",
@@ -49,7 +47,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         tests: 0,
-        img: Keven
+        img: "/images/keven.jpg"
       },
       oceanwall: {
         name: "Matthew Zhao",
@@ -60,7 +58,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         tests: 0,
-        img: Matthew
+        img: "/images/matthew.jpg"
       }
     },
     BASE_URL: "https://gitlab.com/api/v4/projects/",
@@ -84,7 +82,6 @@ class About extends Component {
     let commits = 0;
 
     do {
-      // TODO: GitLab API doesn't identify users by username but rather by author email
       for (let commit of commit_info) {
         let name = commit.author_name;
         if (name === "Bryan Yang" || name === "bryanyang16") {
@@ -255,7 +252,6 @@ class About extends Component {
         <Container>
           <CardDeck>{memberCards}</CardDeck>
         </Container>
-
         <table class="table table-striped mt-5">
           <thead>
             <tr class="text-center">
@@ -272,6 +268,35 @@ class About extends Component {
             </tr>
           </tbody>
         </table>
+        <Container>
+          <Row>
+            <Col>
+              <LogoCard src="/images/bootstrap.png" />
+            </Col>
+          </Row>
+        </Container>
+        <h2>
+          GitLab URL: <br />
+          <a
+            href="https://gitlab.com/oceanwall/findadogforme"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Find A Dog For Me
+          </a>
+        </h2>
+        <br />
+        <h2>
+          Postman API URL:
+          <br />
+          <a
+            href="https://documenter.getpostman.com/view/6754951/S11KQJxc"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Documentation
+          </a>
+        </h2>
       </div>
     );
   }
