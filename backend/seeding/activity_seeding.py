@@ -60,7 +60,7 @@ def build_park(info):
     main_address = info["addresses"][0]
 
     park = Activity(
-        id = info["id"],
+        id = "park" + info["id"],
         type = "park",
         url = info["url"],
         name = info["name"],
@@ -141,7 +141,7 @@ def build_event(info):
         return
 
     event = Activity(
-        id = info["id"],
+        id = "eventbrite" + info["id"],
         type = "eventbrite",
         url = info["url"],
         name = info["name"]['text'],
@@ -215,7 +215,7 @@ def build_meetup(info):
         return
 
     meetup = Activity(
-        id = info["id"],
+        id = "meetup" + info["id"],
         type = "meetup",
         url = info["link"],
         name = info["name"],

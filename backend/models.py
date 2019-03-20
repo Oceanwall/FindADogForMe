@@ -27,7 +27,7 @@ class Activity(db.Model):
 
     __tablename__ = "activity"
     id = db.Column(db.Unicode, primary_key=True, nullable=False)
-    type = db.Column(db.Unicode, primary_key=True, nullable=False)
+    type = db.Column(db.Unicode, nullable=False)
     url = db.Column(db.String(255))
     name = db.Column(db.String(255))
     description = db.Column(db.Text)
