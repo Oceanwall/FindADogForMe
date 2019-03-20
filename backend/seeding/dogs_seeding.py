@@ -21,14 +21,36 @@ def delete_dogs():
     """
     TODO
     """
+    pass
     Dog.query.delete()
     db.session.commit()
 
+def get_shelters (location = "texas", count = 1000, offset = 0):
+    """
+    Returns a list of all shelter ids given a certain location
+    location - string, zip/state 
+    count - number of shelters to list 
+    offset - how far to offset into the results list 
+    """
+    
+    payload = {"key" : PETFINDER_KEY,
+               "location" : str(location), "offset" : str(offset),
+               "count" : str(count), "format" : "json"}
+
+    response = requests.get(API_URL + "shelter.find", params=payload)
+
+    if response.status_code == 200:
+        shelter_ids = []
+        response_obj = json.loads(response.text)
+        shelter_dict = response_obj["petfinder"]["shelters"]["shelter"]
+        for elem in shelter_dict:
+            shelter_ids.append(elem["id"]["$t"])
+        return shelter_ids
+    else:
+        print("Request to get details about shelters failed.")
 
 
-# TODO: Pagination to keep getting dogs?
-# TODO: Get dogs by shelter rather than by this API call? Consider this after database is set up.
-def get_dogs(location = "texas", count = 1000, offset = 0):
+def get_dogs(shelter_id, count = 1000, offset = 0):
     """
     Interfaces with petfinder api to get relevant pet info local to a certain
     zipcode
@@ -36,26 +58,35 @@ def get_dogs(location = "texas", count = 1000, offset = 0):
     count - int, number of results to return
     offset - int, where to start
     """
-    payload = {"key" : PETFINDER_KEY, "animal" : "dog",
-               "location" : str(location), "offset" : str(offset),
-               "count" : str(count), "format" : "json"}
+    dog_list = []
 
-    response = requests.get(API_URL + "pet.find", params=payload)
+    payload = {"key" : PETFINDER_KEY, "id" : shelter_id, "output" : "full",
+               "status" : "A", "offset" : str(offset), "count" : str(count),
+               "format" : "json"}
+
+    response = requests.get(API_URL + "shelter.getPets", params=payload)
 
     if response.status_code == 200:
         response_obj = json.loads(response.text)
-        pet_dict = response_obj["petfinder"]["pets"]["pet"]
-        return pet_dict
+        if "pet" in response_obj["petfinder"]["pets"]:
+            pet_dict = response_obj["petfinder"]["pets"]["pet"]
+            for pet in pet_dict:
+                try:
+                    if pet["animal"]["$t"] == "Dog":
+                        dog_list.append(pet)
+                except: 
+                    pass
+            return dog_list
+        else:
+            return [{}]
     else:
         print("Request to get details about dogs failed.")
-
-
-
 
 def build_dog(pet):
     """
     Builds a dog dict from petfinder data
     """
+    pp.pprint(pet)
     if (pet == {}):
         return None
 
@@ -99,7 +130,7 @@ def build_dog(pet):
             images["image_" + str(pic_id)] = picture["$t"]
 
     # TODO: Add "options" (noKids houseTrained, hasShots, etc)
-    dog = Dog(
+    dog = (
         id = pet['id']['$t'],
         shelter_id = pet['shelterId']['$t'],
         name = pet['name']['$t'],
@@ -112,7 +143,7 @@ def build_dog(pet):
         image_2 = images["image_2"],
         image_3 = images["image_3"],
         image_4 = images["image_4"],
-        )
+    )
 
     db.session.add(dog)
     db.session.commit()
@@ -123,11 +154,13 @@ def main():
     Seeds database with records of local dogs based on Texas Zip Codes
     """
     delete_dogs()
-    print("Previos dogs deleted from database!")
+    print("Previous dogs deleted from database!")
 
-    dog_dict = get_dogs()
-    for dog in dog_dict:
-        build_dog(dog)
+    shelter_list = get_shelters()
+    for shelter in shelter_list:
+        dog_dict = get_dogs(shelter)
+        for dog in dog_dict:
+            build_dog(dog)
 
     print("Dog seeding complete!")
 
