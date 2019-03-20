@@ -18,7 +18,5 @@ app.route("/")
 def hello():
     return "Hello World!"
 
-# from models import Activity, Breed, Dog, Shelter
-
 if __name__ == '__main__':
     app.run()

@@ -166,22 +166,69 @@ class Breed(db.Model):
             "is_active": self.is_active
         }
 
-# class Dog(db.Model):
-#     """
-#     Represents information about a dog.
-#     id (number)
-#     shelter_id (string)
-#     name (string)
-#     breed (lowercase string)
-#     age (string)
-#     size (string)
-#     sex (string)
-#     description (string)
-#     image_1 (string)
-#     image_2 (string)
-#     image_3 (string)
-#     image_4 (string)
-#     """
+class Dog(db.Model):
+    """
+    Represents information about a dog.
+    id (number)
+    shelter_id (string)
+    name (string)
+    breed (lowercase string)
+    age (string)
+    size (string)
+    sex (string)
+    description (string)
+    image_1 (string)
+    image_2 (string)
+    image_3 (string)
+    image_4 (string)
+    """
+
+    __tablename__ = "dog"
+    id = db.Column(db.String(50), primary_key=True, nullable=False)
+    shelter_id = db.Column(db.String(50))
+    name = db.Column(db.String(50))
+    breed = db.Column(db.String(255))
+    age = db.Column(db.String(50))
+    size = db.Column(db.String(50))
+    sex = db.Column(db.String(50))
+    description = db.Column(db.Text)
+    image_1 = db.Column(db.String(1000))
+    image_2 = db.Column(db.String(1000))
+    image_3 = db.Column(db.String(1000))
+    image_4 = db.Column(db.String(1000))
+
+    def __init__(self, id, shelter_id, name, breed, age, size, sex, description, image_1, image_2, image_3, image_4):
+        self.id = id
+        self.shelter_id = shelter_id
+        self.name = name
+        self.breed = breed
+        self.age = age
+        self.size = size
+        self.sex = sex
+        self.description = description
+        self.image_1 = image_1
+        self.image_2 = image_2
+        self.image_3 = image_3
+        self.image_4 = image_4
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "shelter_id": self.shelter_id,
+            "name": self.name,
+            "breed": self.breed,
+            "age": self.age,
+            "size": self.size,
+            "sex": self.sex,
+            "description": self.description,
+            "image_1": self.image_1,
+            "image_2": self.image_2,
+            "image_3": self.image_3,
+            "image_4": self.image_4,
+        }
 
 class Shelter(db.Model):
     """

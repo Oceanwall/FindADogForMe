@@ -1,9 +1,13 @@
 import os
+import sys
 import json
 import requests
 import pprint
 from dotenv import load_dotenv
 
+sys.path.append("../")
+from app import db
+from models import Dog
 load_dotenv()
 pp = pprint.PrettyPrinter(indent=2)
 
@@ -17,7 +21,8 @@ def delete_dogs():
     """
     TODO
     """
-    pass
+    Dog.query.delete()
+    db.session.commit()
 
 
 
@@ -54,7 +59,6 @@ def build_dog(pet):
     if (pet == {}):
         return None
 
-    image_string = "image_"
     breed = ""
 
     if isinstance(pet["breeds"]["breed"], dict):
@@ -82,45 +86,48 @@ def build_dog(pet):
         if (not manual_fix):
             return None
 
-    # TODO: Add "options" (noKids houseTrained, hasShots, etc)
-    dog = {
-        'id': pet['id']['$t'],
-        'shelter_id': pet['shelterId']['$t'],
-        'name': pet['name']['$t'],
-        'breed': breed.lower(),
-        'age': pet['age']['$t'],
-        'size': pet['size']['$t'],
-        'sex': pet['sex']['$t'],
-        'description': pet['description']['$t'] if '$t' in pet['description'] else None,
-    }
+    images = {"image_1": None,
+              "image_2": None,
+              "image_3": None,
+              "image_4": None,
+              }
 
     pic_id = 0
     for picture in pet["media"]["photos"]["photo"]:
-        if int(picture['@id']) > pic_id and picture['@size'] == 'x' and pic_id <=3:
+        if int(picture['@id']) > pic_id and picture['@size'] == 'x' and pic_id < 4:
             pic_id += 1
-            dog[image_string + str(pic_id)] = picture["$t"]
+            images["image_" + str(pic_id)] = picture["$t"]
 
-    while pic_id < 5:
-        dog[image_string + str(pic_id)] = None
-        pic_id+=1
+    # TODO: Add "options" (noKids houseTrained, hasShots, etc)
+    dog = Dog(
+        id = pet['id']['$t'],
+        shelter_id = pet['shelterId']['$t'],
+        name = pet['name']['$t'],
+        breed = breed.lower(),
+        age = pet['age']['$t'],
+        size = pet['size']['$t'],
+        sex = pet['sex']['$t'],
+        description = pet['description']['$t'] if '$t' in pet['description'] else None,
+        image_1 = images["image_1"],
+        image_2 = images["image_2"],
+        image_3 = images["image_3"],
+        image_4 = images["image_4"],
+        )
 
-    # pp.pprint(dog)
-    return dog
-
+    db.session.add(dog)
+    db.session.commit()
 
 
 def main():
     """
     Seeds database with records of local dogs based on Texas Zip Codes
     """
-    # i = 0
+    delete_dogs()
+
     dog_dict = get_dogs()
-    # print(len(dog_dict))
     for dog in dog_dict:
-        t = build_dog(dog)
-        # if t is not None:
-            # i += 1
-    # print(i)
+        build_dog(dog)
+
     print("Dog seeding complete!")
 
 if __name__ == "__main__":
