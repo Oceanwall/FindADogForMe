@@ -7,7 +7,7 @@ load_dotenv()
 
 sys.path.append("../")
 from application import db
-from models import Breed
+from application.models import Breed
 
 THE_DOG_API_KEY = os.getenv("THE_DOG_API_KEY")
 THE_DOG_API_URL = "https://api.thedogapi.com/v1/"

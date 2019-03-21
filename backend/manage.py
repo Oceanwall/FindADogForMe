@@ -2,6 +2,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
 from application import application, db
+from application.models import Activity, Breed, Dog, Shelter
 
 migrate = Migrate(application, db)
 manager = Manager(application)
