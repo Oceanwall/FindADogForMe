@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 sys.path.append("../")
-from app import db
+from application import db
 from models import Activity
 
 PARKS_KEY = os.getenv("NATIONAL_PARKS_API_KEY")

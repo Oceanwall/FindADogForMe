@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 sys.path.append("../")
-from app import db
+from application import db
 from models import Breed
 
 THE_DOG_API_KEY = os.getenv("THE_DOG_API_KEY")

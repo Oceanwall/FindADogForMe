@@ -6,7 +6,7 @@ import pprint
 from dotenv import load_dotenv
 
 sys.path.append("../")
-from app import db
+from application import db
 from models import Dog
 load_dotenv()
 pp = pprint.PrettyPrinter(indent=2)
@@ -28,11 +28,11 @@ def delete_dogs():
 def get_shelters (location = "texas", count = 1000, offset = 0):
     """
     Returns a list of all shelter ids given a certain location
-    location - string, zip/state 
-    count - number of shelters to list 
-    offset - how far to offset into the results list 
+    location - string, zip/state
+    count - number of shelters to list
+    offset - how far to offset into the results list
     """
-    
+
     payload = {"key" : PETFINDER_KEY,
                "location" : str(location), "offset" : str(offset),
                "count" : str(count), "format" : "json"}
@@ -74,7 +74,7 @@ def get_dogs(shelter_id, count = 1000, offset = 0):
                 try:
                     if pet["animal"]["$t"] == "Dog":
                         dog_list.append(pet)
-                except: 
+                except:
                     pass
             return dog_list
         else:

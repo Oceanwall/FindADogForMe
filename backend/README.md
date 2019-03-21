@@ -19,3 +19,13 @@ OR
 python3 manage.py db migrate
 python3 manage.py db upgrade
 ```
+
+To push changes to Elastic Beanstalk:
+```
+eb deploy
+```
+
+Activate virtual environment (Windows):
+```
+.\env\Scripts\activate
+```

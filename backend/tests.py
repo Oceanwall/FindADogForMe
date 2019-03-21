@@ -1,7 +1,7 @@
 import requests
 import json
 
-url = "http://localhost:5000/api/activity?"
+url = "https://api.findadogfor.me/api/activity?"
 headers = {'Content-Type': 'application/json'}
 
 

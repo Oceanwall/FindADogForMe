@@ -6,7 +6,7 @@ import pprint
 from dotenv import load_dotenv
 
 sys.path.append("../")
-from app import db
+from application import db
 from models import Shelter
 
 load_dotenv()
