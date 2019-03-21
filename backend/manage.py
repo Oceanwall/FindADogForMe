@@ -7,7 +7,7 @@ from application.models import Activity, Breed, Dog, Shelter
 migrate = Migrate(application, db)
 manager = Manager(application)
 
-manager.add_command('db', MigrateCommand)
+manager.add_command("db", MigrateCommand)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     manager.run()

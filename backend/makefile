@@ -9,3 +9,15 @@ reseed_activities:
 schema_update:
 	python3 manage.py db migrate
 	python3 manage.py db upgrade
+
+format:
+	black application.py
+	black manage.py
+	black config.py
+	black routes.py
+	black tests.py
+	black seeding/activity_seeding.py
+	black seeding/breeds_seeding.py
+	black seeding/dogs_seeding.py
+	black application/__init__.py
+	black application/models.py

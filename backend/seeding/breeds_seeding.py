@@ -3,6 +3,7 @@ import sys
 import json
 import requests
 from dotenv import load_dotenv
+
 load_dotenv()
 
 sys.path.append("../")
@@ -13,6 +14,7 @@ THE_DOG_API_KEY = os.getenv("THE_DOG_API_KEY")
 THE_DOG_API_URL = "https://api.thedogapi.com/v1/"
 DOG_IMAGES_API_URL = "https://dog.ceo/api/breed/"
 
+
 def delete_breeds():
     """
     TODO
@@ -20,11 +22,12 @@ def delete_breeds():
     Breed.query.delete()
     db.session.commit()
 
+
 def get_all_breeds():
     """
     Gets details about all the breeds of dogs.
     """
-    payload = {"x-api-key" : THE_DOG_API_KEY}
+    payload = {"x-api-key": THE_DOG_API_KEY}
     response = requests.get(THE_DOG_API_URL + "breeds?", params=payload)
 
     if response.status_code == 200:
@@ -42,15 +45,17 @@ def get_breed_images(breed):
     main_breed = None
     sub_breed = None
 
-    if ' ' in breed:
+    if " " in breed:
         breed_words = breed.split()
         main_breed = breed_words[len(breed_words) - 1]
         sub_breed = breed_words[len(breed_words) - 2]
 
-        response = requests.get(DOG_IMAGES_API_URL + main_breed + "/" + sub_breed + "/images/random/4")
+        response = requests.get(
+            DOG_IMAGES_API_URL + main_breed + "/" + sub_breed + "/images/random/4"
+        )
         if response.status_code == 200:
             response_obj = json.loads(response.text)
-            return response_obj['message']
+            return response_obj["message"]
         else:
             breed = main_breed
 
@@ -58,9 +63,9 @@ def get_breed_images(breed):
     response = requests.get(DOG_IMAGES_API_URL + breed + "/images/random/4")
     if response.status_code == 200:
         response_obj = json.loads(response.text)
-        return response_obj['message']
+        return response_obj["message"]
     else:
-        if (sub_breed):
+        if sub_breed:
             breed = sub_breed
         else:
             return None
@@ -69,7 +74,7 @@ def get_breed_images(breed):
     response = requests.get(DOG_IMAGES_API_URL + breed + "/images/random/4")
     if response.status_code == 200:
         response_obj = json.loads(response.text)
-        return response_obj['message']
+        return response_obj["message"]
     else:
         return None
 
@@ -94,31 +99,32 @@ def build_breed(info):
         weight[0] = weight[len(weight) - 1]
 
     breed = Breed(
-        name = info["name"].lower(),
-        group = info["breed_group"] if "breed_group" in info else None,
-        min_height = height[0],
-        max_height = height[len(height) - 1],
-        min_lifespan = lifespan[0],
-        max_lifespan = lifespan[len(lifespan) - 1],
-        temperament = info["temperament"],
-        min_weight = weight[0],
-        max_weight = weight[len(weight) - 1],
-        image_1 = breed_images[0] if num_images >= 1 else None,
-        image_2 = breed_images[1] if num_images >= 2 else None,
-        image_3 = breed_images[2] if num_images >= 3 else None,
-        image_4 = breed_images[3] if num_images >= 4 else None,
-        is_active = True if "Active" in info["temperament"] or
-            "Adventurous" in info["temperament"] or
-            "Energetic" in info["temperament"] or
-            "Outgoing" in info["temperament"] or
-            "Lively" in info["temperament"] or
-            "Agile" in info["temperament"] or
-            "Athletic" in info["temperament"] else False
-        )
+        name=info["name"].lower(),
+        group=info["breed_group"] if "breed_group" in info else None,
+        min_height=height[0],
+        max_height=height[len(height) - 1],
+        min_lifespan=lifespan[0],
+        max_lifespan=lifespan[len(lifespan) - 1],
+        temperament=info["temperament"],
+        min_weight=weight[0],
+        max_weight=weight[len(weight) - 1],
+        image_1=breed_images[0] if num_images >= 1 else None,
+        image_2=breed_images[1] if num_images >= 2 else None,
+        image_3=breed_images[2] if num_images >= 3 else None,
+        image_4=breed_images[3] if num_images >= 4 else None,
+        is_active=True
+        if "Active" in info["temperament"]
+        or "Adventurous" in info["temperament"]
+        or "Energetic" in info["temperament"]
+        or "Outgoing" in info["temperament"]
+        or "Lively" in info["temperament"]
+        or "Agile" in info["temperament"]
+        or "Athletic" in info["temperament"]
+        else False,
+    )
 
     db.session.add(breed)
     db.session.commit()
-
 
 
 def main():
@@ -132,6 +138,7 @@ def main():
     for breed in breeds_data:
         build_breed(breed)
     print("Breeds seeded!")
+
 
 if __name__ == "__main__":
     main()
