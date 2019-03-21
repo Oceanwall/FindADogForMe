@@ -228,6 +228,33 @@ async function getShelterDogs(id, page){
     })
 }
 
+//function getDogActivities();
+
+function getDogBreed(id){
+    return new Promise((resolve, reject) => {
+        getDogs(id).then((response) => {
+            breed = response.breed;
+            getBreeds(breed).then((result) => {
+                resolve(result);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    })
+}
+
+function getDogShelter(id){
+    return new Promise((resolve, reject) => {
+        getDogs(id).then((response) => {
+            shelter_id = response.shelter_id;
+            getShelters(shelter_id).then((result) => {
+                resolve(result);
+            }).catch((error) => {
+                reject(error)
+            });
+        });
+    })
+}
 
 getShelters().then((response) => {
     //console.log(response)
@@ -254,6 +281,13 @@ getShelterActivities("TX1399", 0.1).then((response) => {
 getShelterDogs("TX1399");
 
 getDogs('',"TX1399").then((response) => {
-    console.log(response);
+    //console.log(response);
 })
 
+getDogBreed('43022980').then((response) =>{
+    //console.log(response);
+});
+
+getDogShelter('43022980').then((response) => {
+    console.log(response);
+});
