@@ -1,0 +1,15 @@
+{
+  "name": "dog_wrap",
+  "version": "1.0.0",
+  "description": "A wrapper for the findadogfor.me API",
+  "main": "dog_wrap.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Samarth Desai",
+  "license": "ISC",
+  "dependencies": {
+    "fetch": "^1.1.0",
+    "request": "^2.88.0"
+  }
+}
