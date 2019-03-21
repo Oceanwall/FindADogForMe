@@ -204,7 +204,7 @@ class Breed(db.Model):
 class Dog(db.Model):
     """
     Represents information about a dog.
-    id (number)
+    id (string)
     shelter_id (string)
     name (string)
     breed (lowercase string)
