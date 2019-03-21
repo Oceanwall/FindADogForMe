@@ -79,7 +79,7 @@ def get_breed_images(breed):
         return None
 
 
-def build_breed(info):
+def build_breed(info, commit=False):
     """
     TODO
     """
@@ -123,8 +123,11 @@ def build_breed(info):
         else False,
     )
 
-    db.session.add(breed)
-    db.session.commit()
+    if commit:
+        db.session.add(breed)
+        db.session.commit()
+
+    return breed
 
 
 def main():
@@ -136,7 +139,7 @@ def main():
 
     breeds_data = get_all_breeds()
     for breed in breeds_data:
-        build_breed(breed)
+        build_breed(breed, True)
     print("Breeds seeded!")
 
 

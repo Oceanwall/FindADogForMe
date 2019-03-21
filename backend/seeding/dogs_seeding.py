@@ -180,7 +180,7 @@ def get_shelters(location="texas", count=500, offset=0):
         print("Request to get details about shelters failed." + str(location))
 
 
-def build_shelter(shelter, shelter_ids):
+def build_shelter(shelter, shelter_ids, commit=False):
     """
     Builds a shelter dictionary based on the results of get_shelter
     """
@@ -223,8 +223,11 @@ def build_shelter(shelter, shelter_ids):
         address=address,
     )
 
-    db.session.add(curr_shelter)
-    db.session.commit()
+    if commit:
+        db.session.add(curr_shelter)
+        db.session.commit()
+
+    return curr_shelter
 
 
 def get_dogs(shelter_id, count=20, offset=0):
@@ -266,7 +269,7 @@ def get_dogs(shelter_id, count=20, offset=0):
         print("Request to get details about dogs failed.")
 
 
-def build_dog(pet):
+def build_dog(pet, commit=False):
     """
     Builds a dog dict from petfinder data
     """
@@ -327,8 +330,11 @@ def build_dog(pet):
         image_4=images["image_4"],
     )
 
-    db.session.add(dog)
-    db.session.commit()
+    if commit:
+        db.session.add(dog)
+        db.session.commit()
+
+    return dog
 
 
 def main():
@@ -343,14 +349,14 @@ def main():
     shelter_dict = get_shelters()
     shelter_ids = set()
     for shelter in shelter_dict:
-        t = build_shelter(shelter, shelter_ids)
+        t = build_shelter(shelter, shelter_ids, True)
     print("Shelter seeding complete!")
 
     shelter_count = 0
     for shelter in shelter_ids:
         dog_dict = get_dogs(shelter)
         for dog in dog_dict:
-            build_dog(dog)
+            build_dog(dog, True)
         shelter_count += 1
         print("Dogs from Shelter " + str(shelter_count) + " completed.")
     print("Dog seeding complete!")

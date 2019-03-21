@@ -63,7 +63,7 @@ def get_all_parks():
         return None
 
 
-def build_park(info):
+def build_park(info, commit=False):
     """
     TODO
     """
@@ -106,8 +106,11 @@ def build_park(info):
         date=None,
     )
 
-    db.session.add(park)
-    db.session.commit()
+    if commit:
+        db.session.add(park)
+        db.session.commit()
+
+    return park
 
 
 def get_all_eventbrites():
@@ -152,7 +155,7 @@ def get_eventbrite_venue(venue_id):
         return None
 
 
-def build_event(info):
+def build_event(info, commit=False):
     """
     TODO
     """
@@ -187,8 +190,11 @@ def build_event(info):
         date=info["end"]["local"],
     )
 
-    db.session.add(event)
-    db.session.commit()
+    if commit:
+        db.session.add(event)
+        db.session.commit()
+
+    return event
 
 
 def get_all_meetups():
@@ -223,7 +229,7 @@ def get_all_meetups():
     return meetups
 
 
-def build_meetup(info):
+def build_meetup(info, commit=False):
     """
     TODO
     """
@@ -260,8 +266,11 @@ def build_meetup(info):
         date=info["local_date"],
     )
 
-    db.session.add(meetup)
-    db.session.commit()
+    if commit:
+        db.session.add(meetup)
+        db.session.commit()
+
+    return meetup
 
 
 def main():
@@ -274,19 +283,19 @@ def main():
     # National Parks
     parks_data = get_all_parks()
     for park in parks_data:
-        build_park(park)
+        build_park(park, True)
     print("Parks seeded!")
 
     # Eventbrite
     eventbrite_data = get_all_eventbrites()
     for event in eventbrite_data:
-        build_event(event)
+        build_event(event, True)
     print("Events seeded!")
 
     # Meetup
     meetup_data = get_all_meetups()
     for meetup in meetup_data:
-        build_meetup(meetup)
+        build_meetup(meetup, True)
     print("Meetups seeded!")
 
 

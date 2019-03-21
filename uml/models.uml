@@ -70,6 +70,4 @@ class Shelter {
     String address
 }
 
-
-
 @enduml
