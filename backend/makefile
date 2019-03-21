@@ -1,13 +1,23 @@
 seed:
 	python3 activity_seeding.py
-	python3 pets_seeding.py
-	python3 shelter_seeding.py
+	python3 dogs_seeding.py
 	python3 breeds_seeding.py
 
-re_seed:
+reseed_activities:
 	python3 activity_seeding.py
-	python3 pets_seeding.py
 
 schema_update:
 	python3 manage.py db migrate
 	python3 manage.py db upgrade
+
+format:
+	black application.py
+	black manage.py
+	black config.py
+	black routes.py
+	black tests.py
+	black seeding/activity_seeding.py
+	black seeding/breeds_seeding.py
+	black seeding/dogs_seeding.py
+	black application/__init__.py
+	black application/models.py

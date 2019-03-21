@@ -1,4 +1,5 @@
-from app import db
+from application import db
+
 
 class Activity(db.Model):
     """
@@ -45,9 +46,27 @@ class Activity(db.Model):
     directions = db.Column(db.Text)
     date = db.Column(db.String(1000))
 
-    def __init__(self, id, type, url, name, description, latitude, longitude,
-                location, is_active, is_free, image_1, image_2, image_3, image_4,
-                designation, weather, directions, date):
+    def __init__(
+        self,
+        id,
+        type,
+        url,
+        name,
+        description,
+        latitude,
+        longitude,
+        location,
+        is_active,
+        is_free,
+        image_1,
+        image_2,
+        image_3,
+        image_4,
+        designation,
+        weather,
+        directions,
+        date,
+    ):
         self.id = id
         self.type = type
         self.url = url
@@ -68,7 +87,7 @@ class Activity(db.Model):
         self.date = date
 
     def __repr__(self):
-        return '<id {} type {}>'.format(self.id, self.type)
+        return "<id {} type {}>".format(self.id, self.type)
 
     def serialize(self):
         return {
@@ -91,6 +110,7 @@ class Activity(db.Model):
             "directions": self.directions,
             "date": self.date,
         }
+
 
 class Breed(db.Model):
     """
@@ -127,9 +147,23 @@ class Breed(db.Model):
     image_4 = db.Column(db.String(1000))
     is_active = db.Column(db.Boolean)
 
-    def __init__(self, name, group, min_height, max_height, min_lifespan,
-                max_lifespan, temperament, min_weight, max_weight,
-                image_1, image_2, image_3, image_4, is_active):
+    def __init__(
+        self,
+        name,
+        group,
+        min_height,
+        max_height,
+        min_lifespan,
+        max_lifespan,
+        temperament,
+        min_weight,
+        max_weight,
+        image_1,
+        image_2,
+        image_3,
+        image_4,
+        is_active,
+    ):
         self.name = name
         self.group = group
         self.min_height = min_height
@@ -146,7 +180,7 @@ class Breed(db.Model):
         self.is_active = is_active
 
     def __repr__(self):
-        return '<name {}>'.format(self.name)
+        return "<name {}>".format(self.name)
 
     def serialize(self):
         return {
@@ -163,13 +197,14 @@ class Breed(db.Model):
             "image_2": self.image_2,
             "image_3": self.image_3,
             "image_4": self.image_4,
-            "is_active": self.is_active
+            "is_active": self.is_active,
         }
+
 
 class Dog(db.Model):
     """
     Represents information about a dog.
-    id (number)
+    id (string)
     shelter_id (string)
     name (string)
     breed (lowercase string)
@@ -185,9 +220,9 @@ class Dog(db.Model):
 
     __tablename__ = "dog"
     id = db.Column(db.Unicode, primary_key=True, nullable=False)
-    shelter_id = db.Column(db.Unicode, db.ForeignKey('shelter.id'), nullable=False)
+    shelter_id = db.Column(db.Unicode, db.ForeignKey("shelter.id"), nullable=False)
     name = db.Column(db.String(50))
-    breed = db.Column(db.Unicode, db.ForeignKey('breed.name'), nullable=False)
+    breed = db.Column(db.Unicode, db.ForeignKey("breed.name"), nullable=False)
     age = db.Column(db.String(50))
     size = db.Column(db.String(50))
     sex = db.Column(db.String(50))
@@ -197,7 +232,21 @@ class Dog(db.Model):
     image_3 = db.Column(db.String(1000))
     image_4 = db.Column(db.String(1000))
 
-    def __init__(self, id, shelter_id, name, breed, age, size, sex, description, image_1, image_2, image_3, image_4):
+    def __init__(
+        self,
+        id,
+        shelter_id,
+        name,
+        breed,
+        age,
+        size,
+        sex,
+        description,
+        image_1,
+        image_2,
+        image_3,
+        image_4,
+    ):
         self.id = id
         self.shelter_id = shelter_id
         self.name = name
@@ -212,7 +261,7 @@ class Dog(db.Model):
         self.image_4 = image_4
 
     def __repr__(self):
-        return '<id {}>'.format(self.id)
+        return "<id {}>".format(self.id)
 
     def serialize(self):
         return {
@@ -229,6 +278,7 @@ class Dog(db.Model):
             "image_3": self.image_3,
             "image_4": self.image_4,
         }
+
 
 class Shelter(db.Model):
     """
@@ -255,7 +305,9 @@ class Shelter(db.Model):
     phone = db.Column(db.String(50))
     address = db.Column(db.String(255))
 
-    def __init__(self, id, name, latitude, longitude, city, state, zipcode, phone, address):
+    def __init__(
+        self, id, name, latitude, longitude, city, state, zipcode, phone, address
+    ):
         self.id = id
         self.name = name
         self.latitude = latitude
@@ -267,7 +319,7 @@ class Shelter(db.Model):
         self.address = address
 
     def __repr__(self):
-        return '<id {}>'.format(self.id)
+        return "<id {}>".format(self.id)
 
     def serialize(self):
         return {
@@ -279,5 +331,5 @@ class Shelter(db.Model):
             "state": self.state,
             "zipcode": self.zipcode,
             "phone": self.phone,
-            "address": self.address
+            "address": self.address,
         }

@@ -1,0 +1,73 @@
+@startuml
+Breed "1" *- "*" Dog
+Breed "*" - "*" Shelter
+Dog "*" *- "1" Shelter
+Breed "*" - "*" Activity
+Shelter "*" - "*" Activity
+
+class Activity {
+    String id
+    String type
+    String url
+    String name
+    Text description
+    Float latitude
+    Float longitude
+    String location
+    Boolean is_active
+    Boolean is_free
+    String image_1
+    String image_2
+    String image_3
+    String image_4
+    String designation
+    Text weather
+    Text directions
+    String date
+}
+
+class Breed {
+    String name
+    String group
+    Float min_height
+    Float max_height
+    Float min_lifespan
+    Float max_lifespan
+    String temperament
+    Integer min_weight
+    Integer max_weight
+    String image_1
+    String image_2
+    String image_3
+    String image_4
+    Boolean is_active
+}
+
+class Dog {
+    String id
+    String shelter_id
+    String name
+    String breed
+    String age
+    String size
+    String sex
+    Text description
+    String image_1
+    String image_2
+    String image_3
+    String image_4
+}
+
+class Shelter {
+    String id
+    String name
+    Float latitude
+    Float longitude
+    String city
+    String state
+    Integer zipcode
+    String phone
+    String address
+}
+
+@enduml
