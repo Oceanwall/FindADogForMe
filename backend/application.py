@@ -10,10 +10,16 @@ manager.create_api(Breed, methods=["Get"])
 manager.create_api(Dog, methods=["Get"], results_per_page=12)
 manager.create_api(Shelter, methods=["Get"], results_per_page=12)
 
-# TODO: Provide example list of endpoints?
 @application.route("/")
 def hello():
-    return "Hello World!"
+    message = {
+        'status': 200,
+        'message': "Welcome to FindADogForMe's API! If you need help, check out the Postman Documentation: https://documenter.getpostman.com/view/6754951/S11KQJxc"
+    }
+    response = jsonify(message)
+    response.status_code = 200
+
+    return response
 
 @application.errorhandler(404)
 def page_not_found(e):
