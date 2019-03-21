@@ -1,7 +1,7 @@
 const request = require('request');
 
 // Builds base query for /shelter
-var buildQueryShelters = (model ,id, name, latitude, longitude, range, page) => {
+function buildQuery(model ,id, name, latitude, longitude, range, page){
     queryString = '';
     // Add case for all params except page 
     if (id != '' && !name && !latitude && !longitude && !range && !page){
@@ -63,7 +63,7 @@ var buildQueryShelters = (model ,id, name, latitude, longitude, range, page) => 
 
 async function getShelters (id, name, latitude, longitude, range, page) {
     if (arguments.length > 0){
-        queryString = await buildQueryShelters("shelter", id, name, latitude, longitude, range, page);
+        queryString = await buildQuery("shelter", id, name, latitude, longitude, range, page);
     }
     else{
         queryString = '';
@@ -85,7 +85,7 @@ async function getShelters (id, name, latitude, longitude, range, page) {
 // Activity id 
 async function getActivities (id, name, latitude, longitude, range, page) {
     if (arguments.length > 0){
-        queryString = await buildQueryShelters ("activity", id, name, latitude, longitude, range, page);
+        queryString = await buildQuery("activity", id, name, latitude, longitude, range, page);
     }else{
         queryString = '';
     }
@@ -106,7 +106,7 @@ async function getActivities (id, name, latitude, longitude, range, page) {
 //TODO: Get all results at once, what to pass in for page
 async function getBreeds (name) {
     if (name){
-        queryString = await buildQueryShelters ("breed", '', name);
+        queryString = await buildQuery("breed", '', name);
     }else{
         queryString = '';
     }
@@ -123,6 +123,33 @@ async function getBreeds (name) {
         })
     })
 
+}
+
+//TODO: Is range useful for this method?
+async function getDogs (id, shelter_id, range, page){
+    queryString = '';
+    if (id != '' && id){
+        queryString = `/${id}`;
+    }else if(shelter_id != '' && shelter_id){
+        return getShelterDogs(shelter_id, page);
+    }else if (page){
+        queryString=`?page[number]=${page}`;
+    }else{
+        queryString = '';
+    }
+
+    return new Promise ((resolve, reject) => {
+        request({
+            url:`https://api.findadogfor.me/api/dog${queryString}`,
+            method: "GET",
+        }, (error, response, body) => {
+            if(error){
+                reject(new Error('Unable to connect to API'));
+            }else{
+                resolve(JSON.parse(body));
+            }
+        });
+    });
 }
 
 // Returns activities close to a certain shelter
@@ -202,7 +229,7 @@ async function getShelterDogs(id, page){
 }
 
 
-getShelters('','',29.5961, -95.5169).then((response) => {
+getShelters().then((response) => {
     //console.log(response)
 })
 
@@ -225,3 +252,8 @@ getShelterActivities("TX1399", 0.1).then((response) => {
 });
 
 getShelterDogs("TX1399");
+
+getDogs('',"TX1399").then((response) => {
+    console.log(response);
+})
+
