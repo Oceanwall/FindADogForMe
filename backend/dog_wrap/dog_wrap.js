@@ -1,7 +1,7 @@
 const request = require('request');
 
 // Builds base query for /shelter
-function buildQuery(model ,id, name, latitude, longitude, range, page){
+function buildQuery(model, id, name, latitude, longitude, range, page){
     queryString = '';
     // Add case for all params except page 
     if (id != '' && !name && !latitude && !longitude && !range && !page){
@@ -62,6 +62,7 @@ function buildQuery(model ,id, name, latitude, longitude, range, page){
 }
 
 async function getShelters (id, name, latitude, longitude, range, page) {
+    var queryString = '';
     if (arguments.length > 0){
         queryString = await buildQuery("shelter", id, name, latitude, longitude, range, page);
     }
@@ -84,6 +85,7 @@ async function getShelters (id, name, latitude, longitude, range, page) {
 
 // Activity id 
 async function getActivities (id, name, latitude, longitude, range, page) {
+    var queryString = '';
     if (arguments.length > 0){
         queryString = await buildQuery("activity", id, name, latitude, longitude, range, page);
     }else{
@@ -105,6 +107,7 @@ async function getActivities (id, name, latitude, longitude, range, page) {
 
 //TODO: Get all results at once, what to pass in for page
 async function getBreeds (name) {
+    var queryString = '';
     if (name){
         queryString = await buildQuery("breed", '', name);
     }else{
@@ -127,7 +130,7 @@ async function getBreeds (name) {
 
 //TODO: Is range useful for this method?
 async function getDogs (id, shelter_id, range, page){
-    queryString = '';
+    var queryString = '';
     if (id != '' && id){
         queryString = `/${id}`;
     }else if(shelter_id != '' && shelter_id){
@@ -176,7 +179,7 @@ async function getShelterBreeds(id){
         op:"eq",
         val:id
     }
-    queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`
+    var queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`
     return new Promise ((resolve, reject) => {
         if(!id){
             reject("Must provide a shelter id!")
@@ -201,12 +204,12 @@ async function getShelterBreeds(id){
 
 //Returns dogs within a specific shelter 
 async function getShelterDogs(id, page){
-    queryObject = {
+    let queryObject = {
         name:"shelter_id",
         op:"eq",
         val:id
     }
-    queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`
+    var queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`
     if(page){
         queryString += `page[number]=${page}`
     }
@@ -256,6 +259,48 @@ function getDogShelter(id){
     })
 }
 
+function buildBreedActivityQuery(active, queryString, multipleArgs){
+    if (active === true){
+        filter_string = '{"name" : "is_active", "op":"eq", "val": true}'
+    } else {
+        filter_string = '{"name" : "is_active", "op":"eq", "val": false}'
+    }
+    if(multipleArgs){
+        queryString = [queryString.slice(0, 15), filter_string,',', queryString.slice(15)].join('');
+    }else{
+        queryString = '?q={"filters":[' + filter_string + ']}'
+    }
+    return queryString;
+}
+
+async function getBreedActivities(name, latitude, longitude, range, page) {
+    var multipleArgs = false;
+    var queryString = '';
+    if (arguments.length > 1){
+        queryString = await buildQuery("activity", '', name, latitude, longitude, range, page);
+        multipleArgs = true; 
+    }else{
+        queryString = '';
+    }
+    return new Promise((resolve, reject) => {
+        getBreeds(name).then(async (response) => {
+            active = response.objects[0].is_active;
+            queryString = await buildBreedActivityQuery(active, queryString, multipleArgs);
+            console.log(queryString);
+            request({
+                url: `https://api.findadogfor.me/api/activity${queryString}`,
+                method: "GET",
+            }, (error, response, body) => {
+                if(error){
+                    reject(error)
+                }else{
+                    resolve(JSON.parse(body));
+                }
+            })
+        })
+    })
+}
+
 getShelters().then((response) => {
     //console.log(response)
 })
@@ -289,5 +334,9 @@ getDogBreed('43022980').then((response) =>{
 });
 
 getDogShelter('43022980').then((response) => {
-    console.log(response);
+    //console.log(response);
+});
+
+getBreedActivities('affenpinscher', 29.7856, -95.8242, 1).then((response) => {
+    console.log(response)
 });
