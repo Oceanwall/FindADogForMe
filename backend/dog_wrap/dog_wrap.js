@@ -23,11 +23,9 @@ function buildQuery(model, id, name, latitude, longitude, range, page){
         }
         queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`;
     }
-    else if (latitude && longitude){
+    else if (latitude && longitude && latitude != 0 && longitude != 0){
         if (!range)
             range = 0
-        if (!page)
-            page = 1
         latitude_lower = {
             name:"latitude",
             op:"ge",
@@ -55,9 +53,12 @@ function buildQuery(model, id, name, latitude, longitude, range, page){
         lou = JSON.stringify(longitude_upper);
 
         queryString = `?q={"filters":[${ll}, ${lu}, ${lol}, ${lou}]}`
-        queryString += `&page[number]=${page}`
 
     }
+    if (page){
+        queryString += `&page[number]=${page}`
+    }
+
     return queryString
 }
 
@@ -136,7 +137,7 @@ async function getDogs (id, shelter_id, range, page){
     }else if(shelter_id != '' && shelter_id){
         return getShelterDogs(shelter_id, page);
     }else if (page){
-        queryString=`?page[number]=${page}`;
+        queryString=`?page=${page}`;
     }else{
         queryString = '';
     }
@@ -211,7 +212,7 @@ async function getShelterDogs(id, page){
     }
     var queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`
     if(page){
-        queryString += `page[number]=${page}`
+        queryString += `&page=${page}`
     }
     return new Promise ((resolve, reject) => {
         if(!id){
@@ -286,7 +287,6 @@ async function getBreedActivities(name, latitude, longitude, range, page) {
         getBreeds(name).then(async (response) => {
             active = response.objects[0].is_active;
             queryString = await buildBreedActivityQuery(active, queryString, multipleArgs);
-            console.log(queryString);
             request({
                 url: `https://api.findadogfor.me/api/activity${queryString}`,
                 method: "GET",
@@ -300,6 +300,33 @@ async function getBreedActivities(name, latitude, longitude, range, page) {
         })
     })
 }
+
+async function getBreedDogs(name, latitude, longitude, range, page){
+    return new Promise (async (resolve, reject) => {
+        var queryString = '';
+        let filter_string = `{"name" : "name", "op":"eq", "val": "${name}"}`;
+        if (arguments.length > 2 && latitude != 0 && longitude != 0){
+            queryString = await buildQuery("breed", '', '', latitude, longitude, range, page);
+            queryString = [queryString.slice(0, 15), filter_string,',', queryString.slice(15)].join('');
+        }else{
+            queryString = "?q=" + filter_string;
+            if(page){
+                queryString+= `&page=${page}`;
+            }
+        }
+        request({
+            url: `https://api.findadogfor.me/api/dog${queryString}`,
+            method: "GET",
+        }, (error, response, body) => {
+            if(error){
+                reject(error)
+            }else{
+                resolve(JSON.parse(body));
+            }
+        });
+    });
+}
+
 
 getShelters().then((response) => {
     //console.log(response)
@@ -338,5 +365,9 @@ getDogShelter('43022980').then((response) => {
 });
 
 getBreedActivities('affenpinscher', 29.7856, -95.8242, 1).then((response) => {
-    console.log(response)
+    //console.log(response)
 });
+
+getBreedDogs('labrador retriever', 0,0,0,2).then((response) => {
+    //console.log(response);
+})
