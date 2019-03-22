@@ -1,5 +1,15 @@
 const request = require('request');
 
+/**
+ * NOTE TO WHOEVER DECIDES TO USE THIS. IF YOU DONT WANT TO USE A CERTAIN PARAMETER
+ * USE THE FOLLOWING VALUES TO IGNORE THEM, 
+ * '' - for id and name 
+ *  0 - for latitude, longitude, range
+ * For example if I'd like to get the second page of results for all dogs of certain breed
+ * I would do 
+ *     getBreedDogs('labrador retriever, 0, 0, 0, 2);
+ */
+
 // Builds base query for /shelter
 function buildQuery(model, id, name, latitude, longitude, range, page){
     var queryString = '';
