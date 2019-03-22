@@ -2,12 +2,12 @@ const request = require('request');
 
 // Builds base query for /shelter
 function buildQuery(model, id, name, latitude, longitude, range, page){
-    queryString = '';
+    var queryString = '';
     // Add case for all params except page 
     if (id != '' && !name && !latitude && !longitude && !range && !page){
         queryString+= '/' + id;
     }
-    else if (name != '' && !latitude && !longitude && !range && !page){
+    else if (name != '' && !latitude && !longitude && !range){
         if(model === "shelter" || model === "breed"){
             queryObject = {
                 name: "name",
@@ -22,6 +22,9 @@ function buildQuery(model, id, name, latitude, longitude, range, page){
             }
         }
         queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`;
+        if (page){
+            queryString += `&page[number]=${page}`;
+        }
     }
     else if (latitude && longitude && latitude != 0 && longitude != 0){
         if (!range)
@@ -54,11 +57,11 @@ function buildQuery(model, id, name, latitude, longitude, range, page){
 
         queryString = `?q={"filters":[${ll}, ${lu}, ${lol}, ${lou}]}`
 
-    }
-    if (page){
-        queryString += `&page[number]=${page}`
-    }
+        if (page){
+            queryString += `&page[number]=${page}`;
+        }
 
+    }
     return queryString
 }
 
@@ -106,11 +109,11 @@ async function getActivities (id, name, latitude, longitude, range, page) {
     });
 }
 
-//TODO: Get all results at once, what to pass in for page
-async function getBreeds (name) {
+//TODO: Figure out location filter
+async function getBreeds (name, latitude, longitude, range, page) {
     var queryString = '';
     if (name){
-        queryString = await buildQuery("breed", '', name);
+        queryString = await buildQuery("breed", '', name, latitude, longitude, range, page);
     }else{
         queryString = '';
     }
@@ -232,8 +235,10 @@ async function getShelterDogs(id, page){
     })
 }
 
+// TODO: Complete this method
 //function getDogActivities();
 
+// Retrieve the breed information for a particular dog
 function getDogBreed(id){
     return new Promise((resolve, reject) => {
         getDogs(id).then((response) => {
@@ -247,6 +252,7 @@ function getDogBreed(id){
     })
 }
 
+// Retrieve the shelter a dog is hosted at 
 function getDogShelter(id){
     return new Promise((resolve, reject) => {
         getDogs(id).then((response) => {
@@ -274,6 +280,7 @@ function buildBreedActivityQuery(active, queryString, multipleArgs){
     return queryString;
 }
 
+//Returns a activities nearby for a particular breed
 async function getBreedActivities(name, latitude, longitude, range, page) {
     var multipleArgs = false;
     var queryString = '';
@@ -301,11 +308,13 @@ async function getBreedActivities(name, latitude, longitude, range, page) {
     })
 }
 
+//TODO: Latitude and Longitude doesn't work as I forgot dogs have no location attribute
+//ONLY USE WITH NAME AND PAGE 
 async function getBreedDogs(name, latitude, longitude, range, page){
     return new Promise (async (resolve, reject) => {
         var queryString = '';
         let filter_string = `{"name" : "name", "op":"eq", "val": "${name}"}`;
-        if (arguments.length > 2 && latitude != 0 && longitude != 0){
+        if (arguments.length > 2 && latitude && longitude && latitude != 0 && longitude != 0){
             queryString = await buildQuery("breed", '', '', latitude, longitude, range, page);
             queryString = [queryString.slice(0, 15), filter_string,',', queryString.slice(15)].join('');
         }else{
@@ -327,6 +336,36 @@ async function getBreedDogs(name, latitude, longitude, range, page){
     });
 }
 
+function createPromiseArray(response){
+    var shelterList = [];
+    for(var i = 0; i < response.objects.length; i++){
+        shelterList.push(getShelters(response.objects[i].shelter_id));
+        if(i == response.objects.length - 1){
+            return shelterList;
+        }
+    }
+}
+
+// TODO: DOESN'T WORK WITH LOCATION YET
+// Right now it takes way too many calls to get a response as we need to go from 
+// breed -> dog -> Extract shelters for all results -> then filter through shelter list
+// to get final shelter list. Is this functionality useful? 
+async function getBreedShelters (name, latitude, longitude, range, page){
+    // Get list of dogs based on breed
+    // Get shelter objects based on name stored in breed
+    return new Promise ((resolve, reject) => {
+        getBreedDogs(name, latitude, longitude, range, page).then(async (response) => {
+            //console.log(response);
+            let promiseArray = await createPromiseArray(response);
+            Promise.all(promiseArray).then((values) => {
+                returnObj = {
+                    objects : values
+                };
+                resolve(returnObj);
+            })
+        });
+    });
+}
 
 getShelters().then((response) => {
     //console.log(response)
@@ -340,9 +379,9 @@ getBreeds().then((response) => {
     //console.log(response);
 });
 
-getBreeds('alaskan husky').then((response) => {
+getBreeds('alaskan husky', 0, 0, 0, 2).then((response) => {
     //console.log(response);
-})
+});
 
 getShelterBreeds("TX1399")
 
@@ -368,6 +407,10 @@ getBreedActivities('affenpinscher', 29.7856, -95.8242, 1).then((response) => {
     //console.log(response)
 });
 
-getBreedDogs('labrador retriever', 0,0,0,2).then((response) => {
+getBreedDogs('labrador retriever', 0, 0, 0, 2).then((response) => {
     //console.log(response);
 })
+
+getBreedShelters('labrador retriever').then((response) => {
+    //console.log(response);
+});
