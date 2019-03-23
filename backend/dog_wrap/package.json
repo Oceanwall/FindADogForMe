@@ -9,7 +9,6 @@
   "author": "Samarth Desai",
   "license": "ISC",
   "dependencies": {
-    "fetch": "^1.1.0",
     "request": "^2.88.0"
   }
 }
