@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import "./HomeCarousel.css";
+import "../styles/HomeCarousel.css";
 
 class HomeCarousel extends Component {
   state = {};

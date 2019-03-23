@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./LogoCard.css";
+import "../styles/LogoCard.css";
 
 class LogoCard extends Component {
   render() {

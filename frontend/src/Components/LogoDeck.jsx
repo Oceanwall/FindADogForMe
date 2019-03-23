@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./LogoDeck.css";
+import "../styles/LogoDeck.css";
 import LogoCard from "./LogoCard";
 
 class LogoDeck extends Component {

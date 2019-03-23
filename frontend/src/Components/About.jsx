@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import LogoDeck from "./LogoDeck";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import "./About.css";
+import "../styles/About.css";
 
 class About extends Component {
   state = {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Pagination from "react-bootstrap/Pagination";
-import "./PageComp.css";
+import "../styles/PageComp.css";
 
 class PageComp extends Component {
   constructor(props) {
