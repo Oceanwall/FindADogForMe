@@ -11,7 +11,7 @@ class CustomNavbar extends Component {
     return (
       <Navbar bg="light" variant="light" expand="lg">
         <Navbar.Brand href="/">
-          <img src="/favicon.ico" />
+          <img src="/favicon.ico" alt="" />
           {"Find a Dog for Me"}
         </Navbar.Brand>
         <Nav className="mr-auto">

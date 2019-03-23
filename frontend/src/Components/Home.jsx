@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import HomeCarousel from "./HomeCarousel";
-import Container from "react-bootstrap/Container";
 
 class Home extends Component {
   render() {

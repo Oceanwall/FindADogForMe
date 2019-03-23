@@ -1,0 +1,5 @@
+.page-comp {
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+}

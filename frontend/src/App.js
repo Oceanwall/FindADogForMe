@@ -8,7 +8,6 @@ import Shelters from "./Components/Shelters";
 import Dogs from "./Components/Dogs";
 import Breeds from "./Components/Breeds";
 import Activities from "./Components/Activities";
-import Container from "react-bootstrap/Container";
 
 class App extends Component {
   render() {
@@ -16,12 +15,14 @@ class App extends Component {
       <div className="App">
         <CustomNavbar />
         <Router>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/shelters" component={Shelters} />
-          <Route exact path="/dogs" component={Dogs} />
-          <Route exact path="/breeds" component={Breeds} />
-          <Route exact path="/activities" component={Activities} />
-          <Route exact path="/about" component={About} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/shelters" component={Shelters} />
+            <Route exact path="/dogs" component={Dogs} />
+            <Route exact path="/breeds" component={Breeds} />
+            <Route exact path="/activities" component={Activities} />
+            <Route exact path="/about" component={About} />
+          </Switch>
         </Router>
       </div>
     );

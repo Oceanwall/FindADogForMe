@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Pagination from "react-bootstrap/Pagination";
+import "./PageComp.css";
 
 class PageComp extends Component {
   constructor(props) {
@@ -28,27 +29,33 @@ class PageComp extends Component {
 
   render() {
     return (
-      <Pagination>
-        {this.props.currentPage > 1 && [
-          <Pagination.First onClick={this.handleFirst} />,
-          <Pagination.Prev onClick={this.handlePrev} />,
-          <Pagination.Item
-            onClick={evt => this.handleCustom(this.props.currentPage - 1, evt)}
-          >
-            {this.props.currentPage - 1}
-          </Pagination.Item>
-        ]}
-        <Pagination.Item active>{this.props.currentPage}</Pagination.Item>
-        {this.props.maxPage > this.props.currentPage && [
-          <Pagination.Item
-            onClick={evt => this.handleCustom(this.props.currentPage + 1, evt)}
-          >
-            {this.props.currentPage + 1}
-          </Pagination.Item>,
-          <Pagination.Next onClick={this.handleNext} />,
-          <Pagination.Last onClick={this.handleLast} />
-        ]}
-      </Pagination>
+      <div class="page-comp">
+        <Pagination>
+          {this.props.currentPage > 1 && [
+            <Pagination.First onClick={this.handleFirst} />,
+            <Pagination.Prev onClick={this.handlePrev} />,
+            <Pagination.Item
+              onClick={evt =>
+                this.handleCustom(this.props.currentPage - 1, evt)
+              }
+            >
+              {this.props.currentPage - 1}
+            </Pagination.Item>
+          ]}
+          <Pagination.Item active>{this.props.currentPage}</Pagination.Item>
+          {this.props.maxPage > this.props.currentPage && [
+            <Pagination.Item
+              onClick={evt =>
+                this.handleCustom(this.props.currentPage + 1, evt)
+              }
+            >
+              {this.props.currentPage + 1}
+            </Pagination.Item>,
+            <Pagination.Next onClick={this.handleNext} />,
+            <Pagination.Last onClick={this.handleLast} />
+          ]}
+        </Pagination>
+      </div>
     );
   }
 }
