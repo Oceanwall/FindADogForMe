@@ -58,7 +58,7 @@ class About extends Component {
           "Currently a Fullstack Engineer, primarily responsible for Backend.",
         commits: 0,
         issues: 0,
-        tests: 0,
+        tests: 20,
         img: "/images/matthew.jpg"
       }
     },

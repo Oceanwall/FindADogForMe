@@ -1,8 +1,8 @@
 {
-  "name": "dog_wrap",
+  "name": "wrapper",
   "version": "1.0.0",
   "description": "A wrapper for the findadogfor.me API",
-  "main": "dog_wrap.js",
+  "main": "wrapper.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

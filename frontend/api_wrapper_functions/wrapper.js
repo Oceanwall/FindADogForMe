@@ -21,7 +21,7 @@ SHELTERS
 
 // Get all shelters, or get a specific shelter.
 async function getShelter(id, page) {
-    return utilities.getShelters(id, page);
+    return utilities.getShelters(id, undefined, undefined, undefined, page);
 }
 
 // Get activities near a specific shelter.
@@ -92,7 +92,7 @@ DOGS
 
 // Get all dogs, or get a specific dog.
 async function getDog(id, page) {
-    return utilities.getDogs(id, page);
+    return utilities.getDogs(id, undefined, undefined, page);
 }
 
 // Get a dog's breed.
@@ -133,8 +133,8 @@ BREEDS
 */
 
 // Get all breeds, or get a breed.
-async function getBreed(name, page) {
-    return utilities.getBreeds(name, page);
+async function getBreed(name) {
+    return utilities.getBreeds(name);
 }
 
 // Get activities suitable for a breed.
@@ -164,7 +164,6 @@ async function getBreedShelters(name, latitude, longitude, range) {
         let dogs = (await getShelterDogs(shelter.id)).objects;
         for (let dog of dogs) {
             if (dog.breed == name) {
-                console.log("ding");
                 shelters_of_breed.push(shelter);
                 break;
             }
@@ -185,7 +184,7 @@ ACTIVITIES
 
 // Get all activities, or get an activity.
 async function getActivity(id, page) {
-    return utilities.getActivities(id, page);
+    return utilities.getActivities(id, undefined, undefined, undefined, undefined, page);
 }
 
 // Get all breeds suitable for an activity.
@@ -215,14 +214,11 @@ async function getActivityDogs(id, range) {
         suitable_breeds.add(breed.name);
     let shelters = (await getActivityShelters(id, range)).objects;
 
-    // console.log(shelters);
-
     let suitable_dogs = [];
     for (let shelter of shelters) {
         let dogs = (await getShelterDogs(shelter.id)).objects;
         for (let dog of dogs) {;
             if (suitable_breeds.has(dog.breed)) {
-                console.log("ding");
                 suitable_dogs.push(dog);
                 if (suitable_dogs.length >= 12) {
                     return suitable_dogs;
@@ -234,70 +230,21 @@ async function getActivityDogs(id, range) {
     return suitable_dogs;
 }
 
-
-
-// getShelters().then((response) => {
-//     console.log(response)
-// })
-//
-// utilities.getActivities("257930562").then((response) => {
-//     //console.log(response)
-// })
-//
-// getBreeds().then((response) => {
-//     //console.log(response);
-// });
-//
-// getBreeds('alaskan husky', undefined, undefined, undefined, 2).then((response) => {
-//     console.log(response);
-// });
-//
-// getShelterBreeds("TX1399").then((response) => {
-//     console.log(response);
-// });
-//
-// getShelterActivities("TX1399", 0.5).then((response) => {
-//     console.log(response);
-// });
-//
-// getShelterDogs("TX1399");
-//
-// utilities.getDogs('',"TX1399").then((response) => {
-//     //console.log(response);
-// })
-//
-// getDogBreed('43022980').then((response) =>{
-//     console.log(response);
-// });
-// getDogActivities("43022980").then((response) => {
-//     console.log(response);
-// });
-//
-// getDogShelter('43022980').then((response) => {
-//     console.log(response);
-// });
-//
-// getBreedActivities('affenpinscher').then((response) => {
-//     console.log(response)
-// });
-//
-// getBreedDogs('boxer').then((response) => {
-//     console.log(response);
-// })
-// getBreedShelters('bull terrier', 29.7856, -95.8242).then((response) => {
-//     console.log(response);
-// });
-//
-// getBreedShelters('labrador retriever').then((response) => {
-//     //console.log(response);
-// });
-
-// getActivityBreeds("257930562").then((response) => {
-//     console.log(response);
-// });
-// getActivityShelters("257930562").then((response) => {
-//     console.log(response);
-// });
-getActivityDogs("257930562", 0.25).then((response) => {
-    console.log(response);
-});
+module.exports = {
+    getShelter,
+    getShelterActivities,
+    getShelterBreeds,
+    getShelterDogs,
+    getDog,
+    getDogBreed,
+    getDogShelter,
+    getDogActivities,
+    getBreed,
+    getBreedActivities,
+    getBreedDogs,
+    getBreedShelters,
+    getActivity,
+    getActivityBreeds,
+    getActivityShelters,
+    getActivityDogs
+}

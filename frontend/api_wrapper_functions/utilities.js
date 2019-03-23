@@ -99,17 +99,26 @@ async function getDogs(id, shelter_id, range, page){
     if (id){
         queryString = `/${id}`;
     }else if(shelter_id){
-        return getShelterDogs(shelter_id, page);
+        let queryObject = {
+            name:"shelter_id",
+            op:"eq",
+            val:id
+        }
+        queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`
+        if(page){
+            queryString += `&page=${page}`
+        }
+        return perform_api_call(`${API_URL}dog${queryString}`);
     }else if (page){
         queryString=`?page=${page}`;
     }
     return perform_api_call(`${API_URL}dog${queryString}`);
 }
 
-async function getBreeds(name, latitude, longitude, range, page) {
+async function getBreeds(name) {
     let queryString = "";
     if (name) {
-        queryString = build_query("breed", undefined, name, latitude, longitude, range, page);
+        queryString = build_query("breed", undefined, name, undefined, undefined, undefined, undefined);
     }
     return perform_api_call(`${API_URL}breed${queryString}`);
 }
