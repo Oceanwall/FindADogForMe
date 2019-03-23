@@ -32,14 +32,20 @@ function build_query(model, id, name, latitude, longitude, range = 0.5, page) {
             }
         } else if (model === "activity"){
             queryObject = {
-                type: "name",
+                name: "name",
+                op: "eq",
+                val: name,
+            }
+        } else if (model == "dog") {
+            queryObject = {
+                name: "breed",
                 op: "eq",
                 val: name,
             }
         }
         queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`;
         if (page){
-            queryString += `&page[number]=${page}`;
+            queryString += `&page=${page}`;
         }
     }
     else if (latitude && longitude){
@@ -72,17 +78,18 @@ function build_query(model, id, name, latitude, longitude, range = 0.5, page) {
         queryString = `?q={"filters":[${ll}, ${lu}, ${lol}, ${lou}]}`
 
         if (page){
-            queryString += `&page[number]=${page}`;
+            queryString += `&page=${page}`;
         }
 
     }
+
     return queryString;
 }
 
-async function getShelters(id, name, latitude, longitude, range, page) {
+async function getShelters(id, latitude, longitude, range, page) {
     let queryString = "";
     if (arguments.length > 0){
-        queryString = build_query("shelter", id, name, latitude, longitude, range, page);
+        queryString = build_query("shelter", id, undefined, latitude, longitude, range, page);
     }
     return perform_api_call(`${API_URL}shelter${queryString}`);
 }
@@ -129,6 +136,25 @@ function buildBreedActivityQuery(active, queryString, multipleArgs){
     return queryString;
 }
 
+async function getAllNearbyShelters(latitude, longitude, range) {
+    let page_num = 1;
+    let shelters_objects = await getShelters(undefined, latitude, longitude, range, page_num);
+    let shelter_promises = [];
+    while (page_num < shelters_objects.total_pages) {
+        ++page_num;
+        shelter_promises.push(getShelters(undefined, latitude, longitude, range, page_num));
+    }
+
+    shelter_promises = await Promise.all(shelter_promises);
+
+    let nearby_shelters = shelters_objects.objects;
+    for (let shelters_object of shelter_promises) {
+        nearby_shelters = nearby_shelters.concat(shelters_object.objects);
+    }
+
+    return nearby_shelters;
+}
+
 module.exports = {
     perform_api_call,
     build_query,
@@ -136,5 +162,6 @@ module.exports = {
     getDogs,
     getBreeds,
     getActivities,
-    buildBreedActivityQuery
+    buildBreedActivityQuery,
+    getAllNearbyShelters
 }

@@ -133,7 +133,7 @@ async function getBreedActivities(name, latitude, longitude, range, page) {
     var multipleArgs = false;
     var queryString = '';
     if (arguments.length > 1){
-        queryString = utilities.build_query("activity", '', name, latitude, longitude, range, page);
+        queryString = utilities.build_query("activity", undefined, undefined, latitude, longitude, range, page);
         multipleArgs = true;
     }
 
@@ -143,57 +143,33 @@ async function getBreedActivities(name, latitude, longitude, range, page) {
     return utilities.perform_api_call(`${API_URL}activity${queryString}`);
 }
 
-// TODO: getBreedDogs, getBreedShelters
+async function getBreedDogs(name, page) {
+    let queryString = utilities.build_query("dog", undefined, name, undefined, undefined, undefined, page);
+    return utilities.perform_api_call(`${API_URL}dog${queryString}`);
+}
 
-//TODO: Latitude and Longitude doesn't work as I forgot dogs have no location attribute
-//ONLY USE WITH NAME AND PAGE
-// async function getBreedDogs(name, latitude, longitude, range, page){
-//     return new Promise (async (resolve, reject) => {
-//         var queryString = '';
-//         let filter_string = `{"name" : "name", "op":"eq", "val": "${name}"}`;
-//         if (arguments.length > 2 && latitude && longitude && latitude != 0 && longitude != 0){
-//             queryString = utilities.build_query("breed", '', '', latitude, longitude, range, page);
-//             queryString = [queryString.slice(0, 15), filter_string,',', queryString.slice(15)].join('');
-//         }else{
-//             queryString = "?q=" + filter_string;
-//             if(page){
-//                 queryString+= `&page=${page}`;
-//             }
-//         }
-//         request({
-//             url: `${API_URL}dog${queryString}`,
-//             method: "GET",
-//         }, (error, response, body) => {
-//             if(error){
-//                 reject(error)
-//             }else{
-//                 resolve(JSON.parse(body));
-//             }
-//         });
-//     });
-// }
+// Only returns 6 shelters to maximize search speed.
+// Warning: Very slow for rarer species.
+async function getBreedShelters(name, latitude, longitude, range) {
+    let nearby_shelters = await utilities.getAllNearbyShelters(latitude, longitude, range);
 
-// TODO: DOESN'T WORK WITH LOCATION YET
-// Right now it takes way too many calls to get a response as we need to go from
-// breed -> dog -> Extract shelters for all results -> then filter through shelter list
-// to get final shelter list. Is this functionality useful?
-// async function getBreedShelters (name, latitude, longitude, range, page){
-//     // Get list of dogs based on breed
-//     // Get shelter objects based on name stored in breed
-//     return new Promise ((resolve, reject) => {
-//         getBreedDogs(name, latitude, longitude, range, page).then(async (response) => {
-//             //console.log(response);
-//             let promiseArray = await createPromiseArray(response);
-//             Promise.all(promiseArray).then((values) => {
-//                 returnObj = {
-//                     objects : values
-//                 };
-//                 resolve(returnObj);
-//             })
-//         });
-//     });
-// }
+    let shelters_of_breed = [];
+    for (let shelter of nearby_shelters) {
+        let dogs = (await getShelterDogs(shelter.id)).objects;
+        for (let dog of dogs) {
+            if (dog.breed == name) {
+                console.log("ding");
+                shelters_of_breed.push(shelter);
+                break;
+            }
+        }
+        if (shelters_of_breed.length >= 6) {
+            return shelters_of_breed;
+        }
+    }
 
+    return shelters_of_breed;
+}
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ACTIVITIES
@@ -240,9 +216,9 @@ async function getActivity(id, page) {
 // getDogBreed('43022980').then((response) =>{
 //     console.log(response);
 // });
-getDogActivities("43022980").then((response) => {
-    console.log(response);
-});
+// getDogActivities("43022980").then((response) => {
+//     console.log(response);
+// });
 //
 // getDogShelter('43022980').then((response) => {
 //     console.log(response);
@@ -252,9 +228,12 @@ getDogActivities("43022980").then((response) => {
 //     console.log(response)
 // });
 //
-// getBreedDogs('labrador retriever', 0, 0, 0, 2).then((response) => {
-//     //console.log(response);
+// getBreedDogs('boxer').then((response) => {
+//     console.log(response);
 // })
+getBreedShelters('bull terrier', 29.7856, -95.8242).then((response) => {
+    console.log(response);
+});
 //
 // getBreedShelters('labrador retriever').then((response) => {
 //     //console.log(response);
