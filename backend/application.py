@@ -6,8 +6,8 @@ from flask_restless import APIManager
 
 manager = APIManager(application, flask_sqlalchemy_db=db)
 manager.create_api(Activity, methods=["Get"], results_per_page=12)
-manager.create_api(Breed, methods=["Get"])
-manager.create_api(Dog, methods=["Get"], results_per_page=12)
+manager.create_api(Breed, methods=["Get"], results_per_page=0)
+manager.create_api(Dog, methods=["Get"], results_per_page=20)
 manager.create_api(Shelter, methods=["Get"], results_per_page=12)
 
 

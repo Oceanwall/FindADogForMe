@@ -8,7 +8,7 @@ const API_URL = "https://api.findadogfor.me/api/";
  * However, if you want to use a param, but there are unneeded params in the
  * way, then use undefined to ignore those params.
  * Example:
- *      getBreedDogs('shiba inu', undefined, undefined, undefined, 2);
+ *      getShelterActivities('TX1399", undefined, 2);
  *
  * NOTE: range parameter default value is 0.5
  */
@@ -19,11 +19,12 @@ SHELTERS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+// Get all shelters, or get a specific shelter.
 async function getShelter(id, page) {
     return utilities.getShelters(id, page);
 }
 
- // Returns activities close to a certain shelter
+// Get activities near a specific shelter.
 async function getShelterActivities(id, range, page){
     if (!id)
      throw new Error("You must provide a shelter ID.");
@@ -34,6 +35,7 @@ async function getShelterActivities(id, range, page){
     return utilities.getActivities('','',lat, lng, range, page);
 }
 
+// Get breeds hosted by a specific shelter.
 async function getShelterBreeds(id){
     if (!id)
      throw new Error("You must provide a shelter ID.");
@@ -64,7 +66,7 @@ async function getShelterBreeds(id){
     return breeds;
 }
 
-//Returns dogs within a specific shelter
+// Get dogs hosted by a specific shelter.
 async function getShelterDogs(id, page){
     if (!id)
         throw new Error("You must provide a shelter ID.");
@@ -88,25 +90,31 @@ DOGS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+// Get all dogs, or get a specific dog.
 async function getDog(id, page) {
     return utilities.getDogs(id, page);
 }
 
-// Retrieve the breed information for a particular dog
+// Get a dog's breed.
 async function getDogBreed(id){
+    if (!id)
+        throw new Error("You must provide a dog ID.");
     let dog = await utilities.getDogs(id);
     return await utilities.getBreeds(dog.breed);
 }
 
-// Retrieve the shelter a dog is hosted at
+// Get a dog's shelter.
 async function getDogShelter(id){
+    if (!id)
+        throw new Error("You must provide a dog ID.");
     let dog = await utilities.getDogs(id);
     return await utilities.getShelters(dog.shelter_id);
 }
 
+// Get activities that would be suitable for a dog, near that dog's shelter.
 async function getDogActivities(id, range = 0.5, page) {
     if (!id)
-        throw new Error("You must provide a shelter ID.");
+        throw new Error("You must provide a dog ID.");
 
     let dog = await utilities.getDogs(id);
 
@@ -115,7 +123,7 @@ async function getDogActivities(id, range = 0.5, page) {
 
     let shelter = (await getShelter(dog.shelter_id));
 
-    return await getBreedActivities(breed.name, shelter.latitude, shelter.longitude, range, page);
+    return await utilities.getBreedActivitiesWithLocation(breed.name, shelter.latitude, shelter.longitude, range, page);
 }
 
 /*
@@ -124,33 +132,31 @@ BREEDS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+// Get all breeds, or get a breed.
 async function getBreed(name, page) {
     return utilities.getBreeds(name, page);
 }
 
-//Returns a activities nearby for a particular breed
-async function getBreedActivities(name, latitude, longitude, range, page) {
-    var multipleArgs = false;
-    var queryString = '';
-    if (arguments.length > 1){
-        queryString = utilities.build_query("activity", undefined, undefined, latitude, longitude, range, page);
-        multipleArgs = true;
-    }
-
-    let breed_info = await utilities.getBreeds(name);
-    let is_active = breed_info.objects[0].is_active;
-    queryString = utilities.buildBreedActivityQuery(is_active, queryString, multipleArgs);
-    return utilities.perform_api_call(`${API_URL}activity${queryString}`);
+// Get activities suitable for a breed.
+async function getBreedActivities(name, page) {
+    if (!name)
+        throw new Error("You must provide a breed name.");
+    return utilities.getBreedActivitiesWithLocation(name, undefined, undefined, undefined, page);
 }
 
+// Get dogs of a breed.
 async function getBreedDogs(name, page) {
+    if (!name)
+        throw new Error("You must provide a breed name.");
     let queryString = utilities.build_query("dog", undefined, name, undefined, undefined, undefined, page);
     return utilities.perform_api_call(`${API_URL}dog${queryString}`);
 }
 
-// Only returns 6 shelters to maximize search speed.
+// Get (up to) 6 shelters that host some breed.
 // Warning: Very slow for rarer species.
 async function getBreedShelters(name, latitude, longitude, range) {
+    if (!name)
+        throw new Error("You must provide a breed name.");
     let nearby_shelters = await utilities.getAllNearbyShelters(latitude, longitude, range);
 
     let shelters_of_breed = [];
@@ -170,17 +176,64 @@ async function getBreedShelters(name, latitude, longitude, range) {
 
     return shelters_of_breed;
 }
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ACTIVITIES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+// Get all activities, or get an activity.
 async function getActivity(id, page) {
     return utilities.getActivities(id, page);
 }
 
-//TODO: getActivityBreeds, getActivityShelters, getActivityDogs
+// Get all breeds suitable for an activity.
+async function getActivityBreeds(id) {
+    if (!id)
+        throw new Error("You must provide an activity ID.");
+    let activity = await getActivity(id);
+    let queryString = utilities.buildBreedActivityQuery(activity.is_active, "", false);
+    return utilities.perform_api_call(`${API_URL}breed${queryString}`);
+}
+
+// Get shelters located near an activity.
+async function getActivityShelters(id, range, page) {
+    if (!id)
+        throw new Error("You must provide an activity ID.");
+    let activity = await getActivity(id);
+    return utilities.getShelters(undefined, activity.latitude, activity.longitude, range);
+}
+
+// Get (up to) 12 dogs suitable for an activity located in shelters near the activity.
+async function getActivityDogs(id, range) {
+    if (!id)
+        throw new Error("You must provide an activity ID.");
+    let breeds = (await getActivityBreeds(id)).objects;
+    let suitable_breeds = new Set();
+    for (let breed of breeds)
+        suitable_breeds.add(breed.name);
+    let shelters = (await getActivityShelters(id, range)).objects;
+
+    // console.log(shelters);
+
+    let suitable_dogs = [];
+    for (let shelter of shelters) {
+        let dogs = (await getShelterDogs(shelter.id)).objects;
+        for (let dog of dogs) {;
+            if (suitable_breeds.has(dog.breed)) {
+                console.log("ding");
+                suitable_dogs.push(dog);
+                if (suitable_dogs.length >= 12) {
+                    return suitable_dogs;
+                }
+            }
+        }
+    }
+
+    return suitable_dogs;
+}
+
 
 
 // getShelters().then((response) => {
@@ -224,17 +277,27 @@ async function getActivity(id, page) {
 //     console.log(response);
 // });
 //
-// getBreedActivities('affenpinscher', 29.7856, -95.8242, 1).then((response) => {
+// getBreedActivities('affenpinscher').then((response) => {
 //     console.log(response)
 // });
 //
 // getBreedDogs('boxer').then((response) => {
 //     console.log(response);
 // })
-getBreedShelters('bull terrier', 29.7856, -95.8242).then((response) => {
-    console.log(response);
-});
+// getBreedShelters('bull terrier', 29.7856, -95.8242).then((response) => {
+//     console.log(response);
+// });
 //
 // getBreedShelters('labrador retriever').then((response) => {
 //     //console.log(response);
 // });
+
+// getActivityBreeds("257930562").then((response) => {
+//     console.log(response);
+// });
+// getActivityShelters("257930562").then((response) => {
+//     console.log(response);
+// });
+getActivityDogs("257930562", 0.25).then((response) => {
+    console.log(response);
+});

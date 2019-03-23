@@ -155,6 +155,21 @@ async function getAllNearbyShelters(latitude, longitude, range) {
     return nearby_shelters;
 }
 
+async function getBreedActivitiesWithLocation(name, latitude, longitude, range, page) {
+    var multipleArgs = false;
+    var queryString = '';
+    if (latitude || longitude || range || page){
+        queryString = build_query("activity", undefined, undefined, latitude, longitude, range, page);
+        multipleArgs = true;
+    }
+
+    let breed_info = await getBreeds(name);
+    let is_active = breed_info.objects[0].is_active;
+    queryString = buildBreedActivityQuery(is_active, queryString, multipleArgs);
+
+    return perform_api_call(`${API_URL}activity${queryString}`);
+}
+
 module.exports = {
     perform_api_call,
     build_query,
@@ -163,5 +178,6 @@ module.exports = {
     getBreeds,
     getActivities,
     buildBreedActivityQuery,
-    getAllNearbyShelters
+    getAllNearbyShelters,
+    getBreedActivitiesWithLocation
 }
