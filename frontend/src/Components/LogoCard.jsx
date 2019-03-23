@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import Card from "react-bootstrap/Card";
+import "./LogoCard.css";
 
 class LogoCard extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
-      <Card style={{ width: "18rem", border: "light" }}>
-        <Card.Img src={this.props.src} />
-      </Card>
+      <div class="logo-container">
+        <img src={this.props.img} class="logo-image" />
+        <div class="overlay">
+          <div class="text">{this.props.info}</div>
+        </div>
+      </div>
     );
   }
 }

@@ -1,0 +1,11 @@
+.logo-deck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.logo-deck > div {
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  width: calc(1 / 5 * 100% - (1 - 1 / 5) * 10px);
+}

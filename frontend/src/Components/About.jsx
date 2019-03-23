@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import MemberCard from "./MemberCard";
 import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import LogoDeck from "./LogoDeck";
 import Col from "react-bootstrap/Col";
-import LogoCard from "./LogoCard";
+import Row from "react-bootstrap/Row";
+import "./About.css";
 
 class About extends Component {
   state = {
@@ -198,31 +199,62 @@ class About extends Component {
     });
     return (
       <div>
-        <div class="row mt-4">
-          <div class="col-md-4 offset-md-1 col-10 offset-1">
-            <h2 class="text-center">Description and Motivation</h2>
-            <p class="mt-3">
-              As shelters become increasingly crowded at alarming rates, it's
-              become clear that the adoption process must be optimized. Our
-              intent is to go beyond simple data aggregation in facilitating the
-              adoption of dogs from shelters.
-            </p>
-            <p>
-              We aim to provide a simple, yet powerful pet recommendation tool
-              to match owners with specific breeds and dogs. By asking a user
-              for their preferences, we narrow down their opinions and find
-              their perfect match.
-            </p>
-            <p>
-              Moreover, to further encourage prospective adopters, we promote a
-              wide range of activities that can be performed with their new
-              furry companions, such as nearby state and national parks and
-              events happening in nearby locations.
-            </p>
-          </div>
-          <div class="col-md-4 offset-md-2 col-10 offset-1">
+        <Container>
+          <h2 class="text-center">Description and Motivation</h2>
+          <p class="mt-3" align="left">
+            As shelters become increasingly crowded at alarming rates, it's
+            become clear that the adoption process must be optimized. Our intent
+            is to go beyond simple data aggregation in facilitating the adoption
+            of dogs from shelters.
+          </p>
+          <p align="left">
+            We aim to provide a simple, yet powerful pet recommendation tool to
+            match owners with specific breeds and dogs. By asking a user for
+            their preferences, we narrow down their opinions and find their
+            perfect match.
+          </p>
+          <p align="left">
+            Moreover, to further encourage prospective adopters, we promote a
+            wide range of activities that can be performed with their new furry
+            companions, such as nearby state and national parks and events
+            happening in nearby locations.
+          </p>
+        </Container>
+
+        <h2 class="text-center mt-4">Members</h2>
+        <Container>
+          <CardDeck>
+            <div class="card-deck">{memberCards}</div>
+          </CardDeck>
+        </Container>
+
+        <table class="table table-striped mt-5">
+          <thead>
+            <tr class="text-center">
+              <th scope="col">Total # of Commits</th>
+              <th scope="col">Total # of Issues</th>
+              <th scope="col">Total # of Unit Tests</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center">
+              <td id="Total-Commits">{this.state.total_commits}</td>
+              <td id="Total-Issues">{this.state.total_issues}</td>
+              <td id="Total-UT">0</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-center mt-4">Tools</h2>
+        <Container>
+          <LogoDeck />
+        </Container>
+        <br />
+
+        <Row>
+          <Col>
             <h2 class="text-center">Data Sources</h2>
-            <div class="text-center mt-5">
+            <div class="text-center">
               <a href="https://www.petfinder.com/developers/api-docs">
                 Petfinder
               </a>
@@ -246,57 +278,32 @@ class About extends Component {
                 National Park Service
               </a>
             </div>
-          </div>
-        </div>
-        <h2 class="text-center mt-4">Stats</h2>
-        <Container>
-          <CardDeck>{memberCards}</CardDeck>
-        </Container>
-        <table class="table table-striped mt-5">
-          <thead>
-            <tr class="text-center">
-              <th scope="col">Total # of Commits</th>
-              <th scope="col">Total # of Issues</th>
-              <th scope="col">Total # of Unit Tests</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center">
-              <td id="Total-Commits">{this.state.total_commits}</td>
-              <td id="Total-Issues">{this.state.total_issues}</td>
-              <td id="Total-UT">0</td>
-            </tr>
-          </tbody>
-        </table>
-        <Container>
-          <Row>
-            <Col>
-              <LogoCard src="/images/bootstrap.png" />
-            </Col>
-          </Row>
-        </Container>
-        <h2>
-          GitLab URL: <br />
-          <a
-            href="https://gitlab.com/oceanwall/findadogforme"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Find A Dog For Me
-          </a>
-        </h2>
-        <br />
-        <h2>
-          Postman API URL:
-          <br />
-          <a
-            href="https://documenter.getpostman.com/view/6754951/S11KQJxc"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </h2>
+          </Col>
+          <Col>
+            <h2>
+              GitLab URL: <br />
+              <a
+                href="https://gitlab.com/oceanwall/findadogforme"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Find A Dog For Me
+              </a>
+            </h2>
+            <br />
+            <h2>
+              Postman API URL:
+              <br />
+              <a
+                href="https://documenter.getpostman.com/view/6754951/S11KQJxc"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Documentation
+              </a>
+            </h2>
+          </Col>
+        </Row>
       </div>
     );
   }
