@@ -12,15 +12,28 @@ class MemberCard extends Component {
           style={{ width: "auto", height: "300px" }}
         />
         <Card.Body>
-          <Card.Title>{this.props.person.name}</Card.Title>
+          <Card.Title>
+            <b>{this.props.person.name}</b>
+          </Card.Title>
           <Card.Text>
-            <p align="left">Biography: {this.props.person.bio}</p>
             <p align="left">
-              Responsibility: {this.props.person.responsibility}
+              <b>Biography:</b> {this.props.person.bio}
             </p>
-            <p align="left">Commits: {this.props.person.commits}</p>
-            <p align="left">Issues: {this.props.person.issues}</p>
-            <p align="left">Unit Tests: {this.props.person.tests}</p>
+            <p align="left">
+              <b> Responsibility: </b>
+              {this.props.person.responsibility}
+            </p>
+            <p align="left">
+              <b>Commits: </b>
+              {this.props.person.commits}
+            </p>
+            <p align="left">
+              <b>Issues:</b> {this.props.person.issues}
+            </p>
+            <p align="left">
+              <b>Unit Tests: </b>
+              {this.props.person.tests}
+            </p>
           </Card.Text>
         </Card.Body>
       </Card>

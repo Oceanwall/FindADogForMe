@@ -200,7 +200,7 @@ class About extends Component {
     return (
       <div>
         <Container>
-          <h2 class="text-center">Description and Motivation</h2>
+          <h2 class="text-center title-text">Description and Motivation</h2>
           <p class="mt-3" align="left">
             As shelters become increasingly crowded at alarming rates, it's
             become clear that the adoption process must be optimized. Our intent
@@ -221,7 +221,7 @@ class About extends Component {
           </p>
         </Container>
 
-        <h2 class="text-center mt-4">Members</h2>
+        <h2 class="text-center mt-4 title-text">Members</h2>
         <Container>
           <CardDeck>
             <div class="card-deck">{memberCards}</div>
@@ -245,65 +245,71 @@ class About extends Component {
           </tbody>
         </table>
 
-        <h2 class="text-center mt-4">Tools</h2>
-        <Container>
-          <LogoDeck />
-        </Container>
-        <br />
+        <h2 class="text-center mt-4 title-text">Tools</h2>
 
-        <Row>
-          <Col>
-            <h2 class="text-center">Data Sources</h2>
-            <div class="text-center">
-              <a href="https://www.petfinder.com/developers/api-docs">
-                Petfinder
-              </a>
-            </div>
-            <div class="text-center mt-2">
-              <a href="https://thedogapi.com/">TheDogAPI</a>
-            </div>
-            <div class="text-center mt-2">
-              <a href="https://dog.ceo/dog-api/documentation/">Dog API</a>
-            </div>
-            <div class="text-center mt-2">
-              <a href="https://www.eventbrite.com/platform/docs/introduction">
-                Eventbrite
-              </a>
-            </div>
-            <div class="text-center mt-2">
-              <a href="https://www.meetup.com/meetup_api/">Meetup</a>
-            </div>
-            <div class="text-center mt-2">
-              <a href="https://www.nps.gov/subjects/developer/api-documentation.htm">
-                National Park Service
-              </a>
-            </div>
-          </Col>
-          <Col>
-            <h2>
-              GitLab URL: <br />
-              <a
-                href="https://gitlab.com/oceanwall/findadogforme"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Find A Dog For Me
-              </a>
-            </h2>
-            <br />
-            <h2>
-              Postman API URL:
+        <LogoDeck />
+
+        <br />
+        <Container>
+          <Row>
+            <Col>
+              <h2 class="text-center title-text">Data Sources</h2>
+              <div class="text-center">
+                <a href="https://www.petfinder.com/developers/api-docs">
+                  <div class="data-sources-text">Petfinder</div>
+                </a>
+              </div>
+              <div class="text-center mt-2">
+                <a href="https://thedogapi.com/">
+                  <div class="data-sources-text">TheDogAPI</div>
+                </a>
+              </div>
+              <div class="text-center mt-2">
+                <a href="https://dog.ceo/dog-api/documentation/">
+                  <div class="data-sources-text">DogAPI</div>
+                </a>
+              </div>
+              <div class="text-center mt-2">
+                <a href="https://www.eventbrite.com/platform/docs/introduction">
+                  <div class="data-sources-text">Eventbrite</div>
+                </a>
+              </div>
+              <div class="text-center mt-2">
+                <a href="https://www.meetup.com/meetup_api/">
+                  <div class="data-sources-text">Meetup</div>
+                </a>
+              </div>
+              <div class="text-center mt-2">
+                <a href="https://www.nps.gov/subjects/developer/api-documentation.htm">
+                  <div class="data-sources-text">National Park Service</div>
+                </a>
+              </div>
+            </Col>
+            <Col>
+              <h2>
+                <div class="text-center doc-text">GitLab URL</div>
+                <a
+                  href="https://gitlab.com/oceanwall/findadogforme"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div class="url-text">Find A Dog For Me</div>
+                </a>
+              </h2>
               <br />
-              <a
-                href="https://documenter.getpostman.com/view/6754951/S11KQJxc"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Documentation
-              </a>
-            </h2>
-          </Col>
-        </Row>
+              <h2>
+                <div class="text-center doc-text">Postman API URL:</div>
+                <a
+                  href="https://documenter.getpostman.com/view/6754951/S11KQJxc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div class="url-text">Documentation</div>
+                </a>
+              </h2>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
