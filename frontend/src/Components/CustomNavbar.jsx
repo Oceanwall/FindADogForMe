@@ -24,11 +24,12 @@ class CustomNavbar extends Component {
             <Nav.Link href="/activities">Activities</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
           </Nav>
-
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-primary">Search</Button>
-          </Form>
+          <Nav className="justify-content-end">
+            <Form inline className="justify-content-center col-xs-6">
+              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+              <Button variant="outline-primary" className="mt-2 mt-sm-0">Search</Button>
+            </Form>
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     );
