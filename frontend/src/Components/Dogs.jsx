@@ -4,7 +4,6 @@ import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
 import DogCard from "./DogCard";
 
-import "../api_wrapper_functions/wrapper.js";
 
 class Dogs extends Component {
   constructor(props) {
