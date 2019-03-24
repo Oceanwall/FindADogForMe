@@ -1,4 +1,4 @@
-const utilities = require("./utilities");
+const utilities = require("./utilities").default;
 const API_URL = "https://api.findadogfor.me/api/";
 
 /*
@@ -30,8 +30,8 @@ async function getShelterActivities(id, range, page){
      throw new Error("You must provide a shelter ID.");
 
     let shelter_info = await utilities.getShelters(id);
-    lat = shelter_info.latitude;
-    lng = shelter_info.longitude;
+    let lat = shelter_info.latitude;
+    let lng = shelter_info.longitude;
     return utilities.getActivities('','',lat, lng, range, page);
 }
 
@@ -40,12 +40,12 @@ async function getShelterBreeds(id){
     if (!id)
      throw new Error("You must provide a shelter ID.");
 
-    queryObject = {
+    let queryObject = {
         name:"shelter_id",
         op:"eq",
         val:id
     }
-    var queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`
+    let queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`
 
     let dog_list = (await utilities.perform_api_call(`${API_URL}dog${queryString}`)).objects;
     let dog_set = new Set();
@@ -76,7 +76,7 @@ async function getShelterDogs(id, page){
         op:"eq",
         val:id
     }
-    var queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`
+    let queryString = `?q={"filters":[${JSON.stringify(queryObject)}]}`
     if(page){
         queryString += `&page=${page}`
     }
@@ -230,7 +230,7 @@ async function getActivityDogs(id, range) {
     return suitable_dogs;
 }
 
-module.exports = {
+export default {
     getShelter,
     getShelterActivities,
     getShelterBreeds,

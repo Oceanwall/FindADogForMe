@@ -6,6 +6,7 @@ import LogoDeck from "./LogoDeck";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "../styles/About.css";
+const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
 class About extends Component {
   state = {
@@ -184,15 +185,18 @@ class About extends Component {
     this.setState({ total_issues: total_issues });
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.load_commits();
     this.load_issues();
+
+    // let pp = await wrapper.getDog();
+    // console.log(pp);
   }
 
   render() {
     let memberCards = Object.values(this.state.people_info).map(person => {
       return (
-        <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
+        <div className="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
           <MemberCard person={person} />
         </div>
       );
@@ -240,7 +244,7 @@ class About extends Component {
             <tr class="text-center">
               <td id="Total-Commits">{this.state.total_commits}</td>
               <td id="Total-Issues">{this.state.total_issues}</td>
-              <td id="Total-UT">0</td>
+              <td id="Total-UT">20</td>
             </tr>
           </tbody>
         </table>

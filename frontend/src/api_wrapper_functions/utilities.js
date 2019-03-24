@@ -18,7 +18,9 @@ function perform_api_call(url) {
 
 // NOTE: range defaults to 0.5
 function build_query(model, id, name, latitude, longitude, range = 0.5, page) {
-    var queryString = '';
+    let queryString = '';
+    let queryObject = {};
+
     // Add case for all params except page
     if (id && !name && !latitude && !longitude && !page){
         queryString+= '/' + id;
@@ -49,31 +51,31 @@ function build_query(model, id, name, latitude, longitude, range = 0.5, page) {
         }
     }
     else if (latitude && longitude){
-        latitude_lower = {
+        let latitude_lower = {
             name:"latitude",
             op:"ge",
             val: latitude - range
         };
-        latitude_upper = {
+        let latitude_upper = {
             name:"latitude",
             op: "le",
             val: latitude + range
         };
-        longitude_lower = {
+        let longitude_lower = {
             name:"longitude",
             op:"ge",
             val: longitude - range
         };
-        longitude_upper = {
+        let longitude_upper = {
             name:"longitude",
             op: "le",
             val: longitude + range
         };
 
-        ll = JSON.stringify(latitude_lower);
-        lu = JSON.stringify(latitude_upper);
-        lol = JSON.stringify(longitude_lower);
-        lou = JSON.stringify(longitude_upper);
+        let ll = JSON.stringify(latitude_lower);
+        let lu = JSON.stringify(latitude_upper);
+        let lol = JSON.stringify(longitude_lower);
+        let lou = JSON.stringify(longitude_upper);
 
         queryString = `?q={"filters":[${ll}, ${lu}, ${lol}, ${lou}]}`
 
@@ -132,6 +134,7 @@ async function getActivities(id, name, latitude, longitude, range, page) {
 }
 
 function buildBreedActivityQuery(active, queryString, multipleArgs){
+    let filter_string = "";
     if (active === true){
         filter_string = '{"name" : "is_active", "op":"eq", "val": true}'
     } else {
@@ -165,8 +168,8 @@ async function getAllNearbyShelters(latitude, longitude, range) {
 }
 
 async function getBreedActivitiesWithLocation(name, latitude, longitude, range, page) {
-    var multipleArgs = false;
-    var queryString = '';
+    let multipleArgs = false;
+    let queryString = '';
     if (latitude || longitude || range || page){
         queryString = build_query("activity", undefined, undefined, latitude, longitude, range, page);
         multipleArgs = true;
@@ -179,7 +182,7 @@ async function getBreedActivitiesWithLocation(name, latitude, longitude, range, 
     return perform_api_call(`${API_URL}activity${queryString}`);
 }
 
-module.exports = {
+export default {
     perform_api_call,
     build_query,
     getShelters,
