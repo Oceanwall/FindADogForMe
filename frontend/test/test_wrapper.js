@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 const assert = require("chai").assert;
 
-wrapper = require("../src/api_wrapper_functions/wrapper.js");
+wrapper = require("../api_wrapper_functions/wrapper.js");
 
 // TODO: Add additional tests for function failures, different parameters.
 describe("FindADogForMe API Wrapper Functions", function() {
