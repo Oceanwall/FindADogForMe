@@ -14,18 +14,22 @@ class CustomNavbar extends Component {
           <img src="/favicon.ico" alt="" />
           {"Find a Dog for Me"}
         </Navbar.Brand>
-        <Nav className="mr-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/shelters">Shelters</Nav.Link>
-          <Nav.Link href="/dogs">Dogs</Nav.Link>
-          <Nav.Link href="/breeds">Breeds</Nav.Link>
-          <Nav.Link href="/activities">Activities</Nav.Link>
-          <Nav.Link href="/about">About</Nav.Link>
-        </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-primary">Search</Button>
-        </Form>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/shelters">Shelters</Nav.Link>
+            <Nav.Link href="/dogs">Dogs</Nav.Link>
+            <Nav.Link href="/breeds">Breeds</Nav.Link>
+            <Nav.Link href="/activities">Activities</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
+          </Nav>
+
+          <Form inline>
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <Button variant="outline-primary">Search</Button>
+          </Form>
+        </Navbar.Collapse>
       </Navbar>
     );
   }
