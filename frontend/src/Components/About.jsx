@@ -192,7 +192,7 @@ class About extends Component {
   render() {
     let memberCards = Object.values(this.state.people_info).map(person => {
       return (
-        <div class="col-md-4 offset-md-0 col-10 offset-1">
+        <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
           <MemberCard person={person} />
         </div>
       );
