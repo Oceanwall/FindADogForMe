@@ -84,6 +84,9 @@ function build_query(model, id, name, latitude, longitude, range = 0.5, page) {
         }
 
     }
+    else {
+        queryString += `?page=${page}`;
+    }
 
     return queryString;
 }
@@ -152,7 +155,7 @@ async function getAllNearbyShelters(latitude, longitude, range) {
     let page_num = 1;
     let shelters_objects = await getShelters(undefined, latitude, longitude, range, page_num);
     let shelter_promises = [];
-    while (page_num < shelters_objects.total_pages) {
+    while (page_num < shelters_objects.total_pages && page_num < 3) {
         ++page_num;
         shelter_promises.push(getShelters(undefined, latitude, longitude, range, page_num));
     }
