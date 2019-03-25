@@ -8,6 +8,8 @@ import Shelters from "./Components/Shelters";
 import Dogs from "./Components/Dogs";
 import Breeds from "./Components/Breeds";
 import Activities from "./Components/Activities";
+import NoMatch from "./Components/Error404";
+
 
 class App extends Component {
   render() {
@@ -22,6 +24,7 @@ class App extends Component {
             <Route exact path="/breeds" component={Breeds} />
             <Route exact path="/activities" component={Activities} />
             <Route exact path="/about" component={About} />
+            <Route component={NoMatch} />
           </Switch>
         </Router>
       </div>
