@@ -13,8 +13,6 @@ schema_update:
 format:
 	black application.py
 	black manage.py
-	black config.py
-	black routes.py
 	black tests.py
 	black seeding/activity_seeding.py
 	black seeding/breeds_seeding.py

@@ -16,6 +16,11 @@ from application.models import Dog, Shelter
 load_dotenv()
 pp = pprint.PrettyPrinter(indent=2)
 
+"""
+Seeds the "dog" and "shelter" tables of the database.
+@Graders, let us know if you need API keys.
+"""
+
 PETFINDER_KEY = os.getenv("PETFINDER_API_KEY")
 PETFINDER_SECRET = os.getenv("PETFINDER_API_SECRET")
 API_URL = "http://api.petfinder.com/"
@@ -140,7 +145,7 @@ VALID_BREEDS = {
 
 def delete_dogs():
     """
-    TODO
+    Deletes old dogs from the dog table in the database.
     """
     pass
     Dog.query.delete()
@@ -149,7 +154,7 @@ def delete_dogs():
 
 def delete_shelters():
     """
-    TODO
+    Deletes old shelters from the shelter table in the database.
     """
     Shelter.query.delete()
     db.session.commit()
@@ -157,10 +162,7 @@ def delete_shelters():
 
 def get_shelters(location="texas", count=500, offset=0):
     """
-    Returns a list of shelters given a location
-    location - string, zip/state
-    count - number of shelters to list
-    offset - how far to offset into the results list
+    Uses the Petfinder API to get shelters in Texas.
     """
 
     payload = {
@@ -182,7 +184,7 @@ def get_shelters(location="texas", count=500, offset=0):
 
 def build_shelter(shelter, shelter_ids, commit=False):
     """
-    Builds a shelter dictionary based on the results of get_shelter
+    Builds a shelter dictionary based on the results of get_shelter.
     """
     if shelter == {}:
         return None
@@ -232,11 +234,7 @@ def build_shelter(shelter, shelter_ids, commit=False):
 
 def get_dogs(shelter_id, count=20, offset=0):
     """
-    Interfaces with petfinder api to get relevant pet info local to a certain
-    zipcode
-    location - string, state
-    count - int, number of results to return
-    offset - int, where to start
+    Givien a shelter, uses the Petfinder API to get dogs hosted at that shelter.
     """
     dog_list = []
 
@@ -271,7 +269,9 @@ def get_dogs(shelter_id, count=20, offset=0):
 
 def build_dog(pet, commit=False):
     """
-    Builds a dog dict from petfinder data
+    Extracts desired information from the response provided by the Petfinder
+    API, and creates a Pet object, which is then inserted into the
+    database.
     """
     if pet == {}:
         return None

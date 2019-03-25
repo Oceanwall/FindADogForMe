@@ -10,6 +10,11 @@ sys.path.append("../")
 from application import db
 from application.models import Activity
 
+"""
+Seeds the "activity" table of the database.
+@Graders, let us know if you need API keys.
+"""
+
 PARKS_KEY = os.getenv("NATIONAL_PARKS_API_KEY")
 EVENTBRITE_KEY = os.getenv("EVENTBRITE_API_KEY")
 MEETUP_KEY = os.getenv("MEETUP_API_KEY")
@@ -38,7 +43,7 @@ TEXAS_CITIES = [
 
 def delete_activities():
     """
-    TODO
+    Deletes old activities from the activity table in the database.
     """
     Activity.query.delete()
     db.session.commit()
@@ -46,7 +51,7 @@ def delete_activities():
 
 def get_all_parks():
     """
-    TODO
+    Gets all parks located in the state of Texas.
     """
     payload = {
         "stateCode": "TX",
@@ -65,7 +70,9 @@ def get_all_parks():
 
 def build_park(info, commit=False):
     """
-    TODO
+    Extracts desired information from the response provided by the National
+    Parks API, and creates an Activity object, which is then inserted into the
+    database.
     """
     # Converts the latitude-longitude string into a list.
     # Places latitude at index 0 and longitude at index 1.
@@ -115,7 +122,8 @@ def build_park(info, commit=False):
 
 def get_all_eventbrites():
     """
-    TODO
+    Gets all events located in the state of Texas (using latitude-longitude
+    bounding box).
     """
 
     # TODO: Pagination?
@@ -143,7 +151,7 @@ def get_all_eventbrites():
 
 def get_eventbrite_venue(venue_id):
     """
-    TODO
+    Given an eventbrite event ID, gets its venue (location) data.
     """
 
     payload = {"token": EVENTBRITE_KEY}
@@ -157,7 +165,9 @@ def get_eventbrite_venue(venue_id):
 
 def build_event(info, commit=False):
     """
-    TODO
+    Extracts desired information from the response provided by the Eventbrite
+    API, and creates an Activity object, which is then inserted into the
+    database.
     """
     # Active Events: 108, 107, 109, 111, 119
     # Non-active Events: 113, 105, 115
@@ -199,7 +209,7 @@ def build_event(info, commit=False):
 
 def get_all_meetups():
     """
-    TODO
+    Gets meetups near significant cities in the state of Texas.
     """
     meetup_ids = set()
     meetups = []
@@ -231,7 +241,9 @@ def get_all_meetups():
 
 def build_meetup(info, commit=False):
     """
-    TODO
+    Extracts desired information from the response provided by the Meetup
+    API, and creates an Activity object, which is then inserted into the
+    database.
     """
 
     # Active Categories: 15046, 15892, 638, 242, 1998, 25375, 933, 15672

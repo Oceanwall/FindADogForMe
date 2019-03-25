@@ -10,6 +10,11 @@ sys.path.append("../")
 from application import db
 from application.models import Breed
 
+"""
+Seeds the "breed" table of the database.
+@Graders, let us know if you need API keys.
+"""
+
 THE_DOG_API_KEY = os.getenv("THE_DOG_API_KEY")
 THE_DOG_API_URL = "https://api.thedogapi.com/v1/"
 DOG_IMAGES_API_URL = "https://dog.ceo/api/breed/"
@@ -17,7 +22,7 @@ DOG_IMAGES_API_URL = "https://dog.ceo/api/breed/"
 
 def delete_breeds():
     """
-    TODO
+    Deletes old breeds from the breed table in the database.
     """
     Breed.query.delete()
     db.session.commit()
@@ -25,7 +30,7 @@ def delete_breeds():
 
 def get_all_breeds():
     """
-    Gets details about all the breeds of dogs.
+    Gets details about all the breeds of dogs from THE_DOG API.
     """
     payload = {"x-api-key": THE_DOG_API_KEY}
     response = requests.get(THE_DOG_API_URL + "breeds?", params=payload)
@@ -39,7 +44,7 @@ def get_all_breeds():
 
 def get_breed_images(breed):
     """
-    TODO
+    Given a breed name, gets images of example dogs of that breed.
     """
     # Notes: Important dogs failing: Most Shepherds, Bloodhound?
     main_breed = None
@@ -81,7 +86,9 @@ def get_breed_images(breed):
 
 def build_breed(info, commit=False):
     """
-    TODO
+    Extracts desired information from the response provided by the THE_DOG
+    API, and creates a Breed object, which is then inserted into the
+    database.
     """
 
     if "temperament" not in info or "name" not in info:

@@ -4,6 +4,11 @@ from application import db, application
 from application.models import Activity, Breed, Dog, Shelter
 from flask_restless import APIManager
 
+"""
+Sets up Flask Restless API Manager.
+Also provides routing for the index page and 404 errors.
+"""
+
 manager = APIManager(application, flask_sqlalchemy_db=db)
 manager.create_api(Activity, methods=["Get"], results_per_page=12)
 manager.create_api(Breed, methods=["Get"], results_per_page=0)

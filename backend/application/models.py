@@ -1,5 +1,10 @@
 from application import db
 
+"""
+Models for the database.
+Encompasses Activity, Breed, Dog, Shelter
+"""
+
 
 class Activity(db.Model):
     """

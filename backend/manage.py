@@ -4,6 +4,10 @@ from flask_migrate import Migrate, MigrateCommand
 from application import application, db
 from application.models import Activity, Breed, Dog, Shelter
 
+"""
+Handles SQLAlchemy database migrations.
+"""
+
 migrate = Migrate(application, db)
 manager = Manager(application)
 
