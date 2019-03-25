@@ -1,53 +1,53 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
-import "../styles/DogCard.css";
+import "../styles/BreedCard.css";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-class DogCard extends Component {
+class BreedCard extends Component {
   render() {
     return (
       <Card style={{ width: "18rem", height: "35rem" }}>
         <Card.Img
           variant="top"
-          src={this.props.dog.image_1}
+          src={this.props.breed.image_1}
           style={{ width: "auto", height: "300px" }}
         />
         <Card.Body>
-          <Card.Title>{this.props.dog.name}</Card.Title>
+          <Card.Title>{this.props.breed.name}</Card.Title>
           <Card.Text>
             <Container>
               <Row>
                 <Col>
-                  <p align="left"><b>Shelter:</b></p>
+                  <p align="left"><b>Group:</b></p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.dog.shelter_id}</p>
+                  <p align="right">{this.props.breed.group}</p>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <p align="left"><b>Breed:</b></p>
+                  <p align="left"><b>Temperament:</b></p>
                 </Col>
-                <Col xs="auto">
-                  <p align="right">{this.props.dog.breed}</p>
+                <Col>
+                  <p align="right" class="cutoff">{this.props.breed.temperament}</p>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <p align="left"><b>Age:</b></p>
+                  <p align="left"><b>Lifespan:</b></p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.dog.age}</p>
+                  <p align="right">{this.props.breed.min_lifespan} - {this.props.breed.max_lifespan}</p>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <p align="left"><b>Size:</b></p>
+                  <p align="left"><b>Height:</b></p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.dog.size}</p>
+                  <p align="right">{this.props.breed.min_height} - {this.props.breed.max_height}</p>
                 </Col>
               </Row>    
             </Container>
@@ -58,4 +58,4 @@ class DogCard extends Component {
   }
 }
 
-export default DogCard;
+export default BreedCard;

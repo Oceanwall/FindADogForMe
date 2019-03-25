@@ -3,44 +3,66 @@ import PageComp from "./PageComp";
 import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
 import DogCard from "./DogCard";
-
+const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
 class Dogs extends Component {
   constructor(props) {
     super(props);
-    //dogs = getDog
+    //initialize initial state to not loaded
     this.state = {
-      //I'm going to be given an object with an api call through getDog
-      //getDog generically should return an object with objects, total_pages, and page
-      currentPage: 1,
-      maxPage: 10, //dogs["total_pages"]
-      dogList: [] //dogs["objects"]. Array of 12 objects
+      info_loaded: false
     };
     this.changePage = this.changePage.bind(this);
+    this.updateDog = this.updateDog.bind(this);
   }
 
+  //change page. pretty much copy paste this around, replace 'this.updateDog'
   changePage(pageNum) {
     this.setState(state => ({
-      currentPage: pageNum
+      info_loaded: false
     }));
+    this.updateDog(pageNum);
   }
-  render() {
-    let dogCards = this.state.dogList.map(dog => { //add shelter prop from shelterid?
-      return (
-        <div class="col-md-4 offset-md-0 col-10 offset-1">
-          <DogCard dog={dog} />
-        </div>
-      );
+
+  //server request method. called everytime page change, and on initial mount
+  async updateDog(pageNum) {
+    wrapper.getDog(undefined, pageNum).then((response) => {
+      this.setState(state => ({
+        currentPage: pageNum,
+        maxPage: response["total_pages"],
+        dogList: response["objects"],
+        info_loaded: true
+      }));
     });
+  }
+  //update page on initial mount to load information
+  async componentDidMount() {
+    this.changePage(1);
+  }
+
+  render() {
+    let dogCards = null;
+    if(this.state.info_loaded)
+    {
+        dogCards = this.state.dogList.map(dog => {
+        return (
+          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
+            <DogCard dog={dog} />
+          </div>
+        );
+      });
+    }
     return (
       <div>
         <div class="text-center">
           <h1> Dogs</h1>
         </div>
         <Container>
-          <CardDeck>
-            <div class="card-deck">{dogCards}</div>
-          </CardDeck>
+          {this.state.info_loaded && 
+            <CardDeck>
+              <div class="card-deck">{dogCards}</div>
+            </CardDeck>
+          }
         </Container>
         <PageComp
           currentPage={this.state.currentPage}
