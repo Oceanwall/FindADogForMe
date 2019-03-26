@@ -8,3 +8,4 @@ node_modules/
 backend/env
 backend/.elasticbeanstalk
 backend/config.py
+frontend/dockerfile_isolation
