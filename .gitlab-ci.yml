@@ -7,4 +7,5 @@ backend:
     image: oceanbarrier/findadogforme-backend
     script:
     - cd backend
+    - echo $DATABASE_CONFIG | base64 -d > config.py
     - python3 tests.py
