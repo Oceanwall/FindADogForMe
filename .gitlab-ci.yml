@@ -3,7 +3,8 @@ before_script:
     - uname -a
     - printenv | sort
 
-python:
-    image: gpdowning/python
+backend:
+    image: oceanbarrier/findadogforme-backend
     script:
     - cd backend
+    - python3 tests.py
