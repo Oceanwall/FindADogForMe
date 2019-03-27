@@ -189,7 +189,7 @@ class About extends Component {
     this.load_commits();
     this.load_issues();
 
-     let pp = await wrapper.getShelter();
+     let pp = await wrapper.getBreed();
      console.log(pp);
   }
 

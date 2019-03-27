@@ -4,11 +4,12 @@ import "../styles/BreedCard.css";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { Link } from 'react-router-dom';
 
 class BreedCard extends Component {
   render() {
     return (
-      <Card style={{ width: "18rem", height: "35rem" }}>
+      <Card style={{ width: "18rem", height: "40rem" }}>
         <Card.Img
           variant="top"
           src={this.props.breed.image_1}
@@ -49,7 +50,12 @@ class BreedCard extends Component {
                 <Col xs="auto">
                   <p align="right">{this.props.breed.min_height} - {this.props.breed.max_height}</p>
                 </Col>
-              </Row>    
+              </Row>
+              <Row>
+                <Col>
+                  <Link to={`/breeds/${this.props.breed.name}`}>Learn More</Link>
+                </Col>
+              </Row>      
             </Container>
           </Card.Text>
         </Card.Body>

@@ -3,6 +3,9 @@ import PageComp from "./PageComp";
 import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
 import DogCard from "./DogCard";
+import DogInstance from "./DogInstance"
+import { Route } from "react-router-dom";
+
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
 class Dogs extends Component {
@@ -41,36 +44,40 @@ class Dogs extends Component {
   }
 
   render() {
-    let dogCards = null;
-    if(this.state.info_loaded)
-    {
-        dogCards = this.state.dogList.map(dog => {
-        return (
-          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-            <DogCard dog={dog} />
+    if(this.props.match.isExact) {
+      let dogCards = null;
+      if(this.state.info_loaded) {
+          dogCards = this.state.dogList.map(dog => {
+          return (
+            <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
+              <DogCard dog={dog}/>
+            </div>
+          );
+        });
+      }
+      return (
+          <div>
+            <div class="text-center">
+              <h1> Dogs</h1>
+            </div>
+            <Container>
+              {this.state.info_loaded && 
+                <CardDeck>
+                  <div class="card-deck">{dogCards}</div>
+                </CardDeck>
+              }
+            </Container>
+            <PageComp
+              currentPage={this.state.currentPage}
+              maxPage={this.state.maxPage}
+              changePage={this.changePage}
+            />
           </div>
-        );
-      });
+      );
     }
-    return (
-      <div>
-        <div class="text-center">
-          <h1> Dogs</h1>
-        </div>
-        <Container>
-          {this.state.info_loaded && 
-            <CardDeck>
-              <div class="card-deck">{dogCards}</div>
-            </CardDeck>
-          }
-        </Container>
-        <PageComp
-          currentPage={this.state.currentPage}
-          maxPage={this.state.maxPage}
-          changePage={this.changePage}
-        />
-      </div>
-    );
+    else {
+      return (<Route path={`${this.props.match.path}/:dogId`} component={DogInstance} />);
+    }
   }
 }
 

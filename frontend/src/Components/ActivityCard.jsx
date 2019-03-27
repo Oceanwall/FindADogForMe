@@ -4,6 +4,7 @@ import "../styles/ActivityCard.css";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { Link } from 'react-router-dom';
 
 class ActivityCard extends Component {
   render() {
@@ -49,7 +50,12 @@ class ActivityCard extends Component {
                 <Col xs="auto">
                   <p align="right">{this.props.activity.type}</p>
                 </Col>
-              </Row>    
+              </Row>
+              <Row>
+                <Col>
+                  <Link to={`/activities/${this.props.activity.id}`}>Learn More</Link>
+                </Col>
+              </Row>  
             </Container>
           </Card.Text>
         </Card.Body>

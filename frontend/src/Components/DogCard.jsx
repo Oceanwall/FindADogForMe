@@ -4,11 +4,12 @@ import "../styles/DogCard.css";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { Link } from 'react-router-dom';
 
 class DogCard extends Component {
   render() {
     return (
-      <Card style={{ width: "18rem", height: "35rem" }}>
+      <Card style={{ width: "18rem", height: "38rem" }}>
         <Card.Img
           variant="top"
           src={this.props.dog.image_1}
@@ -49,7 +50,12 @@ class DogCard extends Component {
                 <Col xs="auto">
                   <p align="right">{this.props.dog.size}</p>
                 </Col>
-              </Row>    
+              </Row>  
+              <Row>
+                <Col>
+                  <Link to={`/dogs/${this.props.dog.id}`}>Learn More</Link>
+                </Col>
+              </Row>  
             </Container>
           </Card.Text>
         </Card.Body>

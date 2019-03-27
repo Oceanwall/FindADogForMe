@@ -3,6 +3,9 @@ import PageComp from "./PageComp";
 import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
 import ActivityCard from "./ActivityCard";
+import ActivityInstance from "./ActivityInstance"
+import { Route } from "react-router-dom";
+
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
 class Activities extends Component {
@@ -42,36 +45,41 @@ class Activities extends Component {
   }
 
   render() {
-    let activityCards = null;
-    if(this.state.info_loaded)
-    {
-        activityCards = this.state.activityList.map(activity => {
-        return (
-          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-            <ActivityCard activity={activity} />
+    if(this.props.match.isExact) {
+      let activityCards = null;
+      if(this.state.info_loaded)
+      {
+          activityCards = this.state.activityList.map(activity => {
+          return (
+            <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
+              <ActivityCard activity={activity} />
+            </div>
+          );
+        });
+      }
+      return (
+        <div>
+          <div class="text-center">
+            <h1> Activities</h1>
           </div>
-        );
-      });
-    }
-    return (
-      <div>
-        <div class="text-center">
-          <h1> Activities</h1>
+          <Container>
+            {this.state.info_loaded && 
+              <CardDeck>
+                <div class="card-deck">{activityCards}</div>
+              </CardDeck>
+            }
+          </Container>
+          <PageComp
+            currentPage={this.state.currentPage}
+            maxPage={this.state.maxPage}
+            changePage={this.changePage}
+          />
         </div>
-        <Container>
-          {this.state.info_loaded && 
-            <CardDeck>
-              <div class="card-deck">{activityCards}</div>
-            </CardDeck>
-          }
-        </Container>
-        <PageComp
-          currentPage={this.state.currentPage}
-          maxPage={this.state.maxPage}
-          changePage={this.changePage}
-        />
-      </div>
-    );
+      );
+    }
+    else {
+      return (<Route path={`${this.props.match.path}/:activityId`} component={ActivityInstance} />);
+    }
   }
 }
 

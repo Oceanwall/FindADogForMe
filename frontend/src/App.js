@@ -19,10 +19,10 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/shelters" component={Shelters} />
-            <Route exact path="/dogs" component={Dogs} />
-            <Route exact path="/breeds" component={Breeds} />
-            <Route exact path="/activities" component={Activities} />
+            <Route path="/shelters" component={Shelters} />
+            <Route path="/dogs" component={Dogs} />
+            <Route path="/breeds" component={Breeds} />
+            <Route path="/activities" component={Activities} />
             <Route exact path="/about" component={About} />
             <Route component={NoMatch} />
           </Switch>

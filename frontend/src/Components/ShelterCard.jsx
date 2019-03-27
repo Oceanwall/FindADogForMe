@@ -4,6 +4,7 @@ import "../styles/ShelterCard.css";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { Link } from 'react-router-dom';
 
 class ShelterCard extends Component {
   render() {
@@ -48,6 +49,11 @@ class ShelterCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">{this.props.shelter.address ? this.props.shelter.address : "None Provided :("}</p>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Link to={`/shelters/${this.props.shelter.id}`}>Learn More</Link>
                 </Col>
               </Row>    
             </Container>

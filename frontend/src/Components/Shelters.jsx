@@ -3,6 +3,9 @@ import PageComp from "./PageComp";
 import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
 import ShelterCard from "./ShelterCard";
+import ShelterInstance from "./ShelterInstance"
+import { Route } from "react-router-dom";
+
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
 class Shelters extends Component {
@@ -40,38 +43,42 @@ class Shelters extends Component {
     this.changePage(1);
   }
   render() {
-    let shelterCards = null;
-    if(this.state.info_loaded)
-    {
-        shelterCards = this.state.shelterList.map(shelter => {
-        return (
-          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-            <ShelterCard shelter={shelter} />
+    if(this.props.match.isExact) {
+      let shelterCards = null;
+      if(this.state.info_loaded)
+      {
+          shelterCards = this.state.shelterList.map(shelter => {
+          return (
+            <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
+              <ShelterCard shelter={shelter} />
+            </div>
+          );
+        });
+      }
+      return (
+        <div>
+          <div class="text-center">
+            <h1> Shelters</h1>
           </div>
-        );
-      });
-    }
-    return (
-      <div>
-        <div class="text-center">
-          <h1> Shelters</h1>
+          <Container>
+            {this.state.info_loaded && 
+              <CardDeck>
+                <div class="card-deck">{shelterCards}</div>
+              </CardDeck>
+            }
+          </Container>
+          <PageComp
+            currentPage={this.state.currentPage}
+            maxPage={this.state.maxPage}
+            changePage={this.changePage}
+          />
         </div>
-        <Container>
-          {this.state.info_loaded && 
-            <CardDeck>
-              <div class="card-deck">{shelterCards}</div>
-            </CardDeck>
-          }
-        </Container>
-        <PageComp
-          currentPage={this.state.currentPage}
-          maxPage={this.state.maxPage}
-          changePage={this.changePage}
-        />
-      </div>
-    );
+      );
+    }
+    else {
+      return (<Route path={`${this.props.match.path}/:shelterId`} component={ShelterInstance} />);
+    }
   }
-
 }
 
 export default Shelters;
