@@ -31,7 +31,6 @@ class LogoDeck extends Component {
               img="/images/postman.png"
               info="Used for API development and testing"
             />
-
             <LogoCard
               img="/images/react.png"
               info="Used for for frontend development"
@@ -47,6 +46,21 @@ class LogoDeck extends Component {
             <LogoCard
               img="/images/mocha.png"
               info="Used to create unit tests of JavaScript code"
+            />
+            <LogoCard
+              img="/images/chai.png"
+              info="Used to create unit tests of JavaScript code"
+            />
+            <LogoCard img="/images/flask.png" info="Python web framework" />
+            <LogoCard img="/images/black.png" info="Code formatter" />
+            <LogoCard img="/images/babel.png" info="JavaScript compiler" />
+            <LogoCard
+              img="/images/sqlalchemy.png"
+              info="SQL mapper for Python"
+            />
+            <LogoCard
+              img="/images/postgresql.png"
+              info="Relational database management system"
             />
           </Row>
         </Container>

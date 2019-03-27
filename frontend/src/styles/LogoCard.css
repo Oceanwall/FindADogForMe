@@ -20,9 +20,9 @@
   opacity: 0.9;
 }
 
-.text {
+.logo-text {
   color: rgb(0, 0, 0);
-  font-size: 2vw;
+  font-size: 1.5vh;
   position: absolute;
   top: 50%;
   left: 50%;

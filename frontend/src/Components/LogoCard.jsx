@@ -7,7 +7,7 @@ class LogoCard extends Component {
       <div class="logo-container">
         <img src={this.props.img} class="logo-image" alt="logo" />
         <div class="overlay">
-          <div class="text">{this.props.info}</div>
+          <div class="logo-text">{this.props.info}</div>
         </div>
       </div>
     );
