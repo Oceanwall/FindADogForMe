@@ -94,7 +94,7 @@ class DogInstance extends Component {
   }
 
   render() {
-    let activityCards = null;
+    let activityCards = [];
     if (this.isLoaded()) {
       activityCards = this.state.nearby_activities.map(activity => {
         return (
@@ -106,45 +106,51 @@ class DogInstance extends Component {
     }
     return (
       <div>
-        {this.isLoaded() && (
-          <Container>
-            <br />
-            <Row>
-              <Col>
-                <h1> {this.state.name}</h1>
-                <div class="dog-info-text">
-                  <p align="left" className="mt-5">
-                    Shelter:{" "}
-                    <Link to={`/activities/${this.state.shelter_id}`}>
-                      {this.state.shelter}
-                    </Link>
-                  </p>
-                  <p align="left">
-                    Breed:{" "}
-                    <Link to={`/breeds/${this.state.breed}`}>
-                      {this.state.breed}
-                    </Link>
-                  </p>
-                  <p align="left"> Age: {this.state.age}</p>
-                  <p align="left"> Size: {this.state.size}</p>
-                </div>
-              </Col>
-              <Col xs={12} md={7} lg={6}>
-                <InstanceCarousel images={this.state.images} />
-              </Col>
-            </Row>
-            <Row>
-              <Container>
-                <div class="dog-desc-text">
-                  <p align="left">{this.state.description}</p>
-                </div>
-              </Container>
-            </Row>
-            <CardDeck>
-              <div class="card-deck">{activityCards}</div>
-            </CardDeck>
-          </Container>
-        )}
+        <Container>
+          <br />
+          <Row>
+            <Col>
+              <h1> {this.state.name}</h1>
+              <div class="dog-info-text">
+                <p align="left" className="mt-5">
+                  Shelter:{" "}
+                  <Link to={`/activities/${this.state.shelter_id}`}>
+                    {this.state.shelter}
+                  </Link>
+                </p>
+                <p align="left">
+                  Breed:{" "}
+                  <Link to={`/breeds/${this.state.breed}`}>
+                    {this.state.breed}
+                  </Link>
+                </p>
+                <p align="left"> Age: {this.state.age}</p>
+                <p align="left"> Size: {this.state.size}</p>
+              </div>
+            </Col>
+            <Col xs={12} md={7} lg={6}>
+              <InstanceCarousel images={this.state.images} />
+            </Col>
+          </Row>
+          <Row>
+            <Container>
+              <div class="dog-desc-text">
+                <p align="left">{this.state.description}</p>
+              </div>
+            </Container>
+          </Row>
+
+          {activityCards.length > 0 ? (
+            (<p align="left"> Activities: </p>,
+            (
+              <CardDeck>
+                <div class="card-deck">{activityCards}</div>
+              </CardDeck>
+            ))
+          ) : (
+            <p align="left"> Activities: None</p>
+          )}
+        </Container>
       </div>
     );
   }
