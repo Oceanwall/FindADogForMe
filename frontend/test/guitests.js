@@ -41,6 +41,40 @@ describe("Home Page", function() {
     });
   });
 
+  it("should confirm the presence of the navigation bar, and navigate to the About page", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .findElement(By.id("general-navbar"))
+        .catch(() => reject(new Error("No item with ID general-navbar was found.")));
+
+      browser
+        .findElement(By.xpath('//a[@href="/about"]'))
+        .catch(() => reject(new Error("No item with that href attribute was found.")))
+        .then((element) => {
+          element.click();
+        })
+        .then(() => resolve())
+        .catch((error) => reject(error));
+    });
+  });
+
+});
+
+describe("About Page", function() {
+
+  it("should confirm the presence of the description / motivation and members sections", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .findElement(By.id("desc-motivation"))
+        .catch(() => reject(new Error("No item with ID desc-motivation was found.")));
+
+      browser
+        .findElement(By.id("members"))
+        .catch(() => reject(new Error("No item with ID members was found.")))
+        .then(() => resolve());
+    });
+  });
+
 
   after(function() {
     browser.quit();

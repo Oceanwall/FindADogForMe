@@ -9,7 +9,7 @@ class CustomNavbar extends Component {
   state = {};
   render() {
     return (
-      <Navbar bg="light" variant="light" expand="lg">
+      <Navbar bg="light" variant="light" expand="lg" id="general-navbar">
         <Navbar.Brand href="/">
           <img src="/favicon.ico" alt="" />
           {"Find a Dog for Me"}

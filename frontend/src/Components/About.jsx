@@ -203,7 +203,7 @@ class About extends Component {
     });
     return (
       <div>
-        <Container>
+        <Container id="desc-motivation">
           <h2 class="text-center title-text">Description and Motivation</h2>
           <p class="mt-3" align="left">
             As shelters become increasingly crowded at alarming rates, it's
@@ -226,7 +226,7 @@ class About extends Component {
         </Container>
 
         <h2 class="text-center mt-4 title-text">Members</h2>
-        <Container>
+        <Container id="members">
           <CardDeck>
             <div class="card-deck">{memberCards}</div>
           </CardDeck>
