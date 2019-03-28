@@ -1,0 +1,10 @@
+.default-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 300px;
+
+  font-size: 125px;
+
+}

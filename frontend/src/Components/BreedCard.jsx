@@ -5,16 +5,27 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Link } from 'react-router-dom';
+import DefaultImage from "./DefaultImage";
 
 class BreedCard extends Component {
   render() {
+    let card_image;
+    if (this.props.breed.image_1) {
+      card_image = <Card.Img
+        variant="top"
+        src={this.props.breed.image_1}
+        style={{ width: "auto", height: "300px" }}
+      />
+    }
+    else {
+      card_image = <DefaultImage
+        name={this.props.breed.name}
+      />
+    }
+
     return (
-      <Card style={{ width: "18rem", height: "40rem" }}>
-        <Card.Img
-          variant="top"
-          src={this.props.breed.image_1}
-          style={{ width: "auto", height: "300px" }}
-        />
+      <Card style={{ width: "18rem", height: "40rem" }}  className="mt-4">
+        {card_image}
         <Card.Body>
           <Card.Title>{this.props.breed.name}</Card.Title>
           <Card.Text>
@@ -55,7 +66,7 @@ class BreedCard extends Component {
                 <Col>
                   <Link to={`/breeds/${this.props.breed.name}`}>Learn More</Link>
                 </Col>
-              </Row>      
+              </Row>
             </Container>
           </Card.Text>
         </Card.Body>

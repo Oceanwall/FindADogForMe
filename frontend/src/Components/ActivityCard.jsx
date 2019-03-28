@@ -5,16 +5,27 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Link } from 'react-router-dom';
+import DefaultImage from "./DefaultImage";
 
 class ActivityCard extends Component {
   render() {
+    let card_image;
+    if (this.props.activity.image_1) {
+      card_image = <Card.Img
+        variant="top"
+        src={this.props.activity.image_1}
+        style={{ width: "auto", height: "300px" }}
+      />
+    }
+    else {
+      card_image = <DefaultImage
+        name={this.props.activity.name}
+      />
+    }
+
     return (
-      <Card style={{ width: "18rem", height: "35rem" }}>
-        <Card.Img
-          variant="top"
-          src={this.props.activity.image_1}
-          style={{ width: "auto", height: "300px" }}
-        />
+      <Card style={{ width: "18rem", height: "35rem" }} className="mt-4">
+        {card_image}
         <Card.Body>
           <Card.Title>{this.props.activity.name}</Card.Title>
           <Card.Text>
@@ -55,7 +66,7 @@ class ActivityCard extends Component {
                 <Col>
                   <Link to={`/activities/${this.props.activity.id}`}>Learn More</Link>
                 </Col>
-              </Row>  
+              </Row>
             </Container>
           </Card.Text>
         </Card.Body>

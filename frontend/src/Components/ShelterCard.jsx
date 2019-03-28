@@ -5,15 +5,14 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Link } from 'react-router-dom';
+import DefaultImage from './DefaultImage';
 
 class ShelterCard extends Component {
   render() {
     return (
-      <Card style={{ width: "18rem", height: "35rem" }}>
-        <Card.Img
-          variant="top"
-          src={this.props.shelter.image_1} //REPLACE THIS!!!
-          style={{ width: "auto", height: "300px" }}
+      <Card style={{ width: "18rem", height: "35rem" }} className="mt-4">
+        <DefaultImage
+          name={this.props.shelter.name}
         />
         <Card.Body>
           <Card.Title>{this.props.shelter.name}</Card.Title>
@@ -55,7 +54,7 @@ class ShelterCard extends Component {
                 <Col>
                   <Link to={`/shelters/${this.props.shelter.id}`}>Learn More</Link>
                 </Col>
-              </Row>    
+              </Row>
             </Container>
           </Card.Text>
         </Card.Body>
