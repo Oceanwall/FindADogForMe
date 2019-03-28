@@ -1,0 +1,1794 @@
+{
+	"info": {
+		"_postman_id": "1bf28546-31bd-4cc0-a87d-102c7672c522",
+		"name": "Find a Dog for Me",
+		"description": "## Introduction\n\nThis RESTful API is provided by the backend server and consumed by the frontend server for use in supplying findadogfor.me with dynamic information about models.\n\n## Overview\n\nThe models that this API provides are **\"shelters\", \"dogs\", \"breeds\",** and **\"activities\"**. API calls for obtaining relevant attributes, connections, and media about and between these models are included.\n\nThe RESTful API sources for this API include:\n* Petfinder API\n* TheDog API\n* Dog API\n* Eventbrite API\n* Meetup API\n* National Parks API\n\nThese sources are subject to change based on availability of data.\n\n## Authentication\n\nAll API calls must be accompanied by a bearer token.\n\n## Status Codes\n\n* **200: Request Succeeded** \n\t* Request has succeeded!\n* **404: Not Found** \n    * Server cannot find the resource you're trying to access.\n* **500: Internal Server Error**\n\t* Server encountered unexpected condition that prevented it from fulfilling the request.\n\t* If this happens, please let us know!\n\n## Rate Limit\n\nCurrently, no rate limit exists with this API.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Shelters",
+			"item": [
+				{
+					"name": "/shelter",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2ef090fb-4d1e-4a9e-b711-9cf0586420ba",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "45827fec-14ab-457a-917e-01d4d87e5132",
+								"exec": [
+									"pm.test(\"Body contains id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains address\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"address\");",
+									"});",
+									"",
+									"pm.test(\"Body contains city\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"city\");",
+									"});",
+									"",
+									"pm.test(\"Body contains latitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"latitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains longitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"longitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains phone\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"phone\");",
+									"});",
+									"",
+									"pm.test(\"Body contains state\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"state\");",
+									"});",
+									"",
+									"pm.test(\"Body contains zipcode\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"zipcode\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/shelter/TX1399?",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"shelter",
+								"TX1399"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "(Optional) The shelter for which you'd like specific data for. ",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": null,
+									"description": "(Optional) The page of results you'd like",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Returns a list of shelter items matching the specified criteria.\n\nIf no parameters are provided, returns a list of all shelter items, paginated.\n\nParameters:\n\nid - (Optional) The shelter for which you'd like specific data for.\n\npage - (Optional) The page of results you'd like\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tshelter_dict_1,\n\t\t...\n\t\tshelter_dict_12\n\t],\n\tpage: number\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/shelter/activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d05f8e32-5fd0-4a4e-8329-50d96133edbe",
+								"exec": [
+									"pm.test(\"Body contains date\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"date\");",
+									"});",
+									"",
+									"pm.test(\"Body contains description\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"description\");",
+									"});",
+									"",
+									"pm.test(\"Body contains designation\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"designation\");",
+									"});",
+									"",
+									"pm.test(\"Body contains directions\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"directions\");",
+									"});",
+									"",
+									"pm.test(\"Body contains is_active\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"is_active\");",
+									"});",
+									"",
+									"pm.test(\"Body contains latitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"latitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains longitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"longitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains type\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"type\");",
+									"});",
+									"",
+									"pm.test(\"Body contains url\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"url\");",
+									"});",
+									"",
+									"pm.test(\"Body contains page\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"page\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/activity?q={\"filters\":[{\"name\":\"latitude\",\"op\":\"ge\",\"val\":29.2852}, {\"name\":\"latitude\",\"op\":\"le\",\"val\":29.7852}, {\"name\":\"longitude\",\"op\":\"ge\",\"val\":-98.7439}, {\"name\":\"longitude\",\"op\":\"le\",\"val\":-98.2439}]}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"activity"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The shelter id for which you want to find nearby activities",
+									"disabled": true
+								},
+								{
+									"key": "range",
+									"value": "number",
+									"description": "(Optional) The range (in degrees) from the shelter in which you want to find nearby activities.",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "",
+									"description": "(Optional) The current page (12 activities per page) of nearby activity information to request.",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "{\"filters\":[{\"name\":\"latitude\",\"op\":\"ge\",\"val\":29.2852}, {\"name\":\"latitude\",\"op\":\"le\",\"val\":29.7852}, {\"name\":\"longitude\",\"op\":\"ge\",\"val\":-98.7439}, {\"name\":\"longitude\",\"op\":\"le\",\"val\":-98.2439}]}"
+								}
+							]
+						},
+						"description": "Returns a list of activity items found near a specific shelter, paginated.\n\n\"id\" is a required parameter.\n\nParameters: \n\nid - (Required) The shelter id for which you want to find nearby activities\n\nrange - (Optional) The range (in degrees) from the shelter in which you want to find nearby activities.\n\npage - (Optional) The current page (12 activities per page) of nearby activity information to request.\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tactivity_dict_1,\n\t\t...\n\t\tactivity_dict_12\n\t],\n\tpage: number\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/shelter/breed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afc09f44-2f83-4ddd-bbf4-913d7736c130",
+								"exec": [
+									"pm.test(\"Body contains group\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"group\");",
+									"});",
+									"",
+									"pm.test(\"Body contains is_active\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"is_active\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_height\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_height\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_lifespan\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_lifespan\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_weight\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_weight\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_height\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_height\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_lifespan\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_lifespan\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_weight\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_weight\");",
+									"});",
+									"",
+									"pm.test(\"Body contains temperament\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"temperament\");",
+									"});",
+									"",
+									"pm.test(\"Body contains page\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"page\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/breed?q={\"filters\":[{\"name\":\"name\",\"op\":\"eq\",\"val\":\"chow chow\"}]}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"breed"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The ID of the specific shelter.",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "{\"filters\":[{\"name\":\"name\",\"op\":\"eq\",\"val\":\"chow chow\"}]}"
+								}
+							]
+						},
+						"description": "Returns a list of breed items found hosted by a specific shelter.\n\nParameters:\n\nid - (Required) The ID of the specific shelter.\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tbreed_dict_1,\n\t\t...\n\t]\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/shelter/dog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "37beb4d7-e79c-43c8-b852-d95b4bfb947b",
+								"exec": [
+									"pm.test(\"Body contains age\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"age\");",
+									"});",
+									"",
+									"pm.test(\"Body contains breed\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"breed\");",
+									"});",
+									"",
+									"pm.test(\"Body contains description\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"description\");",
+									"});",
+									"",
+									"pm.test(\"Body contains id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains shelter_id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"shelter_id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains sex\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"sex\");",
+									"});",
+									"",
+									"pm.test(\"Body contains page\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"page\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/dog?q={\"filters\":[{\"name\":\"shelter_id\",\"op\":\"eq\",\"val\":\"TX1399\"}]}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"dog"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The ID of the specific shelter.",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "number",
+									"description": "(Optional) The current page (12 dogs per page) of information of dogs hosted by this shelter.",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "{\"filters\":[{\"name\":\"shelter_id\",\"op\":\"eq\",\"val\":\"TX1399\"}]}"
+								}
+							]
+						},
+						"description": "Returns a list of dog items found hosted by a specific shelter, paginated.\n\nIf no arguments are provided then a list of all dogs, paginated, will be provided.\n\nParameters:\n\nid - (Required) The ID of the specific shelter.\n\npage - (Optional) The current page (12 dogs per page) of information of dogs hosted by this shelter.\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tdog_dict_1,\n\t\t...\n\t\tdog_dict_12\n\t],\n\tpage: number\n}\n```"
+					},
+					"response": []
+				}
+			],
+			"description": "API calls related to the Shelter model.\n\nShelter Model:\n```\ndict {\n\tid: string,\n\tname: string,\n\tlatitude: number,\n\tlongitude: number,\n\tcity: string,\n\tstate: string,\n\tzipcode: number,\n\tphone: string, \n\taddress: string,\n}\n```",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{API_TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e54c3f25-259d-4abb-8f28-5f7941a23581",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4cb6966-0e57-4f47-98cf-a581c47b0e45",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Dogs",
+			"item": [
+				{
+					"name": "/dog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9170a1ef-458e-4a2b-9771-2521803dbb08",
+								"exec": [
+									"pm.test(\"Body contains age\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"age\");",
+									"});",
+									"",
+									"pm.test(\"Body contains breed\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"breed\");",
+									"});",
+									"",
+									"pm.test(\"Body contains description\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"description\");",
+									"});",
+									"",
+									"pm.test(\"Body contains id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains shelter_id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"shelter_id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains sex\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"sex\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/dog/43022980?",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"dog",
+								"43022980"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "(Optional) The id of the dog you'd like information about.",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": null,
+									"description": "(Optional) The current page (12 dogs per page) of dog information.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Returns a list of dog items matching the specified criteria.\n\nIf no parameters are provided, returns a list of all dog items, paginated.\n\nParameters:\n\nid - (Optional) The id of the dog you'd like information about.\n\npage - (Optional) The current page (12 dogs per page) of dog information.\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tdog_dict_1,\n\t\t...\n\t\tdoct_dict_12\n\t],\n\tpage: number\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/dog/activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e64b2578-880a-4746-9707-6c06b530d015",
+								"exec": [
+									"pm.test(\"Body contains date\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"date\");",
+									"});",
+									"",
+									"pm.test(\"Body contains description\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"description\");",
+									"});",
+									"",
+									"pm.test(\"Body contains designation\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"designation\");",
+									"});",
+									"",
+									"pm.test(\"Body contains directions\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"directions\");",
+									"});",
+									"",
+									"pm.test(\"Body contains is_active\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"is_active\");",
+									"});",
+									"",
+									"pm.test(\"Body contains latitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"latitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains longitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"longitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains type\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"type\");",
+									"});",
+									"",
+									"pm.test(\"Body contains url\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"url\");",
+									"});",
+									"",
+									"pm.test(\"Body contains page\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"page\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/activity?q={\"filters\":[{\"name\" : \"is_active\", \"op\":\"eq\", \"val\": true},{\"name\":\"latitude\",\"op\":\"ge\",\"val\":29.0961}, {\"name\":\"latitude\",\"op\":\"le\",\"val\":30.0961}, {\"name\":\"longitude\",\"op\":\"ge\",\"val\":-96.0169}, {\"name\":\"longitude\",\"op\":\"le\",\"val\":-95.0169}]}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"activity"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The ID of the dog.",
+									"disabled": true
+								},
+								{
+									"key": "range",
+									"value": "number",
+									"description": "(Optional) The range (in degrees) from the shelter the dog is hosted at in which you want to find suitable activities. Defaults to 0.5 degrees if no range is provided.",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "number",
+									"description": "(Optional) The current page (12 activities per page) of activity information.",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "{\"filters\":[{\"name\" : \"is_active\", \"op\":\"eq\", \"val\": true},{\"name\":\"latitude\",\"op\":\"ge\",\"val\":29.0961}, {\"name\":\"latitude\",\"op\":\"le\",\"val\":30.0961}, {\"name\":\"longitude\",\"op\":\"ge\",\"val\":-96.0169}, {\"name\":\"longitude\",\"op\":\"le\",\"val\":-95.0169}]}"
+								}
+							]
+						},
+						"description": "Returns a list of activity objects that would be suitable for the dog within the specified range, paginated.\n\n'id' is required as a parameter.\n\nParameters:\n\nid - (Required) The ID of the dog.\n\nrange - (Optional) The range (in degrees) from the shelter the dog is hosted at in which you want to find suitable activities. Defaults to 0.5 degrees if no range is provided.\n\npage - (Optional) The current page (12 activities per page) of activity information.\n\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tactivity_dict_1,\n\t\t...\n\t\tactivity_dict_12\n\t],\n\tpage: number\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/dog/breed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f74bbdb5-6342-49fa-a763-fe7c0ce6e3f1",
+								"exec": [
+									"pm.test(\"Body contains group\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"group\");",
+									"});",
+									"",
+									"pm.test(\"Body contains is_active\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"is_active\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_height\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_height\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_lifespan\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_lifespan\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_weight\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_weight\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_height\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_height\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_lifespan\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_lifespan\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_weight\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_weight\");",
+									"});",
+									"",
+									"pm.test(\"Body contains temperament\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"temperament\");",
+									"});",
+									"",
+									"pm.test(\"Body contains page\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"page\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/breed?q={\"filters\":[{\"name\":\"name\",\"op\":\"eq\",\"val\":\"border terrier\"}]}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"breed"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The ID of the dog.",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "{\"filters\":[{\"name\":\"name\",\"op\":\"eq\",\"val\":\"border terrier\"}]}"
+								}
+							]
+						},
+						"description": "Returns a list of breed objects that the dog is a species of.\n\n'id' is required as a parameter.\n\nParameters:\n\nid - (Required) The ID of the dog.\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tbreed_dict_1,\n\t\t...\n\t]\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/dog/shelter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dc42b353-586c-42d5-ad20-e0bf5eacbf35",
+								"exec": [
+									"pm.test(\"Body contains id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains address\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"address\");",
+									"});",
+									"",
+									"pm.test(\"Body contains city\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"city\");",
+									"});",
+									"",
+									"pm.test(\"Body contains latitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"latitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains longitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"longitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains phone\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"phone\");",
+									"});",
+									"",
+									"pm.test(\"Body contains state\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"state\");",
+									"});",
+									"",
+									"pm.test(\"Body contains zipcode\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"zipcode\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/shelter/TX1002?",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"shelter",
+								"TX1002"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The ID of the dog.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Returns a list containing the shelter item that hosts a specific dog.\n\n'id' is required as a parameter.\n\nParameters:\n\nid - (Required) The ID of the dog.\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tshelter_dict_1\n\t]\n}\n```"
+					},
+					"response": []
+				}
+			],
+			"description": "API calls related to the Dog model.\n\nDog Model:\n```\ndict {\n\tid: string,\n\tshelter_id: string\n\tname: string,\n\tbreed: string,\n\tage: string,\n\tsize: string,\n\tsex: string,\n\tdescription: string,\n\timage_1: string,\n\timage_2: string,\n\timage_3: string,\n\timage_4: string,\n}\n```",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{API_TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5c5dcb23-f095-45e1-8462-eef7719947c9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "34615976-7f4f-44b0-bed5-7258c31f0aed",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Breeds",
+			"item": [
+				{
+					"name": "/breed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4ffe408b-980e-4183-b568-6e38b655ed7c",
+								"exec": [
+									"pm.test(\"Body contains group\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"group\");",
+									"});",
+									"",
+									"pm.test(\"Body contains is_active\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"is_active\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_height\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_height\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_lifespan\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_lifespan\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_weight\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_weight\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_height\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_height\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_lifespan\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_lifespan\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_weight\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_weight\");",
+									"});",
+									"",
+									"pm.test(\"Body contains temperament\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"temperament\");",
+									"});",
+									"",
+									"pm.test(\"Body contains page\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"page\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/breed",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"breed"
+							]
+						},
+						"description": "Returns a list of breed items matching the specified criteria.\n\nIf no parameters are provided, returns a list of all breed items, paginated.\n\nParameters:\n\nbreed - (Optional) the specific breed you want information for\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tbreed_dict_1,\n\t\t...\n\t\tbreed_dict_12\n\t],\n\tpage: number\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/breed/activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "75565a42-37bd-4373-8e83-eb13e139b68b",
+								"exec": [
+									"pm.test(\"Body contains date\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"date\");",
+									"});",
+									"",
+									"pm.test(\"Body contains description\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"description\");",
+									"});",
+									"",
+									"pm.test(\"Body contains designation\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"designation\");",
+									"});",
+									"",
+									"pm.test(\"Body contains directions\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"directions\");",
+									"});",
+									"",
+									"pm.test(\"Body contains is_active\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"is_active\");",
+									"});",
+									"",
+									"pm.test(\"Body contains latitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"latitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains longitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"longitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains type\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"type\");",
+									"});",
+									"",
+									"pm.test(\"Body contains url\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"url\");",
+									"});",
+									"",
+									"pm.test(\"Body contains page\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"page\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/activity?q={\"filters\":[{\"name\" : \"is_active\", \"op\":\"eq\", \"val\": true}]}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"activity"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "string",
+									"description": "(Required) The name of the specific breed.",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "number",
+									"description": "(Optional) The current page (12 activities per page) of suitable activity information.",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "{\"filters\":[{\"name\" : \"is_active\", \"op\":\"eq\", \"val\": true}]}"
+								}
+							]
+						},
+						"description": "Returns a list of activity items suitable for dogs of a specific breed, paginated.\r\n\r\n'name' is required as a parameter.\r\n\r\nParameters:\r\n\r\nname - (Required) The name of the specific breed.\r\n\r\npage - (Optional) The current page (12 activities per page) of suitable activity information.\r\n\r\nReturn type:\r\n```\r\ndict {\r\n\tobjects: [\r\n\t\tactivity_dict_1,\r\n\t\t...\r\n\t\tactivity_dict_12\r\n\t],\r\n\tpage: number\r\n}\r\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/breed/dog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6a1aac21-e2da-40df-a1c2-3930626766bb",
+								"exec": [
+									"pm.test(\"Body contains age\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"age\");",
+									"});",
+									"",
+									"pm.test(\"Body contains breed\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"breed\");",
+									"});",
+									"",
+									"pm.test(\"Body contains description\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"description\");",
+									"});",
+									"",
+									"pm.test(\"Body contains id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains shelter_id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"shelter_id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains sex\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"sex\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/dog?q={\"filters\":[{\"name\":\"breed\",\"op\":\"eq\",\"val\":\"labrador retriever\"}]}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"dog"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "string",
+									"description": "(Required) The name of the specific breed.",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "number",
+									"description": "(Optional) The current page (12 dogs per page) of dog information.",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "{\"filters\":[{\"name\":\"breed\",\"op\":\"eq\",\"val\":\"labrador retriever\"}]}"
+								}
+							]
+						},
+						"description": "Returns a list of dog items of a specific breed, paginated.\r\n\r\n'name' is required as a parameter.\r\n\r\nParameters:\r\n\r\nname - (Required) The name of the specific breed.\r\n\r\npage - (Optional) The current page (12 dogs per page) of dog information.\r\n\r\nReturn type:\r\n```\r\ndict {\r\n\tobjects: [\r\n\t\tdog_dict_1,\r\n\t\t...\r\n\t\tdoct_dict_12\r\n\t],\r\n\tpage: number\r\n}\r\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/breed/shelter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b45cceca-baa3-4f28-afbe-2a97ef5feda1",
+								"exec": [
+									"pm.test(\"Body contains id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains address\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"address\");",
+									"});",
+									"",
+									"pm.test(\"Body contains city\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"city\");",
+									"});",
+									"",
+									"pm.test(\"Body contains latitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"latitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains longitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"longitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains phone\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"phone\");",
+									"});",
+									"",
+									"pm.test(\"Body contains state\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"state\");",
+									"});",
+									"",
+									"pm.test(\"Body contains zipcode\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"zipcode\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/breed/shelter?breed=beagle",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"breed",
+								"shelter"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "string",
+									"description": "(Required) The name of the specific breed.",
+									"disabled": true
+								},
+								{
+									"key": "latitude",
+									"value": "number",
+									"description": "(Optional) The latitude in which you want to find nearby shelters hosting a specific breed ",
+									"disabled": true
+								},
+								{
+									"key": "longitude",
+									"value": "number",
+									"description": "(Optional) The longitude in which you want to find nearby shelters hosting a specific breed ",
+									"disabled": true
+								},
+								{
+									"key": "range",
+									"value": "number",
+									"description": "(Optional) The range (in degrees) from the coordinates in which you want to find nearby shelters that host this breed.",
+									"disabled": true
+								},
+								{
+									"key": "breed",
+									"value": "beagle"
+								}
+							]
+						},
+						"description": "Returns a list of shelter items hosting a specific breed within the specified range, up to 6 shelters will be returned.\n\n'name' is required as a parameter.\n\n\nParameters:\n\nname - (Required) The name of the specific breed.\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tshelter_dict_1,\n\t\t...\n\t\tshelter_dict_6\n\t],\n\tpage: number\n}\n```"
+					},
+					"response": []
+				}
+			],
+			"description": "API calls related to the Breed model.\n\nBreed Model:\n```\ndict {\n\tname: string,\n\tgroup: string, \n\tmin_height: number,\n\tmax_height: number,\n\tmin_lifespan: number, \n\tmax_lifespan: number,\n\ttemperament: string,\n\tmin_weight: number,\n\tmax_weight: number,\n\timage_1: string,\n\timage_2: string,\n\timage_3: string,\n\timage_4: string,\n\tis_active: boolean\n}\n```",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b80c56f7-1d91-49b8-91a1-6340fbc69307",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e97705e9-80b2-4bc0-ac65-72bd3fc6a8f2",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "/activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "07447036-82e0-4a83-8335-4e439f074220",
+								"exec": [
+									"pm.test(\"Body contains date\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"date\");",
+									"});",
+									"",
+									"pm.test(\"Body contains description\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"description\");",
+									"});",
+									"",
+									"pm.test(\"Body contains designation\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"designation\");",
+									"});",
+									"",
+									"pm.test(\"Body contains directions\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"directions\");",
+									"});",
+									"",
+									"pm.test(\"Body contains is_active\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"is_active\");",
+									"});",
+									"",
+									"pm.test(\"Body contains latitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"latitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains longitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"longitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains type\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"type\");",
+									"});",
+									"",
+									"pm.test(\"Body contains url\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"url\");",
+									"});",
+									"",
+									"pm.test(\"Body contains page\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"page\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.findadogfor.me/api/activity?q={%22name%22:%20%22latitude%22,%20%22op%22:%20%22%3E%22,%20%22val%22:%20%22500%22}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"activity"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "{%22name%22:%20%22latitude%22,%20%22op%22:%20%22%3E%22,%20%22val%22:%20%22500%22}"
+								}
+							]
+						},
+						"description": "Returns a list of activity items matching the specified criteria.\n\nIf no parameters are provided, returns a list of all activity items, paginated.\n\nParameters:\n\nid - (Optional) The activity id for which you want information for. \n\npage - (Optional) The page of results you'd like.\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tactivity_dict_1,\n\t\t...\n\t\tactivity_dict_12\n\t],\n\tpage: number\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/activity/breed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9d518d80-8d3b-4eac-a233-0733887d0b49",
+								"exec": [
+									"pm.test(\"Body contains group\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"group\");",
+									"});",
+									"",
+									"pm.test(\"Body contains is_active\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"is_active\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_height\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_height\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_lifespan\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_lifespan\");",
+									"});",
+									"",
+									"pm.test(\"Body contains max_weight\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"max_weight\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_height\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_height\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_lifespan\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_lifespan\");",
+									"});",
+									"",
+									"pm.test(\"Body contains min_weight\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"min_weight\");",
+									"});",
+									"",
+									"pm.test(\"Body contains temperament\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"temperament\");",
+									"});",
+									"",
+									"pm.test(\"Body contains page\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"page\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://api.findadogfor.me/api/breed?q={\"filters\":[{\"name\" : \"is_active\", \"op\":\"eq\", \"val\": false}]}",
+							"protocol": "http",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"breed"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The ID of the activity.",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "{\"filters\":[{\"name\" : \"is_active\", \"op\":\"eq\", \"val\": false}]}"
+								}
+							]
+						},
+						"description": "Given an activity, returns a list of breed items representing dog breeds that would enjoy this activity.\n\n\"id\" is a required parameter.\n\nParameters:\n\nid - (Required) The activity id\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tbreed_dict_1,\n\t\t...\n\t]\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/activity/dog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1896629d-43fb-4907-8345-48fca7187b42",
+								"exec": [
+									"pm.test(\"Body contains age\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"age\");",
+									"});",
+									"",
+									"pm.test(\"Body contains breed\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"breed\");",
+									"});",
+									"",
+									"pm.test(\"Body contains description\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"description\");",
+									"});",
+									"",
+									"pm.test(\"Body contains id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains shelter_id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"shelter_id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains sex\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"sex\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://api.findadogfor.me/api/dog?q={\"filters\":[{\"name\":\"shelter_id\",\"op\":\"eq\",\"val\":\"TX1148\"}]}",
+							"protocol": "http",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"dog"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The ID of the activity.",
+									"disabled": true
+								},
+								{
+									"key": "range",
+									"value": "number",
+									"description": "(Optional) The range (in degrees) from the activity in which you want to find nearby dogs that would be suitable for this activity. The default is 0.5 degrees if no range is provided.",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "{\"filters\":[{\"name\":\"shelter_id\",\"op\":\"eq\",\"val\":\"TX1148\"}]}"
+								}
+							]
+						},
+						"description": "Given an activity, returns a list of dog items representing dogs in nearby shelters that would be suitable for this activity within the specified range. This list is capped at 12 entries.\n\n\"id\" is required as a parameter.\n\nParameters:\n\nid - (Required) The ID of the activity.\n\nrange - (Optional) The range (in degrees) from the activity in which you want to find nearby dogs that would be suitable for this activity. The default is 0.5 degrees if no range is provided.\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tdog_dict_1,\n\t\t...\n\t\tdog_dict_12\n\t]\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/activity/shelter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "38e4b0c0-1d10-4e6c-aa47-09d519cfa195",
+								"exec": [
+									"pm.test(\"Body contains id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									"",
+									"pm.test(\"Body contains address\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"address\");",
+									"});",
+									"",
+									"pm.test(\"Body contains city\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"city\");",
+									"});",
+									"",
+									"pm.test(\"Body contains latitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"latitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains longitude\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"longitude\");",
+									"});",
+									"",
+									"pm.test(\"Body contains name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body contains phone\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"phone\");",
+									"});",
+									"",
+									"pm.test(\"Body contains state\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"state\");",
+									"});",
+									"",
+									"pm.test(\"Body contains zipcode\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"zipcode\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://api.findadogfor.me/api/shelter?q={\"filters\":[{\"name\":\"latitude\",\"op\":\"ge\",\"val\":30.0200004577637}, {\"name\":\"latitude\",\"op\":\"le\",\"val\":30.5200004577637}, {\"name\":\"longitude\",\"op\":\"ge\",\"val\":-97.9899978637695}, {\"name\":\"longitude\",\"op\":\"le\",\"val\":-97.4899978637695}]}",
+							"protocol": "http",
+							"host": [
+								"api",
+								"findadogfor",
+								"me"
+							],
+							"path": [
+								"api",
+								"shelter"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The ID of the activity.",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "string",
+									"description": "(Required) The type of the activity (\"park\", \"meetup\", \"event\").",
+									"disabled": true
+								},
+								{
+									"key": "range",
+									"value": "number",
+									"description": "(Optional) The range (in degrees) from the activity in which you want to find nearby shelters. Defaults to 0.5 degrees if no range is provided.",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "number",
+									"description": "(Optional) The current page (12 shelters per page) of shelter information.",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "{\"filters\":[{\"name\":\"latitude\",\"op\":\"ge\",\"val\":30.0200004577637}, {\"name\":\"latitude\",\"op\":\"le\",\"val\":30.5200004577637}, {\"name\":\"longitude\",\"op\":\"ge\",\"val\":-97.9899978637695}, {\"name\":\"longitude\",\"op\":\"le\",\"val\":-97.4899978637695}]}"
+								}
+							]
+						},
+						"description": "Given an activity, returns a list of shelter items near the activity within the specified range.\n\n\"id\" is required as a parameter.\n\nParameters:\n\nid - (Required) The ID of the activity.\n\npage - (Optional) The current page (12 shelters per page) of shelter information.\n\nrange - (Optional) The range (in degrees) from the activity in which you want to find nearby shelters. Defaults to 0.5 degrees if no range is provided.\n\nReturn type:\n```\ndict {\n\tobjects: [\n\t\tshelter_dict_1,\n\t\t...\n\t\tshelter_dict_12\n\t],\n\tpage: number\n}\n```"
+					},
+					"response": []
+				}
+			],
+			"description": "API calls related to the Activity model.\n\nActivity Model:\n```\ndict {\n\tid: string,\n\ttype: string,\n\turl: string,\n\tname: string,\n\tdescription: string, \n\tlatitude: number,\n\tlongitude: number,\n\tlocation: string,\n\tis_active: boolean,\n\tis_free: boolean,\n\timage_1: string,\n\timage_2: string,\n\timage_3: string,\n\timage_4: string,\n\t--- For National Parks Only ---\n\tdesignation: string, \n\tweather: string, \n\tdirections: string, \n\t--- For Meetup/Eventbrite Only ---\n\tdate: string,\n\n}\n```",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "50a422da-fbab-49d6-b17a-01f1c19eba8b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8195e7e7-3aff-4faf-b78f-3d3a7b97ceab",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{API_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b4fb3d1b-19c0-4968-8d1a-b0d932530436",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f4e74ff7-ef66-4260-8d21-bb36c840b514",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "d3bd5a4e-321e-4310-b837-c232a8035d4b",
+			"key": "API_TOKEN",
+			"value": "91B7D3A43B5C31EA",
+			"type": "string"
+		}
+	]
+}

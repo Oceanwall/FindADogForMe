@@ -6,8 +6,10 @@ backend:
     - python3 tests.py
     - cd ..
 
-frontend:
+frontend and postman:
     image: oceanbarrier/findadogforme-frontend
     script:
     - cd frontend
     - mocha --reporter spec --no-timeouts test/mocha_test_babel.js
+    - cd ..
+    - newman run Postman.json

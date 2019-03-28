@@ -5,6 +5,9 @@ const until = webdriver.until;
 const Builder = webdriver.Builder;
 require("geckodriver");
 
+// TO RUN:
+// mocha --reporter spec --no-timeouts guitests.js
+
 const serverUri = "http://localhost:3000/";
 const appTitle = "Find a Dog for Me";
 
@@ -109,19 +112,36 @@ describe("About Page", function() {
   });
 
   it("should confirm that tools used are present", function() {
-    browser
-      .findElements(By.className("logo-container"))
-      .then((items) => {
-        assert.isAbove(Number(items.length), 10)
-      })
-  });
+    return new Promise(function(resolve, reject) {
+      browser
+        .findElements(By.className("logo-container"))
+        .then((items) => {
+            assert.isAbove(Number(items.length), 10);
+        })
+        .then(() => resolve())
+        .catch(() => reject(new Error("Number of tools present is not greater than 10.")));
+      });
+    });
 
 });
 
 describe("Dogs Page", function() {
 
+  // it("should load the dogs page and confirm the presence of dog cards", function() {
+  //   return new Promise(function(resolve, reject) {
+  //     browser
+  //       .get(serverUri + "dogs")
+  //       .then(() => {
+  //         browser.findElements(By.className("logo-container"))
+  //         .catch(() => reject(new Error("No item with ID carousel-container was found.")));
+  //       })
+  //       .then(() => resolve())
+  //       .catch((error) => reject(error));
+  //   });
+  // });
+
   after(function() {
     browser.quit();
   });
 
-}
+});
