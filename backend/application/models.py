@@ -116,6 +116,9 @@ class Activity(db.Model):
             "date": self.date,
         }
 
+    def toJSON(self):
+        return self.serialize()
+
 
 class Breed(db.Model):
     """
@@ -205,6 +208,9 @@ class Breed(db.Model):
             "is_active": self.is_active,
         }
 
+    def toJSON(self):
+        return self.serialize()
+
 
 class Dog(db.Model):
     """
@@ -284,6 +290,9 @@ class Dog(db.Model):
             "image_4": self.image_4,
         }
 
+    def toJSON(self):
+        return self.serialize()
+
 
 class Shelter(db.Model):
     """
@@ -338,3 +347,6 @@ class Shelter(db.Model):
             "phone": self.phone,
             "address": self.address,
         }
+
+    def toJSON(self):
+        return self.serialize()

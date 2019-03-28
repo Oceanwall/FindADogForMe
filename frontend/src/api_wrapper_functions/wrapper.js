@@ -153,27 +153,8 @@ async function getBreedDogs(name, page) {
 }
 
 // Get (up to) 6 shelters that host some breed.
-// Warning: Very slow for rarer species.
-async function getBreedShelters(name, latitude, longitude, range) {
-    if (!name)
-        throw new Error("You must provide a breed name.");
-    let nearby_shelters = await utilities.getAllNearbyShelters(latitude, longitude, range);
-
-    let shelters_of_breed = [];
-    for (let shelter of nearby_shelters) {
-        let dogs = (await getShelterDogs(shelter.id)).objects;
-        for (let dog of dogs) {
-            if (dog.breed == name) {
-                shelters_of_breed.push(shelter);
-                break;
-            }
-        }
-        if (shelters_of_breed.length >= 6) {
-            return shelters_of_breed;
-        }
-    }
-
-    return shelters_of_breed;
+async function getBreedShelters(name) {
+    return utilities.perform_api_call(`${API_URL}breed/shelter?breed=` + name);
 }
 
 /*

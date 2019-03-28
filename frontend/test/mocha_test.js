@@ -193,21 +193,15 @@ describe("FindADogForMe API Wrapper Functions", function() {
     expect(dogs["objects"][0]).to.have.property("image_1");
   });
 
-  // TODO: Too slow for mocha_test, but it does work!
-  // it("should get shelters hosting the breed", async function() {
-  //   let shelters = await wrapper.getBreedShelters(
-  //     "bull terrier",
-  //     29.7856,
-  //     -95.8242
-  //   );
-  //
-  //   expect(shelters).to.be.an("array");
-  //   expect(shelters[0]).to.be.an("object");
-  //   expect(shelters[0]).to.have.property("name");
-  //   expect(shelters[0]).to.have.property("address");
-  //   expect(shelters[0]).to.have.property("phone");
-  //   expect(shelters[0]).to.have.property("state");
-  // });
+  it("should get shelters hosting the breed", async function() {
+    let shelters = await wrapper.getBreedShelters("akita");
+
+    expect(shelters).to.be.an("object");
+    expect(shelters.objects[0]).to.have.property("name");
+    expect(shelters.objects[0]).to.have.property("address");
+    expect(shelters.objects[0]).to.have.property("phone");
+    expect(shelters.objects[0]).to.have.property("state");
+  });
 
   // ACTIVITIES
 
