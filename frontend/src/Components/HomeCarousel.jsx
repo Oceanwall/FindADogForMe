@@ -40,7 +40,7 @@ class HomeCarousel extends Component {
   render() {
     let { leftIcon, rightIcon } = this.state;
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" id="carousel-container">
         <Row>
           <Col>
             <Carousel

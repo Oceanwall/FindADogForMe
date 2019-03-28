@@ -186,7 +186,7 @@ def build_event(info, commit=False):
         type="eventbrite",
         url=info["url"],
         name=info["name"]["text"],
-        description=info["description"]["html"],
+        description=info["description"]["text"],
         latitude=address_data["latitude"],
         longitude=address_data["longitude"],
         location=address_data["address"]["localized_address_display"],
@@ -257,7 +257,7 @@ def build_meetup(info, commit=False):
     # TODO: Figure out a better way to tell if a meetup is free (most meetups only
     # provide cost information in their description).
 
-    if "description" not in info:
+    if "plain_text_description" not in info:
         return
 
     meetup = Activity(
@@ -265,7 +265,7 @@ def build_meetup(info, commit=False):
         type="meetup",
         url=info["link"],
         name=info["name"],
-        description=info["description"],
+        description=info["plain_text_description"],
         latitude=info["group"]["lat"],
         longitude=info["group"]["lon"],
         location=info["group"]["localized_location"],

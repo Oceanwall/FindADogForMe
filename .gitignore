@@ -9,3 +9,4 @@ backend/env
 backend/.elasticbeanstalk
 backend/config.py
 frontend/dockerfile_isolation
+frontend/test/debug.log
