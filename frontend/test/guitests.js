@@ -149,6 +149,29 @@ describe("Dogs Page", function() {
     });
   });
 
+  // TODO: Make this via button click
+  it("should load the dog instance page and confirm existence of related instances on page", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .get(serverUri + "dogs/10946756")
+        .catch(() => reject(new Error("Failed to open dog instance page.")))
+        .then(() => {
+          browser
+            .wait(until.elementLocated(By.className("card")), 20000)
+            .catch(() => reject(new Error("Related instance cards never loaded.")))
+            .then(() => {
+              browser
+                .findElements(By.className("card"))
+                  .then((items) => {
+                    assert.isAbove(Number(items.length), 0);
+                  })
+                .then(() => resolve())
+                .catch((error) => reject(new Error("Number of related instances on page is not greater than 0.")));
+            })
+        });
+    });
+  });
+
 });
 
 describe("Activities Page", function() {
@@ -170,6 +193,29 @@ describe("Activities Page", function() {
                   })
                 .then(() => resolve())
                 .catch((error) => reject(error));
+            })
+        });
+    });
+  });
+
+  // TODO: Make this via button click
+  it("should load the activity instance page and confirm existence of related instances on page", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .get(serverUri + "activities/eventbrite50601879584")
+        .catch(() => reject(new Error("Failed to open activity instance page.")))
+        .then(() => {
+          browser
+            .wait(until.elementLocated(By.className("card")), 20000)
+            .catch(() => reject(new Error("Related instance cards never loaded.")))
+            .then(() => {
+              browser
+                .findElements(By.className("card"))
+                  .then((items) => {
+                    assert.isAbove(Number(items.length), 0);
+                  })
+                .then(() => resolve())
+                .catch((error) => reject(new Error("Number of related instances on page is not greater than 0.")));
             })
         });
     });
@@ -201,6 +247,29 @@ describe("Breeds Page", function() {
     });
   });
 
+  // TODO: Make this via button click
+  it("should load the breed instance page and confirm existence of related instances on page", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .get(serverUri + "breeds/airedale%20terrier")
+        .catch(() => reject(new Error("Failed to open breed instance page.")))
+        .then(() => {
+          browser
+            .wait(until.elementLocated(By.className("card")), 20000)
+            .catch(() => reject(new Error("Related instance cards never loaded.")))
+            .then(() => {
+              browser
+                .findElements(By.className("card"))
+                  .then((items) => {
+                    assert.isAbove(Number(items.length), 0);
+                  })
+                .then(() => resolve())
+                .catch((error) => reject(new Error("Number of related instances on page is not greater than 0.")));
+            })
+        });
+    });
+  });
+
 });
 
 describe("Shelters Page", function() {
@@ -222,6 +291,29 @@ describe("Shelters Page", function() {
                   })
                 .then(() => resolve())
                 .catch((error) => reject(error));
+            })
+        });
+    });
+  });
+
+  // TODO: Make this via button click
+  it("should load the shelter instance page and confirm existence of related instances on page", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .get(serverUri + "shelters/TX1002")
+        .catch(() => reject(new Error("Failed to open shelter instance page.")))
+        .then(() => {
+          browser
+            .wait(until.elementLocated(By.className("card")), 20000)
+            .catch(() => reject(new Error("Related instance cards never loaded.")))
+            .then(() => {
+              browser
+                .findElements(By.className("card"))
+                  .then((items) => {
+                    assert.isAbove(Number(items.length), 0);
+                  })
+                .then(() => resolve())
+                .catch((error) => reject(new Error("Number of related instances on page is not greater than 0.")));
             })
         });
     });
