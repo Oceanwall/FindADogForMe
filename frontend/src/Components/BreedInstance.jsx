@@ -166,33 +166,52 @@ class BreedInstance extends Component {
         <Container>
           {dogCards.length > 0 ? (
             <div>
-              <p align="left"> Dogs: </p>
+              <p align="left" class="deck-title-text">
+                {" "}
+                Dogs:{" "}
+              </p>
               <CardDeck>
                 <div class="card-deck">{dogCards}</div>
               </CardDeck>
             </div>
           ) : (
-            <p align="left"> Dogs: None</p>
+            <p align="left" class="deck-title-text">
+              {" "}
+              Dogs: None
+            </p>
           )}
           {shelterCards.length > 0 ? (
             <div>
-              <p align="left"> Shelters: </p>
+              <p align="left" class="deck-title-text">
+                {" "}
+                Shelters:{" "}
+              </p>
               <CardDeck>
                 <div class="card-deck">{shelterCards}</div>
               </CardDeck>
             </div>
           ) : (
-            <p align="left"> Shelters: None</p>
+            <p align="left" class="deck-title-text">
+              {" "}
+              Shelters: None
+            </p>
           )}
           {activityCards.length > 0 ? (
             <div>
-              <p align="left"> Activities: </p>(
+              <p align="left" class="deck-title-text">
+                {" "}
+                Activities:{" "}
+              </p>
+              (
               <CardDeck>
                 <div class="card-deck">{activityCards}</div>
               </CardDeck>
             </div>
           ) : (
-            <p align="left"> Activities: None</p>
+            <p align="left" class="deck-title-text">
+              {" "}
+              Activities: None
+            </p>
           )}
         </Container>
       </div>
