@@ -127,18 +127,105 @@ describe("About Page", function() {
 
 describe("Dogs Page", function() {
 
-  // it("should load the dogs page and confirm the presence of dog cards", function() {
-  //   return new Promise(function(resolve, reject) {
-  //     browser
-  //       .get(serverUri + "dogs")
-  //       .then(() => {
-  //         browser.findElements(By.className("logo-container"))
-  //         .catch(() => reject(new Error("No item with ID carousel-container was found.")));
-  //       })
-  //       .then(() => resolve())
-  //       .catch((error) => reject(error));
-  //   });
-  // });
+  it("should load the dogs page and confirm the presence of dog cards", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .get(serverUri + "dogs")
+        .catch(() => reject(new Error("Failed to open dogs page.")))
+        .then(() => {
+          browser
+            .wait(until.elementLocated(By.className("card")), 20000)
+            .catch(() => reject(new Error("Dog cards never loaded.")))
+            .then(() => {
+              browser
+                .findElements(By.className("card"))
+                  .then((items) => {
+                    assert.equal(Number(items.length), 20);
+                  })
+                .then(() => resolve())
+                .catch((error) => reject(error));
+            })
+        });
+    });
+  });
+
+});
+
+describe("Activities Page", function() {
+
+  it("should load the activities page and confirm the presence of activity cards", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .get(serverUri + "activities")
+        .catch(() => reject(new Error("Failed to open activities page.")))
+        .then(() => {
+          browser
+            .wait(until.elementLocated(By.className("card")), 20000)
+            .catch(() => reject(new Error("Activity cards never loaded.")))
+            .then(() => {
+              browser
+                .findElements(By.className("card"))
+                  .then((items) => {
+                    assert.equal(Number(items.length), 12);
+                  })
+                .then(() => resolve())
+                .catch((error) => reject(error));
+            })
+        });
+    });
+  });
+
+});
+
+describe("Breeds Page", function() {
+
+  it("should load the breeds page and confirm the presence of breed cards", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .get(serverUri + "breeds")
+        .catch(() => reject(new Error("Failed to open breeds page.")))
+        .then(() => {
+          browser
+            .wait(until.elementLocated(By.className("card")), 20000)
+            .catch(() => reject(new Error("Breed cards never loaded.")))
+            .then(() => {
+              browser
+                .findElements(By.className("card"))
+                  .then((items) => {
+                    assert.equal(Number(items.length), 20);
+                  })
+                .then(() => resolve())
+                .catch((error) => reject(error));
+            })
+        });
+    });
+  });
+
+});
+
+describe("Shelters Page", function() {
+
+  it("should load the shelters page and confirm the presence of shelter cards", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .get(serverUri + "shelters")
+        .catch(() => reject(new Error("Failed to open shelters page.")))
+        .then(() => {
+          browser
+            .wait(until.elementLocated(By.className("card")), 20000)
+            .catch(() => reject(new Error("Shelter cards never loaded.")))
+            .then(() => {
+              browser
+                .findElements(By.className("card"))
+                  .then((items) => {
+                    assert.equal(Number(items.length), 12);
+                  })
+                .then(() => resolve())
+                .catch((error) => reject(error));
+            })
+        });
+    });
+  });
 
   after(function() {
     browser.quit();
