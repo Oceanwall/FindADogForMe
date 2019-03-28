@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "../styles/HomeCarousel.css";
+import "../styles/InstanceCarousel.css";
 import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
 import Carousel from "react-bootstrap-carousel";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-class HomeCarousel extends Component {
+class InstanceCarousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +38,17 @@ class HomeCarousel extends Component {
   };
 
   render() {
+    console.log(this.props.images);
     let { leftIcon, rightIcon } = this.state;
+    let imagesArray = this.props.images.map(image => {
+      return (
+        <img
+          className="Carousel-instance-image"
+          src={image}
+          alt="instance-carousel-img"
+        />
+      );
+    });
     return (
       <div className="container-fluid">
         <Row>
@@ -52,23 +62,7 @@ class HomeCarousel extends Component {
               ref={r => (this.slider = r)}
               version={4}
             >
-              <img
-                className="Carousel-image"
-                src="/images/dog1.jpg"
-                alt="home-carousel-img-1"
-              />
-
-              <img
-                className="Carousel-image"
-                src="/images/dog2.jpeg"
-                alt="home-carousel-img-2"
-              />
-
-              <img
-                className="Carousel-image"
-                src="/images/dog3.jpg"
-                alt="home-carousel-img-3"
-              />
+              {imagesArray}
             </Carousel>
           </Col>
         </Row>
@@ -77,4 +71,4 @@ class HomeCarousel extends Component {
   }
 }
 
-export default HomeCarousel;
+export default InstanceCarousel;

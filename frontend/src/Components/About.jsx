@@ -189,8 +189,8 @@ class About extends Component {
     this.load_commits();
     this.load_issues();
 
-     let pp = await wrapper.getBreed();
-     console.log(pp);
+    let pp = await wrapper.getActivity();
+    console.log(pp);
   }
 
   render() {

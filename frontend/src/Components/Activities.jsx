@@ -3,7 +3,7 @@ import PageComp from "./PageComp";
 import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
 import ActivityCard from "./ActivityCard";
-import ActivityInstance from "./ActivityInstance"
+import ActivityInstance from "./ActivityInstance";
 import { Route } from "react-router-dom";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
@@ -29,7 +29,7 @@ class Activities extends Component {
 
   //server request method. called everytime page change, and on initial mount
   async updateActivity(pageNum) {
-    wrapper.getActivity(undefined, pageNum).then((response) => {
+    wrapper.getActivity(undefined, pageNum).then(response => {
       this.setState(state => ({
         currentPage: pageNum,
         maxPage: response["total_pages"],
@@ -45,17 +45,17 @@ class Activities extends Component {
   }
 
   render() {
-    if(this.props.match.isExact) {
+    if (this.props.match.isExact) {
       let activityCards = null;
-      if(this.state.info_loaded)
-      {
-          activityCards = this.state.activityList.map(activity => {
+      if (this.state.info_loaded) {
+        activityCards = this.state.activityList.map(activity => {
           return (
             <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
               <ActivityCard activity={activity} />
             </div>
           );
         });
+        console.log(this.state.activityList);
       }
       return (
         <div>
@@ -63,11 +63,11 @@ class Activities extends Component {
             <h1> Activities</h1>
           </div>
           <Container>
-            {this.state.info_loaded && 
+            {this.state.info_loaded && (
               <CardDeck>
                 <div class="card-deck">{activityCards}</div>
               </CardDeck>
-            }
+            )}
           </Container>
           <PageComp
             currentPage={this.state.currentPage}
@@ -76,13 +76,15 @@ class Activities extends Component {
           />
         </div>
       );
-    }
-    else {
-      return (<Route path={`${this.props.match.path}/:activityId`} component={ActivityInstance} />);
+    } else {
+      return (
+        <Route
+          path={`${this.props.match.path}/:activityId`}
+          component={ActivityInstance}
+        />
+      );
     }
   }
 }
-
-
 
 export default Activities;
