@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import InstanceCarousel from "./InstanceCarousel";
-import "../styles/DogInstance.css";
+import "../styles/Instance.css";
 import { Link } from "react-router-dom";
 import ActivityCard from "./ActivityCard";
 import CardDeck from "react-bootstrap/CardDeck";
@@ -111,7 +111,7 @@ class DogInstance extends Component {
           <Row>
             <Col>
               <h1> {this.state.name}</h1>
-              <div class="dog-info-text">
+              <div class="info-text">
                 <p align="left" className="mt-5">
                   Shelter:{" "}
                   <Link to={`/shelters/${this.state.shelter_id}`}>
@@ -134,7 +134,7 @@ class DogInstance extends Component {
           </Row>
           <Row>
             <Container>
-              <div class="dog-desc-text">
+              <div class="desc-text">
                 <p align="left">{this.state.description}</p>
               </div>
             </Container>
@@ -142,13 +142,17 @@ class DogInstance extends Component {
 
           {activityCards.length > 0 ? (
             <div>
-              <p align="left"> Activities: </p>
+              <p align="left" class="deck-title-text">
+                Activities:
+              </p>
               <CardDeck>
                 <div class="card-deck">{activityCards}</div>
               </CardDeck>
             </div>
           ) : (
-            <p align="left"> Activities: None</p>
+            <p align="left" class="deck-title-text">
+              Activities: None
+            </p>
           )}
         </Container>
       </div>
