@@ -149,6 +149,51 @@ class TestBackend(TestCase):
                 assert test_park.designation != None
                 assert test_park.weather != None
                 assert test_park.directions != None
+    
+    def test15(self):
+        eventbrites = get_all_eventbrites()
+        assert eventbrites != None
+
+    def test16(self):
+        eventbrites = get_all_eventbrites()
+        eventbrite_venue = get_eventbrite_venue(eventbrites[0]["venue_id"])
+        assert eventbrite_venue != None
+
+    def test17(self):
+        eventbrites = get_all_eventbrites()
+        test_event = eventbrites[0]
+        result = build_event(test_event)
+        assert result.id != None
+        assert result.type != None
+        assert result.url != None
+        assert result.name != None
+        assert result.description != None
+        assert result.latitude != None
+        assert result.longitude != None
+        assert result.is_active != None
+        assert result.is_free != None
+        assert result.date != None
+    
+    def test18(self):
+        meetups = get_all_meetups()
+        assert type(meetups) == type([])
+        assert len(meetups) > 0
+
+    def test19(self):
+        meetups = get_all_meetups()
+        test_meetup = meetups[0]
+        result = build_meetup(test_meetup)
+        assert result.id != None
+        assert result.type != None
+        assert result.url != None
+        assert result.name != None
+        assert result.description != None
+        assert result.latitude != None
+        assert result.longitude != None
+        assert result.location != None
+        assert result.is_active != None
+        assert result.is_free != None
+        assert result.date != None
 
 
 if __name__ == "__main__":
