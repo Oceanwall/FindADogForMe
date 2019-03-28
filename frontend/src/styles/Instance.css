@@ -15,3 +15,8 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.capitalize {
+  text-transform: capitalize
+}
+

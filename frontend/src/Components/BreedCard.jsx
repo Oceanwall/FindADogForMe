@@ -26,7 +26,7 @@ class BreedCard extends Component {
       <Card style={{ width: "18rem", height: "40rem" }} className="mt-4">
         {card_image}
         <Card.Body>
-          <Card.Title>{this.props.breed.name}</Card.Title>
+          <Card.Title className="capitalize">{this.props.breed.name}</Card.Title>
           <Card.Text>
             <Container>
               <Row>

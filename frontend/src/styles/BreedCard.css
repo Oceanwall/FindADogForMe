@@ -8,3 +8,7 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.capitalize {
+  text-transform: capitalize
+}

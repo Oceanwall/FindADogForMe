@@ -118,7 +118,7 @@ class DogInstance extends Component {
                     {this.state.shelter}
                   </Link>
                 </p>
-                <p align="left">
+                <p align="left" className="capitalize">
                   Breed:{" "}
                   <Link to={`/breeds/${this.state.breed}`}>
                     {this.state.breed}

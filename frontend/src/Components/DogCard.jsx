@@ -46,7 +46,7 @@ class DogCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.dog.breed}</p>
+                  <p align="right" className="capitalize">{this.props.dog.breed}</p>
                 </Col>
               </Row>
               <Row>

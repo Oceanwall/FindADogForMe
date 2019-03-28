@@ -131,7 +131,7 @@ class ActivityInstance extends Component {
                 <p align="left" className="mt-5">
                   URL: <a href={this.state.url}>{this.state.url}></a>
                 </p>
-                <p align="left"> Type: {this.state.type}</p>
+                <p align="left" className="capitalize"> Type: {this.state.type}</p>
                 <p align="left"> Date: {this.state.date}</p>
                 <p align="left"> Free: {this.state.is_free ? "Yes" : "No"}</p>
                 <p align="left"> Location: {this.state.location}</p>

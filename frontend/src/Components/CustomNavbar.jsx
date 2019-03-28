@@ -11,7 +11,7 @@ class CustomNavbar extends Component {
     return (
       <Navbar bg="light" variant="light" expand="lg" id="general-navbar">
         <Navbar.Brand href="/">
-          <img src="/favicon.ico" alt="" />
+          <img className="mr-2" src="/favicon.ico" alt="" />
           {"Find a Dog for Me"}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

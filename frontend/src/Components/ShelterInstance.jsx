@@ -135,7 +135,7 @@ class ShelterInstance extends Component {
     if (this.state.loaded) {
       console.log(this.state.breed_list);
       breeds = this.state.breed_list.map(breed => {
-        return breed["name"];
+        return " "+breed["name"];
       });
     }
 
@@ -154,7 +154,7 @@ class ShelterInstance extends Component {
                 </p>
                 {breeds.length > 0 ? (
                   <div>
-                    <p align="left"> Shelter Breeds: {" " + breeds}</p>
+                    <p align="left" className="capitalize"> Shelter Breeds: {" " + breeds}</p>
                   </div>
                 ) : (
                   <div>

@@ -68,7 +68,7 @@ class ActivityCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.activity.type}</p>
+                  <p align="right" className="capitalize">{this.props.activity.type}</p>
                 </Col>
               </Row>
               <Row>

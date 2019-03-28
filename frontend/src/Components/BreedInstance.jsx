@@ -144,7 +144,7 @@ class BreedInstance extends Component {
           <br />
           <Row>
             <Col>
-              <h1> {this.state.name}</h1>
+              <h1 className="capitalize"> {this.state.name}</h1>
               <div class="info-text">
                 <p align="left"> Group: {this.state.group}</p>
                 <p align="left"> Temperament: {this.state.temperament}</p>
