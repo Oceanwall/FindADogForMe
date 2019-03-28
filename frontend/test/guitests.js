@@ -1,4 +1,4 @@
-const assert = require("assert");
+const assert = require("chai").assert;
 const webdriver = require("selenium-webdriver");
 const By = webdriver.By;
 const until = webdriver.until;
@@ -75,9 +75,53 @@ describe("About Page", function() {
     });
   });
 
+  // TODO: Add a wait period to make sure that stats have been updated from API?
+  it("should confirm that total statistics are present", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+        .findElement(By.id("Total-Commits"))
+        .then((item) => {
+          item.getAttribute("innerHTML").then((value) => {
+            assert.isAbove(Number(value), 0);
+          })
+        })
+        .catch(() => reject(new Error("Total-Commits is not greater than 0.")));
+
+      browser
+        .findElement(By.id("Total-Issues"))
+        .then((item) => {
+          item.getAttribute("innerHTML").then((value) => {
+            assert.isAbove(Number(value), 0);
+          })
+        })
+        .catch(() => reject(new Error("Total-Issues is not greater than 0.")));
+
+      browser
+        .findElement(By.id("Total-UT"))
+        .then((item) => {
+          item.getAttribute("innerHTML").then((value) => {
+            assert.isAbove(Number(value), 0);
+          })
+        })
+        .then(() => resolve())
+        .catch(() => reject(new Error("Total-UT is not greater than 0.")));
+    });
+  });
+
+  it("should confirm that tools used are present", function() {
+    browser
+      .findElements(By.className("logo-container"))
+      .then((items) => {
+        assert.isAbove(Number(items.length), 10)
+      })
+  });
+
+});
+
+describe("Dogs Page", function() {
 
   after(function() {
     browser.quit();
   });
 
-});
+}
