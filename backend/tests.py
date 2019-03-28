@@ -98,19 +98,19 @@ class TestBackend(TestCase):
     def test10(self):
         breed_images = get_breed_images("labrador")
         assert type(breed_images) == type([])
-        assert len(breed_images) > 0 
-    
+        assert len(breed_images) > 0
+
     def test11(self):
         breed_list = get_all_breeds()
         breed_one = breed_list[0]
         assert breed_list != []
-        assert len(breed_list) > 0 
+        assert len(breed_list) > 0
         assert breed_one != None
+
 
     def test12(self):
         breed_list = get_all_breeds()
         test_breed = build_breed(breed_list[0])
-        
         assert test_breed.name != None
         assert test_breed.min_height != None
         assert test_breed.max_height != None
@@ -119,6 +119,37 @@ class TestBackend(TestCase):
         assert test_breed.temperament != None
         assert test_breed.min_weight != None
         assert test_breed.is_active != None
+
+    #Begin tests for activity_seeding
+    def test13(self):
+        parks = get_all_parks()
+        assert parks != None 
+        assert parks != []
+        assert len(parks) > 0
+    
+    def test14(self):
+        parks = get_all_parks()
+        for park in parks:
+            test_park = build_park(park)
+            if test_park != None:
+                assert test_park.id != None
+                assert test_park.type != None
+                assert test_park.url != None
+                assert test_park.name != None 
+                assert test_park.description != None 
+                assert test_park.latitude != None
+                assert test_park.longitude != None 
+                assert test_park.location != None
+                assert test_park.is_active != None
+                assert test_park.is_free != None
+                assert test_park.image_1 != None
+                assert test_park.image_2 != None
+                assert test_park.image_3 != None
+                assert test_park.image_4 != None
+                assert test_park.designation != None
+                assert test_park.weather != None
+                assert test_park.directions != None
+
 
 if __name__ == "__main__":
     main()
