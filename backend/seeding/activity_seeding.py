@@ -76,15 +76,20 @@ def build_park(info, commit=False):
     """
     # Converts the latitude-longitude string into a list.
     # Places latitude at index 0 and longitude at index 1.
-    if info["latLong"] == "":
+    if "latlong" not in info:
+        return
+    if ["latlong"] == "":
         return
     location = (
-        info["latLong"]
+        info["latlong"]
         .replace("lat:", "")
         .replace("long:", "")
         .replace(",", "")
         .split()
     )
+    if len(location) == 0:
+        return
+
     main_address = info["addresses"][0]
 
     park = Activity(
@@ -99,17 +104,17 @@ def build_park(info, commit=False):
         + ", "
         + main_address["city"]
         + ", "
-        + main_address["stateCode"],
+        + main_address["statecode"],
         is_active=True,
-        is_free=True if info["entranceFees"][0]["cost"] == 0 else False,
+        is_free=True if info["entrancefees"][0]["cost"] == 0 else False,
         # "cost": info["entranceFees"][0]["cost"],
         image_1=info["images"][0]["url"],
         image_2=info["images"][1]["url"],
         image_3=info["images"][2]["url"],
         image_4=info["images"][3]["url"],
         designation=info["designation"],
-        weather=info["weatherInfo"],
-        directions=info["directionsInfo"],
+        weather=info["weatherinfo"],
+        directions=info["directionsinfo"],
         date=None,
     )
 
