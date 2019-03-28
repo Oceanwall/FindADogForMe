@@ -94,6 +94,31 @@ class TestBackend(TestCase):
                 assert type(result.name) == str
                 assert type(result.sex) == str
 
+    # Begin tests for breeds_seeding
+    def test10(self):
+        breed_images = get_breed_images("labrador")
+        assert type(breed_images) == type([])
+        assert len(breed_images) > 0 
+    
+    def test11(self):
+        breed_list = get_all_breeds()
+        breed_one = breed_list[0]
+        assert breed_list != []
+        assert len(breed_list) > 0 
+        assert breed_one != None
+
+    def test12(self):
+        breed_list = get_all_breeds()
+        test_breed = build_breed(breed_list[0])
+        
+        assert test_breed.name != None
+        assert test_breed.min_height != None
+        assert test_breed.max_height != None
+        assert test_breed.min_lifespan != None
+        assert test_breed.max_lifespan != None
+        assert test_breed.temperament != None
+        assert test_breed.min_weight != None
+        assert test_breed.is_active != None
 
 if __name__ == "__main__":
     main()
