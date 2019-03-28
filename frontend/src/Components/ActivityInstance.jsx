@@ -151,14 +151,26 @@ class ActivityInstance extends Component {
               </Container>
             </Row>
             <Container>
-              <p align="center"> Dogs: </p>
-              <CardDeck>
-                <div class="card-deck">{dogCards}</div>
-              </CardDeck>
-              <p align="center"> Shelters: </p>
-              <CardDeck>
-                <div class="card-deck">{shelterCards}</div>
-              </CardDeck>
+              {dogCards.length > 0 ? (
+                <div>
+                  <p align="left"> Dogs: </p>
+                  <CardDeck>
+                    <div class="card-deck">{dogCards}</div>
+                  </CardDeck>
+                </div>
+              ) : (
+                <p align="left"> Dogs: None</p>
+              )}
+              {shelterCards.length > 0 ? (
+                <div>
+                  <p align="left"> Shelters: </p>
+                  <CardDeck>
+                    <div class="card-deck">{shelterCards}</div>
+                  </CardDeck>
+                </div>
+              ) : (
+                <p align="left"> Shelters: None</p>
+              )}
             </Container>
           </Container>
         )}

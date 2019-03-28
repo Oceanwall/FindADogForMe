@@ -4,27 +4,26 @@ import "../styles/DogCard.css";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { Link } from 'react-router-dom';
-import DefaultImage from './DefaultImage';
+import DefaultImage from "./DefaultImage";
+import Button from "react-bootstrap/Button";
 
 class DogCard extends Component {
   render() {
     let card_image;
     if (this.props.dog.image_1) {
-      card_image = <Card.Img
-        variant="top"
-        src={this.props.dog.image_1}
-        style={{ width: "auto", height: "300px" }}
-      />
-    }
-    else {
-      card_image = <DefaultImage
-        name={this.props.dog.name}
-      />
+      card_image = (
+        <Card.Img
+          variant="top"
+          src={this.props.dog.image_1}
+          style={{ width: "auto", height: "300px" }}
+        />
+      );
+    } else {
+      card_image = <DefaultImage name={this.props.dog.name} />;
     }
 
     return (
-      <Card style={{ width: "18rem", height: "38rem" }}  className="mt-4">
+      <Card style={{ width: "18rem", height: "38rem" }} className="mt-4">
         {card_image}
         <Card.Body>
           <Card.Title>{this.props.dog.name}</Card.Title>
@@ -32,7 +31,9 @@ class DogCard extends Component {
             <Container>
               <Row>
                 <Col>
-                  <p align="left"><b>Shelter:</b></p>
+                  <p align="left">
+                    <b>Shelter:</b>
+                  </p>
                 </Col>
                 <Col xs="auto">
                   <p align="right">{this.props.dog.shelter_id}</p>
@@ -40,7 +41,9 @@ class DogCard extends Component {
               </Row>
               <Row>
                 <Col>
-                  <p align="left"><b>Breed:</b></p>
+                  <p align="left">
+                    <b>Breed:</b>
+                  </p>
                 </Col>
                 <Col xs="auto">
                   <p align="right">{this.props.dog.breed}</p>
@@ -48,7 +51,9 @@ class DogCard extends Component {
               </Row>
               <Row>
                 <Col>
-                  <p align="left"><b>Age:</b></p>
+                  <p align="left">
+                    <b>Age:</b>
+                  </p>
                 </Col>
                 <Col xs="auto">
                   <p align="right">{this.props.dog.age}</p>
@@ -56,7 +61,9 @@ class DogCard extends Component {
               </Row>
               <Row>
                 <Col>
-                  <p align="left"><b>Size:</b></p>
+                  <p align="left">
+                    <b>Size:</b>
+                  </p>
                 </Col>
                 <Col xs="auto">
                   <p align="right">{this.props.dog.size}</p>
@@ -64,7 +71,9 @@ class DogCard extends Component {
               </Row>
               <Row>
                 <Col>
-                  <Link to={`/dogs/${this.props.dog.id}`}>Learn More</Link>
+                  <Button href={`/dogs/${this.props.dog.id}`}>
+                    Learn More
+                  </Button>
                 </Col>
               </Row>
             </Container>

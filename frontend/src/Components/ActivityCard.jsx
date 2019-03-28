@@ -4,23 +4,22 @@ import "../styles/ActivityCard.css";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { Link } from 'react-router-dom';
 import DefaultImage from "./DefaultImage";
+import Button from "react-bootstrap/Button";
 
 class ActivityCard extends Component {
   render() {
     let card_image;
     if (this.props.activity.image_1) {
-      card_image = <Card.Img
-        variant="top"
-        src={this.props.activity.image_1}
-        style={{ width: "auto", height: "300px" }}
-      />
-    }
-    else {
-      card_image = <DefaultImage
-        name={this.props.activity.name}
-      />
+      card_image = (
+        <Card.Img
+          variant="top"
+          src={this.props.activity.image_1}
+          style={{ width: "auto", height: "300px" }}
+        />
+      );
+    } else {
+      card_image = <DefaultImage name={this.props.activity.name} />;
     }
 
     return (
@@ -32,7 +31,9 @@ class ActivityCard extends Component {
             <Container>
               <Row>
                 <Col>
-                  <p align="left"><b>Date:</b></p>
+                  <p align="left">
+                    <b>Date:</b>
+                  </p>
                 </Col>
                 <Col xs="auto">
                   <p align="right">{this.props.activity.date}</p>
@@ -40,15 +41,21 @@ class ActivityCard extends Component {
               </Row>
               <Row>
                 <Col>
-                  <p align="left"><b>Free:</b></p>
+                  <p align="left">
+                    <b>Free:</b>
+                  </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.activity.is_free ? "Yes" : "No"}</p>
+                  <p align="right">
+                    {this.props.activity.is_free ? "Yes" : "No"}
+                  </p>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <p align="left"><b>Location:</b></p>
+                  <p align="left">
+                    <b>Location:</b>
+                  </p>
                 </Col>
                 <Col xs="auto">
                   <p align="right">{this.props.activity.location}</p>
@@ -56,7 +63,9 @@ class ActivityCard extends Component {
               </Row>
               <Row>
                 <Col>
-                  <p align="left"><b>Type:</b></p>
+                  <p align="left">
+                    <b>Type:</b>
+                  </p>
                 </Col>
                 <Col xs="auto">
                   <p align="right">{this.props.activity.type}</p>
@@ -64,7 +73,9 @@ class ActivityCard extends Component {
               </Row>
               <Row>
                 <Col>
-                  <Link to={`/activities/${this.props.activity.id}`}>Learn More</Link>
+                  <Button href={`/activities/${this.props.activity.id}`}>
+                    Learn More
+                  </Button>
                 </Col>
               </Row>
             </Container>

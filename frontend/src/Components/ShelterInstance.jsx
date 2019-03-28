@@ -152,32 +152,32 @@ class ShelterInstance extends Component {
         </Container>
         <Container>
           {dogCards.length > 0 ? (
-            (<p align="left"> Dogs: </p>,
-            (
+            <div>
+              <p align="left"> Dogs: </p>,
               <CardDeck>
                 <div class="card-deck">{dogCards}</div>
               </CardDeck>
-            ))
+            </div>
           ) : (
             <p align="left"> Dogs: None</p>
           )}
           {breedCards.length > 0 ? (
-            (<p align="left"> Breeds: </p>,
-            (
+            <div>
+              <p align="left"> Breeds: </p>
               <CardDeck>
                 <div class="card-deck">{breedCards}</div>
               </CardDeck>
-            ))
+            </div>
           ) : (
             <p align="left"> Breeds: None</p>
           )}
           {activityCards.length > 0 ? (
-            (<p align="left"> Activities: </p>,
-            (
+            <div>
+              <p align="left"> Activities: </p>
               <CardDeck>
                 <div class="card-deck">{activityCards}</div>
               </CardDeck>
-            ))
+            </div>
           ) : (
             <p align="left"> Activities: None</p>
           )}

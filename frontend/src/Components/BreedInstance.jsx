@@ -166,32 +166,32 @@ class BreedInstance extends Component {
           </Container>
           <Container>
             {dogCards.length > 0 ? (
-              (<p align="left"> Dogs: </p>,
-              (
+              <div>
+                <p align="left"> Dogs: </p>
                 <CardDeck>
                   <div class="card-deck">{dogCards}</div>
                 </CardDeck>
-              ))
+              </div>
             ) : (
               <p align="left"> Dogs: None</p>
             )}
             {shelterCards.length > 0 ? (
-              (<p align="left"> Shelters: </p>,
-              (
+              <div>
+                <p align="left"> Shelters: </p>
                 <CardDeck>
                   <div class="card-deck">{shelterCards}</div>
                 </CardDeck>
-              ))
+              </div>
             ) : (
               <p align="left"> Shelters: None</p>
             )}
             {activityCards.length > 0 ? (
-              (<p align="left"> Activities: </p>,
-              (
+              <div>
+                <p align="left"> Activities: </p>(
                 <CardDeck>
                   <div class="card-deck">{activityCards}</div>
                 </CardDeck>
-              ))
+              </div>
             ) : (
               <p align="left"> Activities: None</p>
             )}

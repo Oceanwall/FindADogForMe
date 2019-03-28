@@ -141,12 +141,12 @@ class DogInstance extends Component {
           </Row>
 
           {activityCards.length > 0 ? (
-            (<p align="left"> Activities: </p>,
-            (
+            <div>
+              <p align="left"> Activities: </p>
               <CardDeck>
                 <div class="card-deck">{activityCards}</div>
               </CardDeck>
-            ))
+            </div>
           ) : (
             <p align="left"> Activities: None</p>
           )}
