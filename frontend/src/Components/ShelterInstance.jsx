@@ -7,6 +7,7 @@ import DogCard from "./DogCard";
 import ActivityCard from "./ActivityCard";
 import BreedCard from "./BreedCard";
 import CardDeck from "react-bootstrap/CardDeck";
+import "../styles/Instance.css";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -130,19 +131,36 @@ class ShelterInstance extends Component {
       });
     }
 
+    let breeds = [];
+    if (this.state.loaded) {
+      console.log(this.state.breed_list);
+      breeds = this.state.breed_list.map(breed => {
+        return breed["name"];
+      });
+    }
+
     return (
       <div>
         <Container>
+          <br />
           <Row>
             <Col>
               <h1> {this.state.name}</h1>
-              <div class="dog-info-text">
+              <div class="info-text">
                 <p align="left"> Contact Information: {this.state.phone}</p>
                 <p align="left"> Address: {this.state.address} </p>
                 <p align="left">
                   Location: {this.state.city}, {this.state.state}
                 </p>
-                <p align="left"> Shelter Breeds: </p>
+                {breeds.length > 0 ? (
+                  <div>
+                    <p align="left"> Shelter Breeds: {" " + breeds}</p>
+                  </div>
+                ) : (
+                  <div>
+                    <p align="left"> Shelter Breeds: None listed</p>
+                  </div>
+                )}
               </div>
             </Col>
             <Col>
@@ -153,33 +171,52 @@ class ShelterInstance extends Component {
         <Container>
           {dogCards.length > 0 ? (
             <div>
-              <p align="left"> Dogs: </p>,
+              <p align="left" class="deck-title-text">
+                {" "}
+                Dogs:{" "}
+              </p>
+              ,
               <CardDeck>
                 <div class="card-deck">{dogCards}</div>
               </CardDeck>
             </div>
           ) : (
-            <p align="left"> Dogs: None</p>
+            <p align="left" class="deck-title-text">
+              {" "}
+              Dogs: None
+            </p>
           )}
           {breedCards.length > 0 ? (
             <div>
-              <p align="left"> Breeds: </p>
+              <p align="left" class="deck-title-text">
+                {" "}
+                Breeds:{" "}
+              </p>
               <CardDeck>
                 <div class="card-deck">{breedCards}</div>
               </CardDeck>
             </div>
           ) : (
-            <p align="left"> Breeds: None</p>
+            <p align="left" class="deck-title-text">
+              {" "}
+              Breeds: None
+            </p>
           )}
           {activityCards.length > 0 ? (
             <div>
-              <p align="left"> Activities: </p>
+              <p align="left" class="deck-title-text">
+                {" "}
+                Activities:{" "}
+              </p>
               <CardDeck>
                 <div class="card-deck">{activityCards}</div>
               </CardDeck>
             </div>
           ) : (
-            <p align="left"> Activities: None</p>
+            <p align="left" class="deck-title-text">
+              {" "}
+              Activities: None
+            </p>
           )}
         </Container>
       </div>

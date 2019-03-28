@@ -7,6 +7,7 @@ import DogCard from "./DogCard";
 import ActivityCard from "./ActivityCard";
 import ShelterCard from "./ShelterCard";
 import CardDeck from "react-bootstrap/CardDeck";
+import "../styles/Instance.css";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -139,64 +140,80 @@ class BreedInstance extends Component {
     }
     return (
       <div>
-        <div>
-          <Container>
-            <Row>
-              <Col>
-                <h1> {this.state.name}</h1>
-                <div class="dog-info-text">
-                  <p align="left"> Group: {this.state.group}</p>
-                  <p align="left"> Temperament: {this.state.temperament}</p>
-                  <p align="left">
-                    {" "}
-                    Lifespan: {this.state.min_lifespan}-
-                    {this.state.max_lifespan}
-                  </p>
-                  <p align="left">
-                    {" "}
-                    Height: {this.state.min_height}-{this.state.max_height}{" "}
-                    inches
-                  </p>
-                </div>
-              </Col>
-              <Col>
-                <InstanceCarousel images={this.state.images} />
-              </Col>
-            </Row>
-          </Container>
-          <Container>
-            {dogCards.length > 0 ? (
-              <div>
-                <p align="left"> Dogs: </p>
-                <CardDeck>
-                  <div class="card-deck">{dogCards}</div>
-                </CardDeck>
+        <Container>
+          <br />
+          <Row>
+            <Col>
+              <h1> {this.state.name}</h1>
+              <div class="info-text">
+                <p align="left"> Group: {this.state.group}</p>
+                <p align="left"> Temperament: {this.state.temperament}</p>
+                <p align="left">
+                  {" "}
+                  Lifespan: {this.state.min_lifespan}-{this.state.max_lifespan}
+                </p>
+                <p align="left">
+                  {" "}
+                  Height: {this.state.min_height}-{this.state.max_height} inches
+                </p>
               </div>
-            ) : (
-              <p align="left"> Dogs: None</p>
-            )}
-            {shelterCards.length > 0 ? (
-              <div>
-                <p align="left"> Shelters: </p>
-                <CardDeck>
-                  <div class="card-deck">{shelterCards}</div>
-                </CardDeck>
-              </div>
-            ) : (
-              <p align="left"> Shelters: None</p>
-            )}
-            {activityCards.length > 0 ? (
-              <div>
-                <p align="left"> Activities: </p>(
-                <CardDeck>
-                  <div class="card-deck">{activityCards}</div>
-                </CardDeck>
-              </div>
-            ) : (
-              <p align="left"> Activities: None</p>
-            )}
-          </Container>
-        </div>
+            </Col>
+            <Col>
+              <InstanceCarousel images={this.state.images} />
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          {dogCards.length > 0 ? (
+            <div>
+              <p align="left" class="deck-title-text">
+                {" "}
+                Dogs:{" "}
+              </p>
+              <CardDeck>
+                <div class="card-deck">{dogCards}</div>
+              </CardDeck>
+            </div>
+          ) : (
+            <p align="left" class="deck-title-text">
+              {" "}
+              Dogs: None
+            </p>
+          )}
+          {shelterCards.length > 0 ? (
+            <div>
+              <p align="left" class="deck-title-text">
+                {" "}
+                Shelters:{" "}
+              </p>
+              <CardDeck>
+                <div class="card-deck">{shelterCards}</div>
+              </CardDeck>
+            </div>
+          ) : (
+            <p align="left" class="deck-title-text">
+              {" "}
+              Shelters: None
+            </p>
+          )}
+          {activityCards.length > 0 ? (
+            <div>
+              <p align="left" class="deck-title-text">
+                {" "}
+                Activities:{" "}
+              </p>
+              (
+              <CardDeck>
+                <div class="card-deck">{activityCards}</div>
+              </CardDeck>
+            </div>
+          ) : (
+            <p align="left" class="deck-title-text">
+              {" "}
+              Activities: None
+            </p>
+          )}
+        </Container>
       </div>
     );
   }

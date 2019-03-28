@@ -3,8 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import InstanceCarousel from "./InstanceCarousel";
-import "../styles/DogInstance.css";
-import { Link } from "react-router-dom";
+import "../styles/Instance.css";
 import DogCard from "./DogCard";
 import ShelterCard from "./ShelterCard";
 import CardDeck from "react-bootstrap/CardDeck";
@@ -101,7 +100,7 @@ class ActivityInstance extends Component {
   }
 
   render() {
-    let dogCards = null;
+    let dogCards = [];
     if (this.isLoaded()) {
       dogCards = this.state.dog_list.map(dog => {
         return (
@@ -111,7 +110,7 @@ class ActivityInstance extends Component {
         );
       });
     }
-    let shelterCards = null;
+    let shelterCards = [];
     if (this.isLoaded()) {
       shelterCards = this.state.shelter_list.map(shelter => {
         return (
@@ -123,57 +122,62 @@ class ActivityInstance extends Component {
     }
     return (
       <div>
-        {this.isLoaded() && (
-          <Container>
-            <br />
-            <Row>
-              <Col>
-                <h1> {this.state.name}</h1>
-                <div class="dog-info-text">
-                  <p align="left" className="mt-5">
-                    URL: <a href={this.state.url}>{this.state.url}></a>
-                  </p>
-                  <p align="left"> Type: {this.state.type}</p>
-                  <p align="left"> Date: {this.state.date}</p>
-                  <p align="left"> Free: {this.state.is_free ? "Yes" : "No"}</p>
-                  <p align="left"> Location: {this.state.location}</p>
-                </div>
-              </Col>
-              <Col xs={12} md={7} lg={6}>
-                <InstanceCarousel images={this.state.images} />
-              </Col>
-            </Row>
-            <Row>
-              <Container>
-                <div class="dog-desc-text">
-                  <p align="left">{this.state.description}</p>
-                </div>
-              </Container>
-            </Row>
-            <Container>
-              {dogCards.length > 0 ? (
-                <div>
-                  <p align="left"> Dogs: </p>
-                  <CardDeck>
-                    <div class="card-deck">{dogCards}</div>
-                  </CardDeck>
-                </div>
-              ) : (
-                <p align="left"> Dogs: None</p>
-              )}
-              {shelterCards.length > 0 ? (
-                <div>
-                  <p align="left"> Shelters: </p>
-                  <CardDeck>
-                    <div class="card-deck">{shelterCards}</div>
-                  </CardDeck>
-                </div>
-              ) : (
-                <p align="left"> Shelters: None</p>
-              )}
+        <Container>
+          <br />
+          <Row>
+            <Col>
+              <h1> {this.state.name}</h1>
+              <div class="info-text">
+                <p align="left" className="mt-5">
+                  URL: <a href={this.state.url}>{this.state.url}></a>
+                </p>
+                <p align="left"> Type: {this.state.type}</p>
+                <p align="left"> Date: {this.state.date}</p>
+                <p align="left"> Free: {this.state.is_free ? "Yes" : "No"}</p>
+                <p align="left"> Location: {this.state.location}</p>
+              </div>
+            </Col>
+            <Col xs={12} md={7} lg={6}>
+              <InstanceCarousel images={this.state.images} />
+            </Col>
+          </Row>
+          <Row>
+            <Container className="mt-5">
+              <div class="desc-text">
+                <p align="left">{this.state.description}</p>
+              </div>
             </Container>
-          </Container>
-        )}
+          </Row>
+
+          {dogCards.length > 0 ? (
+            <div>
+              <p align="left" class="deck-title-text">
+                Dogs:
+              </p>
+              <CardDeck>
+                <div class="card-deck">{dogCards}</div>
+              </CardDeck>
+            </div>
+          ) : (
+            <p align="left" class="deck-title-text">
+              Dogs: None
+            </p>
+          )}
+          {shelterCards.length > 0 ? (
+            <div>
+              <p align="left" class="deck-title-text">
+                Shelters:
+              </p>
+              <CardDeck>
+                <div class="card-deck">{shelterCards}</div>
+              </CardDeck>
+            </div>
+          ) : (
+            <p align="left" class="deck-title-text">
+              Shelters: None
+            </p>
+          )}
+        </Container>
       </div>
     );
   }
