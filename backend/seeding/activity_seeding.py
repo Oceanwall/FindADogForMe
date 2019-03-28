@@ -228,7 +228,7 @@ def get_all_meetups():
             "topic_category": "15046,15892,638,242,1998,25375,933,15672",
             "excluded_groups": "31296393,1584246,29397646,9548332,1789287",
             "page": 100,
-            "fields": "featured_photo",
+            "fields": "featured_photo,plain_text_description",
             "key": MEETUP_KEY,
         }
         response = requests.get(MEETUP_URL, params=payload)

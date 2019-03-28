@@ -231,7 +231,7 @@ describe("FindADogForMe API Wrapper Functions", function() {
   });
 
   it("should get breeds that an activity is suitable for", async function() {
-    let breeds = await wrapper.getActivityBreeds("257930562");
+    let breeds = await wrapper.getActivityBreeds("meetup258861199");
 
     expect(breeds).to.be.an("object");
     expect(breeds).to.have.property("num_results");
@@ -245,7 +245,7 @@ describe("FindADogForMe API Wrapper Functions", function() {
   });
 
   it("should get dogs in a shelter located near an activity that the activity is suitable for", async function() {
-    let dogs = await wrapper.getActivityDogs("257930562", 0.25);
+    let dogs = await wrapper.getActivityDogs("meetup258861199", 0.25);
 
     expect(dogs).to.be.an("array");
     expect(dogs[0]).to.have.property("breed");
@@ -255,7 +255,7 @@ describe("FindADogForMe API Wrapper Functions", function() {
   });
 
   it("should get shelters located near an activity", async function() {
-    let shelters = await wrapper.getActivityShelters("257930562");
+    let shelters = await wrapper.getActivityShelters("meetup258861199");
 
     expect(shelters).to.be.an("object");
     expect(shelters).to.have.property("num_results");

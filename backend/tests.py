@@ -123,10 +123,10 @@ class TestBackend(TestCase):
     #Begin tests for activity_seeding
     def test13(self):
         parks = get_all_parks()
-        assert parks != None 
+        assert parks != None
         assert parks != []
         assert len(parks) > 0
-    
+
     def test14(self):
         parks = get_all_parks()
         for park in parks:
@@ -135,10 +135,10 @@ class TestBackend(TestCase):
                 assert test_park.id != None
                 assert test_park.type != None
                 assert test_park.url != None
-                assert test_park.name != None 
-                assert test_park.description != None 
+                assert test_park.name != None
+                assert test_park.description != None
                 assert test_park.latitude != None
-                assert test_park.longitude != None 
+                assert test_park.longitude != None
                 assert test_park.location != None
                 assert test_park.is_active != None
                 assert test_park.is_free != None
@@ -149,7 +149,7 @@ class TestBackend(TestCase):
                 assert test_park.designation != None
                 assert test_park.weather != None
                 assert test_park.directions != None
-    
+
     def test15(self):
         eventbrites = get_all_eventbrites()
         assert eventbrites != None
@@ -173,7 +173,7 @@ class TestBackend(TestCase):
         assert result.is_active != None
         assert result.is_free != None
         assert result.date != None
-    
+
     def test18(self):
         meetups = get_all_meetups()
         assert type(meetups) == type([])
