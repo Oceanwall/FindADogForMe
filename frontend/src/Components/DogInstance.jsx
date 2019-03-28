@@ -114,7 +114,7 @@ class DogInstance extends Component {
               <div class="dog-info-text">
                 <p align="left" className="mt-5">
                   Shelter:{" "}
-                  <Link to={`/activities/${this.state.shelter_id}`}>
+                  <Link to={`/shelters/${this.state.shelter_id}`}>
                     {this.state.shelter}
                   </Link>
                 </p>

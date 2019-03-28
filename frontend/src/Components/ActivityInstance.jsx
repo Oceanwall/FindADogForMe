@@ -131,7 +131,7 @@ class ActivityInstance extends Component {
                 <h1> {this.state.name}</h1>
                 <div class="dog-info-text">
                   <p align="left" className="mt-5">
-                    URL: <Link to={this.state.url}>{this.state.url}</Link>
+                    URL: <a href={this.state.url}>{this.state.url}></a>
                   </p>
                   <p align="left"> Type: {this.state.type}</p>
                   <p align="left"> Date: {this.state.date}</p>
