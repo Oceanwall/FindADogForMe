@@ -43,12 +43,15 @@ Phase 1 Actual Completion Time: 2 hours
 Phase 2 Estimated Completion Time: 12 hours
 Phase 2 Actual Completion Time: 7 hours
 
-Git SHA: e51e6fb96faa91f484ca5d4fb099c9bbccf5a214
+Git SHA: fba41839e1fc01291b6b18496c06b8eac59c615a
 
 Link to GitLab pipelines: https://gitlab.com/oceanwall/findadogforme/pipelines
 
 Link to website: https://findadogfor.me/
 
 Link to API website: https://api.findadogfor.me/
+
+Main Backend File: backend/application.py
+Main Frontend File: frontend/src/index.js
 
 Comments:
