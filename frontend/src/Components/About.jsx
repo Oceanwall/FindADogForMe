@@ -30,7 +30,7 @@ class About extends Component {
         responsibility: "Worked mainly on the backend portion of the project",
         commits: 0,
         issues: 0,
-        tests: 0,
+        tests: 168,
         img: "/images/samarth.jpg"
       },
       Triplestop: {
@@ -59,7 +59,7 @@ class About extends Component {
           "Currently a Fullstack Engineer, primarily responsible for Backend.",
         commits: 0,
         issues: 0,
-        tests: 20,
+        tests: 33,
         img: "/images/matthew.jpg"
       }
     },
@@ -106,7 +106,7 @@ class About extends Component {
           temp["samarthdesai01"].commits += 1;
           this.setState({ people_info: temp });
           commits++;
-        } else if (name === "Daniel Ho" || name === "bryanyang16") {
+        } else if (name === "Daniel Ho" || name === "Triplestop") {
           let temp = this.state.people_info;
           temp["Triplestop"].commits += 1;
           this.setState({ people_info: temp });
@@ -244,7 +244,7 @@ class About extends Component {
             <tr class="text-center">
               <td id="Total-Commits">{this.state.total_commits}</td>
               <td id="Total-Issues">{this.state.total_issues}</td>
-              <td id="Total-UT">20</td>
+              <td id="Total-UT">201</td>
             </tr>
           </tbody>
         </table>
