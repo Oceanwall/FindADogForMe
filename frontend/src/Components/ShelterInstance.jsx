@@ -8,6 +8,7 @@ import ActivityCard from "./ActivityCard";
 import BreedCard from "./BreedCard";
 import CardDeck from "react-bootstrap/CardDeck";
 import "../styles/Instance.css";
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -139,6 +140,12 @@ class ShelterInstance extends Component {
       });
     }
 
+    let phone_number = parsePhoneNumberFromString("+1" + this.state.phone);
+    if (!phone_number)
+      phone_number = this.state.phone;
+    else
+      phone_number = phone_number.formatNational();
+
     return (
       <div>
         <Container>
@@ -147,7 +154,7 @@ class ShelterInstance extends Component {
             <Col>
               <h1> {this.state.name}</h1>
               <div class="info-text">
-                <p align="left"> Contact Information: {this.state.phone}</p>
+                <p align="left"> Contact Information: {phone_number}</p>
                 <p align="left"> Address: {this.state.address} </p>
                 <p align="left">
                   Location: {this.state.city}, {this.state.state}
