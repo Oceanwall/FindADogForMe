@@ -21,7 +21,7 @@ class ShelterCard extends Component {
       <Card style={{ width: "18rem", height: "35rem" }} className="mt-4">
         <DefaultImage name={this.props.shelter.name} />
         <Card.Body>
-          <Card.Title>{this.props.shelter.name}</Card.Title>
+          <Card.Title className="cutoff">{this.props.shelter.name}</Card.Title>
           <Card.Text>
             <Container>
               <Row>

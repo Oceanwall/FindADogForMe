@@ -40,6 +40,19 @@ class ActivityInstance extends Component {
   }
   async updateActivity() {
     wrapper.getActivity(this.state.activityId).then(response => {
+      console.log(response["location"]);
+      let comma = response["location"].substring(0, 2);
+      if (comma === ", ") {
+        this.setState({
+          location: response["location"].substring(
+            2,
+            response["location"].length
+          )
+        });
+      } else {
+        this.setState({ location: response["location"] });
+      }
+
       this.setState(state => ({
         date: response["date"],
         description: response["description"],
@@ -50,7 +63,6 @@ class ActivityInstance extends Component {
         is_active: response["is_active"],
         is_free: response["is_free"],
         latitude: response["latitude"],
-        location: response["location"],
         name: response["name"],
         type: response["type"],
         url: response["url"],
@@ -131,8 +143,21 @@ class ActivityInstance extends Component {
                 <p align="left" className="mt-5">
                   URL: <a href={this.state.url}>{this.state.url}></a>
                 </p>
-                <p align="left" className="capitalize"> Type: {this.state.type}</p>
-                <p align="left"> Date: {this.state.date}</p>
+
+                {this.state.date != null ? (
+                  <div>
+                    <p align="left">Date: {this.state.date}</p>
+                  </div>
+                ) : (
+                  <div>
+                    <p align="left">Designation: {this.state.designation}</p>
+                  </div>
+                )}
+                <p align="left" className="capitalize">
+                  {" "}
+                  Type: {this.state.type}
+                </p>
+
                 <p align="left"> Free: {this.state.is_free ? "Yes" : "No"}</p>
                 <p align="left"> Location: {this.state.location}</p>
               </div>

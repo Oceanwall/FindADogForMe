@@ -7,7 +7,25 @@ import Row from "react-bootstrap/Row";
 import DefaultImage from "./DefaultImage";
 import Button from "react-bootstrap/Button";
 
+const wrapper = require("../api_wrapper_functions/wrapper.js").default;
+
 class DogCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shelter_name: ""
+    };
+  }
+  getShelterName() {
+    let id = this.props.dog.shelter_id;
+    wrapper.getShelter(id).then(response => {
+      this.setState({ shelter_name: response["name"] });
+    });
+  }
+
+  async componentDidMount() {
+    this.getShelterName();
+  }
   render() {
     let card_image;
     if (this.props.dog.image_1) {
@@ -23,7 +41,7 @@ class DogCard extends Component {
     }
 
     return (
-      <Card style={{ width: "18rem", height: "38rem" }} className="mt-4">
+      <Card style={{ width: "18rem", height: "40rem" }} className="mt-4">
         {card_image}
         <Card.Body>
           <Card.Title>{this.props.dog.name}</Card.Title>
@@ -36,7 +54,9 @@ class DogCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.dog.shelter_id}</p>
+                  <p align="right" className="cutoff">
+                    {this.state.shelter_name}
+                  </p>
                 </Col>
               </Row>
               <Row>
@@ -46,7 +66,9 @@ class DogCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right" className="capitalize">{this.props.dog.breed}</p>
+                  <p align="right" className="capitalize cutoff">
+                    {this.props.dog.breed}
+                  </p>
                 </Col>
               </Row>
               <Row>

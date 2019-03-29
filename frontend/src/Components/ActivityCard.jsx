@@ -26,18 +26,33 @@ class ActivityCard extends Component {
       <Card style={{ width: "18rem", height: "35rem" }} className="mt-4">
         {card_image}
         <Card.Body>
-          <Card.Title>{this.props.activity.name}</Card.Title>
+          <Card.Title className="cutoff">{this.props.activity.name}</Card.Title>
           <Card.Text>
             <Container>
               <Row>
-                <Col>
-                  <p align="left">
-                    <b>Date:</b>
-                  </p>
-                </Col>
-                <Col xs="auto">
-                  <p align="right">{this.props.activity.date}</p>
-                </Col>
+                {this.props.activity.date != null ? (
+                  <div>
+                    <Col>
+                      <p align="left">
+                        <b>Date:</b>
+                      </p>
+                    </Col>
+                    <Col xs="auto">
+                      <p align="right">{this.props.activity.date}</p>
+                    </Col>
+                  </div>
+                ) : (
+                  <div>
+                    <Col>
+                      <p align="left">
+                        <b>Designation:</b>
+                      </p>
+                    </Col>
+                    <Col xs="auto">
+                      <p align="right">{this.props.activity.designation}</p>
+                    </Col>
+                  </div>
+                )}
               </Row>
               <Row>
                 <Col>
@@ -68,7 +83,9 @@ class ActivityCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right" className="capitalize">{this.props.activity.type}</p>
+                  <p align="right" className="capitalize">
+                    {this.props.activity.type}
+                  </p>
                 </Col>
               </Row>
               <Row>

@@ -4,6 +4,11 @@ img {
 }
 
 .capitalize {
-  text-transform: capitalize
+  text-transform: capitalize;
 }
 
+.cutoff {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
