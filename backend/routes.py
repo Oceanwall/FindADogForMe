@@ -41,6 +41,20 @@ def activity_query():
     sort_param = request.args.get("sort")
     page_num = request.args.get("page")
 
+    if page_num is None:
+        page_num = 1
+    else:
+        page_num = int(page_num)
+
+    if search_param is not None:
+        search_param = search_param.lower()
+
+    if int(page_num) < 1:
+        message = {"status": 400, "note": "The page number must be positive."}
+        response = jsonify(message)
+        response.status_code = 400
+        return response
+
     valid_items = Activity.query
 
     if activity_filter is not None:
@@ -57,15 +71,38 @@ def activity_query():
     elif sort_param == REVERSE_ALPHABETICAL:
         valid_items = valid_items.order_by(Activity.name.desc())
 
-    # TODO: Searching
-
-    # TODO: Pagination
     valid_items = valid_items.all();
+    search_items = valid_items;
+
+    if search_param is not None:
+        search_items = []
+        for object in valid_items:
+            item = object.serialize()
+            # TODO: Account for fact that "free vs not free" is generated via frontend?
+            # TODO: Make all database string entries lowercase?
+            if ((item["name"] is not None and search_param in item["name"].lower()) or
+               (item["date"] is not None and search_param in item["date"].lower()) or
+               (item["location"] is not None and search_param in item["location"].lower()) or
+               (item["type"] is not None and search_param in item["type"].lower())):
+                search_items.append(object)
+
+    num_pages = len(search_items) // 12
+    if len(search_items) % 12 != 0:
+        num_pages += 1
+
+    if page_num > num_pages:
+        page_items = []
+    elif page_num == num_pages:
+        page_items = search_items[((page_num - 1) * 12):]
+    else:
+        page_items = search_items[(page_num - 1) * 12: page_num * 12]
 
     message = {
         "status": 200,
-        "num_results": len(valid_items),
-        "objects": [item.serialize() for item in valid_items],
+        "num_results": len(search_items),
+        "objects": [item.serialize() for item in page_items],
+        "total_pages": num_pages,
+        "page": page_num
     }
     response = jsonify(message)
     response.status_code = 200
