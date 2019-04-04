@@ -106,7 +106,7 @@ def build_park(info, commit=False):
         + ", "
         + main_address["statecode"],
         is_active=True,
-        is_free=True if info["entrancefees"][0]["cost"] == 0 else False,
+        is_free=True if info["entrancefees"][0]["cost"] == "0.0000" else False,
         # "cost": info["entranceFees"][0]["cost"],
         image_1=info["images"][0]["url"],
         image_2=info["images"][1]["url"],
