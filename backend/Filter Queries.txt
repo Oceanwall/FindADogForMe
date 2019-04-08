@@ -1,0 +1,54 @@
+~~~~~~~~~~~~~~~
+Activities:
+~~~~~~~~~~~~~~~
+
+(Filters)
+    active: "Active" vs "Casual" maps to true vs false
+    free: "Free" VS "Paid" maps to true vs false
+    type: "Eventbrite" vs "Meetup" vs "National Park" maps to "eventbrite" vs "meetup" vs "park"
+
+(Sorts)
+    Alphabetical, Reverse Alphabetical
+
+
+~~~~~~~~~~~~~~~
+Breeds:
+~~~~~~~~~~~~~~~
+
+(Filters)
+    group: "Mixed", "Working", "Non-Sporting", "Sporting", "Herding", "Terrier", "Hound", "Toy" (pass these strings exactly)
+    lifespan: number (allow user to enter OR provide own range between 5 - 20?)
+    height: number (allow user to enter OR provide own range between 10 - 40?)
+    (Note: Probably easier to provide own range for ^).
+
+(Sorts)
+    Alphabetical, Reverse Alphabetical
+    Group, Reverse Group
+
+
+~~~~~~~~~~~~~~~
+Dogs:
+~~~~~~~~~~~~~~~
+
+(Filters)
+    breed: See seeding/dogs_seeding.py, global variable VALID_BREEDS. Pass those strings exactly (as lowercase).
+    age: "Adult", "Young", "Baby", "Senior" (pass these strings exactly).
+    size: "Small", "Medium", "Large", "Extra Large" maps to "S" vs "M" vs "L" vs "XL".
+
+(Sorts)
+    Alphabetical, Reverse Alphabetical
+    Size, Reverse Size
+
+
+~~~~~~~~~~~~~~~
+Shelters:
+~~~~~~~~~~~~~~~
+
+(Filters)
+    city: ['Adkins', 'Aledo', 'Alvin', 'Angleton', 'Arlington', 'Austin', 'Bandera', 'Bastrop', 'Baytown', 'Beeville', 'Bellaire', 'Benbrook', 'Bergheim', 'Bertram', 'Blanco', 'Blessing', 'Boerne', 'Brenham', 'Brownwood', 'Bryan', 'Buchanan Dam', 'Buda', 'Buffalo', 'Bulverde', 'Burleson', 'Canyon Lake', 'Cat Spring', 'Cedar Creek', 'Cedar Hill', 'Cedar Park', 'Cleveland', 'Clifton', 'Coldspring', 'Coleman', 'College Station', 'Comanche', 'Comfort', 'Conroe', 'Converse', 'Copperas Cove', 'Corpus Christi', 'Corsicana', 'Covington', 'Crowley', 'Cuero', 'Cypress', 'Dallas', 'Dickinson', 'Dripping Springs', 'Duncanville', 'Edna', 'El Campo', 'Elgin', 'Everman', 'Fischer', 'Floresville', 'Fort Worth', 'Fredericksburg', 'Friendswood', 'Fulshear', 'Fulton', 'Georgetown', 'Godley', 'Goliad', 'Gonzales', 'Granbury', 'Grand Prairie', 'Gun Barrel City', 'Hearne', 'Helotes', 'Hempstead', 'Highlands', 'Hillsboro', 'Hitchcock', 'Horseshoe Bay', 'Houston', 'Humble', 'Industry', 'Jarrell', 'Junction', 'Katy', 'Kendalia', 'Kenedy', 'Kennedale', 'Kerrville', 'Killeen', 'Kingwood', 'Kyle', 'La Vernia', 'Lago Vista', 'Lake Jackson', 'Lakeway', 'Lampasas', 'Lancaster', 'League City', 'Leander', 'Liberty Hill', 'Liverpool', 'Livingston', 'Lockhart', 'Lott', 'Luling', 'Lytle', 'Mabank', 'Madisonville', 'Magnolia', 'Malakoff', 'Manchaca', 'Mansfield', 'Manvel', 'Marble Falls', 'Mason', 'Mexia', 'Midlothian', 'Mingus', 'Missouri City', 'Montgomery', 'Nassau Bay', 'Navasota', 'New Braunfels', 'Nixon', 'Ovilla', 'Palacios', 'Palestine', 'Pasadena', 'Pearland', 'Pearsall', 'Pflugerville', 'Pipe Creek', 'Pleasanton', 'Porter', 'Poteet', 'Red Oak', 'Richmond', 'Rockdale', 'Rosenberg', 'Rosharon', 'Round Rock', 'San Antonio', 'San Leon', 'San Marcos', 'Santa Fe', 'Schertz', 'Scurry', 'Seabrook', 'Sealy', 'Seguin', 'Seven Points', 'Sheridan', 'Smithville', 'Somerville', 'South Houston ', 'Spring', 'Stafford', 'Stephenville', 'Sugar Land', 'Taylor', 'Temple', 'The Woodlands', 'Thorndale', 'Tomball', 'Universal City', 'Uvalde', 'Van Vleck', 'Venus', 'Victoria', 'Von Ormy', 'Waco', 'Waller', 'Wallis', 'Waxahachie', 'Weatherford', 'Webster', 'Wharton', 'White Settlement', 'Whitney', 'Wimberley', 'Windcrest'] (pass exact strings).
+    zipcode: (5 digit number or string).
+    phone: Area code (so first 3 digits).
+
+(Sorts)
+    Alphabetical, Reverse Alphabetical
+    Zipcode, Reverse Zipcode

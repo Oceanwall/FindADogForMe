@@ -76,8 +76,6 @@ def activity_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            # TODO: Account for fact that "free vs not free" is generated via frontend?
-            # TODO: Make all database string entries lowercase?
             if ((item["name"] is not None and search_param in item["name"].lower()) or
                (item["date"] is not None and search_param in item["date"].lower()) or
                (item["location"] is not None and search_param in item["location"].lower()) or
@@ -90,6 +88,7 @@ def activity_query():
 # Breed Search / Sort / Filter Query
 @application.route("/api/breed/query")
 def breed_query():
+    # TODO: Reject invalid lifespan and height parameters?
     group_filter = request.args.get("group")
     lifespan_filter = request.args.get("lifespan")
     height_filter = request.args.get("height")
@@ -133,21 +132,10 @@ def breed_query():
     valid_items = valid_items.all();
     search_items = valid_items;
 
-    # available groups: {'Mixed', 'Working', 'Non-Sporting', 'Sporting', 'Herding', 'Terrier', 'Hound', 'Toy'}
-    # groups = set()
-    # for dog in valid_items:
-    #     dog = dog.serialize()
-    #     if dog["group"] is not None and dog["group"] not in valid_items:
-    #         groups.add(dog["group"])
-    #
-    # print(groups)
-
     if search_param is not None:
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            # TODO: Figure out temperament highlighting?
-            # TODO: Is this how we want to search for lifespan and height?
             if ((item["name"] is not None and search_param in item["name"].lower()) or
                (item["group"] is not None and search_param in item["group"].lower()) or
                (item["temperament"] is not None and search_param in item["temperament"].lower()) or
@@ -196,7 +184,7 @@ def dog_query():
         valid_items = valid_items.order_by(Dog.name)
     elif sort_param == REVERSE_ALPHABETICAL:
         valid_items = valid_items.order_by(Dog.name.desc())
-    # Inversion here is intended so that it goes (ascending) S M L.
+    # Inversion here is intended so that it goes (ascending) S M L XL.
     elif sort_param == SIZE:
         valid_items = valid_items.order_by(Dog.size.desc())
     elif sort_param == REVERSE_SIZE:
@@ -261,19 +249,8 @@ def shelter_query():
     elif sort_param == REVERSE_ZIPCODE:
         valid_items = valid_items.order_by(Shelter.zipcode.desc())
 
-    # cities = set()
     valid_items = valid_items.all();
     search_items = valid_items;
-
-    # Get list of all cities that shelters are present in
-    # TODO: Move to data seeding script?
-    # ['Adkins', 'Aledo', 'Alvin', 'Angleton', 'Arlington', 'Austin', 'Bandera', 'Bastrop', 'Baytown', 'Beeville', 'Bellaire', 'Benbrook', 'Bergheim', 'Bertram', 'Blanco', 'Blessing', 'Boerne', 'Brenham', 'Brownwood', 'Bryan', 'Buchanan Dam', 'Buda', 'Buffalo', 'Bulverde', 'Burleson', 'Canyon Lake', 'Cat Spring', 'Cedar Creek', 'Cedar Hill', 'Cedar Park', 'Cleveland', 'Clifton', 'Coldspring', 'Coleman', 'College Station', 'Comanche', 'Comfort', 'Conroe', 'Converse', 'Copperas Cove', 'Corpus Christi', 'Corsicana', 'Covington', 'Crowley', 'Cuero', 'Cypress', 'Dallas', 'Dickinson', 'Dripping Springs', 'Duncanville', 'Edna', 'El Campo', 'Elgin', 'Everman', 'Fischer', 'Floresville', 'Fort Worth', 'Fredericksburg', 'Friendswood', 'Fulshear', 'Fulton', 'Georgetown', 'Godley', 'Goliad', 'Gonzales', 'Granbury', 'Grand Prairie', 'Gun Barrel City', 'Hearne', 'Helotes', 'Hempstead', 'Highlands', 'Hillsboro', 'Hitchcock', 'Horseshoe Bay', 'Houston', 'Humble', 'Industry', 'Jarrell', 'Junction', 'Katy', 'Kendalia', 'Kenedy', 'Kennedale', 'Kerrville', 'Killeen', 'Kingwood', 'Kyle', 'La Vernia', 'Lago Vista', 'Lake Jackson', 'Lakeway', 'Lampasas', 'Lancaster', 'League City', 'Leander', 'Liberty Hill', 'Liverpool', 'Livingston', 'Lockhart', 'Lott', 'Luling', 'Lytle', 'Mabank', 'Madisonville', 'Magnolia', 'Malakoff', 'Manchaca', 'Mansfield', 'Manvel', 'Marble Falls', 'Mason', 'Mexia', 'Midlothian', 'Mingus', 'Missouri City', 'Montgomery', 'Nassau Bay', 'Navasota', 'New Braunfels', 'Nixon', 'Ovilla', 'Palacios', 'Palestine', 'Pasadena', 'Pearland', 'Pearsall', 'Pflugerville', 'Pipe Creek', 'Pleasanton', 'Porter', 'Poteet', 'Red Oak', 'Richmond', 'Rockdale', 'Rosenberg', 'Rosharon', 'Round Rock', 'San Antonio', 'San Leon', 'San Marcos', 'Santa Fe', 'Schertz', 'Scurry', 'Seabrook', 'Sealy', 'Seguin', 'Seven Points', 'Sheridan', 'Smithville', 'Somerville', 'South Houston ', 'Spring', 'Stafford', 'Stephenville', 'Sugar Land', 'Taylor', 'Temple', 'The Woodlands', 'Thorndale', 'Tomball', 'Universal City', 'Uvalde', 'Van Vleck', 'Venus', 'Victoria', 'Von Ormy', 'Waco', 'Waller', 'Wallis', 'Waxahachie', 'Weatherford', 'Webster', 'Wharton', 'White Settlement', 'Whitney', 'Wimberley', 'Windcrest']
-    # for item in valid_items:
-    #     item = item.serialize()
-    #     if item["city"] not in cities:
-    #         cities.add(item["city"])
-    #
-    # print(sorted(cities))
 
     if search_param is not None:
         search_items = []
@@ -293,7 +270,6 @@ def shelter_query():
 @application.route("/api/breed/shelter")
 def breed_shelters():
     breed = request.args.get("breed")
-    # TODO: Abstract into its own method.
     if breed is None or breed == "":
         message = {"status": 400, "note": "The breed parameter is required."}
         response = jsonify(message)
