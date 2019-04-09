@@ -37,11 +37,11 @@ class ShelterCard extends Component {
               <Row>
                 <Col>
                   <p align="left">
-                    <b>State:</b>
+                    <b>Zip:</b>
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.shelter.state}</p>
+                  <p align="right">{this.props.shelter.zipcode}</p>
                 </Col>
               </Row>
               <Row>

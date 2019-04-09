@@ -59,8 +59,8 @@ class BreedCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    {this.props.breed.min_lifespan} -{" "}
-                    {this.props.breed.max_lifespan}
+                    {this.props.breed.min_lifespan.toFixed(1)} -{" "}
+                    {this.props.breed.max_lifespan.toFixed(1)}
                   </p>
                 </Col>
               </Row>
@@ -72,8 +72,8 @@ class BreedCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    {this.props.breed.min_height} -{" "}
-                    {this.props.breed.max_height}
+                    {this.props.breed.min_height.toFixed(1)} -{" "}
+                    {this.props.breed.max_height.toFixed(1)}
                   </p>
                 </Col>
               </Row>

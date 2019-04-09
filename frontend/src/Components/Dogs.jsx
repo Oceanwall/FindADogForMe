@@ -57,7 +57,7 @@ class Dogs extends Component {
       }
       return (
           <div>
-            <div class="text-center">
+            <div class="text-center mt-2">
               <h1> Dogs</h1>
             </div>
             <Container>
