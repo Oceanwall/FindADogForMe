@@ -8,6 +8,8 @@ from utilities import control_pagination, page_number_error
 # Sort types
 ALPHABETICAL = "alphabetical"
 REVERSE_ALPHABETICAL = "reverse_alphabetical"
+DATE = "date"
+REVERSE_DATE ="reverse_date"
 ZIPCODE = "zipcode"
 REVERSE_ZIPCODE = "reverse_zipcode"
 SIZE = "size"
@@ -68,6 +70,11 @@ def activity_query():
         valid_items = valid_items.order_by(Activity.name)
     elif sort_param == REVERSE_ALPHABETICAL:
         valid_items = valid_items.order_by(Activity.name.desc())
+
+    if sort_param == DATE:
+        valid_items = valid_items.filter(Activity.date != None).order_by(Activity.date)
+    elif sort_param == REVERSE_DATE:
+        valid_items = valid_items.filter(Activity.date != None).order_by(Activity.date.desc())
 
     valid_items = valid_items.all();
     search_items = valid_items;

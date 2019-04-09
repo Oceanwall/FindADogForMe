@@ -9,6 +9,7 @@ Activities:
 
 (Sorts)
     alphabetical, reverse_alphabetical
+    date, reverse_date
 
 
 ~~~~~~~~~~~~~~~
