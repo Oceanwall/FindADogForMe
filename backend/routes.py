@@ -256,7 +256,6 @@ def shelter_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            # TODO: Make all database string entries lowercase?
             if ((item["name"] is not None and search_param in item["name"].lower()) or
                (item["city"] is not None and search_param in item["city"].lower()) or
                (item["zipcode"] is not None and search_param in str(item["zipcode"])) or

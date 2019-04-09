@@ -76,12 +76,12 @@ def build_park(info, commit=False):
     """
     # Converts the latitude-longitude string into a list.
     # Places latitude at index 0 and longitude at index 1.
-    if "latlong" not in info:
+    if "latLong" not in info:
         return
-    if ["latlong"] == "":
+    if ["latLong"] == "":
         return
     location = (
-        info["latlong"]
+        info["latLong"]
         .replace("lat:", "")
         .replace("long:", "")
         .replace(",", "")
@@ -100,29 +100,27 @@ def build_park(info, commit=False):
         description=info["description"],
         latitude=location[0],
         longitude=location[1],
-        location=main_address["line3"]
-        + ", "
+        location=(main_address["line3"] + ", ") if main_address["line3"] != "" else ""
         + main_address["city"]
         + ", "
-        + main_address["statecode"],
+        + main_address["stateCode"],
         is_active=True,
-        is_free=True if info["entrancefees"][0]["cost"] == "0.0000" else False,
+        is_free=True if info["entranceFees"][0]["cost"] == "0.0000" else False,
+        is_free_string="free" if info["entranceFees"][0]["cost"] == "0.0000" else "paid",
         # "cost": info["entranceFees"][0]["cost"],
         image_1=info["images"][0]["url"],
         image_2=info["images"][1]["url"],
         image_3=info["images"][2]["url"],
         image_4=info["images"][3]["url"],
         designation=info["designation"],
-        weather=info["weatherinfo"],
-        directions=info["directionsinfo"],
+        weather=info["weatherInfo"],
+        directions=info["directionsInfo"],
         date=None,
     )
 
     if commit:
         db.session.add(park)
         db.session.commit()
-
-    return park
 
 
 def get_all_eventbrites():
@@ -194,6 +192,7 @@ def build_event(info, commit=False):
         if info["category_id"] is 108 or 107 or 109 or 111 or 119
         else False,
         is_free=info["is_free"],
+        is_free_string="free" if info["is_free"] else "paid",
         image_1=info["logo"]["url"] if "logo" in info else None,
         image_2=None,
         image_3=None,
@@ -202,7 +201,7 @@ def build_event(info, commit=False):
         weather=None,
         directions=None,
         # UTC date is also an option
-        date=info["end"]["local"],
+        date=info["end"]["local"][0:10] if info["end"]["local"] is not None else None,
     )
 
     if commit:
@@ -271,6 +270,7 @@ def build_meetup(info, commit=False):
         location=info["group"]["localized_location"],
         is_active=True,
         is_free=False,
+        is_free_string="paid",
         image_1=info["featured_photo"]["photo_link"]
         if "featured_photo" in info
         else None,

@@ -42,6 +42,7 @@ class Activity(db.Model):
     location = db.Column(db.String(255))
     is_active = db.Column(db.Boolean)
     is_free = db.Column(db.Boolean)
+    is_free_string = db.Column(db.String(1000))
     image_1 = db.Column(db.String(1000))
     image_2 = db.Column(db.String(1000))
     image_3 = db.Column(db.String(1000))
@@ -63,6 +64,7 @@ class Activity(db.Model):
         location,
         is_active,
         is_free,
+        is_free_string,
         image_1,
         image_2,
         image_3,
@@ -82,6 +84,7 @@ class Activity(db.Model):
         self.location = location
         self.is_active = is_active
         self.is_free = is_free
+        self.is_free_string = is_free_string
         self.image_1 = image_1
         self.image_2 = image_2
         self.image_3 = image_3
@@ -106,6 +109,7 @@ class Activity(db.Model):
             "location": self.location,
             "is_active": self.is_active,
             "is_free": self.is_free,
+            "is_free_string": self.is_free_string,
             "image_1": self.image_1,
             "image_2": self.image_2,
             "image_3": self.image_3,
@@ -217,6 +221,7 @@ class Dog(db.Model):
     Represents information about a dog.
     id (string)
     shelter_id (string)
+    shelter_name (string)
     name (string)
     breed (lowercase string)
     age (string)
@@ -232,6 +237,7 @@ class Dog(db.Model):
     __tablename__ = "dog"
     id = db.Column(db.Unicode, primary_key=True, nullable=False)
     shelter_id = db.Column(db.Unicode, db.ForeignKey("shelter.id"), nullable=False)
+    shelter_name = db.Column(db.Unicode)
     name = db.Column(db.String(50))
     breed = db.Column(db.Unicode, db.ForeignKey("breed.name"), nullable=False)
     age = db.Column(db.String(50))
@@ -247,6 +253,7 @@ class Dog(db.Model):
         self,
         id,
         shelter_id,
+        shelter_name,
         name,
         breed,
         age,
@@ -260,6 +267,7 @@ class Dog(db.Model):
     ):
         self.id = id
         self.shelter_id = shelter_id
+        self.shelter_name = shelter_name
         self.name = name
         self.breed = breed
         self.age = age
@@ -278,6 +286,7 @@ class Dog(db.Model):
         return {
             "id": self.id,
             "shelter_id": self.shelter_id,
+            "shelter_name": self.shelter_name,
             "name": self.name,
             "breed": self.breed,
             "age": self.age,
