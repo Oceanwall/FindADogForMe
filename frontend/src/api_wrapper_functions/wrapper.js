@@ -211,6 +211,82 @@ async function getActivityDogs(id, range) {
     return suitable_dogs;
 }
 
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Filtering, Searching, and Sorting Queries
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+// TODO: Add checks to force compliance with permitted sort params / filter values?
+
+async function getActivityQuery(active_filter, free_filter, type_filter, search_param, sort_param, page_num = 1) {
+    let url = `${API_URL}/activity/query?`;
+
+    if (active_filter)
+        url += `&active=${active_filter}`;
+
+    if (free_filter)
+        url += `&free=${free_filter}`;
+
+    if (type_filter)
+        url += `&type=${type_filter}`;
+
+    url += utilities.build_search_sort_param_string(search_param, sort_param, page_num);
+
+    return utilities.perform_api_call(url);
+}
+
+async function getBreedQuery(group_filter, lifespan_filter, height_filter, search_param, sort_param, page_num = 1) {
+    let url = `${API_URL}/breed/query?`;
+
+    if (group_filter)
+        url += `&group=${group_filter}`;
+
+    if (lifespan_filter)
+        url += `&lifespan=${lifespan_filter}`;
+
+    if (height_filter)
+        url += `&height=${height_filter}`;
+
+    url += utilities.build_search_sort_param_string(search_param, sort_param, page_num);
+
+    return utilities.perform_api_call(url);
+}
+
+async function getDogQuery(breed_filter, age_filter, size_filter, search_param, sort_param, page_num = 1) {
+    let url = `${API_URL}/dog/query?`;
+
+    if (breed_filter)
+        url += `&breed=${breed_filter}`;
+
+    if (age_filter)
+        url += `&age=${age_filter}`;
+
+    if (size_filter)
+        url += `&size=${size_filter}`;
+
+    url += utilities.build_search_sort_param_string(search_param, sort_param, page_num);
+
+    return utilities.perform_api_call(url);
+}
+
+async function getShelterQuery(city_filter, zipcode_filter, phone_filter, search_param, sort_param, page_num = 1) {
+    let url = `${API_URL}/shelter/query?`;
+
+    if (city_filter)
+        url += `&city=${city_filter}`;
+
+    if (zipcode_filter)
+        url += `&zipcode=${zipcode_filter}`;
+
+    if (phone_filter)
+        url += `&phone=${phone_filter}`;
+
+    url += utilities.build_search_sort_param_string(search_param, sort_param, page_num);
+
+    return utilities.perform_api_call(url);
+}
+
 export default {
     getShelter,
     getShelterActivities,
@@ -227,5 +303,9 @@ export default {
     getActivity,
     getActivityBreeds,
     getActivityShelters,
-    getActivityDogs
+    getActivityDogs,
+    getShelterQuery,
+    getDogQuery,
+    getBreedQuery,
+    getActivityQuery
 }

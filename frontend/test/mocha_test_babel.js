@@ -164,17 +164,15 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(dogs["objects"][0]).to.have.property("age");
     expect(dogs["objects"][0]).to.have.property("shelter_id");
     expect(dogs["objects"][0]).to.have.property("image_1");
-  }); // TODO: Too slow for mocha_test, but it does work!
-  it("should get shelters hosting the breed", async function() {
+  });
+  it("should get shelters hosting the breed", async function () {
     let shelters = await wrapper.getBreedShelters("akita");
-
     expect(shelters).to.be.an("object");
     expect(shelters.objects[0]).to.have.property("name");
     expect(shelters.objects[0]).to.have.property("address");
     expect(shelters.objects[0]).to.have.property("phone");
     expect(shelters.objects[0]).to.have.property("state");
-  });
-  // ACTIVITIES
+  }); // ACTIVITIES
 
   it("should get information about all activities", async function () {
     let activities = await wrapper.getActivity(undefined, 2);
@@ -190,7 +188,7 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(activities["objects"][0]).to.have.property("description");
   });
   it("should get information about an activity", async function () {
-    let activity = await wrapper.getActivity("meetup258861199");
+    let activity = await wrapper.getActivity("parkC9056F71-7162-4208-8AE9-2D0AEFA594FD");
     expect(activity).to.be.an("object");
     expect(activity).to.have.property("designation");
     expect(activity).to.have.property("url");

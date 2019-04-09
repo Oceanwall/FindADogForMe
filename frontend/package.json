@@ -27,7 +27,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-wrapper": "npx babel test/mocha_test.js --out-file test/mocha_test_babel.js && mocha --reporter spec --no-timeouts test/mocha_test_babel.js",
-    "rebuild-wrapper-files": "npx babel test/mocha_test.js --out-file test/mocha_test_babel.js && npx babel src/api_wrapper_functions/utilities.js --out-file test/utilities.js && npx babel src/api_wrapper_functions/wrapper.js --out-file test/wrapper.js && mocha --reporter spec --no-timeouts test/mocha_test_babel.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

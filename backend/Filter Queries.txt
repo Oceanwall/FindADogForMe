@@ -8,7 +8,7 @@ Activities:
     type: "Eventbrite" vs "Meetup" vs "National Park" maps to "eventbrite" vs "meetup" vs "park"
 
 (Sorts)
-    Alphabetical, Reverse Alphabetical
+    alphabetical, reverse_alphabetical
 
 
 ~~~~~~~~~~~~~~~
@@ -22,8 +22,8 @@ Breeds:
     (Note: Probably easier to provide own range for ^).
 
 (Sorts)
-    Alphabetical, Reverse Alphabetical
-    Group, Reverse Group
+    alphabetical, reverse_alphabetical
+    group, reverse_group
 
 
 ~~~~~~~~~~~~~~~
@@ -36,8 +36,8 @@ Dogs:
     size: "Small", "Medium", "Large", "Extra Large" maps to "S" vs "M" vs "L" (vs "XL").
 
 (Sorts)
-    Alphabetical, Reverse Alphabetical
-    Size, Reverse Size
+    alphabetical, reverse_alphabetical
+    size, reverse_size
 
 
 ~~~~~~~~~~~~~~~
@@ -50,5 +50,5 @@ Shelters:
     phone: Area code (so first 3 digits).
 
 (Sorts)
-    Alphabetical, Reverse Alphabetical
-    Zipcode, Reverse Zipcode
+    alphabetical, reverse_alphabetical
+    zipcode, reverse_zipcode

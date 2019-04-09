@@ -221,7 +221,7 @@ describe("FindADogForMe API Wrapper Functions", function() {
   });
 
   it("should get information about an activity", async function() {
-    let activity = await wrapper.getActivity("257930562");
+    let activity = await wrapper.getActivity("parkC9056F71-7162-4208-8AE9-2D0AEFA594FD");
 
     expect(activity).to.be.an("object");
     expect(activity).to.have.property("designation");
