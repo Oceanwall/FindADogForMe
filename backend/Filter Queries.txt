@@ -33,7 +33,7 @@ Dogs:
 (Filters)
     breed: See seeding/dogs_seeding.py, global variable VALID_BREEDS. Pass those strings exactly (as lowercase).
     age: "Adult", "Young", "Baby", "Senior" (pass these strings exactly).
-    size: "Small", "Medium", "Large", "Extra Large" maps to "S" vs "M" vs "L" vs "XL".
+    size: "Small", "Medium", "Large", "Extra Large" maps to "S" vs "M" vs "L" (vs "XL").
 
 (Sorts)
     Alphabetical, Reverse Alphabetical

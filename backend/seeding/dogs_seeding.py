@@ -233,6 +233,7 @@ def build_shelter(shelter, shelter_ids, shelter_names, commit=False):
     return curr_shelter
 
 
+# TODO: Maybe keep at 20?
 def get_dogs(shelter_id, count=30, offset=0):
     """
     Givien a shelter, uses the Petfinder API to get dogs hosted at that shelter.

@@ -79,7 +79,7 @@ def activity_query():
             if ((item["name"] is not None and search_param in item["name"].lower()) or
                (item["date"] is not None and search_param in item["date"].lower()) or
                (item["designation"] is not None and search_param in item["designation"].lower()) or
-               (item["is_free_string"] is not None and search_param in item["is_free_string"].lower())
+               (item["is_free_string"] is not None and search_param in item["is_free_string"].lower()) or
                (item["location"] is not None and search_param in item["location"].lower()) or
                (item["type"] is not None and search_param in item["type"].lower())):
                 search_items.append(object)
@@ -186,7 +186,7 @@ def dog_query():
         valid_items = valid_items.order_by(Dog.name)
     elif sort_param == REVERSE_ALPHABETICAL:
         valid_items = valid_items.order_by(Dog.name.desc())
-    # Inversion here is intended so that it goes (ascending) S M L XL.
+    # Inversion here is intended so that it goes (ascending) S M L (XL).
     elif sort_param == SIZE:
         valid_items = valid_items.order_by(Dog.size.desc())
     elif sort_param == REVERSE_SIZE:
