@@ -78,6 +78,8 @@ def activity_query():
             item = object.serialize()
             if ((item["name"] is not None and search_param in item["name"].lower()) or
                (item["date"] is not None and search_param in item["date"].lower()) or
+               (item["designation"] is not None and search_param in item["designation"].lower()) or
+               (item["is_free_string"] is not None and search_param in item["is_free_string"].lower())
                (item["location"] is not None and search_param in item["location"].lower()) or
                (item["type"] is not None and search_param in item["type"].lower())):
                 search_items.append(object)
@@ -197,9 +199,8 @@ def dog_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            # TODO: Modify database so that each breed has access to shelter names as well
             if ((item["name"] is not None and search_param in item["name"].lower()) or
-               # (item["shelter"] is not None and search_param in item["shelter"].lower()) or
+               (item["shelter_name"] is not None and search_param in item["shelter_name"].lower()) or
                (item["breed"] is not None and search_param in item["breed"].lower()) or
                (item["age"] is not None and search_param in item["age"].lower()) or
                (item["size"] is not None and search_param in item["size"].lower())):

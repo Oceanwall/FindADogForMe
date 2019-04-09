@@ -182,7 +182,7 @@ def get_shelters(location="texas", count=500, offset=0):
         print("Request to get details about shelters failed." + str(location))
 
 
-def build_shelter(shelter, shelter_ids, commit=False):
+def build_shelter(shelter, shelter_ids, shelter_names, commit=False):
     """
     Builds a shelter dictionary based on the results of get_shelter.
     """
@@ -212,6 +212,7 @@ def build_shelter(shelter, shelter_ids, commit=False):
         address = None
 
     shelter_ids.add(shelter["id"]["$t"])
+    shelter_names[shelter["id"]["$t"]] = shelter["name"]["$t"]
 
     curr_shelter = Shelter(
         id=shelter["id"]["$t"],
@@ -232,7 +233,7 @@ def build_shelter(shelter, shelter_ids, commit=False):
     return curr_shelter
 
 
-def get_dogs(shelter_id, count=20, offset=0):
+def get_dogs(shelter_id, count=30, offset=0):
     """
     Givien a shelter, uses the Petfinder API to get dogs hosted at that shelter.
     """
@@ -267,7 +268,7 @@ def get_dogs(shelter_id, count=20, offset=0):
         print("Request to get details about dogs failed.")
 
 
-def build_dog(pet, commit=False):
+def build_dog(pet, shelter_name, commit=False):
     """
     Extracts desired information from the response provided by the Petfinder
     API, and creates a Pet object, which is then inserted into the
@@ -318,6 +319,7 @@ def build_dog(pet, commit=False):
     dog = Dog(
         id=pet["id"]["$t"],
         shelter_id=pet["shelterId"]["$t"],
+        shelter_name=shelter_name,
         name=pet["name"]["$t"],
         breed=breed.lower(),
         age=pet["age"]["$t"],
@@ -341,22 +343,23 @@ def main():
     """
     Seeds database with both shelters and records of local dogs from shelters
     """
-    delete_shelters()
-    print("Previous shelters deleted from database!")
     delete_dogs()
     print("Previous dogs deleted from database!")
+    delete_shelters()
+    print("Previous shelters deleted from database!")
 
     shelter_dict = get_shelters()
     shelter_ids = set()
+    shelter_names = {}
     for shelter in shelter_dict:
-        t = build_shelter(shelter, shelter_ids, True)
+        build_shelter(shelter, shelter_ids, shelter_names, True)
     print("Shelter seeding complete!")
 
     shelter_count = 0
-    for shelter in shelter_ids:
-        dog_dict = get_dogs(shelter)
+    for shelter_id in shelter_ids:
+        dog_dict = get_dogs(shelter_id)
         for dog in dog_dict:
-            build_dog(dog, True)
+            build_dog(dog, shelter_names[shelter_id], True)
         shelter_count += 1
         print("Dogs from Shelter " + str(shelter_count) + " completed.")
     print("Dog seeding complete!")

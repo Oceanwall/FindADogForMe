@@ -6,7 +6,6 @@ import LogoDeck from "./LogoDeck";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "../styles/About.css";
-const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
 class About extends Component {
   state = {
@@ -188,9 +187,6 @@ class About extends Component {
   async componentDidMount() {
     this.load_commits();
     this.load_issues();
-
-    let pp = await wrapper.getActivity();
-    console.log(pp);
   }
 
   render() {

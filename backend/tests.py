@@ -38,7 +38,7 @@ class TestBackend(TestCase):
         shelter_list = get_shelters()
         shelter_ids = set()
         for shelter in shelter_list:
-            result = build_shelter(shelter, shelter_ids)
+            result = build_shelter(shelter, shelter_ids, {})
             if result != None:
                 assert result.id != None
                 assert result.name != None
@@ -51,7 +51,7 @@ class TestBackend(TestCase):
         shelter_list = get_shelters()
         shelter_ids = set()
         for shelter in shelter_list:
-            result = build_shelter(shelter, shelter_ids)
+            result = build_shelter(shelter, shelter_ids, {})
             if result != None:
                 assert type(result.id) == str
                 assert type(result.name) == str
@@ -66,12 +66,12 @@ class TestBackend(TestCase):
 
     def test7(self):
         result = get_dogs("TX1399")
-        assert len(result) == 20
+        assert len(result) == 30
 
     def test8(self):
         dog_list = get_dogs("TX1399")
         for dog in dog_list:
-            result = build_dog(dog)
+            result = build_dog(dog, {"TX1399": "Mutts & Meows Rescue"})
             if result != None:
                 assert result.id != None
                 assert result.shelter_id != None
@@ -84,7 +84,7 @@ class TestBackend(TestCase):
     def test9(self):
         dog_list = get_dogs("TX1399")
         for dog in dog_list:
-            result = build_dog(dog)
+            result = build_dog(dog, {"TX1399": "Mutts & Meows Rescue"})
             if result != None:
                 assert type(result.id) == str
                 assert type(result.shelter_id) == str
