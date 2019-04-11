@@ -1,13 +1,14 @@
 @startuml
-Breed "1" *- "*" Dog
-Breed "*" - "*" Shelter
-Dog "*" *- "1" Shelter
-Breed "*" - "*" Activity
-Shelter "*" - "*" Activity
+Activity "*" - "*" Breed
+Activity "*" - "*" Dog
+Activity "*" - "*" Shelter
+Breed    "1" *- "*" Dog
+Breed    "*" - "*" Shelter
+Dog      "*" -* "1" Shelter
 
 class Activity {
-    String id
-    String type
+    String id PRIMARY_KEY NON_NULL
+    String type NON_NULL
     String url
     String name
     Text description
@@ -16,6 +17,7 @@ class Activity {
     String location
     Boolean is_active
     Boolean is_free
+    String is_free_string
     String image_1
     String image_2
     String image_3
@@ -27,7 +29,7 @@ class Activity {
 }
 
 class Breed {
-    String name
+    String name PRIMARY_KEY NON_NULL
     String group
     Float min_height
     Float max_height
@@ -44,10 +46,11 @@ class Breed {
 }
 
 class Dog {
-    String id
-    String shelter_id
+    String id PRIMARY_KEY NON_NULL
+    String shelter_id FOREIGN_KEY NON_NULL
+    String shelter_name
     String name
-    String breed
+    String breed FOREIGN_KEY NON_NULL
     String age
     String size
     String sex
@@ -59,7 +62,7 @@ class Dog {
 }
 
 class Shelter {
-    String id
+    String id PRIMARY_KEY NON_NULL
     String name
     Float latitude
     Float longitude
