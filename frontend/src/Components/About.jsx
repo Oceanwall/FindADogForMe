@@ -32,7 +32,7 @@ class About extends Component {
         tests: 168,
         img: "/images/samarth.jpg"
       },
-      Triplestop: {
+      triplestop: {
         name: "Daniel Ho",
         bio: "UTCS Senior, loves to travel and play video games",
         responsibility: "Front-end",
@@ -107,7 +107,7 @@ class About extends Component {
           commits++;
         } else if (name === "Daniel Ho" || name === "Triplestop") {
           let temp = this.state.people_info;
-          temp["Triplestop"].commits += 1;
+          temp["triplestop"].commits += 1;
           this.setState({ people_info: temp });
           commits++;
         } else {
@@ -163,7 +163,7 @@ class About extends Component {
           temp[name].issues += 1;
           this.setState({ people_info: temp });
           total_issues++;
-        } else if (name === "Triplestop") {
+        } else if (name === "triplestop") {
           let temp = this.state.people_info;
           temp[name].issues += 1;
           this.setState({ people_info: temp });
