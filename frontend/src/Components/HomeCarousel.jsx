@@ -52,23 +52,50 @@ class HomeCarousel extends Component {
               ref={r => (this.slider = r)}
               version={4}
             >
-              <img
-                className="Carousel-image"
-                src="/images/dog1.jpg"
-                alt="home-carousel-img-1"
-              />
-
-              <img
-                className="Carousel-image"
-                src="/images/dog2.jpeg"
-                alt="home-carousel-img-2"
-              />
-
-              <img
-                className="Carousel-image"
-                src="/images/dog3.jpg"
-                alt="home-carousel-img-3"
-              />
+              <div>
+                <img
+                  className="Carousel-image"
+                  src="/images/dog_main.jpg"
+                  alt="home-carousel-img-1"
+                />
+                <div className="carousel-caption">
+                  <h3>Dogs</h3>
+                  <p>Find the perfect dog for you</p>
+                </div>
+              </div>
+              <div>
+                <img
+                  className="Carousel-image"
+                  src="/images/dog2.jpeg"
+                  alt="home-carousel-img-2"
+                />
+                <div className="carousel-caption">
+                  <h3>Activities</h3>
+                  <p>Explore dog related activities and events</p>
+                </div>
+              </div>
+              <div>
+                <img
+                  className="Carousel-image"
+                  src="/images/dog1.jpg"
+                  alt="home-carousel-img-3"
+                />
+                <div className="carousel-caption">
+                  <h3>Shelters</h3>
+                  <p>Find and learn more about nearby dog shelters</p>
+                </div>
+              </div>
+              <div>
+                <img
+                  className="Carousel-image"
+                  src="/images/dog_group.jpg"
+                  alt="home-carousel-img-4"
+                />
+                <div className="carousel-caption">
+                  <h3>Breeds</h3>
+                  <p>Discover and learn more about dog breeds</p>
+                </div>
+              </div>
             </Carousel>
           </Col>
         </Row>
