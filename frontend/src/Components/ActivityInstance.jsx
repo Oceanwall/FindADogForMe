@@ -141,7 +141,7 @@ class ActivityInstance extends Component {
               <h1> {this.state.name}</h1>
               <div class="info-text">
                 <p align="left" className="mt-5">
-                  URL: <a href={this.state.url}>{this.state.url}></a>
+                  URL: <a href={this.state.url}>Learn more about this event</a>
                 </p>
 
                 {this.state.date != null ? (
