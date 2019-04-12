@@ -440,6 +440,9 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(activities["objects"][0]).to.have.property("url");
     expect(activities["objects"][0]).to.have.property("weather");
     expect(activities["objects"][0]).to.have.property("description");
+    for (let currActivity of activities["objects"]){
+      expect(currActivity["type"]).to.equal("eventbrite");
+    }
   });
   it("should correctly filter and sort breed queries", async function() {
     let breeds = await wrapper.getBreedQuery("Mixed", 10, 24, null, "alphabetical");
@@ -452,6 +455,9 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(breeds["objects"][0]).to.have.property("temperament");
     expect(breeds["objects"][0]).to.have.property("is_active");
     expect(breeds["objects"][0]).to.have.property("group");
+    for (let currBreed of breeds["objects"]){
+      expect(currBreed["group"]).to.equal("Mixed");
+    }
   });
   it("should correctly filter and sort dog queries", async function() {
     let dogs = await wrapper.getDogQuery("border collie", "Adult", "L", null, "alphabetical", 1);
@@ -462,6 +468,9 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(dogs["objects"][0]).to.have.property("age");
     expect(dogs["objects"][0]).to.have.property("shelter_id");
     expect(dogs["objects"][0]).to.have.property("image_1");
+    for (let currDog of dogs["objects"]){
+      expect(currDog["breed"]).to.equal("border collie");
+    }
   });
   it("should correctly filter and sort shelter queries", async function() {
     let shelters = await wrapper.getShelterQuery('Austin', null, null, null, 'zipcode', 2);
@@ -475,5 +484,40 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(shelters["objects"][0]).to.have.property("address");
     expect(shelters["objects"][0]).to.have.property("phone");
     expect(shelters["objects"][0]).to.have.property("state");
+    for (let currShelter of shelters["objects"]){
+      expect(currShelter["city"]).to.equal("Austin");
+    }
+
+  });
+  it("should correctly search for border collies", async function() {
+    let dogs = await wrapper.getWebsiteQuery("border collie", 1);
+    expect(dogs).to.be.an("object");
+    expect(dogs).to.have.property("num_results");
+    expect(dogs).to.have.property("objects");
+    expect(dogs["objects"]).to.be.an("array");
+    expect(dogs["objects"][0]).to.be.an("object");
+    expect(dogs["objects"][0]).to.have.property("name");
+    expect(dogs["objects"][0]).to.have.property("temperament");
+    expect(dogs["objects"][0]).to.have.property("is_active");
+    expect(dogs["objects"][0]).to.have.property("group");
+    expect(dogs["objects"][0]["name"]).to.equal("border collie");
+    expect(dogs["objects"][1]).to.have.property("breed");
+    expect(dogs["objects"][1]).to.have.property("age");
+    expect(dogs["objects"][1]).to.have.property("shelter_id");
+    expect(dogs["objects"][1]).to.have.property("image_1");
+    expect(dogs["objects"][1]["breed"]).to.equal("border collie");
+  });
+  it("should only show border collies for the second page of results", async function() {
+    let dogs = await wrapper.getWebsiteQuery("border collie", 2);
+    expect(dogs).to.be.an("object");
+    expect(dogs).to.have.property("num_results");
+    expect(dogs).to.have.property("objects");
+    expect(dogs["objects"][0]).to.have.property("breed");
+    expect(dogs["objects"][0]).to.have.property("age");
+    expect(dogs["objects"][0]).to.have.property("shelter_id");
+    expect(dogs["objects"][0]).to.have.property("image_1");
+    for (let currDog of dogs["objects"]){
+      expect(currDog["breed"]).to.equal("border collie");
+    }
   });
 });
