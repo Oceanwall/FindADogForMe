@@ -227,4 +227,52 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(shelters["objects"][0]).to.have.property("phone");
     expect(shelters["objects"][0]).to.have.property("state");
   });
+  it("should correctly filter and sort activity queries", async function() {
+    let activities = await wrapper.getActivityQuery(true, true, "meetup", null, "alphabetical", 2);
+    expect(activities).to.be.an("object");
+    expect(activities).to.have.property("num_results");
+    expect(activities).to.have.property("objects");
+    expect(activities["page"]).to.equal(2);
+    expect(activities["objects"]).to.be.an("array");
+    expect(activities["objects"][0]).to.be.an("object");
+    expect(activities["objects"][0]).to.have.property("designation");
+    expect(activities["objects"][0]).to.have.property("url");
+    expect(activities["objects"][0]).to.have.property("weather");
+    expect(activities["objects"][0]).to.have.property("description");
+  });
+  it("should correctly filter and sort breed queries", async function() {
+    let breeds = await wrapper.getBreedQuery("Mixed", 10, 24, null, "alphabetical");
+    expect(breeds).to.be.an("object");
+    expect(breeds).to.have.property("num_results");
+    expect(breeds).to.have.property("objects");
+    expect(breeds["objects"]).to.be.an("array");
+    expect(breeds["objects"][0]).to.be.an("object");
+    expect(breeds["objects"][0]).to.have.property("name");
+    expect(breeds["objects"][0]).to.have.property("temperament");
+    expect(breeds["objects"][0]).to.have.property("is_active");
+    expect(breeds["objects"][0]).to.have.property("group");
+  });
+  it("should correctly filter and sort dog queries", async function() {
+    let dogs = await wrapper.getDogQuery("border collie", "Adult", "L", null, "alphabetical", 1);
+    expect(dogs).to.be.an("object");
+    expect(dogs).to.have.property("num_results");
+    expect(dogs).to.have.property("objects");
+    expect(dogs["objects"][0]).to.have.property("breed");
+    expect(dogs["objects"][0]).to.have.property("age");
+    expect(dogs["objects"][0]).to.have.property("shelter_id");
+    expect(dogs["objects"][0]).to.have.property("image_1");
+  });
+  it("should correctly filter and sort shelter queries", async function() {
+    let shelters = await wrapper.getShelterQuery('Austin', null, null, null, 'zipcode', 2);
+    expect(shelters).to.be.an("object");
+    expect(shelters).to.have.property("num_results");
+    expect(shelters).to.have.property("objects");
+    expect(shelters["page"]).to.equal(2);
+    expect(shelters["objects"]).to.be.an("array");
+    expect(shelters["objects"][0]).to.be.an("object");
+    expect(shelters["objects"][0]).to.have.property("name");
+    expect(shelters["objects"][0]).to.have.property("address");
+    expect(shelters["objects"][0]).to.have.property("phone");
+    expect(shelters["objects"][0]).to.have.property("state");
+  });
 });
