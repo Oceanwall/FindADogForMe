@@ -335,8 +335,29 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(activities["objects"][0]).to.have.property("weather");
     expect(activities["objects"][0]).to.have.property("description");
   });
+  it("should get information about all activities on page 3", async function () {
+    let activities = await wrapper.getActivity(undefined, 3);
+    expect(activities).to.be.an("object");
+    expect(activities).to.have.property("num_results");
+    expect(activities).to.have.property("objects");
+    expect(activities["page"]).to.equal(3);
+    expect(activities["objects"]).to.be.an("array");
+    expect(activities["objects"][0]).to.be.an("object");
+    expect(activities["objects"][0]).to.have.property("designation");
+    expect(activities["objects"][0]).to.have.property("url");
+    expect(activities["objects"][0]).to.have.property("weather");
+    expect(activities["objects"][0]).to.have.property("description");
+  });
   it("should get information about an activity", async function () {
     let activity = await wrapper.getActivity("parkC9056F71-7162-4208-8AE9-2D0AEFA594FD");
+    expect(activity).to.be.an("object");
+    expect(activity).to.have.property("designation");
+    expect(activity).to.have.property("url");
+    expect(activity).to.have.property("weather");
+    expect(activity).to.have.property("description");
+  });
+  it("should get information about another activity", async function () {
+    let activity = await wrapper.getActivity("eventbrite56498965928");
     expect(activity).to.be.an("object");
     expect(activity).to.have.property("designation");
     expect(activity).to.have.property("url");
@@ -355,6 +376,18 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(breeds["objects"][0]).to.have.property("is_active");
     expect(breeds["objects"][0]).to.have.property("group");
   });
+  it("should get breeds that another activity is suitable for", async function () {
+    let breeds = await wrapper.getActivityBreeds("eventbrite56498965928");
+    expect(breeds).to.be.an("object");
+    expect(breeds).to.have.property("num_results");
+    expect(breeds).to.have.property("objects");
+    expect(breeds["objects"]).to.be.an("array");
+    expect(breeds["objects"][0]).to.be.an("object");
+    expect(breeds["objects"][0]).to.have.property("name");
+    expect(breeds["objects"][0]).to.have.property("temperament");
+    expect(breeds["objects"][0]).to.have.property("is_active");
+    expect(breeds["objects"][0]).to.have.property("group");
+  });
   it("should get dogs in a shelter located near an activity that the activity is suitable for", async function () {
     let dogs = await wrapper.getActivityDogs("meetup258861199", 0.25);
     expect(dogs).to.be.an("array");
@@ -363,8 +396,28 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(dogs[0]).to.have.property("shelter_id");
     expect(dogs[0]).to.have.property("image_1");
   });
+  it("should get dogs in a shelter located near an activity that the other activity is suitable for", async function () {
+    let dogs = await wrapper.getActivityDogs("eventbrite56498965928", 0.25);
+    expect(dogs).to.be.an("array");
+    expect(dogs[0]).to.have.property("breed");
+    expect(dogs[0]).to.have.property("age");
+    expect(dogs[0]).to.have.property("shelter_id");
+    expect(dogs[0]).to.have.property("image_1");
+  });
   it("should get shelters located near an activity", async function () {
     let shelters = await wrapper.getActivityShelters("meetup258861199");
+    expect(shelters).to.be.an("object");
+    expect(shelters).to.have.property("num_results");
+    expect(shelters).to.have.property("objects");
+    expect(shelters["objects"]).to.be.an("array");
+    expect(shelters["objects"][0]).to.be.an("object");
+    expect(shelters["objects"][0]).to.have.property("name");
+    expect(shelters["objects"][0]).to.have.property("address");
+    expect(shelters["objects"][0]).to.have.property("phone");
+    expect(shelters["objects"][0]).to.have.property("state");
+  });
+  it("should get shelters located near another activity", async function () {
+    let shelters = await wrapper.getActivityShelters("eventbrite56498965928");
     expect(shelters).to.be.an("object");
     expect(shelters).to.have.property("num_results");
     expect(shelters).to.have.property("objects");
