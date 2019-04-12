@@ -228,11 +228,11 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(shelters["objects"][0]).to.have.property("state");
   });
   it("should correctly filter and sort activity queries", async function() {
-    let activities = await wrapper.getActivityQuery(true, true, "meetup", null, "alphabetical", 2);
+    let activities = await wrapper.getActivityQuery(true, true, "eventbrite", null, "alphabetical", 1);
     expect(activities).to.be.an("object");
     expect(activities).to.have.property("num_results");
     expect(activities).to.have.property("objects");
-    expect(activities["page"]).to.equal(2);
+    expect(activities["page"]).to.equal(1);
     expect(activities["objects"]).to.be.an("array");
     expect(activities["objects"][0]).to.be.an("object");
     expect(activities["objects"][0]).to.have.property("designation");
