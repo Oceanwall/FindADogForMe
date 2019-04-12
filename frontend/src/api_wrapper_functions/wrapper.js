@@ -220,7 +220,7 @@ Filtering, Searching, and Sorting Queries
 // TODO: Add checks to force compliance with permitted sort params / filter values?
 
 async function getActivityQuery(active_filter, free_filter, type_filter, search_param, sort_param, page_num = 1) {
-    let url = `${API_URL}/activity/query?`;
+    let url = `${API_URL}activity/query?`;
 
     if (active_filter)
         url += `&active=${active_filter}`;
@@ -237,7 +237,7 @@ async function getActivityQuery(active_filter, free_filter, type_filter, search_
 }
 
 async function getBreedQuery(group_filter, lifespan_filter, height_filter, search_param, sort_param, page_num = 1) {
-    let url = `${API_URL}/breed/query?`;
+    let url = `${API_URL}breed/query?`;
 
     if (group_filter)
         url += `&group=${group_filter}`;
@@ -254,7 +254,7 @@ async function getBreedQuery(group_filter, lifespan_filter, height_filter, searc
 }
 
 async function getDogQuery(breed_filter, age_filter, size_filter, search_param, sort_param, page_num = 1) {
-    let url = `${API_URL}/dog/query?`;
+    let url = `${API_URL}dog/query?`;
 
     if (breed_filter)
         url += `&breed=${breed_filter}`;
@@ -271,7 +271,7 @@ async function getDogQuery(breed_filter, age_filter, size_filter, search_param, 
 }
 
 async function getShelterQuery(city_filter, zipcode_filter, phone_filter, search_param, sort_param, page_num = 1) {
-    let url = `${API_URL}/shelter/query?`;
+    let url = `${API_URL}shelter/query?`;
 
     if (city_filter)
         url += `&city=${city_filter}`;
@@ -288,7 +288,7 @@ async function getShelterQuery(city_filter, zipcode_filter, phone_filter, search
 }
 
 async function getWebsiteQuery(search_param, page_num = 1) {
-    let url = `${API_URL}/api/search_website?`;
+    let url = `${API_URL}search_website?`;
 
     url += utilities.build_search_sort_param_string(search_param, undefined, page_num);
 

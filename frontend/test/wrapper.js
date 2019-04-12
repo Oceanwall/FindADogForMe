@@ -215,7 +215,7 @@ Filtering, Searching, and Sorting Queries
 
 
 async function getActivityQuery(active_filter, free_filter, type_filter, search_param, sort_param, page_num = 1) {
-  let url = `${API_URL}/activity/query?`;
+  let url = `${API_URL}activity/query?`;
   if (active_filter) url += `&active=${active_filter}`;
   if (free_filter) url += `&free=${free_filter}`;
   if (type_filter) url += `&type=${type_filter}`;
@@ -224,7 +224,7 @@ async function getActivityQuery(active_filter, free_filter, type_filter, search_
 }
 
 async function getBreedQuery(group_filter, lifespan_filter, height_filter, search_param, sort_param, page_num = 1) {
-  let url = `${API_URL}/breed/query?`;
+  let url = `${API_URL}breed/query?`;
   if (group_filter) url += `&group=${group_filter}`;
   if (lifespan_filter) url += `&lifespan=${lifespan_filter}`;
   if (height_filter) url += `&height=${height_filter}`;
@@ -233,7 +233,7 @@ async function getBreedQuery(group_filter, lifespan_filter, height_filter, searc
 }
 
 async function getDogQuery(breed_filter, age_filter, size_filter, search_param, sort_param, page_num = 1) {
-  let url = `${API_URL}/dog/query?`;
+  let url = `${API_URL}dog/query?`;
   if (breed_filter) url += `&breed=${breed_filter}`;
   if (age_filter) url += `&age=${age_filter}`;
   if (size_filter) url += `&size=${size_filter}`;
@@ -242,7 +242,7 @@ async function getDogQuery(breed_filter, age_filter, size_filter, search_param, 
 }
 
 async function getShelterQuery(city_filter, zipcode_filter, phone_filter, search_param, sort_param, page_num = 1) {
-  let url = `${API_URL}/shelter/query?`;
+  let url = `${API_URL}shelter/query?`;
   if (city_filter) url += `&city=${city_filter}`;
   if (zipcode_filter) url += `&zipcode=${zipcode_filter}`;
   if (phone_filter) url += `&phone=${phone_filter}`;
@@ -251,7 +251,7 @@ async function getShelterQuery(city_filter, zipcode_filter, phone_filter, search
 }
 
 async function getWebsiteQuery(search_param, page_num = 1) {
-    let url = `${API_URL}/api/search_website?`;
+    let url = `${API_URL}search_website?`;
     url += utilities.build_search_sort_param_string(search_param, undefined, page_num);
     return utilities.perform_api_call(url);
 }
