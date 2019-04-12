@@ -10,6 +10,6 @@ frontend and postman:
     image: oceanbarrier/findadogforme-frontend
     script:
     - cd frontend
-    - mocha --reporter spec --no-timeouts test/mocha_test_babel.js
+    - mocha --reporter spec --no-timeouts test/mocha_test.js
     - cd ..
     - newman run Postman.json

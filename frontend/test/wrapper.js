@@ -250,6 +250,12 @@ async function getShelterQuery(city_filter, zipcode_filter, phone_filter, search
   return utilities.perform_api_call(url);
 }
 
+async function getWebsiteQuery(search_param, page_num = 1) {
+    let url = `${API_URL}/api/search_website?`;
+    url += utilities.build_search_sort_param_string(search_param, undefined, page_num);
+    return utilities.perform_api_call(url);
+}
+
 var _default = {
   getShelter,
   getShelterActivities,
@@ -270,6 +276,7 @@ var _default = {
   getShelterQuery,
   getDogQuery,
   getBreedQuery,
-  getActivityQuery
+  getActivityQuery,
+  getWebsiteQuery
 };
 exports.default = _default;

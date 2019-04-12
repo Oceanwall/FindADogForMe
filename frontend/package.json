@@ -26,7 +26,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-wrapper": "npx babel test/mocha_test.js --out-file test/mocha_test_babel.js && mocha --reporter spec --no-timeouts test/mocha_test_babel.js",
+    "test-wrapper": "mocha --reporter spec --no-timeouts test/mocha_test.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
