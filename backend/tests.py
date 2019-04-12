@@ -194,6 +194,38 @@ class TestBackend(TestCase):
         assert result.is_free != None
         assert result.date != None
 
+    def test20(self):
+        result = get_shelters(count=20)
+        assert len(result) == 20
+
+    def test21(self):
+        result = get_dogs("TX1399", count=20)
+        assert len(result) == 20
+    
+    def test22(self):
+        result = get_dogs("TX1399", count=25)
+        assert len(result) == 25
+
+    def test23(self):
+        result = get_dogs("TX1399")
+        assert len(result) == 30
+    
+    def test24(self):
+        breed_images = get_breed_images("border collie")
+        assert type(breed_images) == type([])
+        assert len(breed_images) > 0
+
+    def test25(self):
+        breed_images = get_breed_images("bull terrier")
+        assert type(breed_images) == type([])
+        assert len(breed_images) > 0
+
+    def test26(self):
+        breed_images = get_breed_images("afghan hound")
+        assert type(breed_images) == type([])
+        assert len(breed_images) > 0
+    
+
 
 if __name__ == "__main__":
     main()
