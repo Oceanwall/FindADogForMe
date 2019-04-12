@@ -23,8 +23,32 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(shelters["objects"][0]).to.have.property("phone");
     expect(shelters["objects"][0]).to.have.property("state");
   });
+  it("should get information about all shelters on page 3", async function () {
+    let shelters = await wrapper.getShelter(undefined, 3);
+    expect(shelters).to.be.an("object");
+    expect(shelters).to.have.property("num_results");
+    expect(shelters).to.have.property("objects");
+    expect(shelters["page"]).to.equal(3);
+    expect(shelters["objects"]).to.be.an("array");
+    expect(shelters["objects"][0]).to.be.an("object");
+    expect(shelters["objects"][0]).to.have.property("id");
+    expect(shelters["objects"][0]).to.have.property("name");
+    expect(shelters["objects"][0]).to.have.property("address");
+    expect(shelters["objects"][0]).to.have.property("phone");
+    expect(shelters["objects"][0]).to.have.property("state");
+  });
   it("should get information about a shelter", async function () {
     let shelter = await wrapper.getShelter("TX1399");
+    expect(shelter).to.be.an("object");
+    expect(shelter).to.have.property("id");
+    expect(shelter).to.have.property("name");
+    expect(shelter).to.have.property("name");
+    expect(shelter).to.have.property("address");
+    expect(shelter).to.have.property("phone");
+    expect(shelter).to.have.property("state");
+  });
+  it("should get information about another shelter", async function () {
+    let shelter = await wrapper.getShelter("TX1002");
     expect(shelter).to.be.an("object");
     expect(shelter).to.have.property("id");
     expect(shelter).to.have.property("name");
@@ -47,8 +71,30 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(activities["objects"][0]).to.have.property("weather");
     expect(activities["objects"][0]).to.have.property("description");
   });
+  it("should get activities hosted near another shelter", async function () {
+    let activities = await wrapper.getShelterActivities("TX1002");
+    expect(activities).to.be.an("object");
+    expect(activities).to.have.property("num_results");
+    expect(activities).to.have.property("objects");
+    expect(activities["objects"]).to.be.an("array");
+    expect(activities["objects"][0]).to.be.an("object");
+    expect(activities["objects"][0]).to.have.property("type");
+    expect(activities["objects"][0]).to.have.property("id");
+    expect(activities["objects"][0]).to.have.property("designation");
+    expect(activities["objects"][0]).to.have.property("url");
+    expect(activities["objects"][0]).to.have.property("weather");
+    expect(activities["objects"][0]).to.have.property("description");
+  });
   it("should get breeds hosted by a shelter", async function () {
     let breeds = await wrapper.getShelterBreeds("TX1399");
+    expect(breeds).to.be.an("array");
+    expect(breeds[0]).to.have.property("name");
+    expect(breeds[0]).to.have.property("temperament");
+    expect(breeds[0]).to.have.property("is_active");
+    expect(breeds[0]).to.have.property("group");
+  });
+  it("should get breeds hosted by another shelter", async function () {
+    let breeds = await wrapper.getShelterBreeds("TX1002");
     expect(breeds).to.be.an("array");
     expect(breeds[0]).to.have.property("name");
     expect(breeds[0]).to.have.property("temperament");
@@ -65,8 +111,18 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(dogs["objects"][0]).to.have.property("breed");
     expect(dogs["objects"][0]).to.have.property("age");
     expect(dogs["objects"][0]).to.have.property("shelter_id");
+  });
+  it("should get dogs hosted by another shelter", async function () {
+    let dogs = await wrapper.getShelterDogs("TX1002");
+    expect(dogs).to.be.an("object");
+    expect(dogs).to.have.property("num_results");
+    expect(dogs).to.have.property("objects");
+    expect(dogs["objects"]).to.be.an("array");
+    expect(dogs["objects"][0]).to.be.an("object");
+    expect(dogs["objects"][0]).to.have.property("breed");
+    expect(dogs["objects"][0]).to.have.property("age");
+    expect(dogs["objects"][0]).to.have.property("shelter_id");
   }); // DOGS
-
   it("should get information about all dogs", async function () {
     let dogs = await wrapper.getDog(undefined, 3);
     expect(dogs).to.be.an("object");
