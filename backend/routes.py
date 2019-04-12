@@ -9,7 +9,7 @@ from utilities import control_pagination, page_number_error
 ALPHABETICAL = "alphabetical"
 REVERSE_ALPHABETICAL = "reverse_alphabetical"
 DATE = "date"
-REVERSE_DATE ="reverse_date"
+REVERSE_DATE = "reverse_date"
 ZIPCODE = "zipcode"
 REVERSE_ZIPCODE = "reverse_zipcode"
 SIZE = "size"
@@ -21,6 +21,7 @@ REVERSE_GROUP = "reverse_group"
 Sets up Flask Restless API Manager.
 Also provides routing for the index page, 404 errors, and search / sort / filter queries.
 """
+
 
 @application.route("/")
 def index():
@@ -74,7 +75,9 @@ def activity_query():
     if sort_param == DATE:
         valid_items = valid_items.filter(Activity.date != None).order_by(Activity.date)
     elif sort_param == REVERSE_DATE:
-        valid_items = valid_items.filter(Activity.date != None).order_by(Activity.date.desc())
+        valid_items = valid_items.filter(Activity.date != None).order_by(
+            Activity.date.desc()
+        )
 
     valid_items = valid_items.all()
     search_items = valid_items
@@ -83,12 +86,23 @@ def activity_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            if ((item["name"] is not None and search_param in item["name"].lower()) or
-               (item["date"] is not None and search_param in item["date"].lower()) or
-               (item["designation"] is not None and search_param in item["designation"].lower()) or
-               (item["is_free_string"] is not None and search_param in item["is_free_string"].lower()) or
-               (item["location"] is not None and search_param in item["location"].lower()) or
-               (item["type"] is not None and search_param in item["type"].lower())):
+            if (
+                (item["name"] is not None and search_param in item["name"].lower())
+                or (item["date"] is not None and search_param in item["date"].lower())
+                or (
+                    item["designation"] is not None
+                    and search_param in item["designation"].lower()
+                )
+                or (
+                    item["is_free_string"] is not None
+                    and search_param in item["is_free_string"].lower()
+                )
+                or (
+                    item["location"] is not None
+                    and search_param in item["location"].lower()
+                )
+                or (item["type"] is not None and search_param in item["type"].lower())
+            ):
                 search_items.append(object)
 
     return control_pagination(search_items, page_num, 12)
@@ -123,11 +137,15 @@ def breed_query():
 
     if lifespan_filter is not None:
         lifespan_filter = float(lifespan_filter)
-        valid_items = valid_items.filter(Breed.min_lifespan <= lifespan_filter).filter(Breed.max_lifespan >= lifespan_filter)
+        valid_items = valid_items.filter(Breed.min_lifespan <= lifespan_filter).filter(
+            Breed.max_lifespan >= lifespan_filter
+        )
 
     if height_filter is not None:
         height_filter = float(height_filter)
-        valid_items = valid_items.filter(Breed.min_height <= height_filter).filter(Breed.max_height >= height_filter)
+        valid_items = valid_items.filter(Breed.min_height <= height_filter).filter(
+            Breed.max_height >= height_filter
+        )
 
     if sort_param == ALPHABETICAL:
         valid_items = valid_items.order_by(Breed.name)
@@ -145,13 +163,30 @@ def breed_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            if ((item["name"] is not None and search_param in item["name"].lower()) or
-               (item["group"] is not None and search_param in item["group"].lower()) or
-               (item["temperament"] is not None and search_param in item["temperament"].lower()) or
-               (item["min_lifespan"] is not None and search_param in str(item["min_lifespan"])) or
-               (item["max_lifespan"] is not None and search_param in str(item["max_lifespan"])) or
-               (item["min_height"] is not None and search_param in str(item["min_height"])) or
-               (item["max_height"] is not None and search_param in str(item["max_height"]))):
+            if (
+                (item["name"] is not None and search_param in item["name"].lower())
+                or (item["group"] is not None and search_param in item["group"].lower())
+                or (
+                    item["temperament"] is not None
+                    and search_param in item["temperament"].lower()
+                )
+                or (
+                    item["min_lifespan"] is not None
+                    and search_param in str(item["min_lifespan"])
+                )
+                or (
+                    item["max_lifespan"] is not None
+                    and search_param in str(item["max_lifespan"])
+                )
+                or (
+                    item["min_height"] is not None
+                    and search_param in str(item["min_height"])
+                )
+                or (
+                    item["max_height"] is not None
+                    and search_param in str(item["max_height"])
+                )
+            ):
                 search_items.append(object)
 
     return control_pagination(search_items, page_num, 20)
@@ -206,11 +241,16 @@ def dog_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            if ((item["name"] is not None and search_param in item["name"].lower()) or
-               (item["shelter_name"] is not None and search_param in item["shelter_name"].lower()) or
-               (item["breed"] is not None and search_param in item["breed"].lower()) or
-               (item["age"] is not None and search_param in item["age"].lower()) or
-               (item["size"] is not None and search_param in item["size"].lower())):
+            if (
+                (item["name"] is not None and search_param in item["name"].lower())
+                or (
+                    item["shelter_name"] is not None
+                    and search_param in item["shelter_name"].lower()
+                )
+                or (item["breed"] is not None and search_param in item["breed"].lower())
+                or (item["age"] is not None and search_param in item["age"].lower())
+                or (item["size"] is not None and search_param in item["size"].lower())
+            ):
                 search_items.append(object)
 
     return control_pagination(search_items, page_num, 20)
@@ -264,11 +304,18 @@ def shelter_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            if ((item["name"] is not None and search_param in item["name"].lower()) or
-               (item["city"] is not None and search_param in item["city"].lower()) or
-               (item["zipcode"] is not None and search_param in str(item["zipcode"])) or
-               (item["phone"] is not None and search_param in str(item["phone"])) or
-               (item["address"] is not None and search_param in item["address"].lower())):
+            if (
+                (item["name"] is not None and search_param in item["name"].lower())
+                or (item["city"] is not None and search_param in item["city"].lower())
+                or (
+                    item["zipcode"] is not None and search_param in str(item["zipcode"])
+                )
+                or (item["phone"] is not None and search_param in str(item["phone"]))
+                or (
+                    item["address"] is not None
+                    and search_param in item["address"].lower()
+                )
+            ):
                 search_items.append(object)
 
     return control_pagination(search_items, page_num, 12)
@@ -292,7 +339,9 @@ def search_website():
         return page_number_error()
 
     # NOTE: Allowing user to provide no search parameter, upon which I return all model instances.
-    all_instances = Activity.query.all() + Breed.query.all() + Dog.query.all() + Shelter.query.all()
+    all_instances = (
+        Activity.query.all() + Breed.query.all() + Dog.query.all() + Shelter.query.all()
+    )
     search_items = all_instances
 
     # TODO: Slightly inefficient? Should I separate out and search by model instead?
@@ -300,26 +349,108 @@ def search_website():
         search_items = []
         for object in all_instances:
             item = object.serialize()
-            if (("name" in item and item["name"] is not None and search_param in item["name"].lower()) or
-               ("date" in item and item["date"] is not None and search_param in item["date"].lower()) or
-               ("designation" in item and item["designation"] is not None and search_param in item["designation"].lower()) or
-               ("is_free_string" in item and item["is_free_string"] is not None and search_param in item["is_free_string"].lower()) or
-               ("location" in item and item["location"] is not None and search_param in item["location"].lower()) or
-               ("type" in item and item["type"] is not None and search_param in item["type"].lower()) or
-               ("group" in item and item["group"] is not None and search_param in item["group"].lower()) or
-               ("temperament" in item and item["temperament"] is not None and search_param in item["temperament"].lower()) or
-               ("min_lifespan" in item and item["min_lifespan"] is not None and search_param in str(item["min_lifespan"])) or
-               ("max_lifespan" in item and item["max_lifespan"] is not None and search_param in str(item["max_lifespan"])) or
-               ("min_height" in item and item["min_height"] is not None and search_param in str(item["min_height"])) or
-               ("max_height" in item and item["max_height"] is not None and search_param in str(item["max_height"])) or
-               ("shelter_name" in item and item["shelter_name"] is not None and search_param in item["shelter_name"].lower()) or
-               ("breed" in item and item["breed"] is not None and search_param in item["breed"].lower()) or
-               ("age" in item and item["age"] is not None and search_param in item["age"].lower()) or
-               ("size" in item and item["size"] is not None and search_param in item["size"].lower()) or
-               ("city" in item and item["city"] is not None and search_param in item["city"].lower()) or
-               ("zipcode" in item and item["zipcode"] is not None and search_param in str(item["zipcode"])) or
-               ("phone" in item and item["phone"] is not None and search_param in str(item["phone"])) or
-               ("address" in item and item["address"] is not None and search_param in item["address"].lower())):
+            if (
+                (
+                    "name" in item
+                    and item["name"] is not None
+                    and search_param in item["name"].lower()
+                )
+                or (
+                    "date" in item
+                    and item["date"] is not None
+                    and search_param in item["date"].lower()
+                )
+                or (
+                    "designation" in item
+                    and item["designation"] is not None
+                    and search_param in item["designation"].lower()
+                )
+                or (
+                    "is_free_string" in item
+                    and item["is_free_string"] is not None
+                    and search_param in item["is_free_string"].lower()
+                )
+                or (
+                    "location" in item
+                    and item["location"] is not None
+                    and search_param in item["location"].lower()
+                )
+                or (
+                    "type" in item
+                    and item["type"] is not None
+                    and search_param in item["type"].lower()
+                )
+                or (
+                    "group" in item
+                    and item["group"] is not None
+                    and search_param in item["group"].lower()
+                )
+                or (
+                    "temperament" in item
+                    and item["temperament"] is not None
+                    and search_param in item["temperament"].lower()
+                )
+                or (
+                    "min_lifespan" in item
+                    and item["min_lifespan"] is not None
+                    and search_param in str(item["min_lifespan"])
+                )
+                or (
+                    "max_lifespan" in item
+                    and item["max_lifespan"] is not None
+                    and search_param in str(item["max_lifespan"])
+                )
+                or (
+                    "min_height" in item
+                    and item["min_height"] is not None
+                    and search_param in str(item["min_height"])
+                )
+                or (
+                    "max_height" in item
+                    and item["max_height"] is not None
+                    and search_param in str(item["max_height"])
+                )
+                or (
+                    "shelter_name" in item
+                    and item["shelter_name"] is not None
+                    and search_param in item["shelter_name"].lower()
+                )
+                or (
+                    "breed" in item
+                    and item["breed"] is not None
+                    and search_param in item["breed"].lower()
+                )
+                or (
+                    "age" in item
+                    and item["age"] is not None
+                    and search_param in item["age"].lower()
+                )
+                or (
+                    "size" in item
+                    and item["size"] is not None
+                    and search_param in item["size"].lower()
+                )
+                or (
+                    "city" in item
+                    and item["city"] is not None
+                    and search_param in item["city"].lower()
+                )
+                or (
+                    "zipcode" in item
+                    and item["zipcode"] is not None
+                    and search_param in str(item["zipcode"])
+                )
+                or (
+                    "phone" in item
+                    and item["phone"] is not None
+                    and search_param in str(item["phone"])
+                )
+                or (
+                    "address" in item
+                    and item["address"] is not None
+                    and search_param in item["address"].lower()
+                )
+            ):
                 search_items.append(object)
 
     return control_pagination(search_items, page_num, 20)

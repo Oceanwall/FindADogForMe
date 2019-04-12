@@ -100,10 +100,15 @@ def build_park(info, commit=False):
         description=info["description"],
         latitude=location[0],
         longitude=location[1],
-        location=((main_address["line3"] + ", ") if main_address["line3"] != "" else "") + main_address["city"] + ", " + main_address["stateCode"],
+        location=((main_address["line3"] + ", ") if main_address["line3"] != "" else "")
+        + main_address["city"]
+        + ", "
+        + main_address["stateCode"],
         is_active=True,
         is_free=True if info["entranceFees"][0]["cost"] == "0.0000" else False,
-        is_free_string="free" if info["entranceFees"][0]["cost"] == "0.0000" else "paid",
+        is_free_string="free"
+        if info["entranceFees"][0]["cost"] == "0.0000"
+        else "paid",
         # "cost": info["entranceFees"][0]["cost"],
         image_1=info["images"][0]["url"],
         image_2=info["images"][1]["url"],
@@ -187,7 +192,13 @@ def build_event(info, commit=False):
         latitude=address_data["latitude"],
         longitude=address_data["longitude"],
         location=address_data["address"]["localized_address_display"],
-        is_active=(info["category_id"] == "108" or info["category_id"] == "107" or info["category_id"] == "109" or info["category_id"] == "111" or info["category_id"] == "119"),
+        is_active=(
+            info["category_id"] == "108"
+            or info["category_id"] == "107"
+            or info["category_id"] == "109"
+            or info["category_id"] == "111"
+            or info["category_id"] == "119"
+        ),
         is_free=info["is_free"],
         is_free_string="free" if info["is_free"] else "paid",
         image_1=info["logo"]["url"] if "logo" in info else None,

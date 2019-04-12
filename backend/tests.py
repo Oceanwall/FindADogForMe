@@ -107,7 +107,6 @@ class TestBackend(TestCase):
         assert len(breed_list) > 0
         assert breed_one != None
 
-
     def test12(self):
         breed_list = get_all_breeds()
         test_breed = build_breed(breed_list[0])
@@ -120,7 +119,7 @@ class TestBackend(TestCase):
         assert test_breed.min_weight != None
         assert test_breed.is_active != None
 
-    #Begin tests for activity_seeding
+    # Begin tests for activity_seeding
     def test13(self):
         parks = get_all_parks()
         assert parks != None

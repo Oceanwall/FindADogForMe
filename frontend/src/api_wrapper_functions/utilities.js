@@ -189,9 +189,9 @@ function build_search_sort_param_string(search_param, sort_param, page_num) {
     let param_string = `&page=${page_num}`;
 
     if (search_param)
-        param_string += `&search?${search_param}`;
+        param_string += `&search=${search_param}`;
     if (sort_param)
-        param_string += `&sort?${sort_param}`;
+        param_string += `&sort=${sort_param}`;
 
     return param_string;
 }

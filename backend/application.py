@@ -1,5 +1,13 @@
 from application import application
-from routes import index, breed_shelters, page_not_found, activity_query, breed_query, dog_query, shelter_query
+from routes import (
+    index,
+    breed_shelters,
+    page_not_found,
+    activity_query,
+    breed_query,
+    dog_query,
+    shelter_query,
+)
 
 """
 Runs application
