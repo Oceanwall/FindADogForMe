@@ -1,0 +1,26 @@
+.vector_icon {
+  width: 100px;
+  height: 100px;
+}
+
+.vector_section, .vector_section:hover {
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+}
+.activities_section:hover .vector_icon {
+  transition: 0.3s all;
+  fill: orange;
+}
+.breeds_section:hover .vector_icon {
+  transition: 0.3s all;
+  fill: #6ddb5c;
+}
+.dogs_section:hover .vector_icon {
+  transition: 0.3s all;
+  fill: #5173db;
+}
+.shelters_section:hover .vector_icon {
+  transition: 0.3s all;
+  fill: #7a2493;
+}

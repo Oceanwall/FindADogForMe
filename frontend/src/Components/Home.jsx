@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import HomeCarousel from "./HomeCarousel";
+import VectorContainer from "./VectorContainer";
 
 class Home extends Component {
   render() {
@@ -9,7 +10,7 @@ class Home extends Component {
         <br />
         <HomeCarousel />
         <br />
-        <Button href="/dogs">Find a Friend!</Button>
+        <VectorContainer />
       </div>
     );
   }
