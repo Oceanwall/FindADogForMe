@@ -23,7 +23,7 @@ class ActivityCard extends Component {
     }
 
     return (
-      <Card style={{ width: "18rem", height: "35rem" }} className="mt-4">
+      <Card style={{ width: "20rem", height: "35rem" }} className="box mt-4">
         {card_image}
         <Card.Body>
           <Card.Title className="cutoff">{this.props.activity.name}</Card.Title>

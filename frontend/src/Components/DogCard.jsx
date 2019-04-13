@@ -41,7 +41,7 @@ class DogCard extends Component {
     }
 
     return (
-      <Card style={{ width: "18rem", height: "40rem" }} className="mt-4">
+      <Card style={{ width: "20rem", height: "40rem" }} className="box mt-4">
         {card_image}
         <Card.Body>
           <Card.Title>{this.props.dog.name}</Card.Title>
@@ -93,9 +93,11 @@ class DogCard extends Component {
               </Row>
               <Row>
                 <Col>
-                  <Button href={`/dogs/${this.props.dog.id}`}>
-                    Learn More
-                  </Button>
+                  <div class="button">
+                    <Button href={`/dogs/${this.props.dog.id}`}>
+                      Learn More
+                    </Button>
+                  </div>
                 </Col>
               </Row>
             </Container>

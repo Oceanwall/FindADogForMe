@@ -7,18 +7,18 @@ import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import DefaultImage from "./DefaultImage";
 import Button from "react-bootstrap/Button";
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 class ShelterCard extends Component {
   render() {
-    let phone_number = parsePhoneNumberFromString("+1" + this.props.shelter.phone);
-    if (!phone_number)
-      phone_number = this.props.shelter.phone;
-    else
-      phone_number = phone_number.formatNational();
+    let phone_number = parsePhoneNumberFromString(
+      "+1" + this.props.shelter.phone
+    );
+    if (!phone_number) phone_number = this.props.shelter.phone;
+    else phone_number = phone_number.formatNational();
 
     return (
-      <Card style={{ width: "18rem", height: "35rem" }} className="mt-4">
+      <Card style={{ width: "20rem", height: "35rem" }} className="box mt-4">
         <DefaultImage name={this.props.shelter.name} />
         <Card.Body>
           <Card.Title className="cutoff">{this.props.shelter.name}</Card.Title>
@@ -52,9 +52,7 @@ class ShelterCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    {phone_number
-                      ? phone_number
-                      : "None Provided"}
+                    {phone_number ? phone_number : "None Provided"}
                   </p>
                 </Col>
               </Row>

@@ -6,6 +6,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <br />
         <HomeCarousel />
         <br />
         <Button href="/dogs">Find a Friend!</Button>

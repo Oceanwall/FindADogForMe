@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
+import "../styles/CustomNavbar.css";
 
 class CustomNavbar extends Component {
   state = {};
   render() {
     return (
-      <Navbar bg="light" variant="light" expand="lg" id="general-navbar" className="border-bottom border-dark">
+      <Navbar
+        bg="light"
+        variant="light"
+        expand="lg"
+        id="general-navbar"
+        className="border-dark navbar"
+      >
         <Navbar.Brand href="/">
           <img className="mr-2" src="/favicon.ico" alt="" />
           {"Find a Dog for Me"}

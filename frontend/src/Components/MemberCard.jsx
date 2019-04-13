@@ -5,7 +5,7 @@ import "../styles/MemberCard.css";
 class MemberCard extends Component {
   render() {
     return (
-      <Card style={{ width: "18rem", height: "43rem" }}>
+      <Card style={{ width: "20rem", height: "43rem" }}>
         <Card.Img
           variant="top"
           src={this.props.person.img}

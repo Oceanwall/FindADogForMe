@@ -23,10 +23,12 @@ class BreedCard extends Component {
     }
 
     return (
-      <Card style={{ width: "18rem", height: "40rem" }} className="mt-4">
+      <Card style={{ width: "20rem", height: "40rem" }} className="box mt-4">
         {card_image}
         <Card.Body>
-          <Card.Title className="capitalize">{this.props.breed.name}</Card.Title>
+          <Card.Title className="capitalize">
+            {this.props.breed.name}
+          </Card.Title>
           <Card.Text>
             <Container>
               <Row>

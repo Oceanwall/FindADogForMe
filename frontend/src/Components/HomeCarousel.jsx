@@ -40,65 +40,61 @@ class HomeCarousel extends Component {
   render() {
     let { leftIcon, rightIcon } = this.state;
     return (
-      <div className="container-fluid" id="carousel-container">
-        <Row>
-          <Col>
-            <Carousel
-              animation={true}
-              autoplay={this.state.autoplay}
-              leftIcon={leftIcon}
-              rightIcon={rightIcon}
-              onSelect={this.onSelect}
-              ref={r => (this.slider = r)}
-              version={4}
-            >
-              <div>
-                <img
-                  className="Carousel-image"
-                  src="/images/dog_main.jpg"
-                  alt="home-carousel-img-1"
-                />
-                <div className="carousel-caption">
-                  <h3>Dogs</h3>
-                  <p>Find the perfect dog for you</p>
-                </div>
-              </div>
-              <div>
-                <img
-                  className="Carousel-image"
-                  src="/images/dog2.jpeg"
-                  alt="home-carousel-img-2"
-                />
-                <div className="carousel-caption">
-                  <h3>Activities</h3>
-                  <p>Explore dog related activities and events</p>
-                </div>
-              </div>
-              <div>
-                <img
-                  className="Carousel-image"
-                  src="/images/dog1.jpg"
-                  alt="home-carousel-img-3"
-                />
-                <div className="carousel-caption">
-                  <h3>Shelters</h3>
-                  <p>Find and learn more about nearby dog shelters</p>
-                </div>
-              </div>
-              <div>
-                <img
-                  className="Carousel-image"
-                  src="/images/dog_group.jpg"
-                  alt="home-carousel-img-4"
-                />
-                <div className="carousel-caption">
-                  <h3>Breeds</h3>
-                  <p>Discover and learn more about dog breeds</p>
-                </div>
-              </div>
-            </Carousel>
-          </Col>
-        </Row>
+      <div id="carousel-container">
+        <Carousel
+          animation={true}
+          autoplay={this.state.autoplay}
+          leftIcon={leftIcon}
+          rightIcon={rightIcon}
+          onSelect={this.onSelect}
+          ref={r => (this.slider = r)}
+          version={4}
+        >
+          <div>
+            <img
+              className="Carousel-image"
+              src="/images/dog_main.jpg"
+              alt="home-carousel-img-1"
+            />
+            <div className="carousel-caption">
+              <h3>Dogs</h3>
+              <p>Find the perfect dog for you</p>
+            </div>
+          </div>
+          <div>
+            <img
+              className="Carousel-image"
+              src="/images/dog2.jpeg"
+              alt="home-carousel-img-2"
+            />
+            <div className="carousel-caption">
+              <h3>Activities</h3>
+              <p>Explore dog related activities and events</p>
+            </div>
+          </div>
+          <div>
+            <img
+              className="Carousel-image"
+              src="/images/dog1.jpg"
+              alt="home-carousel-img-3"
+            />
+            <div className="carousel-caption">
+              <h3>Shelters</h3>
+              <p>Find and learn more about nearby dog shelters</p>
+            </div>
+          </div>
+          <div>
+            <img
+              className="Carousel-image"
+              src="/images/dog_group.jpg"
+              alt="home-carousel-img-4"
+            />
+            <div className="carousel-caption">
+              <h3>Breeds</h3>
+              <p>Discover and learn more about dog breeds</p>
+            </div>
+          </div>
+        </Carousel>
       </div>
     );
   }
