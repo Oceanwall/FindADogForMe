@@ -13,3 +13,8 @@ img {
   width: 100%;
   height: 650px;
 }
+
+.normal_link, .normal_link:hover {
+    color: white;
+    text-decoration: none;
+}

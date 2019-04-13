@@ -57,8 +57,10 @@ class HomeCarousel extends Component {
               alt="home-carousel-img-1"
             />
             <div className="carousel-caption">
-              <h3>Dogs</h3>
-              <p>Find the perfect dog for you</p>
+              <a href="/dogs" class="normal_link">
+                <h3>Dogs</h3>
+                <p>Find the perfect dog for you</p>
+              </a>
             </div>
           </div>
           <div>
@@ -68,8 +70,10 @@ class HomeCarousel extends Component {
               alt="home-carousel-img-2"
             />
             <div className="carousel-caption">
-              <h3>Activities</h3>
-              <p>Explore dog related activities and events</p>
+              <a href="/activities" class="normal_link">
+                <h3>Activities</h3>
+                <p>Explore dog related activities and events</p>
+              </a>
             </div>
           </div>
           <div>
@@ -79,8 +83,10 @@ class HomeCarousel extends Component {
               alt="home-carousel-img-3"
             />
             <div className="carousel-caption">
-              <h3>Shelters</h3>
-              <p>Find and learn more about nearby dog shelters</p>
+              <a href="/shelters" class="normal_link">
+                <h3>Shelters</h3>
+                <p>Find and learn more about nearby dog shelters</p>
+              </a>
             </div>
           </div>
           <div>
@@ -90,8 +96,10 @@ class HomeCarousel extends Component {
               alt="home-carousel-img-4"
             />
             <div className="carousel-caption">
-              <h3>Breeds</h3>
-              <p>Discover and learn more about dog breeds</p>
+              <a href="/breeds" class="normal_link">
+                <h3>Breeds</h3>
+                <p>Discover and learn more about dog breeds</p>
+              </a>
             </div>
           </div>
         </Carousel>
