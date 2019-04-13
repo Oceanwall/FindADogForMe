@@ -8,7 +8,7 @@ import ActivityCard from "./ActivityCard";
 import BreedCard from "./BreedCard";
 import CardDeck from "react-bootstrap/CardDeck";
 import "../styles/Instance.css";
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -136,15 +136,13 @@ class ShelterInstance extends Component {
     if (this.state.loaded) {
       console.log(this.state.breed_list);
       breeds = this.state.breed_list.map(breed => {
-        return " "+breed["name"];
+        return " " + breed["name"];
       });
     }
 
     let phone_number = parsePhoneNumberFromString("+1" + this.state.phone);
-    if (!phone_number)
-      phone_number = this.state.phone;
-    else
-      phone_number = phone_number.formatNational();
+    if (!phone_number) phone_number = this.state.phone;
+    else phone_number = phone_number.formatNational();
 
     return (
       <div>
@@ -161,7 +159,10 @@ class ShelterInstance extends Component {
                 </p>
                 {breeds.length > 0 ? (
                   <div>
-                    <p align="left" className="capitalize"> Shelter Breeds: {" " + breeds}</p>
+                    <p align="left" className="capitalize">
+                      {" "}
+                      Shelter Breeds: {" " + breeds}
+                    </p>
                   </div>
                 ) : (
                   <div>

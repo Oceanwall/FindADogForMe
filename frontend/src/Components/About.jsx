@@ -198,9 +198,11 @@ class About extends Component {
       );
     });
     return (
-      <div>
+      <div class="lato">
         <Container id="desc-motivation">
-          <h2 class="text-center title-text mt-2">Description and Motivation</h2>
+          <h2 class="text-center title-text mt-2">
+            Description and Motivation
+          </h2>
           <p class="mt-3" align="left">
             As shelters become increasingly crowded at alarming rates, it's
             become clear that the adoption process must be optimized. Our intent
