@@ -5,6 +5,11 @@ import Container from "react-bootstrap/Container";
 import DogCard from "./DogCard";
 import DogInstance from "./DogInstance";
 import { Route } from "react-router-dom";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import "../styles/Dogs.css";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -130,34 +135,123 @@ class Dogs extends Component {
     super(props);
     //initialize initial state to not loaded
     this.state = {
-      info_loaded: false
+      info_loaded: false,
+      age: "",
+      size: "",
+      breed: "",
+      ageButtonName: "Filter by age",
+      sizeButtonName: "Filter by size",
+      searchParam: undefined,
+      sortParam: undefined,
+      filtered: false
     };
+
     this.changePage = this.changePage.bind(this);
     this.updateDog = this.updateDog.bind(this);
+    this.setAgeFilter = this.setAgeFilter.bind(this);
+    this.setSizeFilter = this.setSizeFilter.bind(this);
+    this.setBreedFilter = this.setBreedFilter.bind(this);
+    this.setDefaultFilterState = this.setDefaultFilterState.bind(this);
   }
 
   //change page. pretty much copy paste this around, replace 'this.updateDog'
   changePage(pageNum) {
-    this.setState(state => ({
+    this.setState({
       info_loaded: false
-    }));
-    this.updateDog(pageNum);
+    });
+    if (!this.state.filtered) {
+      this.updateDog(pageNum);
+    } else {
+      wrapper
+        .getDogQuery(
+          this.state.breed,
+          this.state.age,
+          this.state.size,
+          this.state.searchParam,
+          this.state.sortParam,
+          pageNum
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({
+            activityList: response["objects"],
+            currentPage: pageNum,
+            maxPage: response["total_pages"],
+            info_loaded: true
+          });
+        });
+    }
   }
 
   //server request method. called everytime page change, and on initial mount
   async updateDog(pageNum) {
     wrapper.getDog(undefined, pageNum).then(response => {
-      this.setState(state => ({
+      this.setState({
         currentPage: pageNum,
         maxPage: response["total_pages"],
         dogList: response["objects"],
         info_loaded: true
-      }));
+      });
     });
   }
   //update page on initial mount to load information
   async componentDidMount() {
     this.changePage(1);
+  }
+
+  setAgeFilter(new_age) {
+    this.setState({ age: new_age, ageButtonName: new_age }, () => {
+      console.log("Age: ", this.state.age);
+      console.log("Size: ", this.state.size);
+      wrapper
+        .getDogQuery(
+          this.state.breed,
+          this.state.age,
+          this.state.size,
+          undefined,
+          undefined
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({ dogList: response["objects"], filtered: true });
+        });
+    });
+  }
+
+  setSizeFilter(new_size, label) {
+    this.setState({ size: new_size, sizeButtonName: label }, () => {
+      console.log("Age: ", this.state.age);
+      console.log("Size: ", this.state.size);
+      wrapper
+        .getDogQuery(
+          this.state.breed,
+          this.state.age,
+          this.state.size,
+          undefined,
+          undefined
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({ dogList: response["objects"], filtered: true });
+        });
+    });
+  }
+
+  setBreedFilter(new_breed) {
+    this.setState({ breed: new_breed }, () => console.log(this.state.breed));
+  }
+
+  setDefaultFilterState() {
+    this.setState(
+      {
+        age: "",
+        breed: "",
+        size: "",
+        ageButtonName: "Filter by age",
+        sizeButtonName: "Filter by size"
+      },
+      () => this.updateDog(1)
+    );
   }
 
   render() {
@@ -178,6 +272,80 @@ class Dogs extends Component {
             <h1> Dogs</h1>
           </div>
           <Container>
+            <Row className="search-bar">
+              <Button
+                variant="danger"
+                onClick={() =>
+                  this.setState(
+                    {
+                      age: "",
+                      breed: "",
+                      size: "",
+                      ageButtonName: "Filter by age",
+                      sizeButtonName: "Filter by size",
+                      filtered: false
+                    },
+                    () => this.updateDog(1)
+                  )
+                }
+              >
+                Reset
+              </Button>
+              <DropdownButton title={this.state.ageButtonName}>
+                <Dropdown.Item
+                  eventKey="Baby"
+                  onSelect={() => this.setAgeFilter("Baby")}
+                >
+                  Baby
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Young"
+                  onSelect={() => this.setAgeFilter("Young")}
+                >
+                  Young
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Adult"
+                  onSelect={() => this.setAgeFilter("Adult")}
+                >
+                  Adult
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Senior"
+                  onSelect={() => this.setAgeFilter("Senior")}
+                >
+                  Senior
+                </Dropdown.Item>
+              </DropdownButton>
+              <DropdownButton title={this.state.sizeButtonName}>
+                <Dropdown.Item
+                  eventKey="Small"
+                  onSelect={eventKey => this.setSizeFilter("S", eventKey)}
+                >
+                  Small
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Medium"
+                  onSelect={eventKey => this.setSizeFilter("M", eventKey)}
+                >
+                  Medium
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Large"
+                  onSelect={eventKey => this.setSizeFilter("L", eventKey)}
+                >
+                  Large
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Extra Large"
+                  onSelect={eventKey => this.setSizeFilter("XL", eventKey)}
+                >
+                  Extra Large
+                </Dropdown.Item>
+              </DropdownButton>
+
+              <Button>Search</Button>
+            </Row>
             {this.state.info_loaded && (
               <CardDeck>
                 <div class="card-deck">{dogCards}</div>

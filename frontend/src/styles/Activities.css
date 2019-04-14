@@ -3,3 +3,8 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.search-bar {
+  display: flex;
+  justify-content: space-around;
+}
