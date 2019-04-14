@@ -24,6 +24,7 @@ class Activities extends Component {
       activeButtonName: "Filter by intensity",
       freeButtonName: "Filter by cost",
       typeButtonName: "Filter by type",
+      sortButtonName: "Sort",
       searchParam: undefined,
       sortParam: undefined,
       filtered: false
@@ -71,6 +72,24 @@ class Activities extends Component {
           });
         });
     }
+  }
+
+  // sets sort criteria then updates the dogs to show
+  setSort(sort, label) {
+    this.setState({ sortParam: sort, sortButtonName: label }, () => {
+      wrapper
+        .getActivityQuery(
+          this.state.active,
+          this.state.free,
+          this.state.type,
+          this.state.searchParam,
+          this.state.sortParam
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({ activityList: response["objects"], filtered: true });
+        });
+    });
   }
 
   setActiveFilter(active, label) {
@@ -168,6 +187,35 @@ class Activities extends Component {
               >
                 Reset
               </Button>
+
+              <DropdownButton title={this.state.sortButtonName}>
+                <Dropdown.Item
+                  eventKey="A-Z"
+                  onSelect={eventKey => this.setSort("alphabetical", eventKey)}
+                >
+                  A-Z
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Z-A"
+                  onSelect={eventKey =>
+                    this.setSort("reverse_alphabetical", eventKey)
+                  }
+                >
+                  Z-A
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Chronological"
+                  onSelect={eventKey => this.setSort("date", eventKey)}
+                >
+                  Chronological
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Reverse Chronological"
+                  onSelect={eventKey => this.setSort("reverse_date", eventKey)}
+                >
+                  Reverse Chronological
+                </Dropdown.Item>
+              </DropdownButton>
 
               <DropdownButton title={this.state.activeButtonName}>
                 <Dropdown.Item
