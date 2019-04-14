@@ -319,13 +319,13 @@ class Dogs extends Component {
                 </Dropdown.Item>
                 <Dropdown.Item
                   eventKey="Smallest-Biggest"
-                  onSelect={eventKey => this.setSort("reverse_size", eventKey)}
+                  onSelect={eventKey => this.setSort("size", eventKey)}
                 >
                   Smallest-Biggest
                 </Dropdown.Item>
                 <Dropdown.Item
                   eventKey="Biggest-Smallest"
-                  onSelect={eventKey => this.setSort("size", eventKey)}
+                  onSelect={eventKey => this.setSort("reverse_size", eventKey)}
                 >
                   Biggest-Smallest
                 </Dropdown.Item>
