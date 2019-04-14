@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import "../styles/ActivityCard.css";
+import "../styles/Card.css";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -15,7 +16,7 @@ class ActivityCard extends Component {
         <Card.Img
           variant="top"
           src={this.props.activity.image_1}
-          style={{ width: "auto", height: "300px" }}
+          className="card-image"
         />
       );
     } else {
@@ -23,7 +24,7 @@ class ActivityCard extends Component {
     }
 
     return (
-      <Card style={{ width: "20rem", height: "35rem" }} className="box mt-4">
+      <Card className="box mt-4 custom-card">
         {card_image}
         <Card.Body>
           <Card.Title className="cutoff">{this.props.activity.name}</Card.Title>
@@ -37,7 +38,7 @@ class ActivityCard extends Component {
                         <b>Date:</b>
                       </p>
                     </Col>
-                    <Col xs="auto">
+                    <Col>
                       <p align="right">{this.props.activity.date}</p>
                     </Col>
                   </div>

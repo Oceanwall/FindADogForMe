@@ -4,7 +4,9 @@ import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
 import ActivityCard from "./ActivityCard";
 import ActivityInstance from "./ActivityInstance";
+import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -32,6 +34,9 @@ class Activities extends Component {
     this.changePage = this.changePage.bind(this);
     this.updateDog = this.updateActivity.bind(this);
     this.filter = this.filter.bind(this);
+    this.modelSearch = this.modelSearch.bind(this);
+
+    this.searchParamRef = React.createRef();
   }
 
   //change page. pretty much copy paste this around, replace 'this.updateDog'
@@ -121,6 +126,12 @@ class Activities extends Component {
     );
   }
 
+  modelSearch() {
+    this.setState({
+      searchParam: this.searchParamRef.value
+    }, this.filter);
+  }
+
   //update page on initial mount to load information
   async componentDidMount() {
     this.changePage(1);
@@ -146,109 +157,138 @@ class Activities extends Component {
           </div>
           <Container>
             <Row className="search-bar">
-              <Button
-                variant="danger"
-                onClick={() =>
-                  this.setState(
-                    {
-                      age: "",
-                      breed: "",
-                      size: "",
-                      activeButtonName: "Filter by intensity",
-                      freeButtonName: "Filter by cost",
-                      typeButtonName: "Filter by type",
-                      filtered: false
-                    },
-                    () => this.updateDog(1)
-                  )
-                }
-              >
-                Reset
-              </Button>
+              <Col md={1} xs={2} className="mt-2">
+                <Button
+                  variant="danger"
+                  onClick={() => {
+                    this.setState(
+                      {
+                        activeButtonName: "Filter by intensity",
+                        freeButtonName: "Filter by cost",
+                        typeButtonName: "Filter by type",
+                        sortButtonName: "Sort",
+                        active: undefined,
+                        free: undefined,
+                        type: "",
+                        filtered: false,
+                        sortParam: undefined,
+                        searchParam: undefined
+                      },
+                      () => this.updateDog(1)
+                    );
+                    this.searchParamRef.value = "";
+                  }}
+                >
+                  Reset
+                </Button>
+              </Col>
 
-              <DropdownButton title={this.state.sortButtonName}>
-                <Dropdown.Item
-                  eventKey="A-Z"
-                  onSelect={eventKey => this.setSort("alphabetical", eventKey)}
-                >
-                  A-Z
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Z-A"
-                  onSelect={eventKey =>
-                    this.setSort("reverse_alphabetical", eventKey)
-                  }
-                >
-                  Z-A
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Chronological"
-                  onSelect={eventKey => this.setSort("date", eventKey)}
-                >
-                  Chronological
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Reverse Chronological"
-                  onSelect={eventKey => this.setSort("reverse_date", eventKey)}
-                >
-                  Reverse Chronological
-                </Dropdown.Item>
-              </DropdownButton>
+              <Col md={2} xs={4} className="mt-2">
+                <DropdownButton title={this.state.sortButtonName}>
+                  <Dropdown.Item
+                    eventKey="A-Z"
+                    onSelect={eventKey => this.setSort("alphabetical", eventKey)}
+                  >
+                    A-Z
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Z-A"
+                    onSelect={eventKey =>
+                      this.setSort("reverse_alphabetical", eventKey)
+                    }
+                  >
+                    Z-A
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Chronological"
+                    onSelect={eventKey => this.setSort("date", eventKey)}
+                  >
+                    Chronological
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Reverse Chronological"
+                    onSelect={eventKey => this.setSort("reverse_date", eventKey)}
+                  >
+                    Reverse Chronological
+                  </Dropdown.Item>
+                </DropdownButton>
+              </Col>
 
-              <DropdownButton title={this.state.activeButtonName}>
-                <Dropdown.Item
-                  eventKey="Active"
-                  onSelect={eventKey => this.setActiveFilter(true, eventKey)}
-                >
-                  Active
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Casual"
-                  onSelect={eventKey => this.setActiveFilter(false, eventKey)}
-                >
-                  Casual
-                </Dropdown.Item>
-              </DropdownButton>
+              <Col md={2} xs={6} className="mt-2">
+                <DropdownButton title={this.state.activeButtonName}>
+                  <Dropdown.Item
+                    eventKey="Active"
+                    onSelect={eventKey => this.setActiveFilter(true, eventKey)}
+                  >
+                    Active
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Casual"
+                    onSelect={eventKey => this.setActiveFilter(false, eventKey)}
+                  >
+                    Casual
+                  </Dropdown.Item>
+                </DropdownButton>
+              </Col>
 
-              <DropdownButton title={this.state.freeButtonName}>
-                <Dropdown.Item
-                  eventKey="Free"
-                  onSelect={eventKey => this.setFreeFilter(true, eventKey)}
-                >
-                  Free
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Paid"
-                  onSelect={eventKey => this.setFreeFilter(false, eventKey)}
-                >
-                  Paid
-                </Dropdown.Item>
-              </DropdownButton>
+              <Col md={2} xs={6} className="mt-2">
+                <DropdownButton title={this.state.freeButtonName}>
+                  <Dropdown.Item
+                    eventKey="Free"
+                    onSelect={eventKey => this.setFreeFilter(true, eventKey)}
+                  >
+                    Free
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Paid"
+                    onSelect={eventKey => this.setFreeFilter(false, eventKey)}
+                  >
+                    Paid
+                  </Dropdown.Item>
+                </DropdownButton>
+              </Col>
 
-              <DropdownButton title={this.state.typeButtonName}>
-                <Dropdown.Item
-                  eventKey="Eventbrite"
-                  onSelect={eventKey =>
-                    this.setTypeFilter("eventbrite", eventKey)
-                  }
-                >
-                  Eventbrite
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Meetup"
-                  onSelect={eventKey => this.setTypeFilter("meetup", eventKey)}
-                >
-                  Meetup
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="National Park"
-                  onSelect={eventKey => this.setTypeFilter("park", eventKey)}
-                >
-                  National Park
-                </Dropdown.Item>
-              </DropdownButton>
+              <Col md={2} xs={6} className="mt-2">
+                <DropdownButton title={this.state.typeButtonName}>
+                  <Dropdown.Item
+                    eventKey="Eventbrite"
+                    onSelect={eventKey =>
+                      this.setTypeFilter("eventbrite", eventKey)
+                    }
+                  >
+                    Eventbrite
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Meetup"
+                    onSelect={eventKey => this.setTypeFilter("meetup", eventKey)}
+                  >
+                    Meetup
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="National Park"
+                    onSelect={eventKey => this.setTypeFilter("park", eventKey)}
+                  >
+                    National Park
+                  </Dropdown.Item>
+                </DropdownButton>
+              </Col>
 
-              <Button>Search</Button>
+              <Col md={2} xs={6} className="mt-2">
+                <Form.Control
+                  id="activity-search"
+                  type="text"
+                  ref={ref => { this.searchParamRef = ref; }}
+                  clearButton
+                  placeholder="Search for a specific activity..."
+                />
+              </Col>
+
+              <Col md={1} xs={6} className="mt-2">
+                <Button onClick={this.modelSearch}>
+                  Search
+                </Button>
+              </Col>
+
             </Row>
             {this.state.info_loaded && (
               <CardDeck>

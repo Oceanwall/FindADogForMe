@@ -1,0 +1,15 @@
+.card-image {
+   width: auto !important;
+   height: 250px !important;
+}
+.custom-card {
+  width: 20rem !important;
+  height: 35rem !important;
+}
+
+
+@media (max-width: 992px) {
+  .custom-card {
+    height: auto !important;
+  }
+}

@@ -216,8 +216,9 @@ Filtering, Searching, and Sorting Queries
 
 async function getActivityQuery(active_filter, free_filter, type_filter, search_param, sort_param, page_num = 1) {
   let url = `${API_URL}activity/query?`;
-  if (active_filter) url += `&active=${active_filter}`;
-  if (free_filter) url += `&free=${free_filter}`;
+  // Special case for checking true / false parameters.
+  if (typeof active_filter != "undefined") url += `&active=${active_filter}`;
+  if (typeof free_filter != "undefined") url += `&free=${free_filter}`;
   if (type_filter) url += `&type=${type_filter}`;
   url += utilities.build_search_sort_param_string(search_param, sort_param, page_num);
   return utilities.perform_api_call(url);

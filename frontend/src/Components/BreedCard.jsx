@@ -15,7 +15,7 @@ class BreedCard extends Component {
         <Card.Img
           variant="top"
           src={this.props.breed.image_1}
-          style={{ width: "auto", height: "300px" }}
+          style={{ height: "250px" }}
         />
       );
     } else {
