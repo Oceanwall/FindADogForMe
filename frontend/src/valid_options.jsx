@@ -178,7 +178,6 @@ const VALID_CITIES = [
   "Wimberley",
   "Windcrest"
 ];
-
 export { VALID_CITIES };
 
 const VALID_BREEDS = [
@@ -298,3 +297,14 @@ const VALID_BREEDS = [
   "basenji"
 ];
 export { VALID_BREEDS };
+
+const VALID_GROUPS = [
+  "Mixed", "Working", "Non-Sporting", "Sporting", "Herding", "Terrier", "Hound", "Toy"
+];
+export { VALID_GROUPS };
+
+const VALID_LIFESPANS = ["6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"];
+export { VALID_LIFESPANS };
+
+const VALID_HEIGHTS = ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35"];
+export { VALID_HEIGHTS };

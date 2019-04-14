@@ -46,7 +46,7 @@ class Shelters extends Component {
     this.searchParamRef = React.createRef();
   }
 
-  //change page. pretty much copy paste this around, replace 'this.updateDog'
+  //change page. pretty much copy paste this around
   changePage(pageNum) {
     this.setState(state => ({
       info_loaded: false

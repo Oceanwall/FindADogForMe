@@ -5,6 +5,15 @@ import Container from "react-bootstrap/Container";
 import BreedCard from "./BreedCard";
 import BreedInstance from "./BreedInstance";
 import { Route } from "react-router-dom";
+import { Typeahead } from "react-bootstrap-typeahead";
+import "react-bootstrap-typeahead/css/Typeahead.css";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Button from "react-bootstrap/Button";
+import { VALID_GROUPS, VALID_LIFESPANS, VALID_HEIGHTS } from "../valid_options.jsx";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -21,18 +30,32 @@ class Breeds extends Component {
       groupButtonName: "Filter by group",
       freeButtonName: "Filter by cost",
       typeButtonName: "Filter by type",
+      sortButtonName: "Sort",
       searchParam: undefined,
       sortParam: undefined,
       filtered: false
     };
     this.changePage = this.changePage.bind(this);
-    this.updateDog = this.updateBreed.bind(this);
+    this.updateBreed = this.updateBreed.bind(this);
+    this.setSort = this.setSort.bind(this);
+    this.setGroupFilter = this.setGroupFilter.bind(this);
+    this.setLifespanFilter = this.setLifespanFilter.bind(this);
+    this.setHeightFilter = this.setHeightFilter.bind(this);
+    this.modelSearch = this.modelSearch.bind(this);
+    this.reset = this.reset.bind(this);
+
+    this.groupRef = React.createRef();
+    this.lifespanRef = React.createRef();
+    this.heightRef = React.createRef();
+    this.searchParamRef = React.createRef();
   }
-  //change page. pretty much copy paste this around, replace 'this.updateDog'
+
+  //change page. pretty much copy paste this around
   changePage(pageNum) {
     this.setState(state => ({
       currentPage: pageNum
     }));
+    this.updateBreed();
   }
 
   //server request method. called everytime page change, and on initial mount
@@ -47,9 +70,89 @@ class Breeds extends Component {
       }));
     });
   }
+
   async componentDidMount() {
-    this.updateBreed();
+    this.changePage(1);
   }
+
+  filter() {
+    wrapper
+      .getBreedQuery(
+        this.state.group,
+        this.state.lifespan,
+        this.state.height,
+        this.state.searchParam,
+        this.state.sortParam
+      )
+      .then(response => {
+        console.log(response);
+        this.setState({
+          shelterList: response["objects"],
+          maxPage: response["total_pages"],
+          info_loaded: true
+        });
+      });
+  }
+
+  setGroupFilter(group) {
+    this.setState(
+      { group: group, groupButtonName: group, filtered: true },
+      () => this.filter()
+    );
+  }
+
+  setLifespanFilter(lifespan) {
+    this.setState(
+      { lifespan: lifespan, lifespanButtonName: lifespan, filtered: true },
+      () => this.filter()
+    );
+  }
+
+  setHeightFilter(height) {
+    this.setState(
+      { height: height, heightButtonName: height, filtered: true },
+      () => this.filter()
+    );
+  }
+
+  setSort(sort, label) {
+    this.setState(
+      { sortParam: sort, sortButtonName: label, filtered: true },
+      () => {
+        this.filter();
+      }
+    );
+  }
+
+  modelSearch() {
+    this.setState({
+      searchParam: this.searchParamRef.value
+    }, this.filter);
+  }
+
+  reset() {
+    this.setState(
+      {
+        group: undefined,
+        lifespan: undefined,
+        height: undefined,
+        groupButtonName: "Filter by group",
+        freeButtonName: "Filter by cost",
+        typeButtonName: "Filter by type",
+        sortButtonName: "Sort",
+        searchParam: undefined,
+        sortParam: undefined,
+        filtered: false
+      },
+      () => this.updateBreed(1)
+    );
+
+    this.groupRef.getInstance().clear();
+    this.lifespanRef.getInstance().clear();
+    this.heightRef.getInstance().clear();
+    this.searchParamRef.value = "";
+  }
+
   render() {
     if (this.props.match.isExact) {
       let breedCards = [];
@@ -73,6 +176,104 @@ class Breeds extends Component {
             <h1> Breeds</h1>
           </div>
           <Container>
+            <Form>
+              <Row className="mt-2">
+
+                <Col md={1} xs={2} className="mt-2">
+                  <Button variant="danger" onClick={() => this.reset()}>
+                    Reset
+                  </Button>
+                </Col>
+
+                <Col md={2} xs={4} className="mt-2">
+                  <DropdownButton title={this.state.sortButtonName}>
+                    <Dropdown.Item
+                      eventKey="A-Z"
+                      onSelect={eventKey =>
+                        this.setSort("alphabetical", eventKey)
+                      }
+                    >
+                      A-Z
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      eventKey="Z-A"
+                      onSelect={eventKey =>
+                        this.setSort("reverse_alphabetical", eventKey)
+                      }
+                    >
+                      Z-A
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      eventKey="Ascending group"
+                      onSelect={eventKey => this.setSort("group", eventKey)}
+                    >
+                      Ascending group
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      eventKey="Descending group"
+                      onSelect={eventKey =>
+                        this.setSort("reverse_group", eventKey)
+                      }
+                    >
+                      Descending group
+                    </Dropdown.Item>
+                  </DropdownButton>
+                </Col>
+
+                <Col md={2} xs={6} className="mt-2">
+                  <Typeahead
+                    id="group-select"
+                    clearButton
+                    placeholder="Filter by group..."
+                    selectHintOnEnter={true}
+                    ref={ref => { this.groupRef = ref; }}
+                    onChange={group => this.setGroupFilter(group)}
+                    options={VALID_GROUPS}
+                  />
+                </Col>
+
+                <Col md={2} xs={6} className="mt-2">
+                  <Typeahead
+                    id="lifespan-select"
+                    clearButton
+                    placeholder="Filter by lifespan..."
+                    selectHintOnEnter={true}
+                    ref={ref => { this.lifespanRef = ref; }}
+                    onChange={lifespan => this.setLifespanFilter(lifespan)}
+                    options={VALID_LIFESPANS}
+                  />
+                </Col>
+
+                <Col md={2} xs={6} className="mt-2">
+                  <Typeahead
+                    id="height-select"
+                    clearButton
+                    placeholder="Filter by height..."
+                    selectHintOnEnter={true}
+                    ref={ref => { this.heightRef = ref; }}
+                    onChange={height => this.setHeightFilter(height)}
+                    options={VALID_HEIGHTS}
+                  />
+                </Col>
+
+                <Col md={2} xs={6} className="mt-2">
+                  <Form.Control
+                    id="breed-search"
+                    type="text"
+                    ref={ref => { this.searchParamRef = ref; }}
+                    clearButton
+                    placeholder="Search for a specific breed..."
+                  />
+                </Col>
+
+                <Col md={1} xs={6} className="mt-2">
+                  <Button onClick={this.modelSearch}>
+                    Search
+                  </Button>
+                </Col>
+
+              </Row>
+            </Form>
             {this.state.info_loaded && (
               <CardDeck>
                 <div class="card-deck">{breedCards}</div>

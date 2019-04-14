@@ -250,7 +250,7 @@ async function getBreedQuery(group_filter, lifespan_filter, height_filter, searc
         url += `&height=${height_filter}`;
 
     url += utilities.build_search_sort_param_string(search_param, sort_param, page_num);
-
+    console.log(url);
     return utilities.perform_api_call(url);
 }
 

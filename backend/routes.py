@@ -111,24 +111,21 @@ def activity_query():
 # Breed Search / Sort / Filter Query
 @application.route("/api/breed/query")
 def breed_query():
-    # TODO: Reject invalid lifespan and height parameters?
+    # Note: No pagination for breeds
     group_filter = request.args.get("group")
     lifespan_filter = request.args.get("lifespan")
     height_filter = request.args.get("height")
     search_param = request.args.get("search")
     sort_param = request.args.get("sort")
-    page_num = request.args.get("page")
 
-    if page_num is None:
-        page_num = 1
-    else:
-        page_num = int(page_num)
+    if lifespan_filter == "":
+        lifespan_filter = None
+
+    if height_filter == "":
+        height_filter = None
 
     if search_param is not None:
         search_param = search_param.lower()
-
-    if int(page_num) < 1:
-        return page_number_error()
 
     valid_items = Breed.query
 
@@ -189,7 +186,17 @@ def breed_query():
             ):
                 search_items.append(object)
 
-    return control_pagination(search_items, page_num, 20)
+    message = {
+        "status": 200,
+        "num_results": len(search_items),
+        "objects": [item.serialize() for item in search_items],
+        "total_pages": 1,
+        "page": 1,
+    }
+    response = jsonify(message)
+    response.status_code = 200
+
+    return response
 
 
 # Dog Search / Sort / Filter Query
