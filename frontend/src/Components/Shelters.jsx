@@ -38,6 +38,9 @@ class Shelters extends Component {
     this.setZipFilter = this.setZipFilter.bind(this);
     this.reset = this.reset.bind(this);
     this.setSort = this.setSort.bind(this);
+    this.modelSearch = this.modelSearch.bind(this);
+
+    this.searchParamRef = React.createRef();
   }
 
   //change page. pretty much copy paste this around, replace 'this.updateDog'
@@ -169,6 +172,12 @@ class Shelters extends Component {
     );
   }
 
+  modelSearch() {
+    this.setState({
+      searchParam: this.searchParamRef.value
+    }, this.filter);
+  }
+
   reset() {
     this.setState(
       {
@@ -182,6 +191,8 @@ class Shelters extends Component {
       },
       () => this.updateShelter(1)
     );
+
+    this.searchParamRef.value = "";
   }
 
   render() {
@@ -203,45 +214,50 @@ class Shelters extends Component {
           </div>
           <Container>
             <Form>
-              <Row className="mt-4">
-                <Button variant="danger" onClick={() => this.reset()}>
-                  Reset
-                </Button>
+              <Row className="mt-2">
 
-                <DropdownButton title={this.state.sortButtonName}>
-                  <Dropdown.Item
-                    eventKey="A-Z"
-                    onSelect={eventKey =>
-                      this.setSort("alphabetical", eventKey)
-                    }
-                  >
-                    A-Z
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    eventKey="Z-A"
-                    onSelect={eventKey =>
-                      this.setSort("reverse_alphabetical", eventKey)
-                    }
-                  >
-                    Z-A
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    eventKey="Ascending zipcode"
-                    onSelect={eventKey => this.setSort("zipcode", eventKey)}
-                  >
-                    Ascending zipcode
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    eventKey="Descending zipcode"
-                    onSelect={eventKey =>
-                      this.setSort("reverse_zipcode", eventKey)
-                    }
-                  >
-                    Descending zipcode
-                  </Dropdown.Item>
-                </DropdownButton>
+                <Col md={1} xs={2} className="mt-2">
+                  <Button variant="danger" onClick={() => this.reset()}>
+                    Reset
+                  </Button>
+                </Col>
 
-                <Col>
+                <Col md={2} xs={4} className="mt-2">
+                  <DropdownButton title={this.state.sortButtonName}>
+                    <Dropdown.Item
+                      eventKey="A-Z"
+                      onSelect={eventKey =>
+                        this.setSort("alphabetical", eventKey)
+                      }
+                    >
+                      A-Z
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      eventKey="Z-A"
+                      onSelect={eventKey =>
+                        this.setSort("reverse_alphabetical", eventKey)
+                      }
+                    >
+                      Z-A
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      eventKey="Ascending zipcode"
+                      onSelect={eventKey => this.setSort("zipcode", eventKey)}
+                    >
+                      Ascending zipcode
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      eventKey="Descending zipcode"
+                      onSelect={eventKey =>
+                        this.setSort("reverse_zipcode", eventKey)
+                      }
+                    >
+                      Descending zipcode
+                    </Dropdown.Item>
+                  </DropdownButton>
+                </Col>
+
+                <Col md={2} xs={6} className="mt-2">
                   <Form.Control
                     type="zip-code"
                     placeholder="Filter by zipcode..."
@@ -249,7 +265,8 @@ class Shelters extends Component {
                     onChange={event => this.setZipFilter(event.target.value)}
                   />
                 </Col>
-                <Col>
+
+                <Col md={2} xs={6} className="mt-2">
                   <Form.Control
                     type="area-code"
                     placeholder="Filter by phone area code..."
@@ -257,7 +274,8 @@ class Shelters extends Component {
                     onChange={event => this.setPhoneFilter(event.target.value)}
                   />
                 </Col>
-                <Col>
+
+                <Col md={2} xs={6} className="mt-2">
                   <Typeahead
                     id="city-search"
                     clearButton
@@ -267,6 +285,23 @@ class Shelters extends Component {
                     options={VALID_CITIES}
                   />
                 </Col>
+
+                <Col md={2} xs={6} className="mt-2">
+                  <Form.Control
+                    id="dog-search"
+                    type="text"
+                    ref={ref => { this.searchParamRef = ref; }}
+                    clearButton
+                    placeholder="Search for a specific dog..."
+                  />
+                </Col>
+
+                <Col md={1} xs={6} className="mt-2">
+                  <Button onClick={this.modelSearch}>
+                    Search
+                  </Button>
+                </Col>
+
               </Row>
             </Form>
             {this.state.info_loaded && (

@@ -283,7 +283,7 @@ async function getShelterQuery(city_filter, zipcode_filter, phone_filter, search
         url += `&phone=${phone_filter}`;
 
     url += utilities.build_search_sort_param_string(search_param, sort_param, page_num);
-
+    
     return utilities.perform_api_call(url);
 }
 

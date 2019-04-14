@@ -301,7 +301,7 @@ class Dogs extends Component {
               <Typeahead
                 id="breed-search"
                 clearButton
-                placeholder="Choose a breed..."
+                placeholder="Filter by breed..."
                 selectHintOnEnter={true}
                 onChange={breed => this.setBreedFilter(breed)}
                 options={VALID_BREEDS}
