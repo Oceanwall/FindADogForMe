@@ -297,11 +297,11 @@ class Shelters extends Component {
 
                 <Col md={2} xs={6} className="mt-2">
                   <Form.Control
-                    id="dog-search"
+                    id="shelter-search"
                     type="text"
                     ref={ref => { this.searchParamRef = ref; }}
                     clearButton
-                    placeholder="Search for a specific dog..."
+                    placeholder="Search for a specific shelter..."
                   />
                 </Col>
 

@@ -6,6 +6,8 @@ import DogCard from "./DogCard";
 import DogInstance from "./DogInstance";
 import { Route } from "react-router-dom";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -40,7 +42,11 @@ class Dogs extends Component {
     this.setBreedFilter = this.setBreedFilter.bind(this);
     this.setSort = this.setSort.bind(this);
     this.filter = this.filter.bind(this);
+    this.modelSearch = this.modelSearch.bind(this);
     this.reset = this.reset.bind(this);
+
+    this.breedRef = React.createRef();
+    this.searchParamRef = React.createRef();
   }
 
   //change page. pretty much copy paste this around, replace 'this.updateDog'
@@ -191,6 +197,15 @@ class Dogs extends Component {
       },
       () => this.updateDog(1)
     );
+
+    this.breedRef.getInstance().clear();
+    this.searchParamRef.value = "";
+  }
+
+  modelSearch() {
+    this.setState({
+      searchParam: this.searchParamRef.value
+    }, this.filter);
   }
 
   render() {
@@ -211,102 +226,129 @@ class Dogs extends Component {
             <h1> Dogs</h1>
           </div>
           <Container>
-            <Row className="search-bar mt-4">
-              <Button variant="danger" onClick={() => this.reset()}>
-                Reset
-              </Button>
+            <Row className="search-bar mt-2">
+              <Col md={1} xs={2} className="mt-2">
+                <Button variant="danger" onClick={() => this.reset()}>
+                  Reset
+                </Button>
+              </Col>
 
-              <DropdownButton title={this.state.sortButtonName}>
-                <Dropdown.Item
-                  eventKey="A-Z"
-                  onSelect={eventKey => this.setSort("alphabetical", eventKey)}
-                >
-                  A-Z
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Z-A"
-                  onSelect={eventKey =>
-                    this.setSort("reverse_alphabetical", eventKey)
-                  }
-                >
-                  Z-A
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Smallest-Biggest"
-                  onSelect={eventKey => this.setSort("size", eventKey)}
-                >
-                  Smallest-Biggest
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Biggest-Smallest"
-                  onSelect={eventKey => this.setSort("reverse_size", eventKey)}
-                >
-                  Biggest-Smallest
-                </Dropdown.Item>
-              </DropdownButton>
+              <Col md={2} xs={4} className="mt-2">
+                <DropdownButton title={this.state.sortButtonName}>
+                  <Dropdown.Item
+                    eventKey="A-Z"
+                    onSelect={eventKey => this.setSort("alphabetical", eventKey)}
+                  >
+                    A-Z
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Z-A"
+                    onSelect={eventKey =>
+                      this.setSort("reverse_alphabetical", eventKey)
+                    }
+                  >
+                    Z-A
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Smallest-Biggest"
+                    onSelect={eventKey => this.setSort("size", eventKey)}
+                  >
+                    Smallest-Biggest
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Biggest-Smallest"
+                    onSelect={eventKey => this.setSort("reverse_size", eventKey)}
+                  >
+                    Biggest-Smallest
+                  </Dropdown.Item>
+                </DropdownButton>
+              </Col>
 
-              <DropdownButton title={this.state.ageButtonName}>
-                <Dropdown.Item
-                  eventKey="Baby"
-                  onSelect={() => this.setAgeFilter("Baby")}
-                >
-                  Baby
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Young"
-                  onSelect={() => this.setAgeFilter("Young")}
-                >
-                  Young
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Adult"
-                  onSelect={() => this.setAgeFilter("Adult")}
-                >
-                  Adult
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Senior"
-                  onSelect={() => this.setAgeFilter("Senior")}
-                >
-                  Senior
-                </Dropdown.Item>
-              </DropdownButton>
-              <DropdownButton title={this.state.sizeButtonName}>
-                <Dropdown.Item
-                  eventKey="Small"
-                  onSelect={eventKey => this.setSizeFilter("S", eventKey)}
-                >
-                  Small
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Medium"
-                  onSelect={eventKey => this.setSizeFilter("M", eventKey)}
-                >
-                  Medium
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Large"
-                  onSelect={eventKey => this.setSizeFilter("L", eventKey)}
-                >
-                  Large
-                </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="Extra Large"
-                  onSelect={eventKey => this.setSizeFilter("XL", eventKey)}
-                >
-                  Extra Large
-                </Dropdown.Item>
-              </DropdownButton>
+              <Col md={2} xs={6} className="mt-2">
+                <DropdownButton title={this.state.ageButtonName}>
+                  <Dropdown.Item
+                    eventKey="Baby"
+                    onSelect={() => this.setAgeFilter("Baby")}
+                  >
+                    Baby
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Young"
+                    onSelect={() => this.setAgeFilter("Young")}
+                  >
+                    Young
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Adult"
+                    onSelect={() => this.setAgeFilter("Adult")}
+                  >
+                    Adult
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Senior"
+                    onSelect={() => this.setAgeFilter("Senior")}
+                  >
+                    Senior
+                  </Dropdown.Item>
+                </DropdownButton>
+              </Col>
 
-              <Typeahead
-                id="breed-search"
-                clearButton
-                placeholder="Filter by breed..."
-                selectHintOnEnter={true}
-                onChange={breed => this.setBreedFilter(breed)}
-                options={VALID_BREEDS}
-              />
-              <Button>Search</Button>
+              <Col md={2} xs={6} className="mt-2">
+                <DropdownButton title={this.state.sizeButtonName}>
+                  <Dropdown.Item
+                    eventKey="Small"
+                    onSelect={eventKey => this.setSizeFilter("S", eventKey)}
+                  >
+                    Small
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Medium"
+                    onSelect={eventKey => this.setSizeFilter("M", eventKey)}
+                  >
+                    Medium
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Large"
+                    onSelect={eventKey => this.setSizeFilter("L", eventKey)}
+                  >
+                    Large
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Extra Large"
+                    onSelect={eventKey => this.setSizeFilter("XL", eventKey)}
+                  >
+                    Extra Large
+                  </Dropdown.Item>
+                </DropdownButton>
+              </Col>
+
+              <Col md={2} xs={6} className="mt-2">
+                <Typeahead
+                  id="breed-search"
+                  clearButton
+                  placeholder="Filter by breed..."
+                  selectHintOnEnter={true}
+                  ref={ref => { this.breedRef = ref; }}
+                  onChange={breed => this.setBreedFilter(breed)}
+                  options={VALID_BREEDS}
+                />
+              </Col>
+
+              <Col md={2} xs={8} className="mt-2">
+                <Form.Control
+                  id="dog-search"
+                  type="text"
+                  ref={ref => { this.searchParamRef = ref; }}
+                  clearButton
+                  placeholder="Search for a specific dog..."
+                />
+              </Col>
+
+              <Col md={1} xs={4} className="mt-2">
+                <Button onClick={this.modelSearch}>
+                  Search
+                </Button>
+              </Col>
             </Row>
             {this.state.info_loaded && (
               <CardDeck>
