@@ -228,13 +228,33 @@ def dog_query():
         valid_items = valid_items.order_by(Dog.name)
     elif sort_param == REVERSE_ALPHABETICAL:
         valid_items = valid_items.order_by(Dog.name.desc())
-    # Inversion here is intended so that it goes (ascending) S M L (XL).
-    elif sort_param == SIZE:
-        valid_items = valid_items.order_by(Dog.size.desc())
-    elif sort_param == REVERSE_SIZE:
-        valid_items = valid_items.order_by(Dog.size)
+
+    def size_sort(elem):
+        if elem.size is None:
+            return -1
+        if elem.size == "S":
+            return 1
+        elif elem.size == "M":
+            return 2
+        elif elem.size == "L":
+            return 3
+        elif elem.size == "XL":
+            return 4
+        # This should never be reached.
+        # TODO: Throw exception if this is triggered?
+        else:
+            return -1
 
     valid_items = valid_items.all()
+
+    # Special case necessary here to sort dogs by size
+    # S M L XL
+    if sort_param == SIZE:
+        valid_items.sort(key=size_sort)
+    # XL L M S
+    elif sort_param == REVERSE_SIZE:
+        valid_items.sort(key=size_sort, reverse=True)
+
     search_items = valid_items
 
     if search_param is not None:
