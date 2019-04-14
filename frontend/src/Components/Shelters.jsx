@@ -110,7 +110,7 @@ class Shelters extends Component {
     if (zipcode.length == 5) {
       this.setState(
         {
-          phone: zipcode
+          zipcode: zipcode
         },
         () => {
           console.log(this.state.phone);
@@ -121,7 +121,7 @@ class Shelters extends Component {
     if (zipcode.length == 0) {
       this.setState(
         {
-          phone: ""
+          zipcode: ""
         },
         () => {
           if (this.state.filtered) {
