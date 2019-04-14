@@ -31,6 +31,7 @@ class Activities extends Component {
     };
     this.changePage = this.changePage.bind(this);
     this.updateDog = this.updateActivity.bind(this);
+    this.filter = this.filter.bind(this);
   }
 
   //change page. pretty much copy paste this around, replace 'this.updateDog'
@@ -74,73 +75,50 @@ class Activities extends Component {
     }
   }
 
+  filter() {
+    wrapper
+      .getActivityQuery(
+        this.state.active,
+        this.state.free,
+        this.state.type,
+        this.state.searchParam,
+        this.state.sortParam
+      )
+      .then(response => {
+        console.log(response);
+        this.setState({
+          activityList: response["objects"],
+          maxPage: response["total_pages"],
+          info_loaded: true
+        });
+      });
+  }
+
   // sets sort criteria then updates the dogs to show
   setSort(sort, label) {
-    this.setState({ sortParam: sort, sortButtonName: label }, () => {
-      wrapper
-        .getActivityQuery(
-          this.state.active,
-          this.state.free,
-          this.state.type,
-          this.state.searchParam,
-          this.state.sortParam
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({ activityList: response["objects"], filtered: true });
-        });
-    });
+    this.setState(
+      { sortParam: sort, sortButtonName: label, filtered: true },
+      () => this.filter()
+    );
   }
 
   setActiveFilter(active, label) {
-    this.setState({ active: active, activeButtonName: label }, () => {
-      wrapper
-        .getActivityQuery(
-          this.state.active,
-          this.state.free,
-          this.state.type,
-          this.state.searchParam,
-          this.state.sortParam
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({ activityList: response["objects"], filtered: true });
-        });
-    });
+    this.setState(
+      { active: active, activeButtonName: label, filtered: true },
+      () => this.filter()
+    );
   }
 
   setFreeFilter(free, label) {
-    this.setState({ free: free, freeButtonName: label }, () => {
-      wrapper
-        .getActivityQuery(
-          this.state.active,
-          this.state.free,
-          this.state.type,
-          this.state.searchParam,
-          this.state.sortParam
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({ activityList: response["objects"], filtered: true });
-        });
-    });
+    this.setState({ free: free, freeButtonName: label, filtered: true }, () =>
+      this.filter()
+    );
   }
 
   setTypeFilter(type, label) {
-    this.setState({ type: type, typeButtonName: label }, () => {
-      wrapper
-        .getActivityQuery(
-          this.state.active,
-          this.state.free,
-          this.state.type,
-          this.state.searchParam,
-          this.state.sortParam
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({ activityList: response["objects"], filtered: true });
-        });
-    });
+    this.setState({ type: type, typeButtonName: label, filtered: true }, () =>
+      this.filter()
+    );
   }
 
   //update page on initial mount to load information

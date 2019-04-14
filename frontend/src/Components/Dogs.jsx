@@ -12,125 +12,9 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import "../styles/Dogs.css";
 import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
+import { VALID_BREEDS } from "../valid_options.jsx";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
-
-const VALID_BREEDS = [
-  "norfolk terrier",
-  "doberman pinscher",
-  "boxer",
-  "pug",
-  "bichon frise",
-  "bull terrier",
-  "briard",
-  "beagle",
-  "tibetan mastiff",
-  "shih tzu",
-  "field spaniel",
-  "keeshond",
-  "english springer spaniel",
-  "staffordshire bull terrier",
-  "australian terrier",
-  "german pinscher",
-  "black and tan coonhound",
-  "norwich terrier",
-  "cairn terrier",
-  "soft coated wheaten terrier",
-  "pembroke welsh corgi",
-  "english toy terrier",
-  "great pyrenees",
-  "alaskan husky",
-  "thai ridgeback",
-  "shetland sheepdog",
-  "irish terrier",
-  "appenzeller sennenhund",
-  "toy fox terrier",
-  "tibetan spaniel",
-  "american pit bull terrier",
-  "lhasa apso",
-  "boykin spaniel",
-  "standard schnauzer",
-  "miniature pinscher",
-  "miniature schnauzer",
-  "yorkshire terrier",
-  "border collie",
-  "west highland white terrier",
-  "samoyed",
-  "american eskimo dog",
-  "bearded collie",
-  "smooth fox terrier",
-  "bluetick coonhound",
-  "shiba inu",
-  "english toy spaniel",
-  "australian cattle dog",
-  "cocker spaniel",
-  "great dane",
-  "coton de tulear",
-  "tibetan terrier",
-  "old english sheepdog",
-  "affenpinscher",
-  "pharaoh hound",
-  "scottish deerhound",
-  "cocker spaniel (american)",
-  "welsh springer spaniel",
-  "rottweiler",
-  "australian kelpie",
-  "chow chow",
-  "american bulldog",
-  "treeing walker coonhound",
-  "vizsla",
-  "chesapeake bay retriever",
-  "belgian malinois",
-  "siberian husky",
-  "saluki",
-  "whippet",
-  "kuvasz",
-  "cardigan welsh corgi",
-  "maltese",
-  "irish setter",
-  "rat terrier",
-  "scottish terrier",
-  "border terrier",
-  "komondor",
-  "bull terrier (miniature)",
-  "pomeranian",
-  "alaskan malamute",
-  "clumber spaniel",
-  "schipperke",
-  "redbone coonhound",
-  "bernese mountain dog",
-  "rhodesian ridgeback",
-  "basset hound",
-  "greyhound",
-  "wire fox terrier",
-  "cavalier king charles spaniel",
-  "english setter",
-  "alapaha blue blood bulldog",
-  "papillon",
-  "irish wolfhound",
-  "french bulldog",
-  "golden retriever",
-  "bedlington terrier",
-  "nova scotia duck tolling retriever",
-  "airedale terrier",
-  "german shorthaired pointer",
-  "boston terrier",
-  "newfoundland",
-  "italian greyhound",
-  "giant schnauzer",
-  "american staffordshire terrier",
-  "american water spaniel",
-  "afghan hound",
-  "weimaraner",
-  "silky terrier",
-  "labrador retriever",
-  "dalmatian",
-  "glen of imaal terrier",
-  "basset bleu de gascogne",
-  "gordon setter",
-  "akita",
-  "basenji"
-];
 
 class Dogs extends Component {
   constructor(props) {
@@ -206,47 +90,70 @@ class Dogs extends Component {
 
   // sets sort criteria then updates the dogs to show
   setSort(sort, label) {
-    this.setState({ sortParam: sort, sortButtonName: label }, () => {
-      console.log(this.state.age);
-      console.log(this.state.size);
-      console.log(this.state.breed);
-      console.log(this.state.sortParam);
-      console.log(this.state.searchParam);
-      this.filter();
-    });
+    this.setState(
+      { sortParam: sort, sortButtonName: label, filtered: true },
+      () => {
+        console.log(this.state.age);
+        console.log(this.state.size);
+        console.log(this.state.breed);
+        console.log(this.state.sortParam);
+        console.log(this.state.searchParam);
+        this.filter();
+      }
+    );
   }
 
   // sets age filter then updates the dogs to show
   setAgeFilter(new_age) {
-    this.setState({ age: new_age, ageButtonName: new_age }, () => {
-      console.log(this.state.age);
-      console.log(this.state.size);
-      console.log(this.state.breed);
-      console.log(this.state.sortParam);
-      console.log(this.state.searchParam);
-      this.filter();
-    });
+    this.setState(
+      { age: new_age, ageButtonName: new_age, filtered: true },
+      () => {
+        console.log(this.state.age);
+        console.log(this.state.size);
+        console.log(this.state.breed);
+        console.log(this.state.sortParam);
+        console.log(this.state.searchParam);
+        this.filter();
+      }
+    );
   }
 
   // sets size filter then updates the dogs to show
   setSizeFilter(new_size, label) {
-    this.setState({ size: new_size, sizeButtonName: label }, () => {
-      console.log(this.state.age);
-      console.log(this.state.size);
-      console.log(this.state.breed);
-      console.log(this.state.sortParam);
-      console.log(this.state.searchParam);
-      this.filter();
-    });
+    this.setState(
+      { size: new_size, sizeButtonName: label, filtered: true },
+      () => {
+        console.log(this.state.age);
+        console.log(this.state.size);
+        console.log(this.state.breed);
+        console.log(this.state.sortParam);
+        console.log(this.state.searchParam);
+        this.filter();
+      }
+    );
   }
 
+  // sets breed filter
   setBreedFilter(new_breed) {
-    this.setState({ breed: new_breed }, () => {
+    if (new_breed.length == 0) new_breed = "";
+    let filter =
+      new_breed != "" ||
+      this.state.age != "" ||
+      this.state.size != "" ||
+      this.state.sortParam != undefined ||
+      this.state.searchParam != undefined;
+    this.setState({ breed: new_breed, filtered: filter }, () => {
       console.log(this.state.age);
       console.log(this.state.size);
       console.log(this.state.breed);
       console.log(this.state.sortParam);
       console.log(this.state.searchParam);
+      console.log(this.state.filtered);
+      if (filter) {
+        this.filter();
+      } else {
+        this.changePage(1);
+      }
     });
   }
 
@@ -304,7 +211,7 @@ class Dogs extends Component {
             <h1> Dogs</h1>
           </div>
           <Container>
-            <Row className="search-bar">
+            <Row className="search-bar mt-4">
               <Button variant="danger" onClick={() => this.reset()}>
                 Reset
               </Button>
@@ -396,28 +303,7 @@ class Dogs extends Component {
                 clearButton
                 placeholder="Choose a breed..."
                 selectHintOnEnter={true}
-                onChange={breed => {
-                  if (breed.length == 0) breed = "";
-                  let filter =
-                    breed != "" ||
-                    this.state.age != "" ||
-                    this.state.size != "" ||
-                    this.state.sortParam != undefined ||
-                    this.state.searchParam != undefined;
-                  this.setState({ breed: breed, filtered: filter }, () => {
-                    console.log(this.state.age);
-                    console.log(this.state.size);
-                    console.log(this.state.breed);
-                    console.log(this.state.sortParam);
-                    console.log(this.state.searchParam);
-                    console.log(this.state.filtered);
-                    if (filter) {
-                      this.filter();
-                    } else {
-                      this.changePage(1);
-                    }
-                  });
-                }}
+                onChange={breed => this.setBreedFilter(breed)}
                 options={VALID_BREEDS}
               />
               <Button>Search</Button>

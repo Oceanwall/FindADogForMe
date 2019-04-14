@@ -5,6 +5,15 @@ import Container from "react-bootstrap/Container";
 import ShelterCard from "./ShelterCard";
 import ShelterInstance from "./ShelterInstance";
 import { Route } from "react-router-dom";
+import { VALID_CITIES } from "../valid_options.jsx";
+import { Typeahead } from "react-bootstrap-typeahead";
+import "react-bootstrap-typeahead/css/Typeahead.css";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Button from "react-bootstrap/Button";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -13,10 +22,22 @@ class Shelters extends Component {
     super(props);
     //initialize initial state to not loaded
     this.state = {
-      info_loaded: false
+      info_loaded: false,
+      zipcode: "",
+      phone: "",
+      city: "",
+      searchParam: undefined,
+      sortParam: undefined,
+      filtered: false,
+      sortButtonName: "Sort"
     };
     this.changePage = this.changePage.bind(this);
     this.updateShelter = this.updateShelter.bind(this);
+    this.setCityFilter = this.setCityFilter.bind(this);
+    this.setPhoneFilter = this.setPhoneFilter.bind(this);
+    this.setZipFilter = this.setZipFilter.bind(this);
+    this.reset = this.reset.bind(this);
+    this.setSort = this.setSort.bind(this);
   }
 
   //change page. pretty much copy paste this around, replace 'this.updateDog'
@@ -42,6 +63,127 @@ class Shelters extends Component {
   async componentDidMount() {
     this.changePage(1);
   }
+
+  filter() {
+    wrapper
+      .getShelterQuery(
+        this.state.city,
+        this.state.zipcode,
+        this.state.phone,
+        this.state.searchParam,
+        this.state.sortParam
+      )
+      .then(response => {
+        console.log(response);
+        this.setState({
+          shelterList: response["objects"],
+          maxPage: response["total_pages"],
+          info_loaded: true
+        });
+      });
+  }
+
+  setCityFilter(city) {
+    if (city.length == 0) city = "";
+    let filter =
+      city != "" ||
+      this.state.age != "" ||
+      this.state.size != "" ||
+      this.state.sortParam != undefined ||
+      this.state.searchParam != undefined;
+    this.setState({ city: city, filtered: filter }, () => {
+      console.log(this.state.city);
+      console.log(this.state.zipcode);
+      console.log(this.state.phone);
+      console.log(this.state.sortParam);
+      console.log(this.state.searchParam);
+      console.log(this.state.filtered);
+      if (filter) {
+        this.filter();
+      } else {
+        this.changePage(1);
+      }
+    });
+  }
+
+  setZipFilter(zipcode) {
+    if (zipcode.length == 5) {
+      this.setState(
+        {
+          phone: zipcode
+        },
+        () => {
+          console.log(this.state.phone);
+          this.filter();
+        }
+      );
+    }
+    if (zipcode.length == 0) {
+      this.setState(
+        {
+          phone: ""
+        },
+        () => {
+          if (this.state.filtered) {
+            this.filter();
+          } else {
+            this.changePage(1);
+          }
+        }
+      );
+    }
+  }
+
+  setPhoneFilter(area_code) {
+    console.log(area_code);
+    if (area_code.length == 3) {
+      this.setState(
+        {
+          phone: area_code
+        },
+        () => this.filter()
+      );
+    }
+    if (area_code.length == 0) {
+      this.setState(
+        {
+          phone: ""
+        },
+        () => {
+          if (this.state.filtered) {
+            this.filter();
+          } else {
+            this.changePage(1);
+          }
+        }
+      );
+    }
+  }
+
+  setSort(sort, label) {
+    this.setState(
+      { sortParam: sort, sortButtonName: label, filtered: true },
+      () => {
+        this.filter();
+      }
+    );
+  }
+
+  reset() {
+    this.setState(
+      {
+        city: "",
+        phone: "",
+        zipcode: "",
+        sortButtonName: "Sort",
+        sortParam: undefined,
+        searchParam: undefined,
+        filtered: false
+      },
+      () => this.updateShelter(1)
+    );
+  }
+
   render() {
     if (this.props.match.isExact) {
       let shelterCards = null;
@@ -60,6 +202,73 @@ class Shelters extends Component {
             <h1> Shelters</h1>
           </div>
           <Container>
+            <Form>
+              <Row className="mt-4">
+                <Button variant="danger" onClick={() => this.reset()}>
+                  Reset
+                </Button>
+
+                <DropdownButton title={this.state.sortButtonName}>
+                  <Dropdown.Item
+                    eventKey="A-Z"
+                    onSelect={eventKey =>
+                      this.setSort("alphabetical", eventKey)
+                    }
+                  >
+                    A-Z
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Z-A"
+                    onSelect={eventKey =>
+                      this.setSort("reverse_alphabetical", eventKey)
+                    }
+                  >
+                    Z-A
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Ascending zipcode"
+                    onSelect={eventKey => this.setSort("zipcode", eventKey)}
+                  >
+                    Ascending zipcode
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Descending zipcode"
+                    onSelect={eventKey =>
+                      this.setSort("reverse_zipcode", eventKey)
+                    }
+                  >
+                    Descending zipcode
+                  </Dropdown.Item>
+                </DropdownButton>
+
+                <Col>
+                  <Form.Control
+                    type="zip-code"
+                    placeholder="Filter by zipcode..."
+                    maxLength={5}
+                    onChange={event => this.setZipFilter(event.target.value)}
+                  />
+                </Col>
+                <Col>
+                  <Form.Control
+                    type="area-code"
+                    placeholder="Filter by phone area code..."
+                    maxLength={3}
+                    onChange={event => this.setPhoneFilter(event.target.value)}
+                  />
+                </Col>
+                <Col>
+                  <Typeahead
+                    id="city-search"
+                    clearButton
+                    placeholder="Filter by city..."
+                    selectHintOnEnter={true}
+                    onChange={city => this.setCityFilter(city)}
+                    options={VALID_CITIES}
+                  />
+                </Col>
+              </Row>
+            </Form>
             {this.state.info_loaded && (
               <CardDeck>
                 <div class="card-deck">{shelterCards}</div>
