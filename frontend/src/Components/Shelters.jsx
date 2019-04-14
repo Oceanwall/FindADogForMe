@@ -40,6 +40,9 @@ class Shelters extends Component {
     this.setSort = this.setSort.bind(this);
     this.modelSearch = this.modelSearch.bind(this);
 
+    this.zipcodeRef = React.createRef();
+    this.phoneRef = React.createRef();
+    this.cityRef = React.createRef();
     this.searchParamRef = React.createRef();
   }
 
@@ -192,6 +195,9 @@ class Shelters extends Component {
       () => this.updateShelter(1)
     );
 
+    this.zipcodeRef.value = "";
+    this.phoneRef.value = "";
+    this.cityRef.getInstance().clear();
     this.searchParamRef.value = "";
   }
 
@@ -262,6 +268,7 @@ class Shelters extends Component {
                     type="zip-code"
                     placeholder="Filter by zipcode..."
                     maxLength={5}
+                    ref={ref => { this.zipcodeRef = ref; }}
                     onChange={event => this.setZipFilter(event.target.value)}
                   />
                 </Col>
@@ -271,6 +278,7 @@ class Shelters extends Component {
                     type="area-code"
                     placeholder="Filter by phone area code..."
                     maxLength={3}
+                    ref={ref => { this.phoneRef = ref; }}
                     onChange={event => this.setPhoneFilter(event.target.value)}
                   />
                 </Col>
@@ -281,6 +289,7 @@ class Shelters extends Component {
                     clearButton
                     placeholder="Filter by city..."
                     selectHintOnEnter={true}
+                    ref={ref => { this.cityRef = ref; }}
                     onChange={city => this.setCityFilter(city)}
                     options={VALID_CITIES}
                   />

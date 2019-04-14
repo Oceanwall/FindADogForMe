@@ -53,9 +53,9 @@ class About extends Component {
       oceanwall: {
         name: "Matthew Zhao",
         bio:
-          "Sophomore at UT CS (duh), likes basketball and violin, certified as the worst member of the UT Badminton Club.",
+          "UTCS Sophomore, NBA junkie and slow runner, certified as the worst member of the UT Badminton Club.",
         responsibility:
-          "Currently a Fullstack Engineer, primarily responsible for Backend.",
+          "Backend Architect, Full Stack Developer, Gitlab Dictator",
         commits: 0,
         issues: 0,
         tests: 33,
