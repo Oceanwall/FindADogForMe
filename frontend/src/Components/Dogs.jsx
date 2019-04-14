@@ -141,6 +141,7 @@ class Dogs extends Component {
       breed: "",
       ageButtonName: "Filter by age",
       sizeButtonName: "Filter by size",
+      sortButtonName: "Sort",
       searchParam: undefined,
       sortParam: undefined,
       filtered: false
@@ -151,7 +152,7 @@ class Dogs extends Component {
     this.setAgeFilter = this.setAgeFilter.bind(this);
     this.setSizeFilter = this.setSizeFilter.bind(this);
     this.setBreedFilter = this.setBreedFilter.bind(this);
-    this.setDefaultFilterState = this.setDefaultFilterState.bind(this);
+    this.setSort = this.setSort.bind(this);
   }
 
   //change page. pretty much copy paste this around, replace 'this.updateDog'
@@ -159,8 +160,20 @@ class Dogs extends Component {
     this.setState({
       info_loaded: false
     });
+    this.updateDog(pageNum);
+  }
+
+  //server request method. called everytime page change, and on initial mount
+  async updateDog(pageNum) {
     if (!this.state.filtered) {
-      this.updateDog(pageNum);
+      wrapper.getDog(undefined, pageNum).then(response => {
+        this.setState({
+          currentPage: pageNum,
+          maxPage: response["total_pages"],
+          dogList: response["objects"],
+          info_loaded: true
+        });
+      });
     } else {
       wrapper
         .getDogQuery(
@@ -174,7 +187,7 @@ class Dogs extends Component {
         .then(response => {
           console.log(response);
           this.setState({
-            activityList: response["objects"],
+            dogList: response["objects"],
             currentPage: pageNum,
             maxPage: response["total_pages"],
             info_loaded: true
@@ -182,23 +195,30 @@ class Dogs extends Component {
         });
     }
   }
-
-  //server request method. called everytime page change, and on initial mount
-  async updateDog(pageNum) {
-    wrapper.getDog(undefined, pageNum).then(response => {
-      this.setState({
-        currentPage: pageNum,
-        maxPage: response["total_pages"],
-        dogList: response["objects"],
-        info_loaded: true
-      });
-    });
-  }
   //update page on initial mount to load information
   async componentDidMount() {
     this.changePage(1);
   }
 
+  // sets sort criteria then updates the dogs to show
+  setSort(sort, label) {
+    this.setState({ sortParam: sort, sortButtonName: label }, () => {
+      wrapper
+        .getDogQuery(
+          this.state.breed,
+          this.state.age,
+          this.state.size,
+          this.state.searchParam,
+          this.state.sortParam
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({ dogList: response["objects"], filtered: true });
+        });
+    });
+  }
+
+  // sets age filter then updates the dogs to show
   setAgeFilter(new_age) {
     this.setState({ age: new_age, ageButtonName: new_age }, () => {
       console.log("Age: ", this.state.age);
@@ -208,8 +228,8 @@ class Dogs extends Component {
           this.state.breed,
           this.state.age,
           this.state.size,
-          undefined,
-          undefined
+          this.state.searchParam,
+          this.state.sortParam
         )
         .then(response => {
           console.log(response);
@@ -218,6 +238,7 @@ class Dogs extends Component {
     });
   }
 
+  // sets size filter then updates the dogs to show
   setSizeFilter(new_size, label) {
     this.setState({ size: new_size, sizeButtonName: label }, () => {
       console.log("Age: ", this.state.age);
@@ -227,8 +248,8 @@ class Dogs extends Component {
           this.state.breed,
           this.state.age,
           this.state.size,
-          undefined,
-          undefined
+          this.state.searchParam,
+          this.state.sortParam
         )
         .then(response => {
           console.log(response);
@@ -239,19 +260,6 @@ class Dogs extends Component {
 
   setBreedFilter(new_breed) {
     this.setState({ breed: new_breed }, () => console.log(this.state.breed));
-  }
-
-  setDefaultFilterState() {
-    this.setState(
-      {
-        age: "",
-        breed: "",
-        size: "",
-        ageButtonName: "Filter by age",
-        sizeButtonName: "Filter by size"
-      },
-      () => this.updateDog(1)
-    );
   }
 
   render() {
@@ -283,6 +291,8 @@ class Dogs extends Component {
                       size: "",
                       ageButtonName: "Filter by age",
                       sizeButtonName: "Filter by size",
+                      sortButtonName: "Sort",
+                      sort: undefined,
                       filtered: false
                     },
                     () => this.updateDog(1)
@@ -291,6 +301,36 @@ class Dogs extends Component {
               >
                 Reset
               </Button>
+
+              <DropdownButton title={this.state.sortButtonName}>
+                <Dropdown.Item
+                  eventKey="A-Z"
+                  onSelect={eventKey => this.setSort("alphabetical", eventKey)}
+                >
+                  A-Z
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Z-A"
+                  onSelect={eventKey =>
+                    this.setSort("reverse_alphabetical", eventKey)
+                  }
+                >
+                  Z-A
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Smallest-Biggest"
+                  onSelect={eventKey => this.setSort("reverse_size", eventKey)}
+                >
+                  Smallest-Biggest
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Biggest-Smallest"
+                  onSelect={eventKey => this.setSort("size", eventKey)}
+                >
+                  Biggest-Smallest
+                </Dropdown.Item>
+              </DropdownButton>
+
               <DropdownButton title={this.state.ageButtonName}>
                 <Dropdown.Item
                   eventKey="Baby"

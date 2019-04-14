@@ -37,8 +37,20 @@ class Activities extends Component {
     this.setState(state => ({
       info_loaded: false
     }));
+    this.updateActivity(pageNum);
+  }
+
+  //server request method. called everytime page change, and on initial mount
+  async updateActivity(pageNum) {
     if (!this.state.filtered) {
-      this.updateActivity(pageNum);
+      wrapper.getActivity(undefined, pageNum).then(response => {
+        this.setState({
+          currentPage: pageNum,
+          maxPage: response["total_pages"],
+          activityList: response["objects"],
+          info_loaded: true
+        });
+      });
     } else {
       wrapper
         .getActivityQuery(
@@ -61,18 +73,6 @@ class Activities extends Component {
     }
   }
 
-  //server request method. called everytime page change, and on initial mount
-  async updateActivity(pageNum) {
-    wrapper.getActivity(undefined, pageNum).then(response => {
-      this.setState({
-        currentPage: pageNum,
-        maxPage: response["total_pages"],
-        activityList: response["objects"],
-        info_loaded: true
-      });
-    });
-  }
-
   setActiveFilter(active, label) {
     this.setState({ active: active, activeButtonName: label }, () => {
       wrapper
@@ -80,8 +80,8 @@ class Activities extends Component {
           this.state.active,
           this.state.free,
           this.state.type,
-          undefined,
-          undefined
+          this.state.searchParam,
+          this.state.sortParam
         )
         .then(response => {
           console.log(response);
@@ -97,8 +97,8 @@ class Activities extends Component {
           this.state.active,
           this.state.free,
           this.state.type,
-          undefined,
-          undefined
+          this.state.searchParam,
+          this.state.sortParam
         )
         .then(response => {
           console.log(response);
@@ -114,8 +114,8 @@ class Activities extends Component {
           this.state.active,
           this.state.free,
           this.state.type,
-          undefined,
-          undefined
+          this.state.searchParam,
+          this.state.sortParam
         )
         .then(response => {
           console.log(response);

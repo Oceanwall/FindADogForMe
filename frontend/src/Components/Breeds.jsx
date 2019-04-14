@@ -14,7 +14,16 @@ class Breeds extends Component {
     //initialize initial state to not loaded
     this.state = {
       currentPage: 1,
-      info_loaded: false
+      info_loaded: false,
+      group: undefined,
+      lifespan: undefined,
+      height: undefined,
+      groupButtonName: "Filter by group",
+      freeButtonName: "Filter by cost",
+      typeButtonName: "Filter by type",
+      searchParam: undefined,
+      sortParam: undefined,
+      filtered: false
     };
     this.changePage = this.changePage.bind(this);
     this.updateDog = this.updateBreed.bind(this);
