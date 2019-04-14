@@ -179,6 +179,7 @@ class Dogs extends Component {
           maxPage: response["total_pages"],
           info_loaded: true
         });
+        this.changePage(this.state.currentPage);
       });
   }
 

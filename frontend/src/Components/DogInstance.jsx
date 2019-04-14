@@ -7,6 +7,8 @@ import "../styles/Instance.css";
 import { Link } from "react-router-dom";
 import ActivityCard from "./ActivityCard";
 import CardDeck from "react-bootstrap/CardDeck";
+import MapContainer from "./Map"
+import Button from "react-bootstrap/Button";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -30,15 +32,20 @@ class DogInstance extends Component {
       nearby_activities: [],
       loaded_shelter: false,
       loaded_dog: false,
-      loaded_activities: false
+      loaded_activities: false,
+      collapse: false
     };
     this.isLoaded = this.isLoaded.bind(this);
+    this.toggle = this.toggle.bind(this);
+
   }
   async updateDog() {
     wrapper.getDogShelter(this.state.dogId).then(response => {
       this.setState(state => ({
         shelter_id: response["id"],
         shelter: response["name"],
+        latitude: response["latitude"],
+        longitude: response["longitude"],
         loaded_shelter: true
       }));
     });
@@ -92,6 +99,9 @@ class DogInstance extends Component {
       this.state.loaded_shelter
     );
   }
+  toggle() {
+    this.setState(state => ({ collapse: !state.collapse }));
+  }
 
   render() {
     let activityCards = [];
@@ -133,11 +143,23 @@ class DogInstance extends Component {
             </Col>
           </Row>
           <Row>
-            <Container>
+            <Col>
               <div class="desc-text">
-                <p align="left">{this.state.description}</p>
+              {this.state.collapse ?  [
+                <p align="left">{this.state.description}</p>,
+                <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Read Less</Button>
+                ] : [
+                <p align="left">{this.state.description.substring(0, 750)}...</p>,
+                <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Read More</Button>
+                ]
+              }
               </div>
-            </Container>
+            </Col>
+            <Col xs={12} md={7} lg={6} style={{height: '50vh'}}>
+              {this.isLoaded() &&
+                  <MapContainer lat={this.state.latitude} lng={this.state.longitude}/>
+              }
+            </Col>
           </Row>
 
           {activityCards.length > 0 ? (
