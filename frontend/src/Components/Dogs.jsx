@@ -10,6 +10,8 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "../styles/Dogs.css";
+import { Typeahead } from "react-bootstrap-typeahead";
+import "react-bootstrap-typeahead/css/Typeahead.css";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -153,6 +155,8 @@ class Dogs extends Component {
     this.setSizeFilter = this.setSizeFilter.bind(this);
     this.setBreedFilter = this.setBreedFilter.bind(this);
     this.setSort = this.setSort.bind(this);
+    this.filter = this.filter.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   //change page. pretty much copy paste this around, replace 'this.updateDog'
@@ -203,63 +207,83 @@ class Dogs extends Component {
   // sets sort criteria then updates the dogs to show
   setSort(sort, label) {
     this.setState({ sortParam: sort, sortButtonName: label }, () => {
-      wrapper
-        .getDogQuery(
-          this.state.breed,
-          this.state.age,
-          this.state.size,
-          this.state.searchParam,
-          this.state.sortParam
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({ dogList: response["objects"], filtered: true });
-        });
+      console.log(this.state.age);
+      console.log(this.state.size);
+      console.log(this.state.breed);
+      console.log(this.state.sortParam);
+      console.log(this.state.searchParam);
+      this.filter();
     });
   }
 
   // sets age filter then updates the dogs to show
   setAgeFilter(new_age) {
     this.setState({ age: new_age, ageButtonName: new_age }, () => {
-      console.log("Age: ", this.state.age);
-      console.log("Size: ", this.state.size);
-      wrapper
-        .getDogQuery(
-          this.state.breed,
-          this.state.age,
-          this.state.size,
-          this.state.searchParam,
-          this.state.sortParam
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({ dogList: response["objects"], filtered: true });
-        });
+      console.log(this.state.age);
+      console.log(this.state.size);
+      console.log(this.state.breed);
+      console.log(this.state.sortParam);
+      console.log(this.state.searchParam);
+      this.filter();
     });
   }
 
   // sets size filter then updates the dogs to show
   setSizeFilter(new_size, label) {
     this.setState({ size: new_size, sizeButtonName: label }, () => {
-      console.log("Age: ", this.state.age);
-      console.log("Size: ", this.state.size);
-      wrapper
-        .getDogQuery(
-          this.state.breed,
-          this.state.age,
-          this.state.size,
-          this.state.searchParam,
-          this.state.sortParam
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({ dogList: response["objects"], filtered: true });
-        });
+      console.log(this.state.age);
+      console.log(this.state.size);
+      console.log(this.state.breed);
+      console.log(this.state.sortParam);
+      console.log(this.state.searchParam);
+      this.filter();
     });
   }
 
   setBreedFilter(new_breed) {
-    this.setState({ breed: new_breed }, () => console.log(this.state.breed));
+    this.setState({ breed: new_breed }, () => {
+      console.log(this.state.age);
+      console.log(this.state.size);
+      console.log(this.state.breed);
+      console.log(this.state.sortParam);
+      console.log(this.state.searchParam);
+    });
+  }
+
+  filter() {
+    wrapper
+      .getDogQuery(
+        this.state.breed,
+        this.state.age,
+        this.state.size,
+        this.state.searchParam,
+        this.state.sortParam
+      )
+      .then(response => {
+        console.log(response);
+        this.setState({
+          dogList: response["objects"],
+          maxPage: response["total_pages"],
+          info_loaded: true
+        });
+      });
+  }
+
+  reset() {
+    this.setState(
+      {
+        age: "",
+        breed: "",
+        size: "",
+        ageButtonName: "Filter by age",
+        sizeButtonName: "Filter by size",
+        sortButtonName: "Sort",
+        sortParam: undefined,
+        searchParam: undefined,
+        filtered: false
+      },
+      () => this.updateDog(1)
+    );
   }
 
   render() {
@@ -281,24 +305,7 @@ class Dogs extends Component {
           </div>
           <Container>
             <Row className="search-bar">
-              <Button
-                variant="danger"
-                onClick={() =>
-                  this.setState(
-                    {
-                      age: "",
-                      breed: "",
-                      size: "",
-                      ageButtonName: "Filter by age",
-                      sizeButtonName: "Filter by size",
-                      sortButtonName: "Sort",
-                      sort: undefined,
-                      filtered: false
-                    },
-                    () => this.updateDog(1)
-                  )
-                }
-              >
+              <Button variant="danger" onClick={() => this.reset()}>
                 Reset
               </Button>
 
@@ -384,6 +391,35 @@ class Dogs extends Component {
                 </Dropdown.Item>
               </DropdownButton>
 
+              <Typeahead
+                id="breed-search"
+                clearButton
+                placeholder="Choose a breed..."
+                selectHintOnEnter={true}
+                onChange={breed => {
+                  if (breed.length == 0) breed = "";
+                  let filter =
+                    breed != "" ||
+                    this.state.age != "" ||
+                    this.state.size != "" ||
+                    this.state.sortParam != undefined ||
+                    this.state.searchParam != undefined;
+                  this.setState({ breed: breed, filtered: filter }, () => {
+                    console.log(this.state.age);
+                    console.log(this.state.size);
+                    console.log(this.state.breed);
+                    console.log(this.state.sortParam);
+                    console.log(this.state.searchParam);
+                    console.log(this.state.filtered);
+                    if (filter) {
+                      this.filter();
+                    } else {
+                      this.changePage(1);
+                    }
+                  });
+                }}
+                options={VALID_BREEDS}
+              />
               <Button>Search</Button>
             </Row>
             {this.state.info_loaded && (
