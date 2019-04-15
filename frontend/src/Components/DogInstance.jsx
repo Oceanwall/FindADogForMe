@@ -7,7 +7,7 @@ import "../styles/Instance.css";
 import { Link } from "react-router-dom";
 import ActivityCard from "./ActivityCard";
 import CardDeck from "react-bootstrap/CardDeck";
-import MapContainer from "./Map"
+import MapContainer from "./Map";
 import Button from "react-bootstrap/Button";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
@@ -37,7 +37,6 @@ class DogInstance extends Component {
     };
     this.isLoaded = this.isLoaded.bind(this);
     this.toggle = this.toggle.bind(this);
-
   }
   async updateDog() {
     wrapper.getDogShelter(this.state.dogId).then(response => {
@@ -145,27 +144,55 @@ class DogInstance extends Component {
           <Row>
             <Col>
               <div class="desc-text">
-              {this.state.collapse ?  [
-                <p align="left">{this.state.description}</p>,
-                <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Read Less</Button>
-                ] : [
-                <p align="left">{this.state.description.substring(0, 750)}...</p>,
-                <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Read More</Button>
-                ]
-              }
+                {this.state.collapse
+                  ? [
+                      <p align="left">{this.state.description}</p>,
+                      <Button
+                        color="primary"
+                        onClick={this.toggle}
+                        style={{ marginBottom: "1rem" }}
+                      >
+                        Read Less
+                      </Button>
+                    ]
+                  : [
+                      <p align="left">
+                        {this.state.description.substring(0, 750)}...
+                      </p>,
+                      <Button
+                        color="primary"
+                        onClick={this.toggle}
+                        style={{ marginBottom: "1rem" }}
+                      >
+                        Read More
+                      </Button>
+                    ]}
               </div>
             </Col>
-            <Col xs={12} md={7} lg={6} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
-              {this.isLoaded() &&
-                  <MapContainer location_objects={[{latitude: this.state.latitude, longitude: this.state.longitude}]}/>
-              }
+            <Col
+              xs={12}
+              md={7}
+              lg={6}
+              className="mt-2 mb-1"
+              style={{ height: "50vh", paddingLeft: "0px" }}
+            >
+              {this.isLoaded() && (
+                <MapContainer
+                  location_objects={[
+                    {
+                      latitude: this.state.latitude,
+                      longitude: this.state.longitude
+                    }
+                  ]}
+                />
+              )}
             </Col>
           </Row>
 
           {activityCards.length > 0 ? (
             <div>
               <p align="left" class="deck-title-text">
-                Activities:
+                Activities suitable for this dog:
               </p>
               <CardDeck>
                 <div class="card-deck">{activityCards}</div>
@@ -173,7 +200,7 @@ class DogInstance extends Component {
             </div>
           ) : (
             <p align="left" class="deck-title-text">
-              Activities: None
+              Activities suitable for this dog: None
             </p>
           )}
         </Container>

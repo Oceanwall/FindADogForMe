@@ -165,8 +165,12 @@ class BreedInstance extends Component {
           </Row>
 
           <Row>
-            <Col xs={12} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
-                <MapContainer location_objects={this.state.shelter_list}/>
+            <Col
+              xs={12}
+              className="mt-2 mb-1"
+              style={{ height: "50vh", paddingLeft: "0px" }}
+            >
+              <MapContainer location_objects={this.state.shelter_list} />
             </Col>
           </Row>
         </Container>
@@ -175,7 +179,7 @@ class BreedInstance extends Component {
             <div>
               <p align="left" class="deck-title-text">
                 {" "}
-                Dogs:{" "}
+                Dogs of this breed:{" "}
               </p>
               <CardDeck>
                 <div class="card-deck">{dogCards}</div>
@@ -184,14 +188,14 @@ class BreedInstance extends Component {
           ) : (
             <p align="left" class="deck-title-text">
               {" "}
-              Dogs: None
+              Dogs of this breed: None
             </p>
           )}
           {shelterCards.length > 0 ? (
             <div>
               <p align="left" class="deck-title-text">
                 {" "}
-                Shelters:{" "}
+                Shelters that have this breed:{" "}
               </p>
               <CardDeck>
                 <div class="card-deck">{shelterCards}</div>
@@ -200,14 +204,14 @@ class BreedInstance extends Component {
           ) : (
             <p align="left" class="deck-title-text">
               {" "}
-              Shelters: None
+              Shelters that have this breed: None
             </p>
           )}
           {activityCards.length > 0 ? (
             <div>
               <p align="left" class="deck-title-text">
                 {" "}
-                Activities:{" "}
+                Activities suitable for this breed:{" "}
               </p>
               <CardDeck>
                 <div class="card-deck">{activityCards}</div>
@@ -216,7 +220,7 @@ class BreedInstance extends Component {
           ) : (
             <p align="left" class="deck-title-text">
               {" "}
-              Activities: None
+              Activities suitable for this breed: None
             </p>
           )}
         </Container>

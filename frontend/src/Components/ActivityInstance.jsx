@@ -7,7 +7,7 @@ import "../styles/Instance.css";
 import DogCard from "./DogCard";
 import ShelterCard from "./ShelterCard";
 import CardDeck from "react-bootstrap/CardDeck";
-import MapContainer from "./Map"
+import MapContainer from "./Map";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -177,17 +177,29 @@ class ActivityInstance extends Component {
                 </div>
               </Container>
             </Col>
-            <Col xs={12} md={6} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
-              {this.isLoaded() &&
-                  <MapContainer location_objects={[{latitude: this.state.latitude, longitude: this.state.longitude}]}/>
-              }
+            <Col
+              xs={12}
+              md={6}
+              className="mt-2 mb-1"
+              style={{ height: "50vh", paddingLeft: "0px" }}
+            >
+              {this.isLoaded() && (
+                <MapContainer
+                  location_objects={[
+                    {
+                      latitude: this.state.latitude,
+                      longitude: this.state.longitude
+                    }
+                  ]}
+                />
+              )}
             </Col>
           </Row>
 
           {dogCards.length > 0 ? (
             <div>
               <p align="left" class="deck-title-text">
-                Dogs:
+                Dogs suitable for this activity:
               </p>
               <CardDeck>
                 <div class="card-deck">{dogCards}</div>
@@ -195,13 +207,13 @@ class ActivityInstance extends Component {
             </div>
           ) : (
             <p align="left" class="deck-title-text">
-              Dogs: None
+              Dogs suitable for this activity: None
             </p>
           )}
           {shelterCards.length > 0 ? (
             <div>
               <p align="left" class="deck-title-text">
-                Shelters:
+                Shelters near this activity:
               </p>
               <CardDeck>
                 <div class="card-deck">{shelterCards}</div>
@@ -209,7 +221,7 @@ class ActivityInstance extends Component {
             </div>
           ) : (
             <p align="left" class="deck-title-text">
-              Shelters: None
+              Shelters near this activity: None
             </p>
           )}
         </Container>
