@@ -164,6 +164,7 @@ class Dogs extends Component {
   }
 
   filter() {
+    let filter = this.checkFiltered();
     wrapper
       .getDogQuery(
         this.state.breed,
@@ -178,6 +179,7 @@ class Dogs extends Component {
           dogList: response["objects"],
           maxPage: response["total_pages"],
           info_loaded: true,
+          filtered: filter,
           currentPage: 1
         });
       });
@@ -212,6 +214,17 @@ class Dogs extends Component {
     );
   }
 
+  checkFiltered() {
+    return (
+      this.state.shelter != "" ||
+      this.state.breed != "" ||
+      this.state.age != "" ||
+      this.state.size != "" ||
+      this.state.sortParam != undefined ||
+      this.state.searchParam != undefined
+    );
+  }
+
   render() {
     if (this.props.match.isExact) {
       let dogCards = null;
@@ -219,7 +232,7 @@ class Dogs extends Component {
         dogCards = this.state.dogList.map(dog => {
           return (
             <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <DogCard dog={dog} highlight={this.state.searchParam}/>
+              <DogCard dog={dog} key={dog.name} highlight={this.state.searchParam}/>
             </div>
           );
         });
