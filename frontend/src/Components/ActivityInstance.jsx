@@ -9,6 +9,7 @@ import ShelterCard from "./ShelterCard";
 import BreedCard from "./BreedCard";
 import CardDeck from "react-bootstrap/CardDeck";
 import MapContainer from "./Map";
+import Button from "react-bootstrap/Button";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -38,9 +39,11 @@ class ActivityInstance extends Component {
       weather: null,
       loaded_activity: false,
       loaded_shelter: false,
-      loaded_dog: false
+      loaded_dog: false,
+      collapse: false
     };
     this.isLoaded = this.isLoaded.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
   async updateActivity() {
     wrapper.getActivity(this.state.activityId).then(response => {
@@ -113,6 +116,10 @@ class ActivityInstance extends Component {
 
   async componentDidMount() {
     this.updateActivity();
+  }
+
+  toggle() {
+    this.setState(state => ({ collapse: !state.collapse }));
   }
 
   isLoaded() {
@@ -192,7 +199,35 @@ class ActivityInstance extends Component {
             <Col xs={12} md={6}>
               <Container>
                 <div class="desc-text">
-                  <p align="left">{this.state.description}</p>
+                  {this.state.description != undefined ? (
+                    this.state.collapse ? (
+                      [
+                        <p align="left">{this.state.description}</p>,
+                        <Button
+                          color="primary"
+                          onClick={this.toggle}
+                          style={{ marginBottom: "1rem" }}
+                        >
+                          Read Less
+                        </Button>
+                      ]
+                    ) : (
+                      [
+                        <p align="left">
+                          {this.state.description.substring(0, 750)}...
+                        </p>,
+                        <Button
+                          color="primary"
+                          onClick={this.toggle}
+                          style={{ marginBottom: "1rem" }}
+                        >
+                          Read More
+                        </Button>
+                      ]
+                    )
+                  ) : (
+                    <p align="left">Description: None</p>
+                  )}
                 </div>
               </Container>
             </Col>

@@ -144,8 +144,9 @@ class DogInstance extends Component {
           <Row>
             <Col>
               <div class="desc-text">
-                {this.state.collapse
-                  ? [
+                {this.state.description != undefined ? (
+                  this.state.collapse ? (
+                    [
                       <p align="left">{this.state.description}</p>,
                       <Button
                         color="primary"
@@ -155,18 +156,26 @@ class DogInstance extends Component {
                         Read Less
                       </Button>
                     ]
-                  : [
-                      <p align="left">
-                        {this.state.description.substring(0, 750)}...
-                      </p>,
-                      <Button
-                        color="primary"
-                        onClick={this.toggle}
-                        style={{ marginBottom: "1rem" }}
-                      >
-                        Read More
-                      </Button>
-                    ]}
+                  ) : (
+                    [
+                      <div>
+                        <p align="left">
+                          {this.state.description.substring(0, 750)}}...
+                        </p>
+
+                        <Button
+                          color="primary"
+                          onClick={this.toggle}
+                          style={{ marginBottom: "1rem" }}
+                        >
+                          Read More
+                        </Button>
+                      </div>
+                    ]
+                  )
+                ) : (
+                  <p align="left">Description: None</p>
+                )}
               </div>
             </Col>
             {this.state.latitude && this.isLoaded() &&
