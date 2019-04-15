@@ -177,9 +177,9 @@ class Dogs extends Component {
         this.setState({
           dogList: response["objects"],
           maxPage: response["total_pages"],
-          info_loaded: true
+          info_loaded: true,
+          currentPage: 1
         });
-        this.changePage(this.state.currentPage);
       });
   }
 
@@ -204,9 +204,12 @@ class Dogs extends Component {
   }
 
   modelSearch() {
-    this.setState({
-      searchParam: this.searchParamRef.value
-    }, this.filter);
+    this.setState(
+      {
+        searchParam: this.searchParamRef.value
+      },
+      this.filter
+    );
   }
 
   render() {
@@ -238,7 +241,9 @@ class Dogs extends Component {
                 <DropdownButton title={this.state.sortButtonName}>
                   <Dropdown.Item
                     eventKey="A-Z"
-                    onSelect={eventKey => this.setSort("alphabetical", eventKey)}
+                    onSelect={eventKey =>
+                      this.setSort("alphabetical", eventKey)
+                    }
                   >
                     A-Z
                   </Dropdown.Item>
@@ -258,7 +263,9 @@ class Dogs extends Component {
                   </Dropdown.Item>
                   <Dropdown.Item
                     eventKey="Biggest-Smallest"
-                    onSelect={eventKey => this.setSort("reverse_size", eventKey)}
+                    onSelect={eventKey =>
+                      this.setSort("reverse_size", eventKey)
+                    }
                   >
                     Biggest-Smallest
                   </Dropdown.Item>
@@ -329,7 +336,9 @@ class Dogs extends Component {
                   clearButton
                   placeholder="Filter by breed..."
                   selectHintOnEnter={true}
-                  ref={ref => { this.breedRef = ref; }}
+                  ref={ref => {
+                    this.breedRef = ref;
+                  }}
                   onChange={breed => this.setBreedFilter(breed)}
                   options={VALID_BREEDS}
                 />
@@ -339,16 +348,16 @@ class Dogs extends Component {
                 <Form.Control
                   id="dog-search"
                   type="text"
-                  ref={ref => { this.searchParamRef = ref; }}
+                  ref={ref => {
+                    this.searchParamRef = ref;
+                  }}
                   clearButton
                   placeholder="Search for a specific dog..."
                 />
               </Col>
 
               <Col md={1} xs={4} className="mt-2">
-                <Button onClick={this.modelSearch}>
-                  Search
-                </Button>
+                <Button onClick={this.modelSearch}>Search</Button>
               </Col>
             </Row>
             {this.state.info_loaded && (

@@ -94,7 +94,8 @@ class Activities extends Component {
         this.setState({
           activityList: response["objects"],
           maxPage: response["total_pages"],
-          info_loaded: true
+          info_loaded: true,
+          currentPage: 1
         });
       });
   }
@@ -127,9 +128,12 @@ class Activities extends Component {
   }
 
   modelSearch() {
-    this.setState({
-      searchParam: this.searchParamRef.value
-    }, this.filter);
+    this.setState(
+      {
+        searchParam: this.searchParamRef.value
+      },
+      this.filter
+    );
   }
 
   //update page on initial mount to load information
@@ -187,7 +191,9 @@ class Activities extends Component {
                 <DropdownButton title={this.state.sortButtonName}>
                   <Dropdown.Item
                     eventKey="A-Z"
-                    onSelect={eventKey => this.setSort("alphabetical", eventKey)}
+                    onSelect={eventKey =>
+                      this.setSort("alphabetical", eventKey)
+                    }
                   >
                     A-Z
                   </Dropdown.Item>
@@ -207,7 +213,9 @@ class Activities extends Component {
                   </Dropdown.Item>
                   <Dropdown.Item
                     eventKey="Reverse Chronological"
-                    onSelect={eventKey => this.setSort("reverse_date", eventKey)}
+                    onSelect={eventKey =>
+                      this.setSort("reverse_date", eventKey)
+                    }
                   >
                     Reverse Chronological
                   </Dropdown.Item>
@@ -260,7 +268,9 @@ class Activities extends Component {
                   </Dropdown.Item>
                   <Dropdown.Item
                     eventKey="Meetup"
-                    onSelect={eventKey => this.setTypeFilter("meetup", eventKey)}
+                    onSelect={eventKey =>
+                      this.setTypeFilter("meetup", eventKey)
+                    }
                   >
                     Meetup
                   </Dropdown.Item>
@@ -277,18 +287,17 @@ class Activities extends Component {
                 <Form.Control
                   id="activity-search"
                   type="text"
-                  ref={ref => { this.searchParamRef = ref; }}
+                  ref={ref => {
+                    this.searchParamRef = ref;
+                  }}
                   clearButton
                   placeholder="Search for a specific activity..."
                 />
               </Col>
 
               <Col md={1} xs={6} className="mt-2">
-                <Button onClick={this.modelSearch}>
-                  Search
-                </Button>
+                <Button onClick={this.modelSearch}>Search</Button>
               </Col>
-
             </Row>
             {this.state.info_loaded && (
               <CardDeck>

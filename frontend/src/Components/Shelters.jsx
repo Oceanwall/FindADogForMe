@@ -39,6 +39,7 @@ class Shelters extends Component {
     this.reset = this.reset.bind(this);
     this.setSort = this.setSort.bind(this);
     this.modelSearch = this.modelSearch.bind(this);
+    this.checkFiltered = this.checkFiltered.bind(this);
 
     this.zipcodeRef = React.createRef();
     this.phoneRef = React.createRef();
@@ -56,14 +57,35 @@ class Shelters extends Component {
 
   //server request method. called everytime page change, and on initial mount
   async updateShelter(pageNum) {
-    wrapper.getShelter(undefined, pageNum).then(response => {
-      this.setState(state => ({
-        currentPage: pageNum,
-        maxPage: response["total_pages"],
-        shelterList: response["objects"],
-        info_loaded: true
-      }));
-    });
+    if (!this.state.filtered) {
+      wrapper.getShelter(undefined, pageNum).then(response => {
+        this.setState(state => ({
+          currentPage: pageNum,
+          maxPage: response["total_pages"],
+          shelterList: response["objects"],
+          info_loaded: true
+        }));
+      });
+    } else {
+      wrapper
+        .getShelterQuery(
+          this.state.city,
+          this.state.zipcode,
+          this.state.phone,
+          this.state.searchParam,
+          this.state.sortParam,
+          pageNum
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({
+            shelterList: response["objects"],
+            currentPage: pageNum,
+            maxPage: response["total_pages"],
+            info_loaded: true
+          });
+        });
+    }
   }
   //update page on initial mount to load information
   async componentDidMount() {
@@ -71,6 +93,7 @@ class Shelters extends Component {
   }
 
   filter() {
+    let filter = this.checkFiltered();
     wrapper
       .getShelterQuery(
         this.state.city,
@@ -84,7 +107,9 @@ class Shelters extends Component {
         this.setState({
           shelterList: response["objects"],
           maxPage: response["total_pages"],
-          info_loaded: true
+          info_loaded: true,
+          filtered: filter,
+          currentPage: 1
         });
       });
   }
@@ -167,18 +192,28 @@ class Shelters extends Component {
   }
 
   setSort(sort, label) {
-    this.setState(
-      { sortParam: sort, sortButtonName: label, filtered: true },
-      () => {
-        this.filter();
-      }
-    );
+    this.setState({ sortParam: sort, sortButtonName: label }, () => {
+      this.filter();
+    });
   }
 
   modelSearch() {
-    this.setState({
-      searchParam: this.searchParamRef.value
-    }, this.filter);
+    this.setState(
+      {
+        searchParam: this.searchParamRef.value
+      },
+      this.filter
+    );
+  }
+
+  checkFiltered() {
+    return (
+      this.state.city != "" ||
+      this.state.age != "" ||
+      this.state.size != "" ||
+      this.state.sortParam != undefined ||
+      this.state.searchParam != undefined
+    );
   }
 
   reset() {
@@ -221,7 +256,6 @@ class Shelters extends Component {
           <Container>
             <Form>
               <Row className="mt-2">
-
                 <Col md={1} xs={2} className="mt-2">
                   <Button variant="danger" onClick={() => this.reset()}>
                     Reset
@@ -230,6 +264,12 @@ class Shelters extends Component {
 
                 <Col md={2} xs={4} className="mt-2">
                   <DropdownButton title={this.state.sortButtonName}>
+                    <Dropdown.Item
+                      eventKey="Sort"
+                      onSelect={eventKey => this.setSort(undefined, eventKey)}
+                    >
+                      No sort
+                    </Dropdown.Item>
                     <Dropdown.Item
                       eventKey="A-Z"
                       onSelect={eventKey =>
@@ -268,7 +308,9 @@ class Shelters extends Component {
                     type="zip-code"
                     placeholder="Filter by zipcode..."
                     maxLength={5}
-                    ref={ref => { this.zipcodeRef = ref; }}
+                    ref={ref => {
+                      this.zipcodeRef = ref;
+                    }}
                     onChange={event => this.setZipFilter(event.target.value)}
                   />
                 </Col>
@@ -278,7 +320,9 @@ class Shelters extends Component {
                     type="area-code"
                     placeholder="Filter by phone area code..."
                     maxLength={3}
-                    ref={ref => { this.phoneRef = ref; }}
+                    ref={ref => {
+                      this.phoneRef = ref;
+                    }}
                     onChange={event => this.setPhoneFilter(event.target.value)}
                   />
                 </Col>
@@ -289,7 +333,9 @@ class Shelters extends Component {
                     clearButton
                     placeholder="Filter by city..."
                     selectHintOnEnter={true}
-                    ref={ref => { this.cityRef = ref; }}
+                    ref={ref => {
+                      this.cityRef = ref;
+                    }}
                     onChange={city => this.setCityFilter(city)}
                     options={VALID_CITIES}
                   />
@@ -299,18 +345,17 @@ class Shelters extends Component {
                   <Form.Control
                     id="shelter-search"
                     type="text"
-                    ref={ref => { this.searchParamRef = ref; }}
+                    ref={ref => {
+                      this.searchParamRef = ref;
+                    }}
                     clearButton
                     placeholder="Search for a specific shelter..."
                   />
                 </Col>
 
                 <Col md={1} xs={6} className="mt-2">
-                  <Button onClick={this.modelSearch}>
-                    Search
-                  </Button>
+                  <Button onClick={this.modelSearch}>Search</Button>
                 </Col>
-
               </Row>
             </Form>
             {this.state.info_loaded && (

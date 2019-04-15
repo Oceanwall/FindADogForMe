@@ -13,7 +13,11 @@ import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
-import { VALID_GROUPS, VALID_LIFESPANS, VALID_HEIGHTS } from "../valid_options.jsx";
+import {
+  VALID_GROUPS,
+  VALID_LIFESPANS,
+  VALID_HEIGHTS
+} from "../valid_options.jsx";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -43,6 +47,7 @@ class Breeds extends Component {
     this.setHeightFilter = this.setHeightFilter.bind(this);
     this.modelSearch = this.modelSearch.bind(this);
     this.reset = this.reset.bind(this);
+    this.checkFiltered = this.checkFiltered.bind(this);
 
     this.groupRef = React.createRef();
     this.lifespanRef = React.createRef();
@@ -60,15 +65,38 @@ class Breeds extends Component {
 
   //server request method. called everytime page change, and on initial mount
   async updateBreed() {
-    wrapper.getBreed().then(response => {
-      this.setState(state => ({
-        maxPage:
-          Math.floor(response["num_results"] / 20) +
-          (response["num_results"] % 20 ? 1 : 0),
-        breedList: response["objects"],
-        info_loaded: true
-      }));
-    });
+    console.log("Filtered:", this.state.filtered);
+    if (!this.state.filtered) {
+      wrapper.getBreed().then(response => {
+        this.setState(state => ({
+          maxPage:
+            Math.floor(response["num_results"] / 20) +
+            (response["num_results"] % 20 ? 1 : 0),
+          breedList: response["objects"],
+          info_loaded: true
+        }));
+      });
+    } else {
+      wrapper
+        .getBreedQuery(
+          this.state.group,
+          this.state.lifespan,
+          this.state.height,
+          this.state.searchParam,
+          this.state.sortParam,
+          this.state.currentPage
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({
+            breedList: response["objects"],
+            maxPage:
+              Math.floor(response["num_results"] / 20) +
+              (response["num_results"] % 20 ? 1 : 0),
+            info_loaded: true
+          });
+        });
+    }
   }
 
   async componentDidMount() {
@@ -76,6 +104,8 @@ class Breeds extends Component {
   }
 
   filter() {
+    let filter = this.checkFiltered();
+    console.log("Filtered: ", filter);
     wrapper
       .getBreedQuery(
         this.state.group,
@@ -87,47 +117,63 @@ class Breeds extends Component {
       .then(response => {
         console.log(response);
         this.setState({
-          shelterList: response["objects"],
-          maxPage: response["total_pages"],
-          info_loaded: true
+          breedList: response["objects"],
+          maxPage:
+            Math.floor(response["num_results"] / 20) +
+            (response["num_results"] % 20 ? 1 : 0),
+          filtered: filter,
+          info_loaded: true,
+          currentPage: 1
         });
       });
   }
 
   setGroupFilter(group) {
-    this.setState(
-      { group: group, groupButtonName: group, filtered: true },
-      () => this.filter()
+    console.log("Group:", group);
+    if (group.length == 0) group = undefined;
+    this.setState({ group: group, groupButtonName: group }, () =>
+      this.filter()
     );
   }
 
   setLifespanFilter(lifespan) {
-    this.setState(
-      { lifespan: lifespan, lifespanButtonName: lifespan, filtered: true },
-      () => this.filter()
+    if (lifespan.length == 0) lifespan = undefined;
+    this.setState({ lifespan: lifespan, lifespanButtonName: lifespan }, () =>
+      this.filter()
     );
   }
 
   setHeightFilter(height) {
-    this.setState(
-      { height: height, heightButtonName: height, filtered: true },
-      () => this.filter()
+    if (height.length == 0) height = undefined;
+    this.setState({ height: height, heightButtonName: height }, () =>
+      this.filter()
     );
   }
 
   setSort(sort, label) {
-    this.setState(
-      { sortParam: sort, sortButtonName: label, filtered: true },
-      () => {
-        this.filter();
-      }
-    );
+    this.setState({ sortParam: sort, sortButtonName: label }, () => {
+      this.filter();
+    });
   }
 
   modelSearch() {
-    this.setState({
-      searchParam: this.searchParamRef.value
-    }, this.filter);
+    this.setState(
+      {
+        searchParam: this.searchParamRef.value
+      },
+      this.filter()
+    );
+  }
+
+  // return true if filtered, false otherwise
+  checkFiltered() {
+    return (
+      this.state.group != undefined ||
+      this.state.lifespan != undefined ||
+      this.state.height != undefined ||
+      this.state.sortParam != undefined ||
+      this.state.searchParam != undefined
+    );
   }
 
   reset() {
@@ -178,7 +224,6 @@ class Breeds extends Component {
           <Container>
             <Form>
               <Row className="mt-2">
-
                 <Col md={1} xs={2} className="mt-2">
                   <Button variant="danger" onClick={() => this.reset()}>
                     Reset
@@ -226,7 +271,9 @@ class Breeds extends Component {
                     clearButton
                     placeholder="Filter by group..."
                     selectHintOnEnter={true}
-                    ref={ref => { this.groupRef = ref; }}
+                    ref={ref => {
+                      this.groupRef = ref;
+                    }}
                     onChange={group => this.setGroupFilter(group)}
                     options={VALID_GROUPS}
                   />
@@ -238,7 +285,9 @@ class Breeds extends Component {
                     clearButton
                     placeholder="Filter by lifespan..."
                     selectHintOnEnter={true}
-                    ref={ref => { this.lifespanRef = ref; }}
+                    ref={ref => {
+                      this.lifespanRef = ref;
+                    }}
                     onChange={lifespan => this.setLifespanFilter(lifespan)}
                     options={VALID_LIFESPANS}
                   />
@@ -250,7 +299,9 @@ class Breeds extends Component {
                     clearButton
                     placeholder="Filter by height..."
                     selectHintOnEnter={true}
-                    ref={ref => { this.heightRef = ref; }}
+                    ref={ref => {
+                      this.heightRef = ref;
+                    }}
                     onChange={height => this.setHeightFilter(height)}
                     options={VALID_HEIGHTS}
                   />
@@ -260,18 +311,17 @@ class Breeds extends Component {
                   <Form.Control
                     id="breed-search"
                     type="text"
-                    ref={ref => { this.searchParamRef = ref; }}
+                    ref={ref => {
+                      this.searchParamRef = ref;
+                    }}
                     clearButton
                     placeholder="Search for a specific breed..."
                   />
                 </Col>
 
                 <Col md={1} xs={6} className="mt-2">
-                  <Button onClick={this.modelSearch}>
-                    Search
-                  </Button>
+                  <Button onClick={this.modelSearch}>Search</Button>
                 </Col>
-
               </Row>
             </Form>
             {this.state.info_loaded && (
