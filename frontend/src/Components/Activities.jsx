@@ -292,6 +292,11 @@ class Activities extends Component {
                   }}
                   clearButton
                   placeholder="Search for a specific activity..."
+                  onKeyPress={event => {
+                      if (event.key === "Enter") {
+                        this.modelSearch();
+                      }
+                    }}
                 />
               </Col>
 
