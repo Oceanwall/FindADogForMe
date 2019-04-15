@@ -93,7 +93,7 @@ class DogCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.dog.name}
+                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.dog.size}
                     highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                 </Col>
               </Row>

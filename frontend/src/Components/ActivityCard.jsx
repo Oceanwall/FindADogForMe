@@ -62,13 +62,13 @@ class ActivityCard extends Component {
               <Row>
                 <Col>
                   <p align="left">
-                    <b>Free:</b>
+                    <b>Cost:</b>
                   </p>
                 </Col>
                 <Col xs="auto">
                   <p align="right">
                     <Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.activity.is_free ? "Free" : "Paid"}
-                      highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/> 
+                      highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>
                   </p>
                 </Col>
               </Row>
