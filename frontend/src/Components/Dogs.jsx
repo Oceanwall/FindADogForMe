@@ -219,7 +219,7 @@ class Dogs extends Component {
         dogCards = this.state.dogList.map(dog => {
           return (
             <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <DogCard dog={dog} />
+              <DogCard dog={dog} highlight={this.state.searchParam}/>
             </div>
           );
         });

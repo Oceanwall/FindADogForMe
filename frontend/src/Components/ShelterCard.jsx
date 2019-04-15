@@ -8,9 +8,11 @@ import { Link } from "react-router-dom";
 import DefaultImage from "./DefaultImage";
 import Button from "react-bootstrap/Button";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
+import Highlighter from "react-highlight-words";
 
 class ShelterCard extends Component {
   render() {
+    console.log(this.props.highlight);
     let phone_number = parsePhoneNumberFromString(
       "+1" + this.props.shelter.phone
     );
@@ -21,7 +23,8 @@ class ShelterCard extends Component {
       <Card style={{ width: "20rem", height: "35rem" }} className="box mt-4">
         <DefaultImage name={this.props.shelter.name} />
         <Card.Body>
-          <Card.Title className="cutoff">{this.props.shelter.name}</Card.Title>
+          <Card.Title className="cutoff">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.name}
+              highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</Card.Title>
           <Card.Text>
             <Container>
               <Row>
@@ -31,7 +34,8 @@ class ShelterCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.shelter.city}</p>
+                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.city}
+                    highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                 </Col>
               </Row>
               <Row>
@@ -41,7 +45,8 @@ class ShelterCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.shelter.zipcode}</p>
+                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.zipcode}
+                    highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                 </Col>
               </Row>
               <Row>
@@ -52,7 +57,8 @@ class ShelterCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    {phone_number ? phone_number : "None Provided"}
+                  {<Highlighter searchWords={[this.props.highlight]} textToHighlight={phone_number ? phone_number : "None Provided"}
+                    highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
                   </p>
                 </Col>
               </Row>
@@ -64,9 +70,10 @@ class ShelterCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    {this.props.shelter.address
-                      ? this.props.shelter.address
-                      : "None Provided"}
+                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.address
+                        ? this.props.shelter.address
+                        : "None Provided"}
+                      highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
                   </p>
                 </Col>
               </Row>

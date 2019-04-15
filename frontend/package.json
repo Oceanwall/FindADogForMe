@@ -19,6 +19,8 @@
     "react-bootstrap-carousel": "^3.4.1",
     "react-bootstrap-typeahead": "^4.0.0-alpha.9",
     "react-dom": "^16.8.5",
+    "react-highlight-words": "^0.16.0",
+    "react-highlighter": "^0.4.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "request": "^2.88.0",

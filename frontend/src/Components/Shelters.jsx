@@ -201,9 +201,9 @@ class Shelters extends Component {
     this.setState(
       {
         searchParam: this.searchParamRef.value
-      },
-      this.filter
-    );
+      }, () => {
+      this.filter()
+    });
   }
 
   checkFiltered() {
@@ -243,7 +243,7 @@ class Shelters extends Component {
         shelterCards = this.state.shelterList.map(shelter => {
           return (
             <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <ShelterCard shelter={shelter} />
+              <ShelterCard shelter={shelter} highlight={this.state.searchParam}/>
             </div>
           );
         });

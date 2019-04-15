@@ -212,7 +212,7 @@ class Breeds extends Component {
         breedCards = this.state.breedList.slice(start, end).map(breed => {
           return (
             <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <BreedCard breed={breed} />
+              <BreedCard breed={breed} highlight={this.state.searchParam}/>
             </div>
           );
         });

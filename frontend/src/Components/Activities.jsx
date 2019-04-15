@@ -148,7 +148,7 @@ class Activities extends Component {
         activityCards = this.state.activityList.map(activity => {
           return (
             <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <ActivityCard activity={activity} />
+              <ActivityCard activity={activity} highlight={this.state.searchParam} />
             </div>
           );
         });

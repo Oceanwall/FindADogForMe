@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import DefaultImage from "./DefaultImage";
 import Button from "react-bootstrap/Button";
+import Highlighter from "react-highlight-words";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -44,7 +45,8 @@ class DogCard extends Component {
       <Card style={{ width: "20rem", height: "40rem" }} className="box mt-4">
         {card_image}
         <Card.Body>
-          <Card.Title>{this.props.dog.name}</Card.Title>
+          <Card.Title>{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.dog.name}
+            highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</Card.Title>
           <Card.Text>
             <Container>
               <Row>
@@ -55,7 +57,8 @@ class DogCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right" className="cutoff">
-                    {this.state.shelter_name}
+                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.state.shelter_name}
+                      highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
                   </p>
                 </Col>
               </Row>
@@ -67,7 +70,8 @@ class DogCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right" className="capitalize cutoff">
-                    {this.props.dog.breed}
+                  <Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.dog.breed}
+                    highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>
                   </p>
                 </Col>
               </Row>
@@ -78,7 +82,8 @@ class DogCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.dog.age}</p>
+                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.dog.age}
+                    highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                 </Col>
               </Row>
               <Row>
@@ -88,7 +93,8 @@ class DogCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{this.props.dog.size}</p>
+                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.dog.name}
+                    highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                 </Col>
               </Row>
               <Row>
