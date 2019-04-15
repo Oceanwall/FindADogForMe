@@ -12,7 +12,7 @@ import Highlighter from "react-highlight-words";
 
 class ShelterCard extends Component {
   render() {
-    console.log(this.props.highlight);
+    console.log(this.props.shelter.zipcode);
     let phone_number = parsePhoneNumberFromString(
       "+1" + this.props.shelter.phone
     );
@@ -20,7 +20,7 @@ class ShelterCard extends Component {
     else phone_number = phone_number.formatNational();
 
     return (
-      <Card style={{ width: "20rem", height: "35rem" }} className="box mt-4">
+      <Card style={{ width: "20rem", height: "35rem" }} className="box mt-4 custom-card">
         <DefaultImage name={this.props.shelter.name} />
         <Card.Body>
           <Card.Title className="cutoff">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.name}
@@ -45,7 +45,7 @@ class ShelterCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.zipcode}
+                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={String(this.props.shelter.zipcode)}
                     highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                 </Col>
               </Row>

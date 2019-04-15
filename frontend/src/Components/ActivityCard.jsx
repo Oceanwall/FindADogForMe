@@ -25,7 +25,7 @@ class ActivityCard extends Component {
     }
 
     return (
-      <Card className="box mt-4 custom-card">
+      <Card style={{height: "35rem"}} className="box mt-4 custom-card">
         {card_image}
         <Card.Body>
           <Card.Title className="cutoff">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.activity.name}

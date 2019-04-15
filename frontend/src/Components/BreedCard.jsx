@@ -24,7 +24,7 @@ class BreedCard extends Component {
     }
 
     return (
-      <Card style={{ width: "20rem", height: "40rem" }} className="box mt-4">
+      <Card style={{ width: "20rem", height: "40rem" }} className="box mt-4 custom-card">
         {card_image}
         <Card.Body>
           <Card.Title className="capitalize">
@@ -65,8 +65,8 @@ class BreedCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.min_lifespan.toFixed(1) 
-                      + " " +
+                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.min_lifespan.toFixed(1)
+                      + "-" +
                       this.props.breed.max_lifespan.toFixed(1)}
                       highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
                   </p>
@@ -80,7 +80,7 @@ class BreedCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.min_height.toFixed(1) 
+                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.min_height.toFixed(1)
                       + " " +
                       this.props.breed.max_height.toFixed(1)}
                       highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}

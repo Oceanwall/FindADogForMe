@@ -42,7 +42,7 @@ class DogCard extends Component {
     }
 
     return (
-      <Card style={{ width: "20rem", height: "40rem" }} className="box mt-4">
+      <Card style={{ width: "20rem", height: "40rem" }} className="box mt-4 custom-card">
         {card_image}
         <Card.Body>
           <Card.Title>{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.dog.name}
