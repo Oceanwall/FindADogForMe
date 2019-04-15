@@ -155,9 +155,9 @@ class DogInstance extends Component {
               }
               </div>
             </Col>
-            <Col xs={12} md={7} lg={6} style={{height: '50vh'}}>
+            <Col xs={12} md={7} lg={6} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
               {this.isLoaded() &&
-                  <MapContainer lat={this.state.latitude} lng={this.state.longitude}/>
+                  <MapContainer location_objects={[{latitude: this.state.latitude, longitude: this.state.longitude}]}/>
               }
             </Col>
           </Row>

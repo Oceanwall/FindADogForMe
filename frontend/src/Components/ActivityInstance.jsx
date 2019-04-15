@@ -7,6 +7,7 @@ import "../styles/Instance.css";
 import DogCard from "./DogCard";
 import ShelterCard from "./ShelterCard";
 import CardDeck from "react-bootstrap/CardDeck";
+import MapContainer from "./Map"
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -24,6 +25,7 @@ class ActivityInstance extends Component {
       is_active: null,
       is_free: null,
       latitude: null,
+      longitude: null,
       location: "",
       name: "",
       type: "",
@@ -63,6 +65,7 @@ class ActivityInstance extends Component {
         is_active: response["is_active"],
         is_free: response["is_free"],
         latitude: response["latitude"],
+        longitude: response["longitude"],
         name: response["name"],
         type: response["type"],
         url: response["url"],
@@ -166,12 +169,19 @@ class ActivityInstance extends Component {
               <InstanceCarousel images={this.state.images} />
             </Col>
           </Row>
-          <Row>
-            <Container className="mt-5">
-              <div class="desc-text">
-                <p align="left">{this.state.description}</p>
-              </div>
-            </Container>
+          <Row className="mt-2">
+            <Col xs={12} md={6}>
+              <Container>
+                <div class="desc-text">
+                  <p align="left">{this.state.description}</p>
+                </div>
+              </Container>
+            </Col>
+            <Col xs={12} md={6} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
+              {this.isLoaded() &&
+                  <MapContainer location_objects={[{latitude: this.state.latitude, longitude: this.state.longitude}]}/>
+              }
+            </Col>
           </Row>
 
           {dogCards.length > 0 ? (

@@ -7,6 +7,7 @@ import DogCard from "./DogCard";
 import ActivityCard from "./ActivityCard";
 import ShelterCard from "./ShelterCard";
 import CardDeck from "react-bootstrap/CardDeck";
+import MapContainer from "./Map";
 import "../styles/Instance.css";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
@@ -162,6 +163,12 @@ class BreedInstance extends Component {
               <InstanceCarousel images={this.state.images} />
             </Col>
           </Row>
+
+          <Row>
+            <Col xs={12} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
+                <MapContainer location_objects={this.state.shelter_list}/>
+            </Col>
+          </Row>
         </Container>
         <Container>
           {dogCards.length > 0 ? (
@@ -202,7 +209,6 @@ class BreedInstance extends Component {
                 {" "}
                 Activities:{" "}
               </p>
-              (
               <CardDeck>
                 <div class="card-deck">{activityCards}</div>
               </CardDeck>

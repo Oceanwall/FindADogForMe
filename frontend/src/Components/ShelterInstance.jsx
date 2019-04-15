@@ -8,6 +8,7 @@ import ActivityCard from "./ActivityCard";
 import BreedCard from "./BreedCard";
 import CardDeck from "react-bootstrap/CardDeck";
 import "../styles/Instance.css";
+import MapContainer from "./Map";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
@@ -40,7 +41,9 @@ class ShelterInstance extends Component {
           city: shelter["city"],
           name: shelter["name"],
           phone: shelter["phone"],
-          state: shelter["state"]
+          state: shelter["state"],
+          latitude: shelter["latitude"],
+          longitude: shelter["longitude"]
         },
         () =>
           wrapper.getShelterBreeds(this.state.shelterId).then(response => {
@@ -171,11 +174,19 @@ class ShelterInstance extends Component {
                 )}
               </div>
             </Col>
-            <Col>
+            <Col xs={12} md={7} lg={6}>
               <InstanceCarousel images={this.state.images} />
             </Col>
           </Row>
+
+          <Row>
+            <Col xs={12} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
+              <MapContainer location_objects={[{latitude: this.state.latitude, longitude: this.state.longitude}]}/>
+            </Col>
+          </Row>
+          
         </Container>
+
         <Container>
           {dogCards.length > 0 ? (
             <div>
