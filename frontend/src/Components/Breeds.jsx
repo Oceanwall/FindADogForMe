@@ -162,7 +162,7 @@ class Breeds extends Component {
       {
         searchParam: this.searchParamRef.value
       },
-      this.filter()
+      this.filter
     );
   }
 
