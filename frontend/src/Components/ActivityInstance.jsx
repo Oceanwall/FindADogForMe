@@ -6,6 +6,7 @@ import InstanceCarousel from "./InstanceCarousel";
 import "../styles/Instance.css";
 import DogCard from "./DogCard";
 import ShelterCard from "./ShelterCard";
+import BreedCard from "./BreedCard";
 import CardDeck from "react-bootstrap/CardDeck";
 import MapContainer from "./Map";
 
@@ -33,6 +34,7 @@ class ActivityInstance extends Component {
       images: [],
       shelter_list: [],
       dog_list: [],
+      breed_list: [],
       weather: null,
       loaded_activity: false,
       loaded_shelter: false,
@@ -100,6 +102,13 @@ class ActivityInstance extends Component {
         loaded_dog: true
       }));
     });
+    wrapper.getActivityBreeds(this.state.activityId).then(response => {
+      console.log("Activity breeds: ", response);
+      this.setState({
+        breed_list: response["objects"],
+        loaded_dog: true
+      });
+    });
   }
 
   async componentDidMount() {
@@ -131,6 +140,16 @@ class ActivityInstance extends Component {
         return (
           <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
             <ShelterCard shelter={shelter} />
+          </div>
+        );
+      });
+    }
+    let breedCards = [];
+    if (this.isLoaded()) {
+      breedCards = this.state.breed_list.map(breed => {
+        return (
+          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
+            <BreedCard breed={breed} />
           </div>
         );
       });
@@ -210,6 +229,7 @@ class ActivityInstance extends Component {
               Dogs suitable for this activity: None
             </p>
           )}
+
           {shelterCards.length > 0 ? (
             <div>
               <p align="left" class="deck-title-text">
@@ -222,6 +242,21 @@ class ActivityInstance extends Component {
           ) : (
             <p align="left" class="deck-title-text">
               Shelters near this activity: None
+            </p>
+          )}
+
+          {breedCards.length > 0 ? (
+            <div>
+              <p align="left" class="deck-title-text">
+                Breeds suitable for this activity:
+              </p>
+              <CardDeck>
+                <div class="card-deck">{breedCards}</div>
+              </CardDeck>
+            </div>
+          ) : (
+            <p align="left" class="deck-title-text">
+              Breeds suitable for this activity: None
             </p>
           )}
         </Container>
