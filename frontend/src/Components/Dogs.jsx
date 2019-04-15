@@ -164,7 +164,6 @@ class Dogs extends Component {
   }
 
   filter() {
-    let filter = this.checkFiltered();
     wrapper
       .getDogQuery(
         this.state.breed,
@@ -179,7 +178,6 @@ class Dogs extends Component {
           dogList: response["objects"],
           maxPage: response["total_pages"],
           info_loaded: true,
-          filtered: filter,
           currentPage: 1
         });
       });
@@ -211,17 +209,6 @@ class Dogs extends Component {
         searchParam: this.searchParamRef.value
       },
       this.filter
-    );
-  }
-
-  checkFiltered() {
-    return (
-      this.state.shelter != "" ||
-      this.state.breed != "" ||
-      this.state.age != "" ||
-      this.state.size != "" ||
-      this.state.sortParam != undefined ||
-      this.state.searchParam != undefined
     );
   }
 
