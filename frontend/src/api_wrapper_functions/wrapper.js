@@ -288,10 +288,11 @@ async function getShelterQuery(city_filter, zipcode_filter, phone_filter, search
     return utilities.perform_api_call(url);
 }
 
-async function getWebsiteQuery(search_param, page_num = 1) {
+async function getWebsiteQuery(search_param) {
     let url = `${API_URL}search_website?`;
 
-    url += utilities.build_search_sort_param_string(search_param, undefined, page_num);
+    // Note: Page number parameter serves no purpose.
+    url += utilities.build_search_sort_param_string(search_param, undefined, 1);
 
     return utilities.perform_api_call(url);
 }
