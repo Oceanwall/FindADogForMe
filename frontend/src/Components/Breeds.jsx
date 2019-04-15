@@ -58,7 +58,8 @@ class Breeds extends Component {
   //change page. pretty much copy paste this around
   changePage(pageNum) {
     this.setState(state => ({
-      currentPage: pageNum
+      currentPage: pageNum,
+      info_loaded: false
     }));
     this.updateBreed();
   }

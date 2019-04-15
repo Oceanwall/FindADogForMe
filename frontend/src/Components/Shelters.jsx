@@ -265,12 +265,6 @@ class Shelters extends Component {
                 <Col md={2} xs={4} className="mt-2">
                   <DropdownButton title={this.state.sortButtonName}>
                     <Dropdown.Item
-                      eventKey="Sort"
-                      onSelect={eventKey => this.setSort(undefined, eventKey)}
-                    >
-                      No sort
-                    </Dropdown.Item>
-                    <Dropdown.Item
                       eventKey="A-Z"
                       onSelect={eventKey =>
                         this.setSort("alphabetical", eventKey)
