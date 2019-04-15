@@ -317,6 +317,11 @@ class Breeds extends Component {
                     }}
                     clearButton
                     placeholder="Search for a specific breed..."
+                    onKeyPress={event => {
+                      if (event.key === "Enter") {
+                        this.modelSearch();
+                      }
+                    }}
                   />
                 </Col>
 
