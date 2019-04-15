@@ -164,15 +164,13 @@ class BreedInstance extends Component {
             </Col>
           </Row>
 
-          <Row>
-            <Col
-              xs={12}
-              className="mt-2 mb-1"
-              style={{ height: "50vh", paddingLeft: "0px" }}
-            >
-              <MapContainer location_objects={this.state.shelter_list} />
-            </Col>
-          </Row>
+          {this.state.shelter_list && this.state.shelter_list.length > 0 &&
+            <Row>
+              <Col xs={12} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
+                  <MapContainer location_objects={this.state.shelter_list}/>
+              </Col>
+            </Row>
+          }
         </Container>
         <Container>
           {dogCards.length > 0 ? (

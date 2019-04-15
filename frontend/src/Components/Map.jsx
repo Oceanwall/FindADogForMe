@@ -1,15 +1,50 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 
-export class MapContainer extends Component {
+class MapContainer extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
+    };
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onMapClicked = this.onMapClicked.bind(this);
+  }
+
+  onMarkerClick (props, marker, e) {
+    console.log(props);
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+  }
+
+  onMapClicked (props) {
+    console.log("ssdsdDADADAD");
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
+
   render() {
-    console.log( this.props.location_objects);
-    if (!this.props.location_objects || this.props.location_objects.length == 0 || !this.props.location_objects[0]["latitude"] || !this.props.location_objects[0]["longitude"])
-      return null;
+    console.log(this.props.location_objects);
+    if (!this.props.location_objects || this.props.location_objects.length == 0 || !this.props.location_objects[0]["latitude"] || !this.props.location_objects[0]["longitude"] || !this.props.location_objects[0]["name"]) {
+      console.log(this.props.location_objects);
+      return (
+        <div></div>
+      );
+    }
+
     let markers = []
-    // console.log( this.props.location_objects);
     for (let location_object of this.props.location_objects) {
-      markers.push(<Marker position={{lat: location_object.latitude, lng: location_object.longitude}}/>);
+      markers.push(<Marker position={{lat: location_object.latitude, lng: location_object.longitude}} name={location_object.name} onClick={this.onMarkerClick}/>);
     }
 
     console.log(markers);
@@ -23,8 +58,16 @@ export class MapContainer extends Component {
             lat: this.props.location_objects[0]["latitude"],
             lng: this.props.location_objects[0]["longitude"]
             }}
+            onClick={this.onMapClicked}
           >
             {markers}
+            <InfoWindow
+              marker={this.state.activeMarker}
+              visible={this.state.showingInfoWindow}>
+                <div>
+                  <div style={{"fontSize": "16px"}}>{this.state.selectedPlace.name}</div>
+                </div>
+            </InfoWindow>
         </Map>
       </div>
     );

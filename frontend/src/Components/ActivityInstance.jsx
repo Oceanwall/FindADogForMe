@@ -196,23 +196,11 @@ class ActivityInstance extends Component {
                 </div>
               </Container>
             </Col>
-            <Col
-              xs={12}
-              md={6}
-              className="mt-2 mb-1"
-              style={{ height: "50vh", paddingLeft: "0px" }}
-            >
-              {this.isLoaded() && (
-                <MapContainer
-                  location_objects={[
-                    {
-                      latitude: this.state.latitude,
-                      longitude: this.state.longitude
-                    }
-                  ]}
-                />
-              )}
-            </Col>
+            {this.state.latitude && this.isLoaded() &&
+              <Col xs={12} md={6} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
+                <MapContainer location_objects={[{latitude: this.state.latitude, longitude: this.state.longitude, name: this.state.name}]}/>
+              </Col>
+            }
           </Row>
 
           {dogCards.length > 0 ? (

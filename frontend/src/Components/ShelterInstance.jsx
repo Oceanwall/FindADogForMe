@@ -21,6 +21,8 @@ class ShelterInstance extends Component {
       address: "",
       city: "",
       name: "",
+      latitude: undefined,
+      longitude: undefined,
       phone: "",
       state: "",
       dog_list: [],
@@ -179,22 +181,14 @@ class ShelterInstance extends Component {
             </Col>
           </Row>
 
-          <Row>
-            <Col
-              xs={12}
-              className="mt-2 mb-1"
-              style={{ height: "50vh", paddingLeft: "0px" }}
-            >
-              <MapContainer
-                location_objects={[
-                  {
-                    latitude: this.state.latitude,
-                    longitude: this.state.longitude
-                  }
-                ]}
-              />
-            </Col>
-          </Row>
+          {this.state.latitude &&
+            <Row>
+              <Col xs={12} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
+                <MapContainer location_objects={[{"latitude": this.state.latitude, "longitude": this.state.longitude, "name": this.state.name}]}/>
+              </Col>
+            </Row>
+          }
+
         </Container>
 
         <Container>
