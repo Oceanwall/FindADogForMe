@@ -344,6 +344,11 @@ class Shelters extends Component {
                     }}
                     clearButton
                     placeholder="Search for a specific shelter..."
+                    onKeyPress={event => {
+                      if (event.key === "Enter") {
+                        this.modelSearch();
+                      }
+                    }}
                   />
                 </Col>
 
