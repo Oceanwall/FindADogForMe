@@ -25,7 +25,7 @@ class ActivityCard extends Component {
     }
 
     return (
-      <Card className="box mt-4 custom-card">
+      <Card style={{height: "35rem"}} className="box mt-4 custom-card">
         {card_image}
         <Card.Body>
           <Card.Title className="cutoff">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.activity.name}
@@ -62,13 +62,13 @@ class ActivityCard extends Component {
               <Row>
                 <Col>
                   <p align="left">
-                    <b>Free:</b>
+                    <b>Cost:</b>
                   </p>
                 </Col>
                 <Col xs="auto">
                   <p align="right">
                     <Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.activity.is_free ? "Free" : "Paid"}
-                      highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/> 
+                      highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>
                   </p>
                 </Col>
               </Row>

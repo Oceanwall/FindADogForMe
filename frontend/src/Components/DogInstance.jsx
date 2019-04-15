@@ -160,7 +160,7 @@ class DogInstance extends Component {
                     [
                       <div>
                         <p align="left">
-                          {this.state.description.substring(0, 750)}}...
+                          {this.state.description.substring(0, 750)}...
                         </p>
 
                         <Button
