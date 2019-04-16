@@ -5,6 +5,7 @@ import PageComp from "./PageComp";
 import Shelters from "./Shelters"
 import ShelterCard from "./ShelterCard"
 import Dogs from "./Dogs"
+import DogCard from "./DogCard"
 import Breeds from "./Breeds"
 import Activities from "./Activities"
 import { Route } from "react-router-dom";
@@ -17,20 +18,22 @@ class GlobalSearch extends Component {
     this.toggle = this.toggle.bind(this);
     this.changePage = this.changePage.bind(this);
     this.state = {
-      info_loaded: false,
+      shelters_loaded: false,
+      dogs_loaded: false,
       searchParam: this.props.match.params.id,
-      activeTabIndex: "tab1",
+      activeTab: "tab1",
     };
   }
 
   async componentDidMount() {
-    this.changePage(1)
+    this.updateShelter(1);
+    this.updateDog(1);
   }
 
-  async toggle(tabIndex) {
-    if (this.state.activeTabIndex !== tabIndex) {
+  async toggle(tab) {
+    if (this.state.activeTab !== tab) {
       this.setState({
-        activeTabIndex: tabIndex,
+        activeTab: tab,
       });
     }
   }
@@ -45,12 +48,13 @@ class GlobalSearch extends Component {
       "",
       "",
       this.state.searchParam,
+      undefined,
       pageNum,
     )
     .then(response => {
       console.log(response);
       this.setState({
-        info_loaded: true,
+        shelters_loaded: true,
         shelterList: response["objects"],
         shelterCurrentPage: pageNum,
         shelterMaxPage: response["total_pages"],
@@ -58,9 +62,29 @@ class GlobalSearch extends Component {
     });
   }
 
+  async updateDog(pageNum) {
+    wrapper.getDogQuery(
+      "",
+      "",
+      "",
+      this.state.searchParam,
+      undefined,
+      pageNum
+    )
+    .then(response => {
+      console.log(response);
+      this.setState({
+        dogs_loaded: true,
+        dogList: response["objects"],
+        dogCurrentPage: pageNum,
+        dogMaxPage: response["total_pages"],
+      });
+    });
+  }
+
   render() {
     let shelterCards = null;
-    if (this.state.info_loaded) {
+    if (this.state.shelters_loaded) {
       shelterCards = this.state.shelterList.map(shelter => {
         return (
           <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
@@ -70,10 +94,21 @@ class GlobalSearch extends Component {
       });
     }
 
+    let dogCards = null;
+    if (this.state.dogs_loaded) {
+      dogCards = this.state.dogList.map(dog => {
+        return (
+          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
+            <DogCard dog={dog} key={dog.name} highlight={this.state.searchParam}/>
+          </div>
+        );
+      });
+    }
+
     let shelters = (
       <div>
         <Container>
-          {this.state.info_loaded && (
+          {this.state.shelters_loaded && (
             <CardDeck>
               <div class="card-deck">{shelterCards}</div>
             </CardDeck>
@@ -82,6 +117,23 @@ class GlobalSearch extends Component {
         <PageComp
           currentPage={this.state.shelterCurrentPage}
           maxPage={this.state.shelterMaxPage}
+          changePage={this.changePage}
+        />
+      </div>
+    );
+
+    let dogs = (
+      <div>
+        <Container>
+          {this.state.dogs_loaded && (
+            <CardDeck>
+              <div class="card-deck">{dogCards}</div>
+            </CardDeck>
+          )}
+        </Container>
+        <PageComp
+          currentPage={this.state.dogCurrentPage}
+          maxPage={this.state.dogMaxPage}
           changePage={this.changePage}
         />
       </div>
@@ -96,8 +148,23 @@ class GlobalSearch extends Component {
         <Tabs activeTab={{
           id: this.state.activeTab
         }}>
-          <Tabs.Tab id="tab1" title="Shelters">
+          <Tabs.Tab
+            id="tab1"
+            title="Shelters"
+            onClick={() => {
+              this.toggle("tab1");
+            }}
+          >
             {shelters}
+          </Tabs.Tab>
+          <Tabs.Tab
+            id="tab2"
+            title="Dogs"
+            onClick={() => {
+              this.toggle("tab2");
+            }}
+          >
+            {dogs}
           </Tabs.Tab>
         </Tabs>
       </div>
