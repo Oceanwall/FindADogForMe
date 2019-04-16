@@ -105,6 +105,7 @@ def build_park(info, commit=False):
         + ", "
         + main_address["stateCode"],
         is_active=True,
+        is_active_string="Active",
         is_free=True if info["entranceFees"][0]["cost"] == "0.0000" else False,
         is_free_string="free"
         if info["entranceFees"][0]["cost"] == "0.0000"
@@ -183,6 +184,14 @@ def build_event(info, commit=False):
 
     # Note that info["category_id"] is of type string.
 
+    is_active = (
+        info["category_id"] == "108"
+        or info["category_id"] == "107"
+        or info["category_id"] == "109"
+        or info["category_id"] == "111"
+        or info["category_id"] == "119"
+    )
+
     event = Activity(
         id="eventbrite" + info["id"],
         type="eventbrite",
@@ -192,13 +201,8 @@ def build_event(info, commit=False):
         latitude=address_data["latitude"],
         longitude=address_data["longitude"],
         location=address_data["address"]["localized_address_display"],
-        is_active=(
-            info["category_id"] == "108"
-            or info["category_id"] == "107"
-            or info["category_id"] == "109"
-            or info["category_id"] == "111"
-            or info["category_id"] == "119"
-        ),
+        is_active=is_active,
+        is_active_string="Active" if is_active else "Casual",
         is_free=info["is_free"],
         is_free_string="free" if info["is_free"] else "paid",
         image_1=info["logo"]["url"] if "logo" in info else None,
@@ -277,6 +281,7 @@ def build_meetup(info, commit=False):
         longitude=info["group"]["lon"],
         location=info["group"]["localized_location"],
         is_active=True,
+        is_active_string="Active",
         is_free=False,
         is_free_string="paid",
         image_1=info["featured_photo"]["photo_link"]
