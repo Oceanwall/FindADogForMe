@@ -7,6 +7,7 @@ import ShelterCard from "./ShelterCard"
 import Dogs from "./Dogs"
 import DogCard from "./DogCard"
 import Breeds from "./Breeds"
+import BreedCard from "./BreedCard"
 import Activities from "./Activities"
 import { Route } from "react-router-dom";
 
@@ -29,6 +30,7 @@ class GlobalSearch extends Component {
   async componentDidMount() {
     this.updateShelter(1);
     this.updateDog(1);
+    this.updateBreed(1);
   }
 
   async toggle(tabIndex) {
@@ -52,6 +54,12 @@ class GlobalSearch extends Component {
         });
         this.updateDog(pageNum);
         break;
+      case "tab3":
+        this.setState({
+          breeds_loaded: false,
+        });
+        this.updateBreed(pageNum);
+        break;
     }
   }
 
@@ -63,8 +71,7 @@ class GlobalSearch extends Component {
       this.state.searchParam,
       undefined,
       pageNum,
-    )
-    .then(response => {
+    ).then(response => {
       console.log(response);
       this.setState({
         shelters_loaded: true,
@@ -82,15 +89,35 @@ class GlobalSearch extends Component {
       "",
       this.state.searchParam,
       undefined,
-      pageNum
-    )
-    .then(response => {
+      pageNum,
+    ).then(response => {
       console.log(response);
       this.setState({
         dogs_loaded: true,
         dogList: response["objects"],
         dogCurrentPage: pageNum,
         dogMaxPage: response["total_pages"],
+      });
+    });
+  }
+
+  async updateBreed(pageNum) {
+    wrapper.getBreedQuery(
+      undefined,
+      undefined,
+      undefined,
+      this.state.searchParam,
+      undefined,
+      pageNum,
+    ).then(response => {
+      console.log(response);
+      this.setState({
+        breedList: response["objects"],
+        breedMaxPage:
+          Math.floor(response["num_results"] / 20) +
+          (response["num_results"] % 20 ? 1 : 0),
+        breeds_loaded: true,
+        breedCurrentPage: pageNum,
       });
     });
   }
@@ -113,6 +140,22 @@ class GlobalSearch extends Component {
         return (
           <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
             <DogCard dog={dog} key={dog.name} highlight={this.state.searchParam}/>
+          </div>
+        );
+      });
+    }
+
+    let breedCards = [];
+    if (this.state.breeds_loaded) {
+      let start = (this.state.currentPage - 1) * 20;
+      let end =
+        start + 20 < this.state.breedList.length
+          ? start + 20
+          : this.state.breedList.length;
+      breedCards = this.state.breedList.slice(start, end).map(breed => {
+        return (
+          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
+            <BreedCard breed={breed} highlight={this.state.searchParam}/>
           </div>
         );
       });
@@ -152,6 +195,23 @@ class GlobalSearch extends Component {
       </div>
     );
 
+    let breeds = (
+      <div>
+        <Container>
+          {this.state.breeds_loaded && (
+            <CardDeck>
+              <div class="card-deck">{breedCards}</div>
+            </CardDeck>
+          )}
+        </Container>
+        <PageComp
+          currentPage={this.state.breedCurrentPage}
+          maxPage={this.state.breedMaxPage}
+          changePage={this.changePage}
+        />
+      </div>
+    )
+
     return (
       <div class="text-center mt-2">
         <h1>
@@ -177,6 +237,12 @@ class GlobalSearch extends Component {
             title="Dogs"
           >
             {dogs}
+          </Tabs.Tab>
+          <Tabs.Tab
+            id="tab3"
+            title="Breeds"
+          >
+            {breeds}
           </Tabs.Tab>
         </Tabs>
       </div>
