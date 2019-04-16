@@ -90,6 +90,7 @@ class GlobalSearch extends Component {
       this.state.searchParam,
       undefined,
       pageNum,
+      true,
     ).then(response => {
       console.log(response);
       this.setState({
@@ -130,6 +131,7 @@ class GlobalSearch extends Component {
       this.state.searchParam,
       undefined,
       pageNum,
+      true,
     ).then(response => {
       console.log(response);
       this.setState({
