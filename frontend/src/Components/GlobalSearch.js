@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, CardDeck, Container } from "react-bootstrap";
-import { Tabs } from "@yazanaabed/react-tabs";
+import { Tabs, TabProvider } from "@yazanaabed/react-tabs";
 import PageComp from "./PageComp";
 import Shelters from "./Shelters"
 import ShelterCard from "./ShelterCard"
@@ -17,11 +17,12 @@ class GlobalSearch extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.changePage = this.changePage.bind(this);
+    this.tabRef = React.createRef();
     this.state = {
       shelters_loaded: false,
       dogs_loaded: false,
       searchParam: this.props.match.params.id,
-      activeTab: "tab1",
+      activeTabIndex: "tab1",
     };
   }
 
@@ -30,16 +31,28 @@ class GlobalSearch extends Component {
     this.updateDog(1);
   }
 
-  async toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab,
-      });
-    }
+  async toggle(tabIndex) {
+    this.setState({
+      activeTabIndex: tabIndex,
+    });
   }
 
-  async changePage(pageNum) {
-    this.updateShelter(pageNum);
+  changePage(pageNum) {
+    console.log('AGAHSIFJ', pageNum, this.tabRef)
+    switch(this.tabRef.props.activeTab.id) {
+      case "tab1":
+        this.setState({
+          shelters_loaded: false,
+        });
+        this.updateShelter(pageNum);
+        break;
+      case "tab2":
+        this.setState({
+          dogs_loaded: false,
+        });
+        this.updateDog(pageNum);
+        break;
+    }
   }
 
   async updateShelter(pageNum) {
@@ -145,24 +158,23 @@ class GlobalSearch extends Component {
           Search Results for: {this.props.match.params.id}
         </h1>
 
-        <Tabs activeTab={{
-          id: this.state.activeTab
-        }}>
+        <Tabs
+          activeTab={{
+            id: "tab2"
+          }}
+          ref={ref => {
+            this.tabRef = ref;
+          }}
+        >
           <Tabs.Tab
             id="tab1"
             title="Shelters"
-            onClick={() => {
-              this.toggle("tab1");
-            }}
           >
             {shelters}
           </Tabs.Tab>
           <Tabs.Tab
             id="tab2"
             title="Dogs"
-            onClick={() => {
-              this.toggle("tab2");
-            }}
           >
             {dogs}
           </Tabs.Tab>
