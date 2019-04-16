@@ -21,7 +21,6 @@ class GlobalSearch extends Component {
     this.dogChangePage = this.dogChangePage.bind(this);
     this.breedChangePage = this.breedChangePage.bind(this);
     this.activityChangePage = this.activityChangePage.bind(this);
-    this.tabRef = React.createRef();
     this.state = {
       shelters_loaded: false,
       dogs_loaded: false,
