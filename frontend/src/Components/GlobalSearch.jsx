@@ -17,7 +17,6 @@ const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 class GlobalSearch extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.shelterChangePage = this.shelterChangePage.bind(this);
     this.dogChangePage = this.dogChangePage.bind(this);
     this.breedChangePage = this.breedChangePage.bind(this);
@@ -27,7 +26,6 @@ class GlobalSearch extends Component {
       shelters_loaded: false,
       dogs_loaded: false,
       searchParam: this.props.match.params.id,
-      activeTabIndex: "tab1",
     };
   }
 
@@ -36,12 +34,6 @@ class GlobalSearch extends Component {
     this.updateDog(1);
     this.updateBreed(1);
     this.updateActivity(1);
-  }
-
-  async toggle(tabIndex) {
-    this.setState({
-      activeTabIndex: tabIndex,
-    });
   }
 
   shelterChangePage(pageNum) {
@@ -276,7 +268,7 @@ class GlobalSearch extends Component {
 
         <Tabs
           activeTab={{
-            id: "tab2"
+            id: "tab1"
           }}
           ref={ref => {
             this.tabRef = ref;
