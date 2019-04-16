@@ -18,7 +18,10 @@ class GlobalSearch extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.changePage = this.changePage.bind(this);
+    this.shelterChangePage = this.shelterChangePage.bind(this);
+    this.dogChangePage = this.dogChangePage.bind(this);
+    this.breedChangePage = this.breedChangePage.bind(this);
+    this.activityChangePage = this.activityChangePage.bind(this);
     this.tabRef = React.createRef();
     this.state = {
       shelters_loaded: false,
@@ -41,34 +44,32 @@ class GlobalSearch extends Component {
     });
   }
 
-  changePage(pageNum) {
-    console.log('AGAHSIFJ', pageNum, this.tabRef)
-    switch(this.tabRef.props.activeTab.id) {
-      case "tab1":
-        this.setState({
-          shelters_loaded: false,
-        });
-        this.updateShelter(pageNum);
-        break;
-      case "tab2":
-        this.setState({
-          dogs_loaded: false,
-        });
-        this.updateDog(pageNum);
-        break;
-      case "tab3":
-        this.setState({
-          breeds_loaded: false,
-        });
-        this.updateBreed(pageNum);
-        break;
-      case "tab4":
-        this.setState({
-          activities_loaded: false,
-        });
-        this.updateActivity(pageNum);
-        break;
-    }
+  shelterChangePage(pageNum) {
+    this.setState({
+      shelters_loaded: false,
+    });
+    this.updateShelter(pageNum);
+  }
+
+  dogChangePage(pageNum) {
+    this.setState({
+      dogs_loaded: false,
+    });
+    this.updateDog(pageNum);
+  }
+
+  breedChangePage(pageNum) {
+    this.setState({
+      breeds_loaded: false,
+    });
+    this.updateBreed(pageNum);
+  }
+
+  activityChangePage(pageNum) {
+    this.setState({
+      activities_loaded: false,
+    });
+    this.updateActivity(pageNum);
   }
 
   async updateShelter(pageNum) {
@@ -211,7 +212,7 @@ class GlobalSearch extends Component {
         <PageComp
           currentPage={this.state.shelterCurrentPage}
           maxPage={this.state.shelterMaxPage}
-          changePage={this.changePage}
+          changePage={this.shelterChangePage}
         />
       </div>
     );
@@ -228,7 +229,7 @@ class GlobalSearch extends Component {
         <PageComp
           currentPage={this.state.dogCurrentPage}
           maxPage={this.state.dogMaxPage}
-          changePage={this.changePage}
+          changePage={this.dogChangePage}
         />
       </div>
     );
@@ -245,7 +246,7 @@ class GlobalSearch extends Component {
         <PageComp
           currentPage={this.state.breedCurrentPage}
           maxPage={this.state.breedMaxPage}
-          changePage={this.changePage}
+          changePage={this.breedChangePage}
         />
       </div>
     )
@@ -262,7 +263,7 @@ class GlobalSearch extends Component {
         <PageComp
           currentPage={this.state.activityCurrentPage}
           maxPage={this.state.activityMaxPage}
-          changePage={this.changePage}
+          changePage={this.activityChangePage}
         />
       </div>
     )
