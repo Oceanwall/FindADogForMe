@@ -225,7 +225,25 @@ class TestBackend(TestCase):
         assert type(breed_images) == type([])
         assert len(breed_images) > 0
     
+    def test27(self):
+        breed_images = get_breed_images("akita")
+        assert type(breed_images) == type([])
+        assert len(breed_images) > 0
+    
+    def test28(self):
+        breed_images = get_breed_images("american bulldog")
+        assert type(breed_images) == type([])
+        assert len(breed_images) > 0
 
+    def test29(self):
+        breed_images = get_breed_images("basenji")
+        assert type(breed_images) == type([])
+        assert len(breed_images) > 0
+
+    def test30(self):
+        breed_images = get_breed_images("beagle")
+        assert type(breed_images) == type([])
+        assert len(breed_images) > 0
 
 if __name__ == "__main__":
     main()

@@ -8,7 +8,7 @@ require("geckodriver");
 
 // TO RUN:
 // mocha --reporter spec --no-timeouts guitests.js
-// MUST BE USED IN test DIRECTORY
+// MUST BE USED IN test DIRECTORY (where the chromedrivers are located).
 
 // Currently: 27 tests
 

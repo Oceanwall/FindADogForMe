@@ -169,7 +169,7 @@ class ActivityInstance extends Component {
             <Col>
               <h1> {this.state.name}</h1>
               <div class="info-text">
-                <p align="left" className="mt-5">
+                <p align="left" className="mt-4">
                   URL: <a href={this.state.url}>Learn more about this event</a>
                 </p>
 
@@ -187,7 +187,8 @@ class ActivityInstance extends Component {
                   Type: {this.state.type}
                 </p>
 
-                <p align="left"> Free: {this.state.is_free ? "Yes" : "No"}</p>
+                <p align="left"> Cost: {this.state.is_free ? "Free" : "Paid"}</p>
+                <p align="left"> Level of Activity: {this.state.is_active ? "Active" : "Casual"}</p>
                 <p align="left"> Location: {this.state.location}</p>
               </div>
             </Col>
@@ -241,7 +242,7 @@ class ActivityInstance extends Component {
           {dogCards.length > 0 ? (
             <div>
               <p align="left" class="deck-title-text">
-                Dogs suitable for this activity:
+                Suitable dogs near this activity:
               </p>
               <CardDeck>
                 <div class="card-deck">{dogCards}</div>
@@ -249,7 +250,7 @@ class ActivityInstance extends Component {
             </div>
           ) : (
             <p align="left" class="deck-title-text">
-              Dogs suitable for this activity: None
+              Suitable dogs near this activity: None
             </p>
           )}
 

@@ -155,11 +155,7 @@ class Shelters extends Component {
           zipcode: ""
         },
         () => {
-          if (this.state.filtered) {
-            this.filter();
-          } else {
-            this.changePage(1);
-          }
+          this.filter();
         }
       );
     }
@@ -200,10 +196,17 @@ class Shelters extends Component {
   modelSearch() {
     this.setState(
       {
-        searchParam: this.searchParamRef.value
-      }, () => {
-      this.filter()
-    });
+        searchParam: this.searchParamRef.value,
+        filtered: true
+      },
+      () => {
+        if (this.state.filtered) {
+          this.filter();
+        } else {
+          this.updateShelter(1);
+        }
+      }
+    );
   }
 
   checkFiltered() {
@@ -243,7 +246,10 @@ class Shelters extends Component {
         shelterCards = this.state.shelterList.map(shelter => {
           return (
             <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <ShelterCard shelter={shelter} highlight={this.state.searchParam}/>
+              <ShelterCard
+                shelter={shelter}
+                highlight={this.state.searchParam}
+              />
             </div>
           );
         });
@@ -257,13 +263,20 @@ class Shelters extends Component {
             <Form>
               <Row className="mt-2">
                 <Col md={1} xs={2} className="mt-2">
-                  <Button variant="danger" id="reset-button" onClick={() => this.reset()}>
+                  <Button
+                    variant="danger"
+                    id="reset-button"
+                    onClick={() => this.reset()}
+                  >
                     Reset
                   </Button>
                 </Col>
 
                 <Col md={2} xs={4} className="mt-2">
-                  <DropdownButton title={this.state.sortButtonName} id="sort-select">
+                  <DropdownButton
+                    title={this.state.sortButtonName}
+                    id="sort-select"
+                  >
                     <Dropdown.Item
                       eventKey="A-Z"
                       onSelect={eventKey =>
@@ -353,7 +366,9 @@ class Shelters extends Component {
                 </Col>
 
                 <Col md={1} xs={6} className="mt-2">
-                  <Button onClick={this.modelSearch} id="search-button">Search</Button>
+                  <Button onClick={this.modelSearch} id="search-button">
+                    Search
+                  </Button>
                 </Col>
               </Row>
             </Form>

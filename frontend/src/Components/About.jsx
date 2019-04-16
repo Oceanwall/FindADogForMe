@@ -29,7 +29,7 @@ class About extends Component {
         responsibility: "Worked mainly on the backend portion of the project",
         commits: 0,
         issues: 0,
-        tests: 168,
+        tests: 262,
         img: "/images/samarth.jpg"
       },
       triplestop: {

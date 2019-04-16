@@ -120,7 +120,7 @@ class DogInstance extends Component {
           <Row>
             <Col>
               <h1> {this.state.name}</h1>
-              <div class="info-text">
+              <div className="mt-4 info-text">
                 <p align="left" className="mt-5">
                   Shelter:{" "}
                   <Link to={`/shelters/${this.state.shelter_id}`}>

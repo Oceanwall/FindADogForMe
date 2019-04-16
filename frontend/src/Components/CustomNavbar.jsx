@@ -1,24 +1,22 @@
 import React, { Component } from "react";
-import { BrowserRouter, withRouter } from "react-router-dom"
+import { withRouter } from "react-router-dom"
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/CustomNavbar.css";
+import GlobalSearch from "./GlobalSearch";
 
 class CustomNavbar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchParamRef: React.createRef(),
-    }
     this.globalSearch = this.globalSearch.bind(this);
+    this.searchParam = React.createRef();
   }
 
-  globalSearch() {
-    if (this.searchParamRef.value !== "") {
-      this.props.history.push("/search/" + this.searchParamRef.value)
-    }
+  globalSearch()  {
+    if(this.searchParam.value != "")
+      this.props.history.push(`/search/${this.searchParam.value}`);
   }
 
   render() {
@@ -45,14 +43,13 @@ class CustomNavbar extends Component {
           </Nav>
           {
           <Nav className="justify-content-end">
-            <Form inline className="justify-content-center col-xs-6">
               <Form.Control
                 id="searchbar"
                 type="text"
                 placeholder="Search"
                 className="mr-sm-2"
                 ref={ref => {
-                      this.searchParamRef = ref;
+                  this.searchParam = ref;
                 }}
                 onKeyPress={event => {
                   if (event.key === "Enter") {
@@ -60,8 +57,7 @@ class CustomNavbar extends Component {
                   }
                 }}
               />
-              <Button variant="outline-primary" className="mt-2 mt-sm-0">Search</Button>
-            </Form>
+              <Button variant="outline-primary" className="mt-2 mt-sm-0" onClick={()=>this.globalSearch()}>Search</Button>
           </Nav>
           }
         </Navbar.Collapse>
@@ -70,4 +66,4 @@ class CustomNavbar extends Component {
   }
 }
 
-export default CustomNavbar;
+export default withRouter(CustomNavbar);

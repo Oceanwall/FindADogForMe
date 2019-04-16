@@ -18,6 +18,7 @@ class Activity(db.Model):
     longitude (number)
     location (string)
     is_active (boolean)
+    is_active_string (string)
     is_free (boolean)
     is_free_string (string)
     image_1 (string)
@@ -42,6 +43,7 @@ class Activity(db.Model):
     longitude = db.Column(db.Float)
     location = db.Column(db.String(255))
     is_active = db.Column(db.Boolean)
+    is_active_string = db.Column(db.String(255))
     is_free = db.Column(db.Boolean)
     is_free_string = db.Column(db.String(1000))
     image_1 = db.Column(db.String(1000))
@@ -64,6 +66,7 @@ class Activity(db.Model):
         longitude,
         location,
         is_active,
+        is_active_string,
         is_free,
         is_free_string,
         image_1,
@@ -84,6 +87,7 @@ class Activity(db.Model):
         self.longitude = longitude
         self.location = location
         self.is_active = is_active
+        self.is_active_string = is_active_string
         self.is_free = is_free
         self.is_free_string = is_free_string
         self.image_1 = image_1
@@ -109,6 +113,7 @@ class Activity(db.Model):
             "longitude": self.longitude,
             "location": self.location,
             "is_active": self.is_active,
+            "is_active_string": self.is_active_string,
             "is_free": self.is_free,
             "is_free_string": self.is_free_string,
             "image_1": self.image_1,

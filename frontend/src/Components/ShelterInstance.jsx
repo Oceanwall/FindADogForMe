@@ -156,7 +156,7 @@ class ShelterInstance extends Component {
           <Row>
             <Col>
               <h1> {this.state.name}</h1>
-              <div class="info-text">
+              <div className="mt-4 info-text">
                 <p align="left"> Contact Information: {phone_number}</p>
                 <p align="left"> Address: {this.state.address} </p>
                 <p align="left">

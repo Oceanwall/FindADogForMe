@@ -357,7 +357,7 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(activity).to.have.property("description");
   });
   it("should get information about another activity", async function () {
-    let activity = await wrapper.getActivity("eventbrite56498965928");
+    let activity = await wrapper.getActivity("eventbrite46549055478");
     expect(activity).to.be.an("object");
     expect(activity).to.have.property("designation");
     expect(activity).to.have.property("url");
@@ -397,7 +397,7 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(dogs[0]).to.have.property("image_1");
   });
   it("should get dogs in a shelter located near an activity that the other activity is suitable for", async function () {
-    let dogs = await wrapper.getActivityDogs("eventbrite56498965928", 0.25);
+    let dogs = await wrapper.getActivityDogs("eventbrite46549055478", 1);
     expect(dogs).to.be.an("array");
     expect(dogs[0]).to.have.property("breed");
     expect(dogs[0]).to.have.property("age");
@@ -417,7 +417,7 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(shelters["objects"][0]).to.have.property("state");
   });
   it("should get shelters located near another activity", async function () {
-    let shelters = await wrapper.getActivityShelters("eventbrite56498965928");
+    let shelters = await wrapper.getActivityShelters("eventbrite46549055478");
     expect(shelters).to.be.an("object");
     expect(shelters).to.have.property("num_results");
     expect(shelters).to.have.property("objects");
@@ -429,7 +429,7 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(shelters["objects"][0]).to.have.property("state");
   });
   it("should correctly filter and sort activity queries", async function() {
-    let activities = await wrapper.getActivityQuery(true, true, "eventbrite", null, "alphabetical", 1);
+    let activities = await wrapper.getActivityQuery(true, true, "eventbrite", null, "alphabetical", 1, true);
     expect(activities).to.be.an("object");
     expect(activities).to.have.property("num_results");
     expect(activities).to.have.property("objects");
@@ -460,7 +460,7 @@ describe("FindADogForMe API Wrapper Functions", function () {
     }
   });
   it("should correctly filter and sort dog queries", async function() {
-    let dogs = await wrapper.getDogQuery("border collie", "Adult", "L", null, "alphabetical", 1);
+    let dogs = await wrapper.getDogQuery("border collie", "Adult", "L", null, "alphabetical", 1, true);
     expect(dogs).to.be.an("object");
     expect(dogs).to.have.property("num_results");
     expect(dogs).to.have.property("objects");

@@ -16,6 +16,7 @@ class Activity {
     Float longitude
     String location
     Boolean is_active
+    String is_active_string
     Boolean is_free
     String is_free_string
     String image_1
