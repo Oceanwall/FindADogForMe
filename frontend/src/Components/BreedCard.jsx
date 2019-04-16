@@ -28,7 +28,7 @@ class BreedCard extends Component {
         {card_image}
         <Card.Body>
           <Card.Title className="capitalize">
-            {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.name}
+            {<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.breed.name}
               highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
           </Card.Title>
           <Card.Text>
@@ -40,7 +40,7 @@ class BreedCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.group}
+                  <p align="right">{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.breed.group}
                     highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                 </Col>
               </Row>
@@ -52,7 +52,7 @@ class BreedCard extends Component {
                 </Col>
                 <Col>
                   <p align="right" class="cutoff">
-                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.temperament}
+                    {<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.breed.temperament}
                       highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
                   </p>
                 </Col>
@@ -65,7 +65,7 @@ class BreedCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.min_lifespan.toFixed(1)
+                    {<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.breed.min_lifespan.toFixed(1)
                       + " - " +
                       this.props.breed.max_lifespan.toFixed(1)
                       + " (years)"}
@@ -81,7 +81,7 @@ class BreedCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.min_height.toFixed(1)
+                    {<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.breed.min_height.toFixed(1)
                       + " - " +
                       this.props.breed.max_height.toFixed(1)
                       + " (inches)"}

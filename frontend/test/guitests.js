@@ -3,11 +3,14 @@ const webdriver = require("selenium-webdriver");
 const By = webdriver.By;
 const until = webdriver.until;
 const Builder = webdriver.Builder;
+const Key = webdriver.Key;
 require("geckodriver");
 
 // TO RUN:
 // mocha --reporter spec --no-timeouts guitests.js
 // MUST BE USED IN test DIRECTORY
+
+// Currently: 27 tests
 
 const serverUri = "http://localhost:3000/";
 const appTitle = "Find a Dog for Me";
@@ -210,6 +213,75 @@ describe("Dogs Page", function() {
   });
 
 
+  it("should confirm the presence of a query interface", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+      .findElement(By.id('reset-button'))
+      .catch(() => reject(new Error("No item with the ID reset-button was found.")));
+
+      browser
+      .findElement(By.id('sort-select'))
+      .catch(() => reject(new Error("No item with the ID sort-select was found.")));
+
+      browser
+      .findElement(By.id('age-filter'))
+      .catch(() => reject(new Error("No item with the ID age-filter was found.")));
+
+      browser
+      .findElement(By.id('size-filter'))
+      .catch(() => reject(new Error("No item with the ID size-filter was found.")));
+
+      browser
+      .findElements(By.className("breed-filter"))
+        .then((items) => {
+          assert.equal(Number(items.length), 1);
+        })
+        .catch(() => reject(new Error("Found more than one / no items with the class name breed-filter.")))
+      .catch(() => reject(new Error("No item with the class name breed-filter was found.")));
+
+      browser
+      .findElement(By.id('dog-search'))
+      .catch(() => reject(new Error("No item with the ID reset-button was found.")));
+
+      browser
+      .findElement(By.id('search-button'))
+      .catch(() => reject(new Error("No item with the ID search-button was found.")))
+      .then(() => resolve());
+    });
+  });
+
+  it("should interact with query interface to search for results", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+      .findElement(By.id('dog-search'))
+      .then((elem) => {
+        elem
+        .sendKeys("happy", Key.ENTER)
+        .then(() => {
+          browser
+          .wait(browser.sleep(4000), 5000)
+          .then(() => {
+            browser
+              .findElements(By.className("card"))
+                .then((items) => {
+                  assert.isAbove(Number(items.length), 0);
+                })
+                .catch((error) => reject(new Error("Number of instances on page that match search query is not greater than 0.")));
+
+            browser
+              .findElements(By.className("search-highlight"))
+                .then((items) => {
+                  assert.isAbove(Number(items.length), 0);
+                })
+              .then(() => resolve())
+              .catch((error) => reject(new Error("Number of 'search query-matching' highlights on page is not greater than 0.")));
+          })
+        })
+      })
+    });
+  });
+
+
   it("should load the dog instance page and confirm existence of related instances on page", function() {
     return new Promise(function(resolve, reject) {
       browser
@@ -269,6 +341,70 @@ describe("Activities Page", function() {
                 .catch((error) => reject(error));
             })
         });
+    });
+  });
+
+  it("should confirm the presence of a query interface", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+      .findElement(By.id('reset-button'))
+      .catch(() => reject(new Error("No item with the ID reset-button was found.")));
+
+      browser
+      .findElement(By.id('sort-select'))
+      .catch(() => reject(new Error("No item with the ID sort-select was found.")));
+
+      browser
+      .findElement(By.id('active-filter'))
+      .catch(() => reject(new Error("No item with the ID active-filter was found.")));
+
+      browser
+      .findElement(By.id('cost-filter'))
+      .catch(() => reject(new Error("No item with the ID cost-filter was found.")));
+
+      browser
+      .findElement(By.id('type-filter'))
+      .catch(() => reject(new Error("No item with the ID type-filter was found.")));
+
+      browser
+      .findElement(By.id('activity-search'))
+      .catch(() => reject(new Error("No item with the ID reset-button was found.")));
+
+      browser
+      .findElement(By.id('search-button'))
+      .catch(() => reject(new Error("No item with the ID search-button was found.")))
+      .then(() => resolve());
+    });
+  });
+
+  it("should interact with query interface to search for results", function() {
+    return new Promise(function(resolve, reject) {
+      browser
+      .findElement(By.id('activity-search'))
+      .then((elem) => {
+        elem
+        .sendKeys("dog", Key.ENTER)
+        .then(() => {
+          browser
+          .wait(browser.sleep(4000), 5000)
+          .then(() => {
+            browser
+              .findElements(By.className("card"))
+                .then((items) => {
+                  assert.isAbove(Number(items.length), 0);
+                })
+                .catch((error) => reject(new Error("Number of instances on page that match search query is not greater than 0.")));
+
+            browser
+              .findElements(By.className("search-highlight"))
+                .then((items) => {
+                  assert.isAbove(Number(items.length), 0);
+                })
+              .then(() => resolve())
+              .catch((error) => reject(new Error("Number of 'search query-matching' highlights on page is not greater than 0.")));
+          })
+        })
+      })
     });
   });
 
@@ -335,6 +471,82 @@ describe("Breeds Page", function() {
     });
   });
 
+  it("should confirm the presence of a query interface", function() {
+     return new Promise(function(resolve, reject) {
+       browser
+       .findElement(By.id('reset-button'))
+       .catch(() => reject(new Error("No item with the ID reset-button was found.")));
+
+       browser
+       .findElement(By.id('sort-select'))
+       .catch(() => reject(new Error("No item with the ID sort-select was found.")));
+
+       browser
+       .findElements(By.className("group-filter"))
+         .then((items) => {
+           assert.equal(Number(items.length), 1);
+         })
+         .catch(() => reject(new Error("Found more than one / no items with the class name group-filter.")))
+       .catch(() => reject(new Error("No item with the class name group-filter was found.")));
+
+       browser
+       .findElements(By.className("lifespan-filter"))
+         .then((items) => {
+           assert.equal(Number(items.length), 1);
+         })
+         .catch(() => reject(new Error("Found more than one / no items with the class name lifespan-filter.")))
+       .catch(() => reject(new Error("No item with the class name lifespan-filter was found.")));
+
+       browser
+       .findElements(By.className("height-filter"))
+         .then((items) => {
+           assert.equal(Number(items.length), 1);
+         })
+         .catch(() => reject(new Error("Found more than one / no items with the class name height-filter.")))
+       .catch(() => reject(new Error("No item with the class name height-filter was found.")));
+
+       browser
+       .findElement(By.id('breed-search'))
+       .catch(() => reject(new Error("No item with the ID reset-button was found.")));
+
+       browser
+       .findElement(By.id('search-button'))
+       .catch(() => reject(new Error("No item with the ID search-button was found.")))
+       .then(() => resolve());
+     });
+   });
+
+    it("should interact with query interface to search for results", function() {
+     return new Promise(function(resolve, reject) {
+       browser
+       .findElement(By.id('breed-search'))
+       .then((elem) => {
+         elem
+         .sendKeys("lab", Key.ENTER)
+         .then(() => {
+           browser
+           .wait(browser.sleep(4000), 5000)
+           .then(() => {
+             browser
+               .findElements(By.className("card"))
+                 .then((items) => {
+                   assert.isAbove(Number(items.length), 0);
+                 })
+                 .catch((error) => reject(new Error("Number of instances on page that match search query is not greater than 0.")));
+
+             browser
+               .findElements(By.className("search-highlight"))
+                 .then((items) => {
+                   assert.isAbove(Number(items.length), 0);
+                 })
+               .then(() => resolve())
+               .catch((error) => reject(new Error("Number of 'search query-matching' highlights on page is not greater than 0.")));
+           })
+         })
+       })
+     });
+    });
+
 
   it("should load the breed instance page and confirm existence of related instances on page", function() {
     return new Promise(function(resolve, reject) {
@@ -397,6 +609,75 @@ describe("Shelters Page", function() {
         });
     });
   });
+
+  it("should confirm the presence of a query interface", function() {
+     return new Promise(function(resolve, reject) {
+       browser
+       .findElement(By.id('reset-button'))
+       .catch(() => reject(new Error("No item with the ID reset-button was found.")));
+
+       browser
+       .findElement(By.id('sort-select'))
+       .catch(() => reject(new Error("No item with the ID sort-select was found.")));
+
+       browser
+         .findElement(By.id('zipcode-filter'))
+         .catch(() => reject(new Error("No item with the ID zipcode-filter was found.")));
+
+       browser
+       .findElement(By.id('areacode-filter'))
+       .catch(() => reject(new Error("No item with the ID areacode-filter was found.")));
+
+       browser
+       .findElements(By.className("city-filter"))
+         .then((items) => {
+           assert.equal(Number(items.length), 1);
+         })
+         .catch(() => reject(new Error("Found more than one / no items with the class name city-filter.")))
+       .catch(() => reject(new Error("No item with the class name city-filter was found.")));
+
+       browser
+       .findElement(By.id('shelter-search'))
+       .catch(() => reject(new Error("No item with the ID reset-button was found.")));
+
+       browser
+       .findElement(By.id('search-button'))
+       .catch(() => reject(new Error("No item with the ID search-button was found.")))
+       .then(() => resolve());
+     });
+   });
+
+    it("should interact with query interface to search for results", function() {
+     return new Promise(function(resolve, reject) {
+       browser
+       .findElement(By.id('shelter-search'))
+       .then((elem) => {
+         elem
+         .sendKeys("country", Key.ENTER)
+         .then(() => {
+           browser
+           .wait(browser.sleep(4000), 5000)
+           .then(() => {
+             browser
+               .findElements(By.className("card"))
+                 .then((items) => {
+                   assert.isAbove(Number(items.length), 0);
+                 })
+                 .catch((error) => reject(new Error("Number of instances on page that match search query is not greater than 0.")));
+
+             browser
+               .findElements(By.className("search-highlight"))
+                 .then((items) => {
+                   assert.isAbove(Number(items.length), 0);
+                 })
+               .then(() => resolve())
+               .catch((error) => reject(new Error("Number of 'search query-matching' highlights on page is not greater than 0.")));
+           })
+         })
+       })
+     });
+    });
+
 
 
   it("should load the shelter instance page and confirm existence of related instances on page", function() {

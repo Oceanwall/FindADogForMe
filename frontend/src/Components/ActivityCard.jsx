@@ -28,7 +28,7 @@ class ActivityCard extends Component {
       <Card style={{height: "35rem"}} className="box mt-4 custom-card">
         {card_image}
         <Card.Body>
-          <Card.Title className="cutoff">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.activity.name}
+          <Card.Title className="cutoff">{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.activity.name}
             highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</Card.Title>
           <Card.Text>
             <Container>
@@ -41,7 +41,7 @@ class ActivityCard extends Component {
                       </p>
                     </Col>
                     <Col>
-                      <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.activity.date}
+                      <p align="right">{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.activity.date}
                         highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                     </Col>
                   </div>
@@ -53,7 +53,7 @@ class ActivityCard extends Component {
                       </p>
                     </Col>
                     <Col xs="auto">
-                      <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.activity.designation}
+                      <p align="right">{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.activity.designation}
                         highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                     </Col>
                   </div>
@@ -67,7 +67,7 @@ class ActivityCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    <Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.activity.is_free ? "Free" : "Paid"}
+                    <Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.activity.is_free ? "Free" : "Paid"}
                       highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>
                   </p>
                 </Col>
@@ -79,7 +79,7 @@ class ActivityCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.activity.location}
+                  <p align="right">{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.activity.location}
                     highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                 </Col>
               </Row>
@@ -91,7 +91,7 @@ class ActivityCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right" className="capitalize">
-                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.activity.type}
+                    {<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.activity.type}
                       highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
                   </p>
                 </Col>

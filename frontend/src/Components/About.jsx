@@ -53,12 +53,12 @@ class About extends Component {
       oceanwall: {
         name: "Matthew Zhao",
         bio:
-          "UTCS Sophomore, NBA junkie and slow runner, certified as the worst member of the UT Badminton Club.",
+          "UTCS Sophomore, NBA junkie, certified as the worst member of the UT Badminton Club.",
         responsibility:
           "Backend Architect, Full Stack Developer, Gitlab Dictator",
         commits: 0,
         issues: 0,
-        tests: 33,
+        tests: 47,
         img: "/images/matthew.jpg"
       }
     },
@@ -242,7 +242,7 @@ class About extends Component {
             <tr class="text-center">
               <td id="Total-Commits">{this.state.total_commits}</td>
               <td id="Total-Issues">{this.state.total_issues}</td>
-              <td id="Total-UT">201</td>
+              <td id="Total-UT">215</td>
             </tr>
           </tbody>
         </table>

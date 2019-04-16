@@ -160,9 +160,10 @@ class Activities extends Component {
             <h1> Activities</h1>
           </div>
           <Container>
-            <Row className="search-bar">
+            <Row>
               <Col md={1} xs={2} className="mt-2">
                 <Button
+                  id="reset-button"
                   variant="danger"
                   onClick={() => {
                     this.setState(
@@ -188,7 +189,7 @@ class Activities extends Component {
               </Col>
 
               <Col md={2} xs={4} className="mt-2">
-                <DropdownButton title={this.state.sortButtonName}>
+                <DropdownButton title={this.state.sortButtonName} id="sort-select">
                   <Dropdown.Item
                     eventKey="A-Z"
                     onSelect={eventKey =>
@@ -223,7 +224,7 @@ class Activities extends Component {
               </Col>
 
               <Col md={2} xs={6} className="mt-2">
-                <DropdownButton title={this.state.activeButtonName}>
+                <DropdownButton title={this.state.activeButtonName} id="active-filter">
                   <Dropdown.Item
                     eventKey="Active"
                     onSelect={eventKey => this.setActiveFilter(true, eventKey)}
@@ -240,7 +241,7 @@ class Activities extends Component {
               </Col>
 
               <Col md={2} xs={6} className="mt-2">
-                <DropdownButton title={this.state.freeButtonName}>
+                <DropdownButton title={this.state.freeButtonName} id="cost-filter">
                   <Dropdown.Item
                     eventKey="Free"
                     onSelect={eventKey => this.setFreeFilter(true, eventKey)}
@@ -257,7 +258,7 @@ class Activities extends Component {
               </Col>
 
               <Col md={2} xs={6} className="mt-2">
-                <DropdownButton title={this.state.typeButtonName}>
+                <DropdownButton title={this.state.typeButtonName} id="type-filter">
                   <Dropdown.Item
                     eventKey="Eventbrite"
                     onSelect={eventKey =>
@@ -301,7 +302,7 @@ class Activities extends Component {
               </Col>
 
               <Col md={1} xs={6} className="mt-2">
-                <Button onClick={this.modelSearch}>Search</Button>
+                <Button onClick={this.modelSearch} id="search-button">Search</Button>
               </Col>
             </Row>
             {this.state.info_loaded && (

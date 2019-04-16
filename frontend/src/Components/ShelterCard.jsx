@@ -23,7 +23,7 @@ class ShelterCard extends Component {
       <Card style={{ width: "20rem", height: "35rem" }} className="box mt-4 custom-card">
         <DefaultImage name={this.props.shelter.name} />
         <Card.Body>
-          <Card.Title className="cutoff">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.name}
+          <Card.Title className="cutoff">{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.name}
               highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</Card.Title>
           <Card.Text>
             <Container>
@@ -34,7 +34,7 @@ class ShelterCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.city}
+                  <p align="right">{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.city}
                     highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                 </Col>
               </Row>
@@ -45,7 +45,7 @@ class ShelterCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{<Highlighter searchWords={[this.props.highlight]} textToHighlight={String(this.props.shelter.zipcode)}
+                  <p align="right">{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={String(this.props.shelter.zipcode)}
                     highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
                 </Col>
               </Row>
@@ -57,7 +57,7 @@ class ShelterCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                  {<Highlighter searchWords={[this.props.highlight]} textToHighlight={phone_number ? phone_number : "None Provided"}
+                  {<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={phone_number ? phone_number : "None Provided"}
                     highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
                   </p>
                 </Col>
@@ -70,7 +70,7 @@ class ShelterCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right">
-                    {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.address
+                    {<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.shelter.address
                         ? this.props.shelter.address
                         : "None Provided"}
                       highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}

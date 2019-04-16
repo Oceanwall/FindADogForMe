@@ -232,13 +232,13 @@ class Dogs extends Component {
           <Container>
             <Row className="search-bar mt-2">
               <Col md={1} xs={2} className="mt-2">
-                <Button variant="danger" onClick={() => this.reset()}>
+                <Button id="reset-button" variant="danger" onClick={() => this.reset()}>
                   Reset
                 </Button>
               </Col>
 
               <Col md={2} xs={4} className="mt-2">
-                <DropdownButton title={this.state.sortButtonName}>
+                <DropdownButton id="sort-select" title={this.state.sortButtonName}>
                   <Dropdown.Item
                     eventKey="A-Z"
                     onSelect={eventKey =>
@@ -273,7 +273,7 @@ class Dogs extends Component {
               </Col>
 
               <Col md={2} xs={6} className="mt-2">
-                <DropdownButton title={this.state.ageButtonName}>
+                <DropdownButton id="age-filter" title={this.state.ageButtonName}>
                   <Dropdown.Item
                     eventKey="Baby"
                     onSelect={() => this.setAgeFilter("Baby")}
@@ -302,7 +302,7 @@ class Dogs extends Component {
               </Col>
 
               <Col md={2} xs={6} className="mt-2">
-                <DropdownButton title={this.state.sizeButtonName}>
+                <DropdownButton id="size-filter" title={this.state.sizeButtonName}>
                   <Dropdown.Item
                     eventKey="Small"
                     onSelect={eventKey => this.setSizeFilter("S", eventKey)}
@@ -332,7 +332,7 @@ class Dogs extends Component {
 
               <Col md={2} xs={6} className="mt-2">
                 <Typeahead
-                  id="breed-search"
+                  className="breed-filter"
                   clearButton
                   placeholder="Filter by breed..."
                   selectHintOnEnter={true}
@@ -362,7 +362,7 @@ class Dogs extends Component {
               </Col>
 
               <Col md={1} xs={4} className="mt-2">
-                <Button onClick={this.modelSearch}>Search</Button>
+                <Button id="search-button" onClick={this.modelSearch}>Search</Button>
               </Col>
             </Row>
             {this.state.info_loaded && (

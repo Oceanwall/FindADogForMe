@@ -226,13 +226,13 @@ class Breeds extends Component {
             <Form>
               <Row className="mt-2">
                 <Col md={1} xs={2} className="mt-2">
-                  <Button variant="danger" onClick={() => this.reset()}>
+                  <Button id="reset-button" variant="danger" onClick={() => this.reset()}>
                     Reset
                   </Button>
                 </Col>
 
                 <Col md={2} xs={4} className="mt-2">
-                  <DropdownButton title={this.state.sortButtonName}>
+                  <DropdownButton title={this.state.sortButtonName} id="sort-select">
                     <Dropdown.Item
                       eventKey="A-Z"
                       onSelect={eventKey =>
@@ -268,7 +268,7 @@ class Breeds extends Component {
 
                 <Col md={2} xs={6} className="mt-2">
                   <Typeahead
-                    id="group-select"
+                    className="group-filter"
                     clearButton
                     placeholder="Filter by group..."
                     selectHintOnEnter={true}
@@ -282,7 +282,7 @@ class Breeds extends Component {
 
                 <Col md={2} xs={6} className="mt-2">
                   <Typeahead
-                    id="lifespan-select"
+                    className="lifespan-filter"
                     clearButton
                     placeholder="Filter by lifespan..."
                     selectHintOnEnter={true}
@@ -296,7 +296,7 @@ class Breeds extends Component {
 
                 <Col md={2} xs={6} className="mt-2">
                   <Typeahead
-                    id="height-select"
+                    className="height-filter"
                     clearButton
                     placeholder="Filter by height..."
                     selectHintOnEnter={true}
@@ -326,7 +326,7 @@ class Breeds extends Component {
                 </Col>
 
                 <Col md={1} xs={6} className="mt-2">
-                  <Button onClick={this.modelSearch}>Search</Button>
+                  <Button onClick={this.modelSearch} id="search-button">Search</Button>
                 </Col>
               </Row>
             </Form>

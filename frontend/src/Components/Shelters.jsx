@@ -257,13 +257,13 @@ class Shelters extends Component {
             <Form>
               <Row className="mt-2">
                 <Col md={1} xs={2} className="mt-2">
-                  <Button variant="danger" onClick={() => this.reset()}>
+                  <Button variant="danger" id="reset-button" onClick={() => this.reset()}>
                     Reset
                   </Button>
                 </Col>
 
                 <Col md={2} xs={4} className="mt-2">
-                  <DropdownButton title={this.state.sortButtonName}>
+                  <DropdownButton title={this.state.sortButtonName} id="sort-select">
                     <Dropdown.Item
                       eventKey="A-Z"
                       onSelect={eventKey =>
@@ -299,7 +299,7 @@ class Shelters extends Component {
 
                 <Col md={2} xs={6} className="mt-2">
                   <Form.Control
-                    type="zip-code"
+                    id="zipcode-filter"
                     placeholder="Filter by zipcode..."
                     maxLength={5}
                     ref={ref => {
@@ -311,7 +311,7 @@ class Shelters extends Component {
 
                 <Col md={2} xs={6} className="mt-2">
                   <Form.Control
-                    type="area-code"
+                    id="areacode-filter"
                     placeholder="Filter by phone area code..."
                     maxLength={3}
                     ref={ref => {
@@ -323,7 +323,7 @@ class Shelters extends Component {
 
                 <Col md={2} xs={6} className="mt-2">
                   <Typeahead
-                    id="city-search"
+                    className="city-filter"
                     clearButton
                     placeholder="Filter by city..."
                     selectHintOnEnter={true}
@@ -353,7 +353,7 @@ class Shelters extends Component {
                 </Col>
 
                 <Col md={1} xs={6} className="mt-2">
-                  <Button onClick={this.modelSearch}>Search</Button>
+                  <Button onClick={this.modelSearch} id="search-button">Search</Button>
                 </Col>
               </Row>
             </Form>
