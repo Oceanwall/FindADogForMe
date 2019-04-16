@@ -17,6 +17,7 @@ class CustomNavbar extends Component {
   globalSearch()  {
     if(this.searchParam.value != "")
       this.props.history.push(`/search/${this.searchParam.value}`);
+      window.location.reload();
   }
 
   render() {
