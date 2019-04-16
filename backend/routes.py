@@ -43,6 +43,7 @@ def activity_query():
     type_filter = request.args.get("type")
     search_param = request.args.get("search")
     sort_param = request.args.get("sort")
+    description_param = request.args.get("include_description")
     page_num = request.args.get("page")
 
     if page_num is None:
@@ -104,6 +105,12 @@ def activity_query():
                 or (item["type"] is not None and search_param in item["type"].lower())
             ):
                 search_items.append(object)
+                # Use of continue to avoid adding duplicate items
+                continue
+
+            if description_param and item["description"] is not None and search_param in item["description"].lower():
+                search_items.append(object)
+
 
     return control_pagination(search_items, page_num, 12)
 
@@ -207,6 +214,7 @@ def dog_query():
     size_filter = request.args.get("size")
     search_param = request.args.get("search")
     sort_param = request.args.get("sort")
+    description_param = request.args.get("include_description")
     page_num = request.args.get("page")
 
     if page_num is None:
@@ -278,6 +286,11 @@ def dog_query():
                 or (item["age"] is not None and search_param in item["age"].lower())
                 or (item["size"] is not None and search_param in item["size"].lower())
             ):
+                search_items.append(object)
+                # Use of continue to avoid adding duplicate items
+                continue
+
+            if description_param and item["description"] is not None and search_param in item["description"].lower():
                 search_items.append(object)
 
     return control_pagination(search_items, page_num, 20)

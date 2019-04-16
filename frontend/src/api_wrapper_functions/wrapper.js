@@ -219,7 +219,7 @@ Filtering, Searching, and Sorting Queries
 
 // TODO: Add checks to force compliance with permitted sort params / filter values?
 
-async function getActivityQuery(active_filter, free_filter, type_filter, search_param, sort_param, page_num = 1) {
+async function getActivityQuery(active_filter, free_filter, type_filter, search_param, sort_param, page_num = 1, include_description = false) {
     let url = `${API_URL}activity/query?`;
 
     // Special case for checking true / false parameters.
@@ -231,6 +231,9 @@ async function getActivityQuery(active_filter, free_filter, type_filter, search_
 
     if (type_filter)
         url += `&type=${type_filter}`;
+
+    if (include_description)
+      url += `&include_description=true`;
 
     url += utilities.build_search_sort_param_string(search_param, sort_param, page_num);
     console.log(url);
@@ -254,7 +257,7 @@ async function getBreedQuery(group_filter, lifespan_filter, height_filter, searc
     return utilities.perform_api_call(url);
 }
 
-async function getDogQuery(breed_filter, age_filter, size_filter, search_param, sort_param, page_num = 1) {
+async function getDogQuery(breed_filter, age_filter, size_filter, search_param, sort_param, page_num = 1, include_description = false) {
     let url = `${API_URL}dog/query?`;
 
     if (breed_filter)
@@ -265,6 +268,9 @@ async function getDogQuery(breed_filter, age_filter, size_filter, search_param, 
 
     if (size_filter)
         url += `&size=${size_filter}`;
+
+    if (include_description)
+        url += `&include_description=true`;
 
     url += utilities.build_search_sort_param_string(search_param, sort_param, page_num);
 
