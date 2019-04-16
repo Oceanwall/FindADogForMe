@@ -8,6 +8,7 @@ import Shelters from "./Components/Shelters";
 import Dogs from "./Components/Dogs";
 import Breeds from "./Components/Breeds";
 import Activities from "./Components/Activities";
+import GlobalSearch from "./Components/GlobalSearch"
 import NoMatch from "./Components/Error404";
 
 
@@ -24,6 +25,7 @@ class App extends Component {
             <Route path="/breeds" component={Breeds} />
             <Route path="/activities" component={Activities} />
             <Route exact path="/about" component={About} />
+            <Route path="/search/:id" component={GlobalSearch} />
             <Route component={NoMatch} />
           </Switch>
         </Router>
