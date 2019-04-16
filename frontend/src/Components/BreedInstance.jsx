@@ -58,35 +58,36 @@ class BreedInstance extends Component {
           image_4: breed["image_4"],
           group: breed["group"]
         },
-        () =>
-          wrapper.getBreedShelters(this.state.name).then(response => {
-            console.log(response);
-            this.setState(
-              {
-                shelter_list: response["objects"]
-              },
-              () =>
-                wrapper
-                  .getBreedDogs(this.state.name, undefined)
-                  .then(response => {
-                    console.log(response);
-                    this.setState(
-                      {
-                        dog_list: response["objects"]
+        async () =>
+          wrapper
+            .getBreedDogs(this.state.name, undefined)
+            .then(response => {
+              console.log(response);
+              this.setState(
+                {
+                  dog_list: response["objects"]
+                },
+                async () =>
+                  wrapper
+                    .getBreedActivities(this.state.name)
+                    .then(response => {
+                      console.log(response);
+                      this.setState({
+                        activity_list: response["objects"]
                       },
-                      () =>
-                        wrapper
-                          .getBreedActivities(this.state.name)
-                          .then(response => {
-                            console.log(response);
-                            this.setState({
-                              activity_list: response["objects"]
-                            });
-                          })
-                    );
-                  })
-            );
-          })
+                      async () => {
+                        let shelters = [];
+                        for (let dog of this.state.dog_list) {
+                          shelters.push(await(wrapper.getShelter(dog["shelter_id"])));
+                        }
+                        this.setState({
+                          shelter_list: shelters
+                        });
+                        }
+                      );
+                    })
+              );
+            })
       );
       let imageArray = [];
       if (this.state.image_1 != null) {
@@ -166,7 +167,7 @@ class BreedInstance extends Component {
 
           {this.state.shelter_list && this.state.shelter_list.length > 0 &&
             <Row>
-              <Col xs={12} className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
+              <Col xs={12} id="google-map" className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
                   <MapContainer location_objects={this.state.shelter_list}/>
               </Col>
             </Row>

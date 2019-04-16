@@ -47,6 +47,7 @@ class CustomNavbar extends Component {
           <Nav className="justify-content-end">
             <Form inline className="justify-content-center col-xs-6">
               <Form.Control
+                id="searchbar"
                 type="text"
                 placeholder="Search"
                 className="mr-sm-2"

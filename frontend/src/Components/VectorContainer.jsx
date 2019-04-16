@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 class VectorContainer extends Component {
   render() {
     return (
-      <Container>
+      <Container id="vector-clickables-container">
         <Row>
           <Col md={3} xs={6}>
             <a href="/activities" className="vector_section activities_section">

@@ -66,8 +66,9 @@ class BreedCard extends Component {
                 <Col xs="auto">
                   <p align="right">
                     {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.min_lifespan.toFixed(1)
-                      + "-" +
-                      this.props.breed.max_lifespan.toFixed(1)}
+                      + " - " +
+                      this.props.breed.max_lifespan.toFixed(1)
+                      + " (years)"}
                       highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
                   </p>
                 </Col>
@@ -81,8 +82,9 @@ class BreedCard extends Component {
                 <Col xs="auto">
                   <p align="right">
                     {<Highlighter searchWords={[this.props.highlight]} textToHighlight={this.props.breed.min_height.toFixed(1)
-                      + " " +
-                      this.props.breed.max_height.toFixed(1)}
+                      + " - " +
+                      this.props.breed.max_height.toFixed(1)
+                      + " (inches)"}
                       highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
                   </p>
                 </Col>

@@ -32,6 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-wrapper": "mocha --reporter spec --no-timeouts test/mocha_test.js",
+    "test-gui": "mocha --reporter spec --no-timeouts guitests.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
