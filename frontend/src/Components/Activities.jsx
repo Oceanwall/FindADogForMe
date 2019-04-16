@@ -132,7 +132,10 @@ class Activities extends Component {
       {
         searchParam: this.searchParamRef.value
       },
-      this.filter
+      () => {
+        if (this.state.filtered) this.filter();
+        else this.updateActivity(1);
+      }
     );
   }
 
@@ -148,7 +151,10 @@ class Activities extends Component {
         activityCards = this.state.activityList.map(activity => {
           return (
             <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <ActivityCard activity={activity} highlight={this.state.searchParam} />
+              <ActivityCard
+                activity={activity}
+                highlight={this.state.searchParam}
+              />
             </div>
           );
         });
@@ -189,7 +195,10 @@ class Activities extends Component {
               </Col>
 
               <Col md={2} xs={4} className="mt-2">
-                <DropdownButton title={this.state.sortButtonName} id="sort-select">
+                <DropdownButton
+                  title={this.state.sortButtonName}
+                  id="sort-select"
+                >
                   <Dropdown.Item
                     eventKey="A-Z"
                     onSelect={eventKey =>
@@ -224,7 +233,10 @@ class Activities extends Component {
               </Col>
 
               <Col md={2} xs={6} className="mt-2">
-                <DropdownButton title={this.state.activeButtonName} id="active-filter">
+                <DropdownButton
+                  title={this.state.activeButtonName}
+                  id="active-filter"
+                >
                   <Dropdown.Item
                     eventKey="Active"
                     onSelect={eventKey => this.setActiveFilter(true, eventKey)}
@@ -241,7 +253,10 @@ class Activities extends Component {
               </Col>
 
               <Col md={2} xs={6} className="mt-2">
-                <DropdownButton title={this.state.freeButtonName} id="cost-filter">
+                <DropdownButton
+                  title={this.state.freeButtonName}
+                  id="cost-filter"
+                >
                   <Dropdown.Item
                     eventKey="Free"
                     onSelect={eventKey => this.setFreeFilter(true, eventKey)}
@@ -258,7 +273,10 @@ class Activities extends Component {
               </Col>
 
               <Col md={2} xs={6} className="mt-2">
-                <DropdownButton title={this.state.typeButtonName} id="type-filter">
+                <DropdownButton
+                  title={this.state.typeButtonName}
+                  id="type-filter"
+                >
                   <Dropdown.Item
                     eventKey="Eventbrite"
                     onSelect={eventKey =>
@@ -294,15 +312,17 @@ class Activities extends Component {
                   clearButton
                   placeholder="Search for a specific activity..."
                   onKeyPress={event => {
-                      if (event.key === "Enter") {
-                        this.modelSearch();
-                      }
-                    }}
+                    if (event.key === "Enter") {
+                      this.modelSearch();
+                    }
+                  }}
                 />
               </Col>
 
               <Col md={1} xs={6} className="mt-2">
-                <Button onClick={this.modelSearch} id="search-button">Search</Button>
+                <Button onClick={this.modelSearch} id="search-button">
+                  Search
+                </Button>
               </Col>
             </Row>
             {this.state.info_loaded && (

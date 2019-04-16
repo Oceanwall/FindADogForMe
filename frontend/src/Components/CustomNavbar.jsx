@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, withRouter } from "react-router-dom"
+import { BrowserRouter, withRouter } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
@@ -10,14 +10,14 @@ class CustomNavbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchParamRef: React.createRef(),
-    }
+      searchParamRef: React.createRef()
+    };
     this.globalSearch = this.globalSearch.bind(this);
   }
 
   globalSearch() {
     if (this.searchParamRef.value !== "") {
-      this.props.history.push("/search/" + this.searchParamRef.value)
+      this.props.history.push("/search/" + this.searchParamRef.value);
     }
   }
 
@@ -44,25 +44,27 @@ class CustomNavbar extends Component {
             <Nav.Link href="/about">About</Nav.Link>
           </Nav>
           {
-          <Nav className="justify-content-end">
-            <Form inline className="justify-content-center col-xs-6">
-              <Form.Control
-                id="searchbar"
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-                ref={ref => {
-                      this.searchParamRef = ref;
-                }}
-                onKeyPress={event => {
-                  if (event.key === "Enter") {
-                    this.globalSearch();
-                  }
-                }}
-              />
-              <Button variant="outline-primary" className="mt-2 mt-sm-0">Search</Button>
-            </Form>
-          </Nav>
+            <Nav className="justify-content-end">
+              <Form inline className="justify-content-center col-xs-6">
+                <Form.Control
+                  id="searchbar"
+                  type="text"
+                  placeholder="Search"
+                  className="mr-sm-2"
+                  ref={ref => {
+                    this.searchParamRef = ref;
+                  }}
+                  onKeyPress={event => {
+                    if (event.key === "Enter") {
+                      this.globalSearch();
+                    }
+                  }}
+                />
+                <Button variant="outline-primary" className="mt-2 mt-sm-0">
+                  Search
+                </Button>
+              </Form>
+            </Nav>
           }
         </Navbar.Collapse>
       </Navbar>

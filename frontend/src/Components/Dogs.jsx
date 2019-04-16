@@ -164,23 +164,25 @@ class Dogs extends Component {
   }
 
   filter() {
-    wrapper
-      .getDogQuery(
-        this.state.breed,
-        this.state.age,
-        this.state.size,
-        this.state.searchParam,
-        this.state.sortParam
-      )
-      .then(response => {
-        console.log(response);
-        this.setState({
-          dogList: response["objects"],
-          maxPage: response["total_pages"],
-          info_loaded: true,
-          currentPage: 1
+    if (this.state.filtered) {
+      wrapper
+        .getDogQuery(
+          this.state.breed,
+          this.state.age,
+          this.state.size,
+          this.state.searchParam,
+          this.state.sortParam
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({
+            dogList: response["objects"],
+            maxPage: response["total_pages"],
+            info_loaded: true,
+            currentPage: 1
+          });
         });
-      });
+    }
   }
 
   reset() {
@@ -208,7 +210,13 @@ class Dogs extends Component {
       {
         searchParam: this.searchParamRef.value
       },
-      this.filter
+      () => {
+        if (this.state.filtered) {
+          this.filter();
+        } else {
+          this.updateDog(1);
+        }
+      }
     );
   }
 
@@ -219,7 +227,11 @@ class Dogs extends Component {
         dogCards = this.state.dogList.map(dog => {
           return (
             <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <DogCard dog={dog} key={dog.name} highlight={this.state.searchParam}/>
+              <DogCard
+                dog={dog}
+                key={dog.name}
+                highlight={this.state.searchParam}
+              />
             </div>
           );
         });
@@ -232,13 +244,20 @@ class Dogs extends Component {
           <Container>
             <Row className="search-bar mt-2">
               <Col md={1} xs={2} className="mt-2">
-                <Button id="reset-button" variant="danger" onClick={() => this.reset()}>
+                <Button
+                  id="reset-button"
+                  variant="danger"
+                  onClick={() => this.reset()}
+                >
                   Reset
                 </Button>
               </Col>
 
               <Col md={2} xs={4} className="mt-2">
-                <DropdownButton id="sort-select" title={this.state.sortButtonName}>
+                <DropdownButton
+                  id="sort-select"
+                  title={this.state.sortButtonName}
+                >
                   <Dropdown.Item
                     eventKey="A-Z"
                     onSelect={eventKey =>
@@ -273,7 +292,10 @@ class Dogs extends Component {
               </Col>
 
               <Col md={2} xs={6} className="mt-2">
-                <DropdownButton id="age-filter" title={this.state.ageButtonName}>
+                <DropdownButton
+                  id="age-filter"
+                  title={this.state.ageButtonName}
+                >
                   <Dropdown.Item
                     eventKey="Baby"
                     onSelect={() => this.setAgeFilter("Baby")}
@@ -302,7 +324,10 @@ class Dogs extends Component {
               </Col>
 
               <Col md={2} xs={6} className="mt-2">
-                <DropdownButton id="size-filter" title={this.state.sizeButtonName}>
+                <DropdownButton
+                  id="size-filter"
+                  title={this.state.sizeButtonName}
+                >
                   <Dropdown.Item
                     eventKey="Small"
                     onSelect={eventKey => this.setSizeFilter("S", eventKey)}
@@ -354,15 +379,17 @@ class Dogs extends Component {
                   clearButton
                   placeholder="Search for a specific dog..."
                   onKeyPress={event => {
-                      if (event.key === "Enter") {
-                        this.modelSearch();
-                      }
-                    }}
+                    if (event.key === "Enter") {
+                      this.modelSearch();
+                    }
+                  }}
                 />
               </Col>
 
               <Col md={1} xs={4} className="mt-2">
-                <Button id="search-button" onClick={this.modelSearch}>Search</Button>
+                <Button id="search-button" onClick={this.modelSearch}>
+                  Search
+                </Button>
               </Col>
             </Row>
             {this.state.info_loaded && (
