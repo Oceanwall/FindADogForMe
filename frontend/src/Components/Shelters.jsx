@@ -196,7 +196,8 @@ class Shelters extends Component {
   modelSearch() {
     this.setState(
       {
-        searchParam: this.searchParamRef.value
+        searchParam: this.searchParamRef.value,
+        filtered: true
       },
       () => {
         if (this.state.filtered) {
