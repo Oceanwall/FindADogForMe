@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, CardDeck, Container } from "react-bootstrap";
-import { Tabs, TabProvider } from "@yazanaabed/react-tabs";
+import { Tabs, TabProvider } from "react-tabs";
 import PageComp from "./PageComp";
 import Shelters from "./Shelters"
 import ShelterCard from "./ShelterCard"

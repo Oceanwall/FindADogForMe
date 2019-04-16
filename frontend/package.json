@@ -23,6 +23,7 @@
     "react-highlighter": "^0.4.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
+    "react-tabs": "^3.0.0",
     "request": "^2.88.0",
     "selenium-webdriver": "^4.0.0-alpha.1"
   },

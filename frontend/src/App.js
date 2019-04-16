@@ -8,7 +8,7 @@ import Shelters from "./Components/Shelters";
 import Dogs from "./Components/Dogs";
 import Breeds from "./Components/Breeds";
 import Activities from "./Components/Activities";
-import GlobalSearch from "./Components/GlobalSearch"
+import GlobalSearch from "./Components/GlobalSearch";
 import NoMatch from "./Components/Error404";
 
 
