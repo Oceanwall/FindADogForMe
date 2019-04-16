@@ -9,6 +9,7 @@ import DogCard from "./DogCard"
 import Breeds from "./Breeds"
 import BreedCard from "./BreedCard"
 import Activities from "./Activities"
+import ActivityCard from "./ActivityCard"
 import { Route } from "react-router-dom";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
@@ -31,6 +32,7 @@ class GlobalSearch extends Component {
     this.updateShelter(1);
     this.updateDog(1);
     this.updateBreed(1);
+    this.updateActivity(1);
   }
 
   async toggle(tabIndex) {
@@ -59,6 +61,12 @@ class GlobalSearch extends Component {
           breeds_loaded: false,
         });
         this.updateBreed(pageNum);
+        break;
+      case "tab4":
+        this.setState({
+          activities_loaded: false,
+        });
+        this.updateActivity(pageNum);
         break;
     }
   }
@@ -122,6 +130,25 @@ class GlobalSearch extends Component {
     });
   }
 
+  async updateActivity(pageNum) {
+    wrapper.getActivityQuery(
+      undefined,
+      undefined,
+      "",
+      this.state.searchParam,
+      undefined,
+      pageNum,
+    ).then(response => {
+      console.log(response);
+      this.setState({
+        activityList: response["objects"],
+        activityCurrentPage: pageNum,
+        activityMaxPage: response["total_pages"],
+        activities_loaded: true,
+      });
+    });
+  }
+
   render() {
     let shelterCards = null;
     if (this.state.shelters_loaded) {
@@ -156,6 +183,17 @@ class GlobalSearch extends Component {
         return (
           <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
             <BreedCard breed={breed} highlight={this.state.searchParam}/>
+          </div>
+        );
+      });
+    }
+
+    let activityCards = null;
+    if (this.state.activities_loaded) {
+      activityCards = this.state.activityList.map(activity => {
+        return (
+          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
+            <ActivityCard activity={activity} highlight={this.state.searchParam} />
           </div>
         );
       });
@@ -212,6 +250,23 @@ class GlobalSearch extends Component {
       </div>
     )
 
+    let activities = (
+      <div>
+        <Container>
+          {this.state.activities_loaded && (
+            <CardDeck>
+              <div class="card-deck">{activityCards}</div>
+            </CardDeck>
+          )}
+        </Container>
+        <PageComp
+          currentPage={this.state.activityCurrentPage}
+          maxPage={this.state.activityMaxPage}
+          changePage={this.changePage}
+        />
+      </div>
+    )
+
     return (
       <div class="text-center mt-2">
         <h1>
@@ -243,6 +298,12 @@ class GlobalSearch extends Component {
             title="Breeds"
           >
             {breeds}
+          </Tabs.Tab>
+          <Tabs.Tab
+            id="tab4"
+            title="Activities"
+          >
+            {activities}
           </Tabs.Tab>
         </Tabs>
       </div>
