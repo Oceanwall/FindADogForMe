@@ -99,6 +99,10 @@ def activity_query():
                     and search_param in item["is_free_string"].lower()
                 )
                 or (
+                    item["is_active_string"] is not None
+                    and search_param in item["is_active_string"].lower()
+                )
+                or (
                     item["location"] is not None
                     and search_param in item["location"].lower()
                 )
