@@ -147,16 +147,16 @@ class BreedInstance extends Component {
           <Row>
             <Col>
               <h1 className="capitalize"> {this.state.name}</h1>
-              <div class="info-text">
+              <div className="mt-4 info-text">
                 <p align="left"> Group: {this.state.group}</p>
                 <p align="left"> Temperament: {this.state.temperament}</p>
                 <p align="left">
                   {" "}
-                  Lifespan: {this.state.min_lifespan}-{this.state.max_lifespan}
+                  Lifespan: {this.state.min_lifespan} - {this.state.max_lifespan} years
                 </p>
                 <p align="left">
                   {" "}
-                  Height: {this.state.min_height}-{this.state.max_height} inches
+                  Height: {this.state.min_height} - {this.state.max_height} inches
                 </p>
               </div>
             </Col>

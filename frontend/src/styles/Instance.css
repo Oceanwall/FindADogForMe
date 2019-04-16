@@ -7,7 +7,10 @@
 }
 
 .deck-title-text {
-  font-size: calc(0.75em + 1.2vmin);
+  font-size: calc(0.8em + 1.2vmin);
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 10px;
 }
 
 .card-deck {
@@ -19,4 +22,3 @@
 .capitalize {
   text-transform: capitalize
 }
-
