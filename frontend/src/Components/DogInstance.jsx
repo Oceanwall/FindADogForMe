@@ -178,11 +178,26 @@ class DogInstance extends Component {
                 )}
               </div>
             </Col>
-            {this.state.latitude && this.isLoaded() &&
-              <Col xs={12} md={7} lg={6} id="google-map" className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
-                <MapContainer location_objects={[{latitude: this.state.latitude, longitude: this.state.longitude, name: this.state.shelter}]}/>
+            {this.state.latitude && this.isLoaded() && (
+              <Col
+                xs={12}
+                md={7}
+                lg={6}
+                id="google-map"
+                className="mt-2 mb-1"
+                style={{ height: "50vh", paddingLeft: "0px" }}
+              >
+                <MapContainer
+                  location_objects={[
+                    {
+                      latitude: this.state.latitude,
+                      longitude: this.state.longitude,
+                      name: this.state.shelter
+                    }
+                  ]}
+                />
               </Col>
-            }
+            )}
           </Row>
 
           {activityCards.length > 0 ? (
