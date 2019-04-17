@@ -17,7 +17,6 @@ class CustomNavbar extends Component {
   globalSearch()  {
     if(this.searchParam.value != "")
       this.props.history.push(`/search/${this.searchParam.value}`);
-      window.location.reload();
   }
 
   render() {
@@ -44,7 +43,6 @@ class CustomNavbar extends Component {
           </Nav>
           {
           <Nav className="justify-content-end">
-            <Form inline className="justify-content-center col-xs-6">
               <Form.Control
                 id="searchbar"
                 type="text"
@@ -60,7 +58,6 @@ class CustomNavbar extends Component {
                 }}
               />
               <Button variant="outline-primary" className="mt-2 mt-sm-0" onClick={()=>this.globalSearch()}>Search</Button>
-            </Form>
           </Nav>
           }
         </Navbar.Collapse>

@@ -35,6 +35,14 @@ class GlobalSearch extends Component {
     this.updateActivity(1);
   }
 
+  async componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.setState({
+        searchParam: this.props.match.params.id,
+      });
+    }
+  }
+
   shelterChangePage(pageNum) {
     this.setState({
       shelters_loaded: false,
