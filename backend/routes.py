@@ -3,7 +3,12 @@ from flask import Flask, jsonify, request
 from application import db, application
 from application.models import Activity, Breed, Dog, Shelter
 from flask_restless import APIManager
-from utilities import control_pagination, page_number_error, extract_website_search_param, search_param_in_item
+from utilities import (
+    control_pagination,
+    page_number_error,
+    extract_website_search_param,
+    search_param_in_item,
+)
 
 # Sort types
 ALPHABETICAL = "alphabetical"
@@ -112,9 +117,12 @@ def activity_query():
                 # Use of continue to avoid adding duplicate items
                 continue
 
-            if description_param and item["description"] is not None and search_param in item["description"].lower():
+            if (
+                description_param
+                and item["description"] is not None
+                and search_param in item["description"].lower()
+            ):
                 search_items.append(object)
-
 
     return control_pagination(search_items, page_num, 12)
 
@@ -294,7 +302,11 @@ def dog_query():
                 # Use of continue to avoid adding duplicate items
                 continue
 
-            if description_param and item["description"] is not None and search_param in item["description"].lower():
+            if (
+                description_param
+                and item["description"] is not None
+                and search_param in item["description"].lower()
+            ):
                 search_items.append(object)
 
     return control_pagination(search_items, page_num, 20)
@@ -398,10 +410,12 @@ def search_website():
         search_items["dogs"] = Dog.query.all()
         search_items["shelters"] = Shelter.query.all()
 
-
     message = {
         "status": 200,
-        "num_results": len(search_items["activities"]) + len(search_items["breeds"]) + len(search_items["dogs"]) + len(search_items["shelters"]),
+        "num_results": len(search_items["activities"])
+        + len(search_items["breeds"])
+        + len(search_items["dogs"])
+        + len(search_items["shelters"]),
         "num_activities": len(search_items["activities"]),
         "activities": [search_items["activities"]],
         "num_breeds": len(search_items["breeds"]),

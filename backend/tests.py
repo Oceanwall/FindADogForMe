@@ -201,7 +201,7 @@ class TestBackend(TestCase):
     def test21(self):
         result = get_dogs("TX1399", count=20)
         assert len(result) == 20
-    
+
     def test22(self):
         result = get_dogs("TX1399", count=25)
         assert len(result) == 25
@@ -209,7 +209,7 @@ class TestBackend(TestCase):
     def test23(self):
         result = get_dogs("TX1399")
         assert len(result) == 30
-    
+
     def test24(self):
         breed_images = get_breed_images("border collie")
         assert type(breed_images) == type([])
@@ -224,12 +224,12 @@ class TestBackend(TestCase):
         breed_images = get_breed_images("afghan hound")
         assert type(breed_images) == type([])
         assert len(breed_images) > 0
-    
+
     def test27(self):
         breed_images = get_breed_images("akita")
         assert type(breed_images) == type([])
         assert len(breed_images) > 0
-    
+
     def test28(self):
         breed_images = get_breed_images("american bulldog")
         assert type(breed_images) == type([])
@@ -244,6 +244,7 @@ class TestBackend(TestCase):
         breed_images = get_breed_images("beagle")
         assert type(breed_images) == type([])
         assert len(breed_images) > 0
+
 
 if __name__ == "__main__":
     main()
