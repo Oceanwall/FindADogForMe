@@ -74,6 +74,7 @@ class GlobalSearch extends Component {
     this.setState({
       activities_loaded: false,
     });
+    this.updateActivity(pageNum);
   }
 
   async updateShelter(pageNum) {
