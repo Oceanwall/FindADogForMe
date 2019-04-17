@@ -130,6 +130,14 @@ class ActivityInstance extends Component {
     );
   }
 
+  shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
   render() {
     let dogCards = [];
     if (this.isLoaded()) {
@@ -152,8 +160,21 @@ class ActivityInstance extends Component {
       });
     }
     let breedCards = [];
+    let randList = [];
+    let breeds = [];
     if (this.isLoaded()) {
-      breedCards = this.state.breed_list.map(breed => {
+      if (this.state.breed_list.length > 12) {
+        for (let i = 0; i < this.state.breed_list.length; i++) {
+          randList.push(i);
+        }
+        randList = this.shuffle(randList);
+        for (let i = 0; i < 12; i++) {
+          breeds.push(this.state.breed_list[randList[i]]);
+        }
+      } else {
+        breeds = this.state.breed_list;
+      }
+      breedCards = breeds.map(breed => {
         return (
           <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
             <BreedCard breed={breed} />
@@ -187,8 +208,15 @@ class ActivityInstance extends Component {
                   Type: {this.state.type}
                 </p>
 
-                <p align="left"> Cost: {this.state.is_free ? "Free" : "Paid"}</p>
-                <p align="left"> Level of Activity: {this.state.is_active ? "Active" : "Casual"}</p>
+                <p align="left">
+                  {" "}
+                  Cost: {this.state.is_free ? "Free" : "Paid"}
+                </p>
+                <p align="left">
+                  {" "}
+                  Level of Activity:{" "}
+                  {this.state.is_active ? "Active" : "Casual"}
+                </p>
                 <p align="left"> Location: {this.state.location}</p>
               </div>
             </Col>
@@ -232,11 +260,25 @@ class ActivityInstance extends Component {
                 </div>
               </Container>
             </Col>
-            {this.state.latitude && this.isLoaded() &&
-              <Col xs={12} md={6} className="mt-2 mb-1" id="google-map" style={{'height': '50vh', 'paddingLeft': '0px'}}>
-                <MapContainer location_objects={[{latitude: this.state.latitude, longitude: this.state.longitude, name: this.state.name}]}/>
+            {this.state.latitude && this.isLoaded() && (
+              <Col
+                xs={12}
+                md={6}
+                className="mt-2 mb-1"
+                id="google-map"
+                style={{ height: "50vh", paddingLeft: "0px" }}
+              >
+                <MapContainer
+                  location_objects={[
+                    {
+                      latitude: this.state.latitude,
+                      longitude: this.state.longitude,
+                      name: this.state.name
+                    }
+                  ]}
+                />
               </Col>
-            }
+            )}
           </Row>
 
           {dogCards.length > 0 ? (
