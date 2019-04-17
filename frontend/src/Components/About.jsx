@@ -200,7 +200,7 @@ class About extends Component {
     return (
       <div class="lato">
         <Container id="desc-motivation">
-          <h2 class="text-center title-text mt-2">
+          <h2 class="text-center title-text mt-3">
             Description and Motivation
           </h2>
           <p class="mt-3" align="left">
@@ -242,7 +242,7 @@ class About extends Component {
             <tr class="text-center">
               <td id="Total-Commits">{this.state.total_commits}</td>
               <td id="Total-Issues">{this.state.total_issues}</td>
-              <td id="Total-UT">215</td>
+              <td id="Total-UT">309</td>
             </tr>
           </tbody>
         </table>

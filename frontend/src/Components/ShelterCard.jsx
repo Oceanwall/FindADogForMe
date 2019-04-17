@@ -12,7 +12,6 @@ import Highlighter from "react-highlight-words";
 
 class ShelterCard extends Component {
   render() {
-    console.log(this.props.shelter.zipcode);
     let phone_number = parsePhoneNumberFromString(
       "+1" + this.props.shelter.phone
     );

@@ -219,7 +219,7 @@ class Breeds extends Component {
       }
       return (
         <div>
-          <div class="text-center mt-2">
+          <div class="text-center mt-3">
             <h1> Breeds</h1>
           </div>
           <Container>

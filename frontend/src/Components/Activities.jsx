@@ -163,7 +163,7 @@ class Activities extends Component {
       }
       return (
         <div>
-          <div class="text-center mt-2">
+          <div class="text-center mt-3">
             <h1> Activities</h1>
           </div>
           <Container>

@@ -276,7 +276,7 @@ class GlobalSearch extends Component {
     )
 
     return (
-      <div class="text-center mt-2">
+      <div class="text-center mt-3">
         <h1>
           Search Results for: {this.props.match.params.id}
         </h1>
