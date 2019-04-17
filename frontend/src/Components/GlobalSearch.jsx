@@ -37,8 +37,14 @@ class GlobalSearch extends Component {
 
   async componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
+      console.log(this.props.location.pathname, prevProps.location.pathname)
       this.setState({
         searchParam: this.props.match.params.id,
+      }, () => {
+        this.shelterChangePage(1);
+        this.dogChangePage(1);
+        this.breedChangePage(1);
+        this.activityChangePage(1);
       });
     }
   }
@@ -68,7 +74,6 @@ class GlobalSearch extends Component {
     this.setState({
       activities_loaded: false,
     });
-    this.updateActivity(pageNum);
   }
 
   async updateShelter(pageNum) {
