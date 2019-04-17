@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/CustomNavbar.css";
 import GlobalSearch from "./GlobalSearch";
+import LinkContainer from "react-router-bootstrap/lib/LinkContainer"
 
 class CustomNavbar extends Component {
   constructor(props) {
@@ -35,11 +36,21 @@ class CustomNavbar extends Component {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/shelters">Shelters</Nav.Link>
-            <Nav.Link href="/dogs">Dogs</Nav.Link>
-            <Nav.Link href="/breeds">Breeds</Nav.Link>
-            <Nav.Link href="/activities">Activities</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
+            <LinkContainer to="/shelters">
+              <Nav.Link>Shelters</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/dogs">
+              <Nav.Link>Dogs</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/breeds">
+              <Nav.Link>Breeds</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/activities">
+              <Nav.Link>Activities</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/about">
+              <Nav.Link>About</Nav.Link>
+            </LinkContainer>
           </Nav>
           {
           <Nav className="justify-content-end">
