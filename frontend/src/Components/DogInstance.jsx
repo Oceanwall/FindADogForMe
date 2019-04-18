@@ -143,40 +143,43 @@ class DogInstance extends Component {
           </Row>
           <Row>
             <Col>
-              <div class="desc-text">
-                {this.state.description != undefined ? (
-                  this.state.collapse ? (
-                    [
-                      <p align="left">{this.state.description}</p>,
-                      <Button
-                        color="primary"
-                        onClick={this.toggle}
-                        style={{ marginBottom: "1rem" }}
-                      >
-                        Read Less
-                      </Button>
-                    ]
+              <Container>
+                <div class="desc-text">
+                  {this.state.description != undefined ? (
+                    this.state.description.length > 750 ? (
+                      this.state.collapse ? (
+                        [
+                          <p align="left">{this.state.description}</p>,
+                          <Button
+                            color="primary"
+                            onClick={this.toggle}
+                            style={{ marginBottom: "1rem" }}
+                          >
+                            Read Less
+                          </Button>
+                        ]
+                      ) : (
+                        [
+                          <p align="left">
+                            {this.state.description.substring(0, 750)}...
+                          </p>,
+                          <Button
+                            color="primary"
+                            onClick={this.toggle}
+                            style={{ marginBottom: "1rem" }}
+                          >
+                            Read More
+                          </Button>
+                        ]
+                      )
+                    ) : (
+                      <p align="left">{this.state.description}</p>
+                    )
                   ) : (
-                    [
-                      <div>
-                        <p align="left">
-                          {this.state.description.substring(0, 750)}...
-                        </p>
-
-                        <Button
-                          color="primary"
-                          onClick={this.toggle}
-                          style={{ marginBottom: "1rem" }}
-                        >
-                          Read More
-                        </Button>
-                      </div>
-                    ]
-                  )
-                ) : (
-                  <p align="left">Description: None</p>
-                )}
-              </div>
+                    <p align="left">Description: None</p>
+                  )}
+                </div>
+              </Container>
             </Col>
             {this.state.latitude && this.isLoaded() && (
               <Col
@@ -203,7 +206,7 @@ class DogInstance extends Component {
           {activityCards.length > 0 ? (
             <div>
               <p align="left" class="deck-title-text">
-                Activities suitable for this dog:
+                Activities nearby that are suitable for this dog:
               </p>
               <CardDeck>
                 <div class="card-deck">{activityCards}</div>
@@ -211,7 +214,7 @@ class DogInstance extends Component {
             </div>
           ) : (
             <p align="left" class="deck-title-text">
-              Activities suitable for this dog: None
+              Activities nearby that are suitable for this dog: None
             </p>
           )}
         </Container>

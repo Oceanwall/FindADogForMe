@@ -229,30 +229,34 @@ class ActivityInstance extends Component {
               <Container>
                 <div class="desc-text">
                   {this.state.description != undefined ? (
-                    this.state.collapse ? (
-                      [
-                        <p align="left">{this.state.description}</p>,
-                        <Button
-                          color="primary"
-                          onClick={this.toggle}
-                          style={{ marginBottom: "1rem" }}
-                        >
-                          Read Less
-                        </Button>
-                      ]
+                    this.state.description.length > 750 ? (
+                      this.state.collapse ? (
+                        [
+                          <p align="left">{this.state.description}</p>,
+                          <Button
+                            color="primary"
+                            onClick={this.toggle}
+                            style={{ marginBottom: "1rem" }}
+                          >
+                            Read Less
+                          </Button>
+                        ]
+                      ) : (
+                        [
+                          <p align="left">
+                            {this.state.description.substring(0, 750)}...
+                          </p>,
+                          <Button
+                            color="primary"
+                            onClick={this.toggle}
+                            style={{ marginBottom: "1rem" }}
+                          >
+                            Read More
+                          </Button>
+                        ]
+                      )
                     ) : (
-                      [
-                        <p align="left">
-                          {this.state.description.substring(0, 750)}...
-                        </p>,
-                        <Button
-                          color="primary"
-                          onClick={this.toggle}
-                          style={{ marginBottom: "1rem" }}
-                        >
-                          Read More
-                        </Button>
-                      ]
+                      <p align="left">{this.state.description}</p>
                     )
                   ) : (
                     <p align="left">Description: None</p>
