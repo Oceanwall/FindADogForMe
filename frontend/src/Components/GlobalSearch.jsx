@@ -182,7 +182,7 @@ class GlobalSearch extends Component {
 
     let breedCards = [];
     if (this.state.breeds_loaded) {
-      let start = (this.state.currentPage - 1) * 20;
+      let start = (this.state.breedCurrentPage - 1) * 20;
       let end =
         start + 20 < this.state.breedList.length
           ? start + 20
