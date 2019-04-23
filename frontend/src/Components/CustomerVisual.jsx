@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
-class DeveloperVisual extends Component {
+class CustomerVisual extends Component {
   render() {
     return (
       <div class="text-center mt-3">
@@ -40,4 +40,4 @@ class DeveloperVisual extends Component {
   }
 }
 
-export default DeveloperVisual;
+export default CustomerVisual;

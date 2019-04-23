@@ -10,6 +10,7 @@ import Breeds from "./Components/Breeds";
 import Activities from "./Components/Activities";
 import GlobalSearch from "./Components/GlobalSearch";
 import DeveloperVisual from "./Components/DeveloperVisual"
+import CustomerVisual from "./Components/CustomerVisual"
 import NoMatch from "./Components/Error404";
 
 
@@ -29,6 +30,7 @@ class App extends Component {
             <Route exact path="/about" component={About} />
             <Route path="/search/:id" component={GlobalSearch} />
             <Route path="/dev-visualizations" component={DeveloperVisual} />
+            <Route path="/customer-visualizations" component={CustomerVisual} />
             <Route component={NoMatch} />
           </Switch>
         </Router>

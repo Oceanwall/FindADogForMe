@@ -51,6 +51,9 @@ class CustomNavbar extends Component {
             <LinkContainer to="/dev-visualizations">
               <Nav.Link>Developer Visualizations</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/customer-visualizations">
+              <Nav.Link>Customer Visualizations</Nav.Link>
+            </LinkContainer>
             <LinkContainer to="/about">
               <Nav.Link>About</Nav.Link>
             </LinkContainer>
