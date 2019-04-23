@@ -9,6 +9,7 @@ import Dogs from "./Components/Dogs";
 import Breeds from "./Components/Breeds";
 import Activities from "./Components/Activities";
 import GlobalSearch from "./Components/GlobalSearch";
+import DeveloperVisual from "./Components/DeveloperVisual"
 import NoMatch from "./Components/Error404";
 
 
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path="/activities" component={Activities} />
             <Route exact path="/about" component={About} />
             <Route path="/search/:id" component={GlobalSearch} />
+            <Route path="/dev-visualizations" component={DeveloperVisual} />
             <Route component={NoMatch} />
           </Switch>
         </Router>
