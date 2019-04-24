@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Tabs, TabProvider } from "@yazanaabed/react-tabs";
 import { Route } from "react-router-dom";
 import BubbleChart from '@weknow/react-bubble-chart-d3';
+import { BarChart } from 'react-d3-components';
+import * as d3 from "d3";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -23,11 +25,9 @@ class DeveloperVisual extends Component {
   // Get all necessary information on mount
   async componentDidMount() {
     let info = await wrapper.getWebsiteQuery(" ");
-    let pairings = new Map();
 
-    // console.log(info);
-    console.log(info.shelters);
-
+    // Visualization 1
+    let city_shelter_pairings = new Map();
     let shelter_cities = [];
     let shelter_promises = [];
     for (let shelter of info.shelters) {
@@ -42,23 +42,50 @@ class DeveloperVisual extends Component {
       let num_dogs = shelter_dogs[i].num_results;
       let city = shelter_cities[i];
 
-      if (pairings.has(city)) {
-        pairings.set(city, pairings.get(city) + num_dogs);
+      if (city_shelter_pairings.has(city)) {
+        city_shelter_pairings.set(city, city_shelter_pairings.get(city) + num_dogs);
       }
-      else pairings.set(city, num_dogs);
+      else city_shelter_pairings.set(city, num_dogs);
     }
 
     let city_shelter_pairs = [];
-    for (let entry of pairings.entries()) {
+    for (let entry of city_shelter_pairings.entries()) {
       // Readability purposes
       if (entry[1] > 4)
         city_shelter_pairs.push({label: entry[0], value: entry[1]});
     }
 
+    // Visualization 2
+    let group_breed_pairings = new Map();
+    for (let breed of info.breeds) {
+      let group = breed.group;
+      // Breeds with null groups
+      if (!group)
+        continue;
+      if (group_breed_pairings.has(group)) {
+        group_breed_pairings.set(group, group_breed_pairings.get(group) + 1);
+      }
+      else group_breed_pairings.set(group, 1);
+    }
+
+    let group_breed_pairs = [];
+    let domain = [];
+    for (let entry of group_breed_pairings.entries()) {
+      group_breed_pairs.push({x: entry[0], y: entry[1]});
+    }
+
+    let group_breed_data = [{
+        label: "Frequency of Breeds by Group",
+        values: group_breed_pairs
+    }];
+    //
+    console.log(group_breed_pairs);
+
     this.setState({
       info_loaded: true,
       information: info,
       city_shelter_pairs: city_shelter_pairs,
+      group_breed_pairs: group_breed_data,
     });
 
     this.updateWindowDimensions();
@@ -129,7 +156,15 @@ class DeveloperVisual extends Component {
           >
             {this.state.info_loaded ? (
               <div>
-                loaded
+                <BarChart
+                  data={this.state.group_breed_pairs}
+                  xAxis={{label: "Group Name"}}
+                  yAxis={{label: "Number of Breeds"}}
+                  colorScale={d3.scaleOrdinal(d3.schemeAccent)}
+                  width={this.state.width > 800 ? 800 : this.state.width}
+                  height={this.state.width > 800 ? 800 : this.state.width}
+                  margin={{top: 10, bottom: 50, left: 50, right: 10}}
+                />
               </div>
             ) : (
               <div>
