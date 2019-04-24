@@ -417,13 +417,13 @@ def search_website():
         + len(search_items["dogs"])
         + len(search_items["shelters"]),
         "num_activities": len(search_items["activities"]),
-        "activities": [search_items["activities"]],
+        "activities": search_items["activities"],
         "num_breeds": len(search_items["breeds"]),
-        "breeds": [search_items["breeds"]],
+        "breeds": search_items["breeds"],
         "num_dogs": len(search_items["dogs"]),
-        "dogs": [search_items["dogs"]],
+        "dogs": search_items["dogs"],
         "num_shelters": len(search_items["shelters"]),
-        "shelters": [search_items["shelters"]],
+        "shelters": search_items["shelters"],
         "total_pages": 1,
         "page": 1,
     }
