@@ -24,35 +24,55 @@ class DeveloperVisual extends Component {
 
   // Get all necessary information on mount
   async componentDidMount() {
+    // TODO: Colors for bar graph (which I spent an hour on and couldn't get working :()
+    // TODO: Separate out visualizations into different methods so that visualizations 2 and 3 can load before visualizations 1?
     let info = await wrapper.getWebsiteQuery(" ");
 
     // Visualization 1
-    let city_shelter_pairings = new Map();
-    let shelter_cities = [];
-    let shelter_promises = [];
+    // let city_dog_pairings = new Map();
+    // let shelter_cities = [];
+    // let shelter_promises = [];
+    // for (let shelter of info.shelters) {
+    //   shelter_promises.push(wrapper.getShelterDogs(shelter.id));
+    //   shelter_cities.push(shelter.city);
+    // }
+    //
+    // // WARNING: 500 API calls. Is this too slow / a risk to my AWS billing?
+    // let shelter_dogs = await Promise.all(shelter_promises);
+    //
+    // for (let i = 0; i < shelter_dogs.length; ++i) {
+    //   let num_dogs = shelter_dogs[i].num_results;
+    //   let city = shelter_cities[i];
+    //
+    //   if (city_dog_pairings.has(city)) {
+    //     city_dog_pairings.set(city, city_dog_pairings.get(city) + num_dogs);
+    //   }
+    //   else city_dog_pairings.set(city, num_dogs);
+    // }
+    //
+    // let city_dog_pairs = [];
+    // for (let entry of city_dog_pairings.entries()) {
+    //   // Readability purposes
+    //   if (entry[1] > 4)
+    //     city_dog_pairs.push({label: entry[0], value: entry[1]});
+    // }
+
+    // Alternate Visualization 1 (city_shelter pairings)
+    let city_dog_pairings = new Map();
     for (let shelter of info.shelters) {
-      shelter_promises.push(wrapper.getShelterDogs(shelter.id));
-      shelter_cities.push(shelter.city);
-    }
+      let city = shelter.city;
 
-    // 500 API calls. Should this be replaced by shelters per city?
-    let shelter_dogs = await Promise.all(shelter_promises);
-
-    for (let i = 0; i < shelter_dogs.length; ++i) {
-      let num_dogs = shelter_dogs[i].num_results;
-      let city = shelter_cities[i];
-
-      if (city_shelter_pairings.has(city)) {
-        city_shelter_pairings.set(city, city_shelter_pairings.get(city) + num_dogs);
+      if (city_dog_pairings.has(city)) {
+        city_dog_pairings.set(city, city_dog_pairings.get(city) + 1);
       }
-      else city_shelter_pairings.set(city, num_dogs);
+      else city_dog_pairings.set(city, 1);
     }
 
-    let city_shelter_pairs = [];
-    for (let entry of city_shelter_pairings.entries()) {
+    let city_dog_pairs = [];
+    for (let entry of city_dog_pairings.entries()) {
       // Readability purposes
-      if (entry[1] > 4)
-        city_shelter_pairs.push({label: entry[0], value: entry[1]});
+      if (entry[1] > 2)
+        city_dog_pairs.push({label: entry[0], value: entry[1]});
     }
 
     // Visualization 2
@@ -78,14 +98,44 @@ class DeveloperVisual extends Component {
         label: "Frequency of Breeds by Group",
         values: group_breed_pairs
     }];
-    //
-    console.log(group_breed_pairs);
+
+    // Visualization 3
+    let dog_attribute_pairings = new Map();
+    for (let dog of info.dogs) {
+      let size_name = "";
+      switch(dog.size) {
+        case("S"):
+          size_name = "Small";
+          break;
+        case("M"):
+          size_name = "Medium";
+          break;
+        case("L"):
+          size_name = "Large";
+          break;
+        case("XL"):
+          size_name = "Extra Large";
+          break;
+      }
+      let key = size_name + " and " + dog.age;
+
+      if (dog_attribute_pairings.has(key)) {
+        dog_attribute_pairings.set(key, dog_attribute_pairings.get(key) + 1);
+      }
+      else dog_attribute_pairings.set(key, 1);
+    }
+
+    let dog_attribute_pairs = [];
+    for (let entry of dog_attribute_pairings.entries()) {
+      dog_attribute_pairs.push({label: entry[0], value: entry[1]});
+    }
 
     this.setState({
       info_loaded: true,
       information: info,
-      city_shelter_pairs: city_shelter_pairs,
+      city_dog_pairs: city_dog_pairs,
       group_breed_pairs: group_breed_data,
+      dog_attribute_pairs: dog_attribute_pairs,
     });
 
     this.updateWindowDimensions();
@@ -98,8 +148,6 @@ class DeveloperVisual extends Component {
 
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight});
-    console.log(window.innerWidth);
-    console.log(window.innerHeight);
   }
 
   render() {
@@ -141,7 +189,7 @@ class DeveloperVisual extends Component {
                       color: '#fff',
                       weight: 'bold',
                     }}
-                data={this.state.city_shelter_pairs}
+                data={this.state.city_dog_pairs}
               />
               </div>
             ) : (
@@ -178,11 +226,33 @@ class DeveloperVisual extends Component {
           >
             {this.state.info_loaded ? (
               <div>
-                loaded
+                <BubbleChart
+                graph= {{
+                  zoom: 1,
+                  offsetX: 0,
+                  offsetY: 0,
+                }}
+                width={this.state.width > 800 ? 800 : this.state.width}
+                height={this.state.width > 800 ? 800 : this.state.width}
+                showLegend={false} // optional value, pass false to disable the legend.
+                valueFont={{
+                      family: 'Arial',
+                      size: 12,
+                      color: '#fff',
+                      weight: 'bold',
+                    }}
+                labelFont={{
+                      family: 'Arial',
+                      size: 10,
+                      color: '#fff',
+                      weight: 'bold',
+                    }}
+                data={this.state.dog_attribute_pairs}
+              />
               </div>
             ) : (
               <div>
-                not loaded yet
+                not loaded yet, plaese give me an animation
               </div>
             )}
           </Tabs.Tab>

@@ -496,20 +496,20 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(dogs).to.have.property("breeds");
     expect(dogs).to.have.property("dogs");
     expect(dogs).to.have.property("activities");
-    expect(dogs["breeds"][0][0]).to.have.property("name");
-    expect(dogs["breeds"][0][0]).to.have.property("temperament");
-    expect(dogs["breeds"][0][0]).to.have.property("is_active");
-    expect(dogs["breeds"][0][0]).to.have.property("group");
-    expect(dogs["breeds"][0][0]["name"]).to.equal("border collie");
-    expect(dogs["dogs"][0][0]).to.have.property("breed");
-    expect(dogs["dogs"][0][0]).to.have.property("age");
-    expect(dogs["dogs"][0][0]).to.have.property("shelter_id");
-    expect(dogs["dogs"][0][0]).to.have.property("image_1");
-    expect(dogs["dogs"][0][0]["breed"]).to.equal("border collie");
+    expect(dogs["breeds"][0]).to.have.property("name");
+    expect(dogs["breeds"][0]).to.have.property("temperament");
+    expect(dogs["breeds"][0]).to.have.property("is_active");
+    expect(dogs["breeds"][0]).to.have.property("group");
+    expect(dogs["breeds"][0]["name"]).to.equal("border collie");
+    expect(dogs["dogs"][0]).to.have.property("breed");
+    expect(dogs["dogs"][0]).to.have.property("age");
+    expect(dogs["dogs"][0]).to.have.property("shelter_id");
+    expect(dogs["dogs"][0]).to.have.property("image_1");
+    expect(dogs["dogs"][0]["breed"]).to.equal("border collie");
   });
   it("should only show border collie related dogs inside the dogs array", async function() {
     let dogs = await wrapper.getWebsiteQuery("border collie");
-    for (let currDog of dogs["dogs"][0]){
+    for (let currDog of dogs["dogs"]){
       expect(currDog["breed"]).to.be.oneOf(["border collie", "australian cattle dog", "great dane", "labrador retriever"]);
     }
   });
