@@ -24,18 +24,19 @@ class CustomerVisual extends Component {
 
   async componentDidMount() {
 
-  // Natural disaster frequency per state (map)
-  // Organization frequency per state (map)
-  // Natural disaster frequency per organization (bar graph)
+    // Natural disaster frequency per state (map)
+    // Organization frequency per state (map)
+    // Natural disaster frequency per organization (bar graph)
+
+    let state_data = data.state_data;
+    let disaster_data = data.disaster_data;
+    let organization_data = data.organization_data;
+    console.log(state_data);
 
     // Visualization 1
 
     // let state_data = await wrapper.get_states_models(undefined, undefined, undefined, undefined, undefined, undefined, 100, 1);
     // console.log(state_data);
-
-    let state_data = data.state_data;
-    let disaster_data = data.disaster_data;
-    console.log(state_data);
 
     // Get state codes
     let state_disaster_pairings = {};
@@ -82,11 +83,37 @@ class CustomerVisual extends Component {
 
     // Visualization 2
 
+    // Get state codes
+    let state_organization_pairings = {};
+    for (let state of state_data) {
+      state_organization_pairings[state.code] = {organizations: 0};
+    }
+
+    // Get organization frequency per state
+    for (let organization of organization_data) {
+      if (organization.stateorprovince) {
+        state_organization_pairings[organization.stateorprovince].organizations += 1;
+      }
+    }
+
+    // Set fill keys based on organization frequency
+    for (const key of Object.keys(state_organization_pairings)) {
+      // 0, 1, 2, 3, 4, 5, 6
+      let num = state_organization_pairings[key].organizations;
+      if (num <= 6)
+        state_organization_pairings[key]["fillKey"] = String(num);
+      else
+        state_organization_pairings[key]["fillKey"] = "defaultFill";
+    }
+
+    console.log(state_organization_pairings);
+
     // Visualization 3
 
     this.setState({
       info_loaded: true,
-      state_disaster_pairings: state_disaster_pairings
+      state_disaster_pairings: state_disaster_pairings,
+      state_organization_pairings: state_organization_pairings
     });
 
     this.updateWindowDimensions();
@@ -106,7 +133,7 @@ class CustomerVisual extends Component {
       <div class="text-center mt-3">
         <Tabs
           activeTab={{
-            id: "Visualization 1"
+            id: "Visualization 2"
           }}
           ref={ref => {
             this.tabRef = ref;
@@ -117,35 +144,35 @@ class CustomerVisual extends Component {
             title="Visualization 1"
           >
             {this.state.info_loaded ? (
-              <div style={{width: (this.state.width > 1200 ? 1200 : this.state.width),
-                           height: (this.state.width > 1200 ? 800 : (2 / 3) * this.state.width),
-                           marginLeft: (this.state.width > 1200 ? (this.state.width - 1200) / 2 : 0),
-                           marginTop: (this.state.width > 1200 ? "-80" : String(-0.1 * (2 / 3) * this.state.width) + "px")}}>
+              <div>
                 <Datamap
-        scope="usa"
-        geographyConfig={{
-          highlightBorderColor: 'black',
-          popupTemplate: (geography, data) =>
-            `<div class='hoverinfo'>${geography.properties.name}\n Number of Natural Disasters: ${data.disasters}`,
-          highlightBorderWidth: 2
-        }}
-        fills={{
-          '0-4': '#e5e9ff',
-          '5-9': '#d8deff',
-          '10-14': '#c6ceff',
-          '15-19': '#b2bcff',
-          '20-29': '#a5b1ff',
-          '30-39': '#96a4ff',
-          '40-49': '#7a8cff',
-          '50-59': '#6076ff',
-          '60-69': '#5168ff',
-          '70-79': '#3d56ff',
-          '80-89': '#182ba5',
-          'defaultFill': '#12207a',
-        }}
-        data={this.state.state_disaster_pairings}
-        labels
-      />
+                  width={this.state.width > 1200 ? 1200 : this.state.width}
+                  height={this.state.width > 1200 ? 800 : (2 / 3) * this.state.width}
+                  style={{marginTop: (this.state.width > 1200 ? "-80" : String(-0.1 * (2 / 3) * this.state.width) + "px")}}
+                  scope="usa"
+                  geographyConfig={{
+                    highlightBorderColor: 'black',
+                    popupTemplate: (geography, data) =>
+                      `<div class='hoverinfo'><strong>${geography.properties.name}</strong>\n Number of Natural Disasters: ${data.disasters}`,
+                    highlightBorderWidth: 2
+                  }}
+                  fills={{
+                    '0-4': '#e5e9ff',
+                    '5-9': '#d8deff',
+                    '10-14': '#c6ceff',
+                    '15-19': '#b2bcff',
+                    '20-29': '#a5b1ff',
+                    '30-39': '#96a4ff',
+                    '40-49': '#7a8cff',
+                    '50-59': '#6076ff',
+                    '60-69': '#5168ff',
+                    '70-79': '#3d56ff',
+                    '80-89': '#182ba5',
+                    'defaultFill': '#12207a',
+                  }}
+                  data={this.state.state_disaster_pairings}
+                  labels
+              />
               </div>
             ) : (
               <div>
@@ -159,7 +186,31 @@ class CustomerVisual extends Component {
           >
             {this.state.info_loaded ? (
               <div>
-                  i am loaded!
+                <Datamap
+                  width={this.state.width > 1200 ? 1200 : this.state.width}
+                  height={this.state.width > 1200 ? 800 : (2 / 3) * this.state.width}
+                  style={{marginTop: (this.state.width > 1200 ? "-80" : String(-0.1 * (2 / 3) * this.state.width) + "px")}}
+                  scope="usa"
+                  geographyConfig={{
+                    highlightBorderColor: 'black',
+                    popupTemplate: (geography, data) =>
+                      `<div class='hoverinfo'><strong>${geography.properties.name}</strong>\n Number of Organizations Present: ${data.organizations}`,
+                    highlightFillColor: "#bda8e0",
+                    highlightBorderWidth: 2
+                  }}
+                  fills={{
+                    '0': '#ffefd3',
+                    '1': '#ffe3b2',
+                    '2': '#ffd387',
+                    '3': '#ffc86b',
+                    '4': '#ffbc4c',
+                    '5': '#ffad26',
+                    '6': '#ffa511',
+                    'defaultFill': '#ff9e00',
+                  }}
+                  data={this.state.state_organization_pairings}
+                  labels
+                />
               </div>
             ) : (
               <div>

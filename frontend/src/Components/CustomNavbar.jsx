@@ -49,10 +49,10 @@ class CustomNavbar extends Component {
               <Nav.Link>Activities</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/dev-visualizations">
-              <Nav.Link>Our Visualizations</Nav.Link>
+              <Nav.Link>Our Visuals</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/customer-visualizations">
-              <Nav.Link>Provider Visualizations</Nav.Link>
+              <Nav.Link>Provider Visuals</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/about">
               <Nav.Link>About</Nav.Link>
