@@ -20,7 +20,7 @@ function perform_api_call(url, qs) {
 function get_states_models_query(region, pop_min, pop_max, area_min, area_max, sortby, per_page, page){
     let qs = {};
     if(region)
-        qs.region = region; 
+        qs.region = region;
     if(pop_min)
         qs.pop_min = pop_min;
     if(pop_max)
@@ -34,7 +34,7 @@ function get_states_models_query(region, pop_min, pop_max, area_min, area_max, s
     if(per_page)
         qs.per_page = per_page;
     if(page)
-        qs.page = page; 
+        qs.page = page;
     return qs;
 }
 
@@ -44,7 +44,7 @@ function get_natural_disasters_query(incident, funding, statecode, sortby, page,
         qs.incident = incident;
     if(funding)
         qs.funding = funding;
-    if(statecode) 
+    if(statecode)
         qs.statecode = statecode;
     if(sortby)
         qs.sortby = sortby;
@@ -52,7 +52,7 @@ function get_natural_disasters_query(incident, funding, statecode, sortby, page,
         qs.page = page;
     if(per_page)
         qs.per_page = per_page;
-    return qs; 
+    return qs;
 }
 
 function get_organizations_query(rating, stateorprovince, sortby, page, per_page){
@@ -62,16 +62,16 @@ function get_organizations_query(rating, stateorprovince, sortby, page, per_page
     if(stateorprovince)
         qs.stateorprovince = stateorprovince;
     if(sortby)
-        qs.sortby = sortby; 
-    if(page) 
+        qs.sortby = sortby;
+    if(page)
         qs.page = page;
-    if(per_page) 
+    if(per_page)
         qs.per_page = per_page;
     return qs;
 }
 
 
-module.exports = {
+export default {
     perform_api_call,
     get_states_models_query,
     get_natural_disasters_query,

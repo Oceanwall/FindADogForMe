@@ -23,6 +23,7 @@
     "react-bootstrap-carousel": "^3.4.1",
     "react-bootstrap-typeahead": "^4.0.0-alpha.9",
     "react-d3-components": "^0.9.1",
+    "react-datamaps": "^0.4.1",
     "react-dom": "^16.8.5",
     "react-highlight-words": "^0.16.0",
     "react-highlighter": "^0.4.3",
