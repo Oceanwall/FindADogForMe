@@ -176,7 +176,7 @@ class DeveloperVisual extends Component {
                 }}
                 width={this.state.width > 800 ? 800 : this.state.width}
                 height={this.state.width > 800 ? 800 : this.state.width}
-                showLegend={false} // optional value, pass false to disable the legend.
+                showLegend={false}
                 valueFont={{
                       family: 'Arial',
                       size: 12,
@@ -234,7 +234,7 @@ class DeveloperVisual extends Component {
                 }}
                 width={this.state.width > 800 ? 800 : this.state.width}
                 height={this.state.width > 800 ? 800 : this.state.width}
-                showLegend={false} // optional value, pass false to disable the legend.
+                showLegend={false}
                 valueFont={{
                       family: 'Arial',
                       size: 12,

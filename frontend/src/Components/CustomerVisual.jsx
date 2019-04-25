@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Tabs, TabProvider } from "@yazanaabed/react-tabs";
 import { Route } from "react-router-dom";
 import Datamap from "react-datamaps";
+import BubbleChart from '@weknow/react-bubble-chart-d3';
 import "../styles/CustomerVisual.css";
 
 const wrapper = require("../catastrophe_wrapper/wrapper.js").default;
@@ -26,7 +27,7 @@ class CustomerVisual extends Component {
 
     // Natural disaster frequency per state (map)
     // Organization frequency per state (map)
-    // Natural disaster frequency per organization (bar graph)
+    // Disaster funding frequency (bubble)
 
     let state_data = data.state_data;
     let disaster_data = data.disaster_data;
@@ -109,11 +110,78 @@ class CustomerVisual extends Component {
     console.log(state_organization_pairings);
 
     // Visualization 3
+    let disaster_funding_pairings = {"$0 Funding": 0,
+                                     "$1 - $10,000 Funding": 0,
+                                     "$10,001 - $20,000 Funding": 0,
+                                     "$20,001 - $50,000 Funding": 0,
+                                     "$50,001 - $100,000 Funding": 0,
+                                     "$100,001 - $200,000 Funding": 0,
+                                     "$200,001 - $500,000 Funding": 0,
+                                     "$500,001 - $1,000,000 Funding": 0,
+                                     "$1,000,001 - $2,000,000 Funding": 0,
+                                     "$2,000,001 - $5,000,000 Funding": 0,
+                                     "$5,000,001 - $10,000,000 Funding": 0,
+                                     "$10,000,001 - $20,000,000 Funding": 0,
+                                     "$20,000,001 - $50,000,000 Funding": 0,
+                                     "$50,000,001 - $100,000,000 Funding": 0,
+                                     "$100,000,001 - $200,000,000 Funding": 0,
+                                     "$200,000,001 - $500,000,000 Funding": 0,
+                                     "$500,000,001 - $1,000,000,000 Funding": 0,
+                                     "$1,000,000,001+ Funding": 0,
+                                   };
+    // Map funding level of each disaster to appropriate tier.
+    for (let disaster of disaster_data) {
+      if (disaster.obligatedfunding == 0)
+        disaster_funding_pairings["$0 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 10000)
+        disaster_funding_pairings["$1 - $10,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 20000)
+        disaster_funding_pairings["$10,001 - $20,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 50000)
+        disaster_funding_pairings["$20,001 - $50,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 100000)
+        disaster_funding_pairings["$50,001 - $100,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 200000)
+        disaster_funding_pairings["$100,001 - $200,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 500000)
+        disaster_funding_pairings["$200,001 - $500,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 1000000)
+        disaster_funding_pairings["$500,001 - $1,000,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 2000000)
+        disaster_funding_pairings["$1,000,001 - $2,000,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 5000000)
+        disaster_funding_pairings["$2,000,001 - $5,000,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 10000000)
+        disaster_funding_pairings["$5,000,001 - $10,000,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 20000000)
+        disaster_funding_pairings["$10,000,001 - $20,000,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 50000000)
+        disaster_funding_pairings["$20,000,001 - $50,000,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 100000000)
+        disaster_funding_pairings["$50,000,001 - $100,000,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 200000000)
+        disaster_funding_pairings["$100,000,001 - $200,000,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 500000000)
+        disaster_funding_pairings["$200,000,001 - $500,000,000 Funding"] += 1;
+      else if (disaster.obligatedfunding <= 1000000000)
+        disaster_funding_pairings["$500,000,001 - $1,000,000,000 Funding"] += 1;
+      else
+        disaster_funding_pairings["$1,000,000,001+ Funding"] += 1;
+    }
+
+    let disaster_fund_pairs = [];
+    for (const key of Object.keys(disaster_funding_pairings)) {
+      disaster_fund_pairs.push({label: key, value: disaster_funding_pairings[key]});
+    }
+
+    console.log(disaster_fund_pairs);
+
 
     this.setState({
       info_loaded: true,
       state_disaster_pairings: state_disaster_pairings,
-      state_organization_pairings: state_organization_pairings
+      state_organization_pairings: state_organization_pairings,
+      disaster_fund_pairs: disaster_fund_pairs
     });
 
     this.updateWindowDimensions();
@@ -133,7 +201,7 @@ class CustomerVisual extends Component {
       <div class="text-center mt-3">
         <Tabs
           activeTab={{
-            id: "Visualization 2"
+            id: "Visualization 1"
           }}
           ref={ref => {
             this.tabRef = ref;
@@ -224,7 +292,28 @@ class CustomerVisual extends Component {
           >
             {this.state.info_loaded ? (
               <div>
-                i am loaded!
+                <BubbleChart
+                  graph= {{
+                    zoom: 1,
+                    offsetX: 0,
+                    offsetY: 0,
+                  }}
+                  width={this.state.width > 800 ? 800 : this.state.width}
+                  height={this.state.width > 800 ? 800 : this.state.width}
+                  showLegend={false}
+                  valueFont={{
+                        family: 'Arial',
+                        size: 14,
+                        color: '#fff',
+                        weight: 'bold',
+                      }}
+                  labelFont={{
+                        family: 'Arial',
+                        size: 12,
+                        color: '#fff',
+                      }}
+                  data={this.state.disaster_fund_pairs}
+                />
               </div>
             ) : (
               <div>
