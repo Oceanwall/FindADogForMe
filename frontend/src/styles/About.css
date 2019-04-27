@@ -10,14 +10,6 @@
   font-size: calc(0.75em + 2vmin);
 }
 
-.url-text {
-  font-size: calc(0.75em + 1vmin);
-}
-
-.data-sources-text {
-  font-size: calc(0.75em + 1.5vmin);
-}
-
-.doc-text {
-  font-size: calc(0.75em + 0.8vmin);
+.data-text {
+  text-align: left;
 }

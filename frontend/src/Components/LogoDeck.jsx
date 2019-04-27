@@ -62,6 +62,7 @@ class LogoDeck extends Component {
               img="/images/postgresql.png"
               info="Relational database management system"
             />
+            <LogoCard img="/images/d3.png" info="Visualization tool" />
           </Row>
         </Container>
       </div>

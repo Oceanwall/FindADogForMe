@@ -190,6 +190,7 @@ class DogInstance extends Component {
                 className="mt-2 mb-1"
                 style={{ height: "50vh", paddingLeft: "0px" }}
               >
+                <h4 className="ml-1 mr-1 mb-3">Location of Hosting Shelter:</h4>
                 <MapContainer
                   location_objects={[
                     {
