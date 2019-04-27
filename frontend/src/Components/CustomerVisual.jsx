@@ -29,23 +29,32 @@ class CustomerVisual extends Component {
     // Natural disaster frequency per state (map)
     // Organization frequency per state (map)
     // Disaster funding frequency (bubble)
+    let state_data, disaster_data, organization_data;
 
-    // let data = [wrapper.get_states_models(undefined, undefined, undefined, undefined, undefined, undefined, 1, 1000),
-    //             wrapper.get_natural_disasters(undefined, undefined, undefined, undefined, 1, 1000),
-    //             wrapper.get_organizations(undefined, undefined, undefined, 1, 1000)
-    //         ];
-    //
-    // let data_loaded = await Promise.all(data);
-    //
-    // let state_data = data_loaded[0];
-    // let disaster_data = data_loaded[1];
-    // let organization_data = data_loaded[2];
+    try {
+      let data = [wrapper.get_states_models(undefined, undefined, undefined, undefined, undefined, undefined, 1, 1000),
+                  wrapper.get_natural_disasters(undefined, undefined, undefined, undefined, 1, 1000),
+                  wrapper.get_organizations(undefined, undefined, undefined, 1, 1000)
+              ];
+
+      let data_loaded = await Promise.all(data);
+
+      state_data = data_loaded[0];
+      disaster_data = data_loaded[1];
+      organization_data = data_loaded[2];
+    }
+    catch {
+      console.log("Loading catastrophe_world data through API failed, falling back to data file.");
+      state_data = data.state_data;
+      disaster_data = data.disaster_data;
+      organization_data = data.organization_data;
+    }
 
     // NOTE: Use this while the catastrophe_world API suffers from CORS errors.
-    let state_data = data.state_data;
-    let disaster_data = data.disaster_data;
-    let organization_data = data.organization_data;
-    console.log(state_data);
+    // let state_data = data.state_data;
+    // let disaster_data = data.disaster_data;
+    // let organization_data = data.organization_data;
+    // console.log(state_data);
 
     // Visualization 1
 
