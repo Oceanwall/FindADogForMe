@@ -185,6 +185,7 @@ class ShelterInstance extends Component {
           {this.state.latitude &&
             <Row>
               <Col xs={12} className="mt-2 mb-1" id="google-map" style={{'height': '50vh', 'paddingLeft': '0px'}}>
+                <h4 className="ml-1 mr-1 mb-3">Location of Shelter:</h4>
                 <MapContainer location_objects={[{"latitude": this.state.latitude, "longitude": this.state.longitude, "name": this.state.name}]}/>
               </Col>
             </Row>
