@@ -169,6 +169,7 @@ class DeveloperVisual extends Component {
           >
             {this.state.info_loaded ? (
               <div>
+                <h2 className="mt-4 mb-2 ml-1 mr-1">Frequency of Shelters by City</h2>
                 <BubbleChart
                 graph= {{
                   zoom: 1,
@@ -205,6 +206,7 @@ class DeveloperVisual extends Component {
           >
             {this.state.info_loaded ? (
               <div>
+                <h2 className="mt-4 mb-2 ml-1 mr-1">Frequency of Breeds by Group</h2>
                 <BarChart
                   data={this.state.group_breed_pairs}
                   xAxis={{label: "Group Name"}}
@@ -227,6 +229,7 @@ class DeveloperVisual extends Component {
           >
             {this.state.info_loaded ? (
               <div>
+                <h2 className="mt-4 mb-2 ml-1 mr-1">Frequency of Dogs by Size and Age</h2>
                 <BubbleChart
                 graph= {{
                   zoom: 1,

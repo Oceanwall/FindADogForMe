@@ -30,15 +30,24 @@ class CustomerVisual extends Component {
     // Organization frequency per state (map)
     // Disaster funding frequency (bubble)
 
+    // let data = [wrapper.get_states_models(undefined, undefined, undefined, undefined, undefined, undefined, 1, 1000),
+    //             wrapper.get_natural_disasters(undefined, undefined, undefined, undefined, 1, 1000),
+    //             wrapper.get_organizations(undefined, undefined, undefined, 1, 1000)
+    //         ];
+    //
+    // let data_loaded = await Promise.all(data);
+    //
+    // let state_data = data_loaded[0];
+    // let disaster_data = data_loaded[1];
+    // let organization_data = data_loaded[2];
+
+    // NOTE: Use this while the catastrophe_world API suffers from CORS errors.
     let state_data = data.state_data;
     let disaster_data = data.disaster_data;
     let organization_data = data.organization_data;
     console.log(state_data);
 
     // Visualization 1
-
-    // let state_data = await wrapper.get_states_models(undefined, undefined, undefined, undefined, undefined, undefined, 100, 1);
-    // console.log(state_data);
 
     // Get state codes
     let state_disaster_pairings = {};
@@ -214,10 +223,11 @@ class CustomerVisual extends Component {
           >
             {this.state.info_loaded ? (
               <div>
+                <h2 className="mt-4 ml-1 mr-1">Frequency of Natural Disasters by State</h2>
                 <Datamap
                   width={this.state.width > 1200 ? 1200 : this.state.width}
                   height={this.state.width > 1200 ? 800 : (2 / 3) * this.state.width}
-                  style={{marginTop: (this.state.width > 1200 ? "-80" : String(-0.1 * (2 / 3) * this.state.width) + "px")}}
+                  style={{marginTop: (this.state.width > 1200 ? "-80px" : String(-0.1 * 2/3 * this.state.width) + "px")}}
                   scope="usa"
                   geographyConfig={{
                     highlightBorderColor: 'black',
@@ -255,10 +265,11 @@ class CustomerVisual extends Component {
           >
             {this.state.info_loaded ? (
               <div>
+                <h2 className="mt-4 ml-1 mr-1">Frequency of Organizations by State</h2>
                 <Datamap
                   width={this.state.width > 1200 ? 1200 : this.state.width}
                   height={this.state.width > 1200 ? 800 : (2 / 3) * this.state.width}
-                  style={{marginTop: (this.state.width > 1200 ? "-80" : String(-0.1 * (2 / 3) * this.state.width) + "px")}}
+                  style={{marginTop: (this.state.width > 1200 ? "-80px" : String(-0.1 * 2/3 * this.state.width) + "px")}}
                   scope="usa"
                   geographyConfig={{
                     highlightBorderColor: 'black',
@@ -293,6 +304,7 @@ class CustomerVisual extends Component {
           >
             {this.state.info_loaded ? (
               <div>
+                <h2 className="mt-4 ml-1 mr-1">Frequency of Natural Disasters by Funding</h2>
                 <BubbleChart
                   graph= {{
                     zoom: 1,
