@@ -160,7 +160,7 @@ class BreedInstance extends Component {
                 </p>
               </div>
             </Col>
-            <Col>
+            <Col xs={12} md={7} lg={6}>
               <InstanceCarousel images={this.state.images} />
             </Col>
           </Row>
