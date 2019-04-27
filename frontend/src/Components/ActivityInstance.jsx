@@ -272,6 +272,7 @@ class ActivityInstance extends Component {
                 id="google-map"
                 style={{ height: "50vh", paddingLeft: "0px" }}
               >
+                <h4 className="ml-1 mr-1 mb-3">Activity Location:</h4>
                 <MapContainer
                   location_objects={[
                     {

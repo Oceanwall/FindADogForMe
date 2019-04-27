@@ -160,7 +160,7 @@ class BreedInstance extends Component {
                 </p>
               </div>
             </Col>
-            <Col>
+            <Col xs={12} md={7} lg={6}>
               <InstanceCarousel images={this.state.images} />
             </Col>
           </Row>
@@ -168,6 +168,7 @@ class BreedInstance extends Component {
           {this.state.shelter_list && this.state.shelter_list.length > 0 &&
             <Row>
               <Col xs={12} id="google-map" className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
+                  <h4 className="ml-1 mr-1 mb-3 mt-3">Shelters that host this breed:</h4>
                   <MapContainer location_objects={this.state.shelter_list}/>
               </Col>
             </Row>
