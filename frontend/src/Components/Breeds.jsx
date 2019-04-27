@@ -13,6 +13,7 @@ import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
+import Select from "react-select";
 import {
   VALID_GROUPS,
   VALID_LIFESPANS,
@@ -269,11 +270,10 @@ class Breeds extends Component {
                 </Col>
 
                 <Col md={2} xs={6} className="mt-2">
-                  <Typeahead
-                    className="group-filter"
+                  <Select
+                    name="group-filter"
                     clearButton
                     placeholder="Filter by group..."
-                    selectHintOnEnter={true}
                     ref={ref => {
                       this.groupRef = ref;
                     }}
