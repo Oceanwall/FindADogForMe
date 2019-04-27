@@ -205,7 +205,7 @@ class ActivityInstance extends Component {
                 )}
                 <p align="left" className="capitalize">
                   {" "}
-                  Type: {this.state.type}
+                  Type: {this.state.type.toLowerCase() == "eventbrite" ? "Event" : this.state.type}
                 </p>
 
                 <p align="left">
