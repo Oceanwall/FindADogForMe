@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import Datamap from "react-datamaps";
 import BubbleChart from '@weknow/react-bubble-chart-d3';
 import "../styles/CustomerVisual.css";
+import LoadingImage from "./LoadingImage";
 
 const wrapper = require("../catastrophe_wrapper/wrapper.js").default;
 // While the API is blocked by CORS, we use this instead...
@@ -244,7 +245,7 @@ class CustomerVisual extends Component {
               </div>
             ) : (
               <div>
-                not loaded yet, plaese give me an animation
+                <LoadingImage></LoadingImage>
               </div>
             )}
           </Tabs.Tab>
@@ -282,7 +283,7 @@ class CustomerVisual extends Component {
               </div>
             ) : (
               <div>
-                not loaded yet, plaese give me an animation
+                <LoadingImage></LoadingImage>
               </div>
             )}
           </Tabs.Tab>
@@ -317,7 +318,7 @@ class CustomerVisual extends Component {
               </div>
             ) : (
               <div>
-                not loaded yet, plaese give me an animation
+                <LoadingImage></LoadingImage>
               </div>
             )}
           </Tabs.Tab>

@@ -19,6 +19,7 @@ import {
   VALID_HEIGHTS
 } from "../valid_options.jsx";
 import NotFound from "./NotFound";
+import LoadingImage from "./LoadingImage";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -331,14 +332,16 @@ class Breeds extends Component {
                 </Col>
               </Row>
             </Form>
-            {this.state.info_loaded && (
+            {this.state.info_loaded ? (
               this.state.breedList.length > 0 ? (
-              <CardDeck>
-                <div class="card-deck">{breedCards}</div>
-              </CardDeck>
+                <CardDeck>
+                  <div class="card-deck">{breedCards}</div>
+                </CardDeck>
+                ) : (
+                  <NotFound/>
+                )
               ) : (
-                <NotFound/>
-              )
+                <LoadingImage></LoadingImage>
             )}
           </Container>
           <PageComp

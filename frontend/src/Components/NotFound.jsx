@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import LoadingImage from "./LoadingImage";
 class NotFound extends Component {
   render() {
     return (

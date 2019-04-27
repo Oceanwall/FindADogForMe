@@ -15,6 +15,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
 import NotFound from "./NotFound";
+import LoadingImage from "./LoadingImage";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -373,14 +374,16 @@ class Shelters extends Component {
                 </Col>
               </Row>
             </Form>
-            {this.state.info_loaded && (
+            {this.state.info_loaded ? (
               this.state.shelterList.length > 0 ? (
-              <CardDeck>
-                <div class="card-deck">{shelterCards}</div>
-              </CardDeck>
+                <CardDeck>
+                  <div class="card-deck">{shelterCards}</div>
+                </CardDeck>
+                ) : (
+                  <NotFound/>
+                )
               ) : (
-                <NotFound/>
-              )
+                <LoadingImage></LoadingImage>
             )}
           </Container>
           <PageComp

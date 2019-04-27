@@ -12,6 +12,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Route } from "react-router-dom";
 import NotFound from "./NotFound";
+import LoadingImage from "./LoadingImage";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -327,14 +328,16 @@ class Activities extends Component {
                 </Button>
               </Col>
             </Row>
-            {this.state.info_loaded && (
+            {this.state.info_loaded ? (
               this.state.activityList.length > 0 ? (
-              <CardDeck>
-                <div class="card-deck">{activityCards}</div>
-              </CardDeck>
+                <CardDeck>
+                  <div class="card-deck">{activityCards}</div>
+                </CardDeck>
+                ) : (
+                  <NotFound/>
+                )
               ) : (
-                <NotFound/>
-              )
+                <LoadingImage></LoadingImage>
             )}
           </Container>
           <PageComp

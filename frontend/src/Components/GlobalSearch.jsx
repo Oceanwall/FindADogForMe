@@ -12,6 +12,7 @@ import Activities from "./Activities"
 import ActivityCard from "./ActivityCard"
 import { Route } from "react-router-dom";
 import NotFound from "./NotFound";
+import LoadingImage from "./LoadingImage";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -211,14 +212,16 @@ class GlobalSearch extends Component {
     let shelters = (
       <div>
         <Container>
-          {this.state.shelters_loaded && (
+          {this.state.shelters_loaded ? (
             this.state.shelterList.length > 0 ? (
-            <CardDeck>
-              <div class="card-deck">{shelterCards}</div>
-            </CardDeck>
+              <CardDeck>
+                <div class="card-deck">{shelterCards}</div>
+              </CardDeck>
+              ) : (
+                <NotFound/>
+              )
             ) : (
-              <NotFound/>
-            )
+              <LoadingImage></LoadingImage>
           )}
         </Container>
         <PageComp
@@ -232,14 +235,16 @@ class GlobalSearch extends Component {
     let dogs = (
       <div>
         <Container>
-          {this.state.dogs_loaded && (
+          {this.state.dogs_loaded ? (
             this.state.dogList.length > 0 ? (
-            <CardDeck>
-              <div class="card-deck">{dogCards}</div>
-            </CardDeck>
+              <CardDeck>
+                <div class="card-deck">{dogCards}</div>
+              </CardDeck>
+              ) : (
+                <NotFound/>
+              )
             ) : (
-              <NotFound/>
-            )
+              <LoadingImage></LoadingImage>
           )}
         </Container>
         <PageComp
@@ -253,14 +258,16 @@ class GlobalSearch extends Component {
     let breeds = (
       <div>
         <Container>
-          {this.state.breeds_loaded && (
+          {this.state.breeds_loaded ? (
             this.state.breedList.length > 0 ? (
-            <CardDeck>
-              <div class="card-deck">{breedCards}</div>
-            </CardDeck>
+              <CardDeck>
+                <div class="card-deck">{breedCards}</div>
+              </CardDeck>
+              ) : (
+                <NotFound/>
+              )
             ) : (
-              <NotFound></NotFound>
-            )
+              <LoadingImage></LoadingImage>
           )}
         </Container>
         <PageComp
@@ -274,14 +281,16 @@ class GlobalSearch extends Component {
     let activities = (
       <div>
         <Container>
-          {this.state.activities_loaded && (
+          {this.state.activities_loaded ? (
             this.state.activityList.length > 0 ? (
-            <CardDeck>
-              <div class="card-deck">{activityCards}</div>
-            </CardDeck>
+              <CardDeck>
+                <div class="card-deck">{activityCards}</div>
+              </CardDeck>
+              ) : (
+                <NotFound/>
+              )
             ) : (
-              <NotFound/>
-            )
+              <LoadingImage></LoadingImage>
           )}
         </Container>
         <PageComp

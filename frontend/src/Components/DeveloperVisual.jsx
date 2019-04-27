@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import BubbleChart from '@weknow/react-bubble-chart-d3';
 import { BarChart } from 'react-d3-components';
 import * as d3 from "d3";
+import LoadingImage from "./LoadingImage.jsx";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -194,7 +195,7 @@ class DeveloperVisual extends Component {
               </div>
             ) : (
               <div>
-                not loaded yet, plaese give me an animation
+                <LoadingImage></LoadingImage>
               </div>
             )}
           </Tabs.Tab>
@@ -216,7 +217,7 @@ class DeveloperVisual extends Component {
               </div>
             ) : (
               <div>
-                not loaded yet, plaese give me an animation
+                <LoadingImage></LoadingImage>
               </div>
             )}
           </Tabs.Tab>
@@ -252,7 +253,7 @@ class DeveloperVisual extends Component {
               </div>
             ) : (
               <div>
-                not loaded yet, plaese give me an animation
+                <LoadingImage></LoadingImage>
               </div>
             )}
           </Tabs.Tab>
