@@ -281,12 +281,12 @@ class Activities extends Component {
                   id="type-filter"
                 >
                   <Dropdown.Item
-                    eventKey="Eventbrite"
+                    eventKey="Event"
                     onSelect={eventKey =>
                       this.setTypeFilter("eventbrite", eventKey)
                     }
                   >
-                    Eventbrite
+                    Event
                   </Dropdown.Item>
                   <Dropdown.Item
                     eventKey="Meetup"

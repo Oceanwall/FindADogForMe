@@ -179,7 +179,11 @@ def build_event(info, commit=False):
     # Non-active Events: 113, 105, 115
 
     address_data = get_eventbrite_venue(info["venue_id"])
-    if address_data is None:
+    if address_data is None or "address" not in address_data:
+        return
+
+    address = address_data["address"]
+    if "region" not in address or address["region"] != "TX":
         return
 
     # Note that info["category_id"] is of type string.
@@ -268,7 +272,7 @@ def build_meetup(info, commit=False):
     # TODO: Figure out a better way to tell if a meetup is free (most meetups only
     # provide cost information in their description).
 
-    if "plain_text_description" not in info:
+    if "plain_text_description" not in info or "group" not in info or "state" not in info["group"] or info["group"]["state"] != "TX":
         return
 
     meetup = Activity(
