@@ -15,6 +15,7 @@ import "../styles/Dogs.css";
 import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { VALID_BREEDS } from "../valid_options.jsx";
+import NotFound from "./NotFound";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -394,9 +395,13 @@ class Dogs extends Component {
               </Col>
             </Row>
             {this.state.info_loaded && (
+              this.state.dogList.length > 0 ? (
               <CardDeck>
                 <div class="card-deck">{dogCards}</div>
               </CardDeck>
+              ) : (
+                <NotFound/>
+              )
             )}
           </Container>
           <PageComp

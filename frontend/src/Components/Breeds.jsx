@@ -18,6 +18,7 @@ import {
   VALID_LIFESPANS,
   VALID_HEIGHTS
 } from "../valid_options.jsx";
+import NotFound from "./NotFound";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -331,9 +332,13 @@ class Breeds extends Component {
               </Row>
             </Form>
             {this.state.info_loaded && (
+              this.state.breedList.length > 0 ? (
               <CardDeck>
                 <div class="card-deck">{breedCards}</div>
               </CardDeck>
+              ) : (
+                <NotFound/>
+              )
             )}
           </Container>
           <PageComp

@@ -11,6 +11,7 @@ import BreedCard from "./BreedCard"
 import Activities from "./Activities"
 import ActivityCard from "./ActivityCard"
 import { Route } from "react-router-dom";
+import NotFound from "./NotFound";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -211,9 +212,13 @@ class GlobalSearch extends Component {
       <div>
         <Container>
           {this.state.shelters_loaded && (
+            this.state.shelterList.length > 0 ? (
             <CardDeck>
               <div class="card-deck">{shelterCards}</div>
             </CardDeck>
+            ) : (
+              <NotFound/>
+            )
           )}
         </Container>
         <PageComp
@@ -228,9 +233,13 @@ class GlobalSearch extends Component {
       <div>
         <Container>
           {this.state.dogs_loaded && (
+            this.state.dogList.length > 0 ? (
             <CardDeck>
               <div class="card-deck">{dogCards}</div>
             </CardDeck>
+            ) : (
+              <NotFound/>
+            )
           )}
         </Container>
         <PageComp
@@ -245,9 +254,13 @@ class GlobalSearch extends Component {
       <div>
         <Container>
           {this.state.breeds_loaded && (
+            this.state.breedList.length > 0 ? (
             <CardDeck>
               <div class="card-deck">{breedCards}</div>
             </CardDeck>
+            ) : (
+              <NotFound></NotFound>
+            )
           )}
         </Container>
         <PageComp
@@ -262,9 +275,13 @@ class GlobalSearch extends Component {
       <div>
         <Container>
           {this.state.activities_loaded && (
+            this.state.activityList.length > 0 ? (
             <CardDeck>
               <div class="card-deck">{activityCards}</div>
             </CardDeck>
+            ) : (
+              <NotFound/>
+            )
           )}
         </Container>
         <PageComp

@@ -30,6 +30,7 @@ class PageComp extends Component {
   render() {
     return (
       <div class="page-comp">
+      {this.props.maxPage > 0 &&
         <Pagination>
           {this.props.currentPage > 1 && [
             <Pagination.First onClick={this.handleFirst} />,
@@ -55,6 +56,7 @@ class PageComp extends Component {
             <Pagination.Last onClick={this.handleLast} />
           ]}
         </Pagination>
+      }
       </div>
     );
   }

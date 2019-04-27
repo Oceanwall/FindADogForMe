@@ -10,6 +10,7 @@ import CardDeck from "react-bootstrap/CardDeck";
 import "../styles/Instance.css";
 import MapContainer from "./Map";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
+import Card from "react-bootstrap/Card";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
