@@ -52,7 +52,7 @@ class Breeds extends Component {
     this.reset = this.reset.bind(this);
     this.checkFiltered = this.checkFiltered.bind(this);
 
-    // this.groupRef = React.createRef();
+    this.groupRef = React.createRef();
     this.lifespanRef = React.createRef();
     this.heightRef = React.createRef();
     this.searchParamRef = React.createRef();
@@ -134,7 +134,7 @@ class Breeds extends Component {
 
   setGroupFilter(group) {
     console.log("Group:", group);
-    if (group.length == 0) group = undefined;
+    group = (group === null || group.length === 0) ? undefined : group.value;
     this.setState({ group: group, groupButtonName: group }, () =>
       this.filter()
     );
@@ -197,7 +197,7 @@ class Breeds extends Component {
       () => this.updateBreed(1)
     );
 
-    // this.groupRef.getInstance().clear();
+    this.groupRef.select.clearValue();
     this.lifespanRef.getInstance().clear();
     this.heightRef.getInstance().clear();
     this.searchParamRef.value = "";
@@ -272,9 +272,12 @@ class Breeds extends Component {
                 <Col md={2} xs={6} className="mt-2">
                   <Select
                     name="group-filter"
-                    clearButton
+                    isClearable
                     placeholder="Filter by group..."
-                    onChange={group => this.setGroupFilter(group.value)}
+                    ref={ref => {
+                      this.groupRef = ref;
+                    }}
+                    onChange={group => this.setGroupFilter(group)}
                     options={VALID_GROUPS}
                   />
                 </Col>
