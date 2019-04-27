@@ -17,7 +17,7 @@ class Home extends Component {
           href="/about"
           className="about-button"
         >
-          Learn about our Purpose
+          Learn about our purpose
         </Button>
       </div>
     );

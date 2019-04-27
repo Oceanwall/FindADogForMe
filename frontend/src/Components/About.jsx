@@ -6,6 +6,7 @@ import LogoDeck from "./LogoDeck";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "../styles/About.css";
+import DataSourcesList from "./DataSourcesList";
 
 class About extends Component {
   state = {
@@ -253,64 +254,7 @@ class About extends Component {
 
         <br />
         <Container>
-          <Row>
-            <Col>
-              <h2 class="text-center title-text">Data Sources</h2>
-              <div class="text-center">
-                <a href="https://www.petfinder.com/developers/api-docs">
-                  <div class="data-sources-text">Petfinder</div>
-                </a>
-              </div>
-              <div class="text-center mt-2">
-                <a href="https://thedogapi.com/">
-                  <div class="data-sources-text">TheDogAPI</div>
-                </a>
-              </div>
-              <div class="text-center mt-2">
-                <a href="https://dog.ceo/dog-api/documentation/">
-                  <div class="data-sources-text">DogAPI</div>
-                </a>
-              </div>
-              <div class="text-center mt-2">
-                <a href="https://www.eventbrite.com/platform/docs/introduction">
-                  <div class="data-sources-text">Eventbrite</div>
-                </a>
-              </div>
-              <div class="text-center mt-2">
-                <a href="https://www.meetup.com/meetup_api/">
-                  <div class="data-sources-text">Meetup</div>
-                </a>
-              </div>
-              <div class="text-center mt-2">
-                <a href="https://www.nps.gov/subjects/developer/api-documentation.htm">
-                  <div class="data-sources-text">National Park Service</div>
-                </a>
-              </div>
-            </Col>
-            <Col>
-              <h2>
-                <div class="text-center doc-text">GitLab URL</div>
-                <a
-                  href="https://gitlab.com/oceanwall/findadogforme"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div class="url-text">Find A Dog For Me</div>
-                </a>
-              </h2>
-              <br />
-              <h2>
-                <div class="text-center doc-text">Postman API URL:</div>
-                <a
-                  href="https://documenter.getpostman.com/view/6754951/S11KQJxc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div class="url-text">Documentation</div>
-                </a>
-              </h2>
-            </Col>
-          </Row>
+          <DataSourcesList />
         </Container>
       </div>
     );
