@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../styles/LogoDeck.css";
 import LogoCard from "./LogoCard";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
 class LogoDeck extends Component {

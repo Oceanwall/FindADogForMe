@@ -33,6 +33,7 @@ class DataSourcesList extends Component {
             </a>
           </ListGroup.Item>
         </ListGroup>
+
         <ListGroup variant="flush">
           <div class="title-text data-text">GitLab URL</div>
           <ListGroup.Item>
@@ -45,6 +46,7 @@ class DataSourcesList extends Component {
             </a>
           </ListGroup.Item>
         </ListGroup>
+
         <ListGroup variant="flush">
           <div class="title-text data-text">Postman API</div>
           <ListGroup.Item>
