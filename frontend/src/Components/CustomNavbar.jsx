@@ -5,7 +5,6 @@ import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/CustomNavbar.css";
-import GlobalSearch from "./GlobalSearch";
 import LinkContainer from "react-router-bootstrap/lib/LinkContainer"
 
 class CustomNavbar extends Component {
@@ -16,7 +15,7 @@ class CustomNavbar extends Component {
   }
 
   globalSearch()  {
-    if(this.searchParam.value != "")
+    if(this.searchParam.value !== "")
       this.props.history.push(`/search/${this.searchParam.value}`);
   }
 

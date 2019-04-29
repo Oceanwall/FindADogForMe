@@ -38,7 +38,7 @@ function build_query(model, id, name, latitude, longitude, range = 0.5, page) {
                 op: "eq",
                 val: name,
             }
-        } else if (model == "dog") {
+        } else if (model === "dog") {
             queryObject = {
                 name: "breed",
                 op: "eq",

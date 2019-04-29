@@ -141,14 +141,14 @@ class Breeds extends Component {
   }
 
   setLifespanFilter(lifespan) {
-    if (lifespan.length == 0) lifespan = undefined;
+    if (lifespan.length === 0) lifespan = undefined;
     this.setState({ lifespan: lifespan, lifespanButtonName: lifespan }, () =>
       this.filter()
     );
   }
 
   setHeightFilter(height) {
-    if (height.length == 0) height = undefined;
+    if (height.length === 0) height = undefined;
     this.setState({ height: height, heightButtonName: height }, () =>
       this.filter()
     );
@@ -172,11 +172,11 @@ class Breeds extends Component {
   // return true if filtered, false otherwise
   checkFiltered() {
     return (
-      this.state.group != undefined ||
-      this.state.lifespan != undefined ||
-      this.state.height != undefined ||
-      this.state.sortParam != undefined ||
-      this.state.searchParam != undefined
+      typeof this.state.group !== "undefined" ||
+      typeof this.state.lifespan !== "undefined" ||
+      typeof this.state.height !== "undefined" ||
+      typeof this.state.sortParam !== "undefined" ||
+      typeof this.state.searchParam !== "undefined"
     );
   }
 

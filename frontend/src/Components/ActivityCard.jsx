@@ -104,7 +104,7 @@ class ActivityCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right" className="capitalize">
-                    {<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.activity.type.toLowerCase() == "eventbrite" ? "Event" : this.props.activity.type}
+                    {<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.activity.type.toLowerCase() === "eventbrite" ? "Event" : this.props.activity.type}
                       highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
                   </p>
                 </Col>

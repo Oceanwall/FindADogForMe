@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Tabs, TabProvider } from "@yazanaabed/react-tabs";
-import { Route } from "react-router-dom";
+import { Tabs } from "@yazanaabed/react-tabs";
 import BubbleChart from '@weknow/react-bubble-chart-d3';
 import { BarChart } from 'react-d3-components';
 import * as d3 from "d3";
@@ -90,7 +89,6 @@ class DeveloperVisual extends Component {
     }
 
     let group_breed_pairs = [];
-    let domain = [];
     for (let entry of group_breed_pairings.entries()) {
       group_breed_pairs.push({x: entry[0], y: entry[1]});
     }
@@ -115,6 +113,11 @@ class DeveloperVisual extends Component {
           size_name = "Large";
           break;
         case("XL"):
+          size_name = "Extra Large";
+          break;
+        // Should never be reached
+        default:
+          console.log("Warning: Dog without size property has been encountered");
           size_name = "Extra Large";
           break;
       }

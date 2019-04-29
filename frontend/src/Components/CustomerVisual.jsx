@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Tabs, TabProvider } from "@yazanaabed/react-tabs";
-import { Route } from "react-router-dom";
+import { Tabs } from "@yazanaabed/react-tabs";
 import Datamap from "react-datamaps";
 import BubbleChart from '@weknow/react-bubble-chart-d3';
 import "../styles/CustomerVisual.css";
@@ -150,7 +149,7 @@ class CustomerVisual extends Component {
                                    };
     // Map funding level of each disaster to appropriate tier.
     for (let disaster of disaster_data) {
-      if (disaster.obligatedfunding == 0)
+      if (disaster.obligatedfunding === 0)
         disaster_funding_pairings["$0 Funding"] += 1;
       else if (disaster.obligatedfunding <= 10000)
         disaster_funding_pairings["$1 - $10,000 Funding"] += 1;

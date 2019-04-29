@@ -3,8 +3,6 @@ import MemberCard from "./MemberCard";
 import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
 import LogoDeck from "./LogoDeck";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import "../styles/About.css";
 import DataSourcesList from "./DataSourcesList";
 

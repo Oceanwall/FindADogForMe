@@ -143,13 +143,13 @@ class Dogs extends Component {
 
   // sets breed filter
   setBreedFilter(new_breed) {
-    if (new_breed.length == 0) new_breed = "";
+    if (new_breed.length === 0) new_breed = "";
     let filter =
-      new_breed != "" ||
-      this.state.age != "" ||
-      this.state.size != "" ||
-      this.state.sortParam != undefined ||
-      this.state.searchParam != undefined;
+      new_breed !== "" ||
+      this.state.age !== "" ||
+      this.state.size !== "" ||
+      typeof this.state.sortParam !== "undefined" ||
+      typeof this.state.searchParam !== "undefined";
     this.setState({ breed: new_breed, filtered: filter }, () => {
       console.log(this.state.age);
       console.log(this.state.size);

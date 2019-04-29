@@ -145,7 +145,7 @@ class DogInstance extends Component {
             <Col>
               <Container>
                 <div class="desc-text">
-                  {this.state.description != undefined ? (
+                  {typeof this.state.description !== "undefined" ? (
                     this.state.description.length > 750 ? (
                       this.state.collapse ? (
                         [

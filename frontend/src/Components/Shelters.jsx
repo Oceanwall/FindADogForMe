@@ -117,13 +117,13 @@ class Shelters extends Component {
   }
 
   setCityFilter(city) {
-    if (city.length == 0) city = "";
+    if (city.length === 0) city = "";
     let filter =
-      city != "" ||
-      this.state.age != "" ||
-      this.state.size != "" ||
-      this.state.sortParam != undefined ||
-      this.state.searchParam != undefined;
+      city !== "" ||
+      this.state.zipcode !== "" ||
+      this.state.phone !== "" ||
+      this.state.sortParam !== undefined ||
+      this.state.searchParam !== undefined;
     this.setState({ city: city, filtered: filter }, () => {
       console.log(this.state.city);
       console.log(this.state.zipcode);
@@ -140,7 +140,7 @@ class Shelters extends Component {
   }
 
   setZipFilter(zipcode) {
-    if (zipcode.length == 5) {
+    if (zipcode.length === 5) {
       this.setState(
         {
           zipcode: zipcode
@@ -151,7 +151,7 @@ class Shelters extends Component {
         }
       );
     }
-    if (zipcode.length == 0) {
+    if (zipcode.length === 0) {
       this.setState(
         {
           zipcode: ""
@@ -165,7 +165,7 @@ class Shelters extends Component {
 
   setPhoneFilter(area_code) {
     console.log(area_code);
-    if (area_code.length == 3) {
+    if (area_code.length === 3) {
       this.setState(
         {
           phone: area_code
@@ -173,7 +173,7 @@ class Shelters extends Component {
         () => this.filter()
       );
     }
-    if (area_code.length == 0) {
+    if (area_code.length === 0) {
       this.setState(
         {
           phone: ""
@@ -213,11 +213,11 @@ class Shelters extends Component {
 
   checkFiltered() {
     return (
-      this.state.city != "" ||
-      this.state.age != "" ||
-      this.state.size != "" ||
-      this.state.sortParam != undefined ||
-      this.state.searchParam != undefined
+      this.state.city !== "" ||
+      this.state.phone !== "" ||
+      this.state.zipcode !== "" ||
+      this.state.sortParam !== undefined ||
+      this.state.searchParam !== undefined
     );
   }
 

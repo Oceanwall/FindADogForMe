@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import "../styles/HomeCarousel.css";
 import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
 import Carousel from "react-bootstrap-carousel";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 class HomeCarousel extends Component {
   constructor(props) {

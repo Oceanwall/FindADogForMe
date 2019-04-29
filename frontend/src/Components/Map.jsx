@@ -35,7 +35,7 @@ class MapContainer extends Component {
 
   render() {
     console.log(this.props.location_objects);
-    if (!this.props.location_objects || this.props.location_objects.length == 0 || !this.props.location_objects[0]["latitude"] || !this.props.location_objects[0]["longitude"] || !this.props.location_objects[0]["name"]) {
+    if (!this.props.location_objects || this.props.location_objects.length === 0 || !this.props.location_objects[0]["latitude"] || !this.props.location_objects[0]["longitude"] || !this.props.location_objects[0]["name"]) {
       console.log(this.props.location_objects);
       return (
         <div></div>

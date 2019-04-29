@@ -1,5 +1,4 @@
 const request = require('request');
-const API_URL = "http://api.catastrophe.world/";
 
 function perform_api_call(url, qs) {
     return new Promise ((resolve, reject) => {

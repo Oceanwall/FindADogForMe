@@ -35,6 +35,10 @@ class DefaultImage extends Component {
       case 4:
         style = { "background-color": "#ddbbea" };
         break;
+      // Note that this case should never be reached.
+      default:
+        style = { "background-color": "#ddbbea" };
+        break;
     }
 
     return (

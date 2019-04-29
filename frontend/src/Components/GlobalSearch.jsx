@@ -1,16 +1,11 @@
 import React, { Component } from "react";
-import { Row, Col, CardDeck, Container } from "react-bootstrap";
-import { Tabs, TabProvider } from "@yazanaabed/react-tabs";
+import { CardDeck, Container } from "react-bootstrap";
+import { Tabs } from "@yazanaabed/react-tabs";
 import PageComp from "./PageComp";
-import Shelters from "./Shelters"
 import ShelterCard from "./ShelterCard"
-import Dogs from "./Dogs"
 import DogCard from "./DogCard"
-import Breeds from "./Breeds"
 import BreedCard from "./BreedCard"
-import Activities from "./Activities"
 import ActivityCard from "./ActivityCard"
-import { Route } from "react-router-dom";
 import NotFound from "./NotFound";
 import LoadingImage from "./LoadingImage";
 

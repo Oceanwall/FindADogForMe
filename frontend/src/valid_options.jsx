@@ -299,14 +299,14 @@ const VALID_BREEDS = [
 export { VALID_BREEDS };
 
 const VALID_GROUPS = [
-  {value: "Mixed", label: "Mixed"}, 
-  {value: "Working", label: "Working"}, 
-  {value: "Non-", label: "Non-Sporting"}, 
-  {value: "Sporting", label: "Sporting"}, 
-  {value: "Herding", label: "Herding"}, 
-  {value: "Terrier", label: "Terrier"}, 
-  {value: "Hound", label: "Hound"}, 
-  {value: "Toy", label: "Toy"}, 
+  {value: "Mixed", label: "Mixed"},
+  {value: "Working", label: "Working"},
+  {value: "Non-Sporting", label: "Non-Sporting"}, 
+  {value: "Sporting", label: "Sporting"},
+  {value: "Herding", label: "Herding"},
+  {value: "Terrier", label: "Terrier"},
+  {value: "Hound", label: "Hound"},
+  {value: "Toy", label: "Toy"},
 ];
 export { VALID_GROUPS };
 

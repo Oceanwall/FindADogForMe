@@ -205,7 +205,7 @@ class ActivityInstance extends Component {
               <p align="left" className="capitalize">
                 {" "}
                 Type:{" "}
-                {this.state.type.toLowerCase() == "eventbrite"
+                {this.state.type.toLowerCase() === "eventbrite"
                   ? "Event"
                   : this.state.type}
               </p>
@@ -226,7 +226,7 @@ class ActivityInstance extends Component {
           <Col xs={12} md={6}>
             <Container>
               <div class="desc-text">
-                {this.state.description != undefined ? (
+                {typeof this.state.description !== "undefined" ? (
                   this.state.description.length > 750 ? (
                     this.state.collapse ? (
                       [

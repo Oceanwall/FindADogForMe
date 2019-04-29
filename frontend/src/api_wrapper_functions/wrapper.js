@@ -119,7 +119,6 @@ async function getDogActivities(id, range = 0.5, page) {
     let dog = await utilities.getDogs(id);
 
     let breed = await getDogBreed(id);
-    let is_active = breed.is_active;
 
     let shelter = (await getShelter(dog.shelter_id));
 
