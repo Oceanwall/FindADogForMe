@@ -174,7 +174,11 @@ class BreedInstance extends Component {
                 className="mt-2 mb-1"
                 style={{ height: "50vh", paddingLeft: "0px" }}
               >
-                <MapContainer location_objects={this.state.shelter_list} />
+                <h4 className="ml-1 mr-1 mb-3">Locations of Shelters hosting this Breed:</h4>
+                <MapContainer
+                  zoom={6}
+                  location_objects={this.state.shelter_list}
+                />
               </Col>
             </Row>
           )}
