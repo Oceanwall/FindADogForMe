@@ -190,7 +190,6 @@ def build_shelter(shelter, shelter_ids, shelter_names, commit=False):
         return None
 
     # Ensures that shelter contains dogs.
-    # TODO: False positives on some shelter names (ReloCATed animals)
     if "cat" in shelter["name"]["$t"] or "rabbit" in shelter["name"]["$t"]:
         return None
 
@@ -233,7 +232,6 @@ def build_shelter(shelter, shelter_ids, shelter_names, commit=False):
     return curr_shelter
 
 
-# TODO: Maybe keep at 20?
 def get_dogs(shelter_id, count=30, offset=0):
     """
     Givien a shelter, uses the Petfinder API to get dogs hosted at that shelter.
@@ -290,7 +288,6 @@ def build_dog(pet, shelter_name, commit=False):
 
     if breed.lower() not in VALID_BREEDS:
         # Manual fixing of inconsistent breeds
-        # TODO: Find more manual fixes for hounds
         manual_fix = False
         if breed.lower() == "pit bull terrier":
             breed = "american pit bull terrier"
@@ -316,7 +313,6 @@ def build_dog(pet, shelter_name, commit=False):
             pic_id += 1
             images["image_" + str(pic_id)] = picture["$t"]
 
-    # TODO: Add "options" (noKids houseTrained, hasShots, etc)
     dog = Dog(
         id=pet["id"]["$t"],
         shelter_id=pet["shelterId"]["$t"],

@@ -10,7 +10,7 @@ from utilities import (
     search_param_in_item,
 )
 
-# Sort types
+# Sorting Criteria
 ALPHABETICAL = "alphabetical"
 REVERSE_ALPHABETICAL = "reverse_alphabetical"
 DATE = "date"
@@ -30,6 +30,10 @@ Also provides routing for the index page, 404 errors, and search / sort / filter
 
 @application.route("/")
 def index():
+    """
+    API Route for the index page of api.findadogfor.me.
+    Provides a link to the Postman documentation for more information.
+    """
     message = {
         "status": 200,
         "message": "Welcome to FindADogForMe's API! If you need help, check out the Postman Documentation: https://documenter.getpostman.com/view/6754951/S11KQJxc",
@@ -43,6 +47,11 @@ def index():
 # Activity Search / Sort / Filter Query
 @application.route("/api/activity/query")
 def activity_query():
+    """
+    API Route for querying activities.
+    """
+
+    # Query parameters
     activity_filter = request.args.get("active")
     free_filter = request.args.get("free")
     type_filter = request.args.get("type")
@@ -62,6 +71,7 @@ def activity_query():
     if int(page_num) < 1:
         return page_number_error()
 
+    # Filtering
     valid_items = Activity.query
 
     if activity_filter is not None:
@@ -73,6 +83,7 @@ def activity_query():
     if type_filter is not None:
         valid_items = valid_items.filter_by(type=type_filter)
 
+    # Sorting
     if sort_param == ALPHABETICAL:
         valid_items = valid_items.order_by(Activity.name)
     elif sort_param == REVERSE_ALPHABETICAL:
@@ -88,6 +99,7 @@ def activity_query():
     valid_items = valid_items.all()
     search_items = valid_items
 
+    # Searching
     if search_param is not None:
         search_items = []
         for object in valid_items:
@@ -130,7 +142,12 @@ def activity_query():
 # Breed Search / Sort / Filter Query
 @application.route("/api/breed/query")
 def breed_query():
-    # Note: No pagination for breeds
+    """
+    API Route for querying breeds.
+    Breed results are never paginated (so all results are returned at once).
+    """
+
+    # Query parameters
     group_filter = request.args.get("group")
     lifespan_filter = request.args.get("lifespan")
     height_filter = request.args.get("height")
@@ -148,6 +165,7 @@ def breed_query():
 
     valid_items = Breed.query
 
+    # Filtering
     if group_filter is not None:
         valid_items = valid_items.filter_by(group=group_filter)
 
@@ -163,6 +181,7 @@ def breed_query():
             Breed.max_height >= height_filter
         )
 
+    # Sorting
     if sort_param == ALPHABETICAL:
         valid_items = valid_items.order_by(Breed.name)
     elif sort_param == REVERSE_ALPHABETICAL:
@@ -175,6 +194,7 @@ def breed_query():
     valid_items = valid_items.all()
     search_items = valid_items
 
+    # Searching
     if search_param is not None:
         search_items = []
         for object in valid_items:
@@ -221,6 +241,11 @@ def breed_query():
 # Dog Search / Sort / Filter Query
 @application.route("/api/dog/query")
 def dog_query():
+    """
+    API Route for querying dogs.
+    """
+
+    # Query parameters
     breed_filter = request.args.get("breed")
     age_filter = request.args.get("age")
     size_filter = request.args.get("size")
@@ -242,6 +267,7 @@ def dog_query():
 
     valid_items = Dog.query
 
+    # Filtering
     if breed_filter is not None:
         valid_items = valid_items.filter_by(breed=breed_filter)
 
@@ -251,12 +277,16 @@ def dog_query():
     if size_filter is not None:
         valid_items = valid_items.filter_by(size=size_filter)
 
+    # Sorting
     if sort_param == ALPHABETICAL:
         valid_items = valid_items.order_by(Dog.name)
     elif sort_param == REVERSE_ALPHABETICAL:
         valid_items = valid_items.order_by(Dog.name.desc())
 
     def size_sort(elem):
+        """
+        User-defined sorting function for sorting dogs by size.
+        """
         if elem.size is None:
             return -1
         if elem.size == "S":
@@ -268,7 +298,6 @@ def dog_query():
         elif elem.size == "XL":
             return 4
         # This should never be reached.
-        # TODO: Throw exception if this is triggered?
         else:
             return -1
 
@@ -284,6 +313,7 @@ def dog_query():
 
     search_items = valid_items
 
+    # Searching
     if search_param is not None:
         search_items = []
         for object in valid_items:
@@ -315,6 +345,11 @@ def dog_query():
 # Shelter Search / Sort / Filter Query
 @application.route("/api/shelter/query")
 def shelter_query():
+    """
+    API Route for querying shelters.
+    """
+
+    # Query parameters
     city_filter = request.args.get("city")
     zipcode_filter = request.args.get("zipcode")
     phone_filter = request.args.get("phone")
@@ -335,6 +370,7 @@ def shelter_query():
 
     valid_items = Shelter.query
 
+    # Filtering
     if city_filter is not None:
         valid_items = valid_items.filter_by(city=city_filter)
 
@@ -344,6 +380,7 @@ def shelter_query():
     if phone_filter is not None:
         valid_items = valid_items.filter(Shelter.phone.startswith(phone_filter))
 
+    # Sorting
     if sort_param == ALPHABETICAL:
         valid_items = valid_items.order_by(Shelter.name)
     elif sort_param == REVERSE_ALPHABETICAL:
@@ -356,6 +393,7 @@ def shelter_query():
     valid_items = valid_items.all()
     search_items = valid_items
 
+    # Searching
     if search_param is not None:
         search_items = []
         for object in valid_items:
@@ -380,6 +418,11 @@ def shelter_query():
 # Search through entire website (all models).
 @application.route("/api/search_website")
 def search_website():
+    """
+    API Route for searching through all models in the database.
+    Encompasses Activities, Breeds, Dogs, and Shelters.
+    Non-paginated (all matching results are returned at once).
+    """
     search_param = extract_website_search_param(request)
     search_items = {"activities": [], "breeds": [], "dogs": [], "shelters": []}
 
@@ -435,6 +478,11 @@ def search_website():
 
 @application.route("/api/breed/shelter")
 def breed_shelters():
+    """
+    API Route for retrieving shelters that contain dogs of a certain breed.
+    Explicitly defined (as opposed to using Flask-Restless' default API calls)
+    for the purpose of optimizing the speed of this API call.
+    """
     breed = request.args.get("breed")
     if breed is None or breed == "":
         message = {"status": 400, "note": "The breed parameter is required."}
@@ -446,6 +494,7 @@ def breed_shelters():
     good_shelters = []
     shelters = Shelter.query.limit(100).all()
     dogs = []
+    # Find shelters that have dogs that are of the desired breed.
     for shelter in shelters:
         dogs += Dog.query.filter_by(shelter_id=shelter.id).limit(20).all()
         for dog in dogs:
@@ -465,7 +514,7 @@ def breed_shelters():
 
     return response
 
-
+# Flask-Restless default API calls.
 manager = APIManager(application, flask_sqlalchemy_db=db)
 manager.create_api(Activity, methods=["Get"], results_per_page=12)
 manager.create_api(Breed, methods=["Get"], results_per_page=0)
@@ -475,6 +524,10 @@ manager.create_api(Shelter, methods=["Get"], results_per_page=12)
 
 @application.errorhandler(404)
 def page_not_found(e):
+    """
+    API Route triggered when no other API route produces a match.
+    Indicates that the desired API request is not found.
+    """
     message = {"status": 404, "message": "API request not found"}
     response = jsonify(message)
     response.status_code = 404

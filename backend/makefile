@@ -10,7 +10,6 @@ schema_update:
 	python3 manage.py db migrate
 	python3 manage.py db upgrade
 
-# black may affect the usability of the seeding scripts.
 format:
 	black application.py
 	black manage.py

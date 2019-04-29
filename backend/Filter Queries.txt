@@ -5,7 +5,7 @@ Activities:
 (Filters)
     active: "Active" vs "Casual" maps to true vs false
     free: "Free" VS "Paid" maps to true vs false
-    type: "Eventbrite" vs "Meetup" vs "National Park" maps to "eventbrite" vs "meetup" vs "park"
+    type: "Event" vs "Meetup" vs "National Park" maps to "eventbrite" vs "meetup" vs "park"
 
 (Sorts)
     alphabetical, reverse_alphabetical

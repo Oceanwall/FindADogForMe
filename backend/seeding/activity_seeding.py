@@ -24,7 +24,7 @@ EVENTBRITE_URL = "https://www.eventbriteapi.com/v3/events/search"
 EVENTBRITE_VENUE_URL = "https://www.eventbriteapi.com/v3/venues/"
 MEETUP_URL = "https://api.meetup.com/find/upcoming_events"
 
-# Used by Meetup API
+# Used by Meetup API as a list of valid cities around which to scrape events.
 # Amarillo, El Paso, Lubbock, San Antonio, Austin, Fort Worth, Dallas,
 # Houston, Waco, Corpus Christi
 TEXAS_CITIES = [
@@ -110,7 +110,6 @@ def build_park(info, commit=False):
         is_free_string="free"
         if info["entranceFees"][0]["cost"] == "0.0000"
         else "paid",
-        # "cost": info["entranceFees"][0]["cost"],
         image_1=info["images"][0]["url"],
         image_2=info["images"][1]["url"],
         image_3=info["images"][2]["url"],
@@ -131,8 +130,6 @@ def get_all_eventbrites():
     Gets all events located in the state of Texas (using latitude-longitude
     bounding box).
     """
-
-    # TODO: Pagination?
 
     payload = {
         "q": "dog-friendly, pet-friendly",
@@ -182,11 +179,10 @@ def build_event(info, commit=False):
     if address_data is None or "address" not in address_data:
         return
 
+    # Checks to ensure that the event is in Texas.
     address = address_data["address"]
     if "region" not in address or address["region"] != "TX":
         return
-
-    # Note that info["category_id"] is of type string.
 
     is_active = (
         info["category_id"] == "108"
@@ -216,7 +212,6 @@ def build_event(info, commit=False):
         designation=None,
         weather=None,
         directions=None,
-        # UTC date is also an option
         date=info["end"]["local"][0:10] if info["end"]["local"] is not None else None,
     )
 
@@ -269,9 +264,7 @@ def build_meetup(info, commit=False):
     # Active Categories: 15046, 15892, 638, 242, 1998, 25375, 933, 15672
     # No way to discern categories in returned data, so only requesting active categories.
 
-    # TODO: Figure out a better way to tell if a meetup is free (most meetups only
-    # provide cost information in their description).
-
+    # Checks to ensure that the meetup has a description and is in Texas.
     if "plain_text_description" not in info or "group" not in info or "state" not in info["group"] or info["group"]["state"] != "TX":
         return
 

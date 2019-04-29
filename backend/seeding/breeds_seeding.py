@@ -46,7 +46,7 @@ def get_breed_images(breed):
     """
     Given a breed name, gets images of example dogs of that breed.
     """
-    # Notes: Important dogs failing: Most Shepherds, Bloodhound?
+
     main_breed = None
     sub_breed = None
 
