@@ -34,7 +34,7 @@ class DogCard extends Component {
         <Card.Img
           variant="top"
           src={this.props.dog.image_1}
-          style={{ width: "auto", height: "300px" }}
+          style={{ width: "100%", height: "300px" }}
         />
       );
     } else {
@@ -42,11 +42,25 @@ class DogCard extends Component {
     }
 
     return (
-      <Card style={{ width: "20rem", height: "40rem" }} className="box mt-4 custom-card">
+      <Card
+        style={{ width: "20rem", height: "40rem" }}
+        className="box mt-4 custom-card"
+      >
         {card_image}
         <Card.Body>
-          <Card.Title>{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.dog.name}
-            highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</Card.Title>
+          <Card.Title>
+            {
+              <Highlighter
+                highlightClassName="search-highlight"
+                searchWords={[this.props.highlight]}
+                textToHighlight={this.props.dog.name}
+                highlightStyle={{
+                  padding: "0px",
+                  "background-color": "#fdff32"
+                }}
+              />
+            }
+          </Card.Title>
           <Card.Text>
             <Container>
               <Row>
@@ -57,8 +71,17 @@ class DogCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right" className="cutoff">
-                    {<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.state.shelter_name}
-                      highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}
+                    {
+                      <Highlighter
+                        highlightClassName="search-highlight"
+                        searchWords={[this.props.highlight]}
+                        textToHighlight={this.state.shelter_name}
+                        highlightStyle={{
+                          padding: "0px",
+                          "background-color": "#fdff32"
+                        }}
+                      />
+                    }
                   </p>
                 </Col>
               </Row>
@@ -70,8 +93,15 @@ class DogCard extends Component {
                 </Col>
                 <Col xs="auto">
                   <p align="right" className="capitalize cutoff">
-                  <Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.dog.breed}
-                    highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>
+                    <Highlighter
+                      highlightClassName="search-highlight"
+                      searchWords={[this.props.highlight]}
+                      textToHighlight={this.props.dog.breed}
+                      highlightStyle={{
+                        padding: "0px",
+                        "background-color": "#fdff32"
+                      }}
+                    />
                   </p>
                 </Col>
               </Row>
@@ -82,8 +112,19 @@ class DogCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.dog.age}
-                    highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
+                  <p align="right">
+                    {
+                      <Highlighter
+                        highlightClassName="search-highlight"
+                        searchWords={[this.props.highlight]}
+                        textToHighlight={this.props.dog.age}
+                        highlightStyle={{
+                          padding: "0px",
+                          "background-color": "#fdff32"
+                        }}
+                      />
+                    }
+                  </p>
                 </Col>
               </Row>
               <Row>
@@ -93,8 +134,19 @@ class DogCard extends Component {
                   </p>
                 </Col>
                 <Col xs="auto">
-                  <p align="right">{<Highlighter highlightClassName="search-highlight" searchWords={[this.props.highlight]} textToHighlight={this.props.dog.size}
-                    highlightStyle={{"padding": "0px", "background-color": "#fdff32"}}/>}</p>
+                  <p align="right">
+                    {
+                      <Highlighter
+                        highlightClassName="search-highlight"
+                        searchWords={[this.props.highlight]}
+                        textToHighlight={this.props.dog.size}
+                        highlightStyle={{
+                          padding: "0px",
+                          "background-color": "#fdff32"
+                        }}
+                      />
+                    }
+                  </p>
                 </Col>
               </Row>
               <Row>

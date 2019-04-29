@@ -6,11 +6,10 @@ import InstanceCarousel from "./InstanceCarousel";
 import DogCard from "./DogCard";
 import ActivityCard from "./ActivityCard";
 import BreedCard from "./BreedCard";
-import CardDeck from "react-bootstrap/CardDeck";
 import "../styles/Instance.css";
 import MapContainer from "./Map";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
-import Card from "react-bootstrap/Card";
+import InstanceSlider from "./InstanceSlider";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -106,6 +105,7 @@ class ShelterInstance extends Component {
   async componentDidMount() {
     this.updateShelter();
   }
+
   render() {
     let dogCards = [];
     if (this.state.loaded) {
@@ -182,64 +182,54 @@ class ShelterInstance extends Component {
             </Col>
           </Row>
 
-          {this.state.latitude &&
+          {this.state.latitude && (
             <Row>
-              <Col xs={12} className="mt-2 mb-1" id="google-map" style={{'height': '50vh', 'paddingLeft': '0px'}}>
+              <Col
+                xs={12}
+                className="mt-2 mb-1"
+                id="google-map"
+                style={{ height: "50vh", paddingLeft: "0px" }}
+              >
                 <h4 className="ml-1 mr-1 mb-3">Location of Shelter:</h4>
-                <MapContainer location_objects={[{"latitude": this.state.latitude, "longitude": this.state.longitude, "name": this.state.name}]}/>
+                <MapContainer
+                  location_objects={[
+                    {
+                      latitude: this.state.latitude,
+                      longitude: this.state.longitude,
+                      name: this.state.name
+                    }
+                  ]}
+                />
               </Col>
             </Row>
-          }
-
+          )}
         </Container>
 
-        <Container>
+        <Container className="slider-container">
           {dogCards.length > 0 ? (
-            <div>
-              <p align="left" class="deck-title-text">
-                {" "}
-                Dogs in this shelter:{" "}
-              </p>
-              ,
-              <CardDeck>
-                <div class="card-deck">{dogCards}</div>
-              </CardDeck>
-            </div>
+            <InstanceSlider title="Dogs in this shelter:" cards={dogCards} />
           ) : (
             <p align="left" class="deck-title-text">
-              {" "}
               Dogs in this shelter: None
             </p>
           )}
           {breedCards.length > 0 ? (
-            <div>
-              <p align="left" class="deck-title-text">
-                {" "}
-                Breeds in this shelter:{" "}
-              </p>
-              <CardDeck>
-                <div class="card-deck">{breedCards}</div>
-              </CardDeck>
-            </div>
+            <InstanceSlider
+              title="Breeds in this shelter:"
+              cards={breedCards}
+            />
           ) : (
             <p align="left" class="deck-title-text">
-              {" "}
               Breeds in this shelter: None
             </p>
           )}
           {activityCards.length > 0 ? (
-            <div>
-              <p align="left" class="deck-title-text">
-                {" "}
-                Activities near this shelter:{" "}
-              </p>
-              <CardDeck>
-                <div class="card-deck">{activityCards}</div>
-              </CardDeck>
-            </div>
+            <InstanceSlider
+              title="Activities near this shelter:"
+              cards={activityCards}
+            />
           ) : (
             <p align="left" class="deck-title-text">
-              {" "}
               Activities near this shelter: None
             </p>
           )}

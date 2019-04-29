@@ -6,9 +6,9 @@ import InstanceCarousel from "./InstanceCarousel";
 import "../styles/Instance.css";
 import { Link } from "react-router-dom";
 import ActivityCard from "./ActivityCard";
-import CardDeck from "react-bootstrap/CardDeck";
 import MapContainer from "./Map";
 import Button from "react-bootstrap/Button";
+import InstanceSlider from "./InstanceSlider";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -203,21 +203,18 @@ class DogInstance extends Component {
               </Col>
             )}
           </Row>
-
-          {activityCards.length > 0 ? (
-            <div>
+          <div class="slider-container">
+            {activityCards.length > 0 ? (
+              <InstanceSlider
+                title="Activities nearby that are suitable for this dog:"
+                cards={activityCards}
+              />
+            ) : (
               <p align="left" class="deck-title-text">
-                Activities nearby that are suitable for this dog:
+                Activities nearby that are suitable for this dog: None
               </p>
-              <CardDeck>
-                <div class="card-deck">{activityCards}</div>
-              </CardDeck>
-            </div>
-          ) : (
-            <p align="left" class="deck-title-text">
-              Activities nearby that are suitable for this dog: None
-            </p>
-          )}
+            )}
+          </div>
         </Container>
       </div>
     );

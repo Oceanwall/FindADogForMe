@@ -6,9 +6,9 @@ import InstanceCarousel from "./InstanceCarousel";
 import DogCard from "./DogCard";
 import ActivityCard from "./ActivityCard";
 import ShelterCard from "./ShelterCard";
-import CardDeck from "react-bootstrap/CardDeck";
 import MapContainer from "./Map";
 import "../styles/Instance.css";
+import InstanceSlider from "./InstanceSlider";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -59,35 +59,34 @@ class BreedInstance extends Component {
           group: breed["group"]
         },
         async () =>
-          wrapper
-            .getBreedDogs(this.state.name, undefined)
-            .then(response => {
-              console.log(response);
-              this.setState(
-                {
-                  dog_list: response["objects"]
-                },
-                async () =>
-                  wrapper
-                    .getBreedActivities(this.state.name)
-                    .then(response => {
-                      console.log(response);
+          wrapper.getBreedDogs(this.state.name, undefined).then(response => {
+            console.log(response);
+            this.setState(
+              {
+                dog_list: response["objects"]
+              },
+              async () =>
+                wrapper.getBreedActivities(this.state.name).then(response => {
+                  console.log(response);
+                  this.setState(
+                    {
+                      activity_list: response["objects"]
+                    },
+                    async () => {
+                      let shelters = [];
+                      for (let dog of this.state.dog_list) {
+                        shelters.push(
+                          await wrapper.getShelter(dog["shelter_id"])
+                        );
+                      }
                       this.setState({
-                        activity_list: response["objects"]
-                      },
-                      async () => {
-                        let shelters = [];
-                        for (let dog of this.state.dog_list) {
-                          shelters.push(await(wrapper.getShelter(dog["shelter_id"])));
-                        }
-                        this.setState({
-                          shelter_list: shelters
-                        });
-                        }
-                      );
-                    })
-              );
-            })
+                        shelter_list: shelters
+                      });
+                    }
+                  );
+                })
+            );
+          })
       );
       let imageArray = [];
       if (this.state.image_1 != null) {
@@ -114,7 +113,7 @@ class BreedInstance extends Component {
     if (this.state.loaded) {
       dogCards = this.state.dog_list.map(dog => {
         return (
-          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
+          <div>
             <DogCard dog={dog} />
           </div>
         );
@@ -152,11 +151,13 @@ class BreedInstance extends Component {
                 <p align="left"> Temperament: {this.state.temperament}</p>
                 <p align="left">
                   {" "}
-                  Lifespan: {this.state.min_lifespan} - {this.state.max_lifespan} years
+                  Lifespan: {this.state.min_lifespan} -{" "}
+                  {this.state.max_lifespan} years
                 </p>
                 <p align="left">
                   {" "}
-                  Height: {this.state.min_height} - {this.state.max_height} inches
+                  Height: {this.state.min_height} - {this.state.max_height}{" "}
+                  inches
                 </p>
               </div>
             </Col>
@@ -165,41 +166,38 @@ class BreedInstance extends Component {
             </Col>
           </Row>
 
-          {this.state.shelter_list && this.state.shelter_list.length > 0 &&
+          {this.state.shelter_list && this.state.shelter_list.length > 0 && (
             <Row>
-              <Col xs={12} id="google-map" className="mt-2 mb-1" style={{'height': '50vh', 'paddingLeft': '0px'}}>
-                  <h4 className="ml-1 mr-1 mb-3 mt-3">Shelters that host this breed:</h4>
-                  <MapContainer location_objects={this.state.shelter_list}/>
+              <Col
+                xs={12}
+                id="google-map"
+                className="mt-2 mb-1"
+                style={{ height: "50vh", paddingLeft: "0px" }}
+              >
+                <MapContainer location_objects={this.state.shelter_list} />
               </Col>
             </Row>
-          }
+          )}
         </Container>
-        <Container>
+        <Container className="slider-container">
           {dogCards.length > 0 ? (
             <div>
-              <p align="left" class="deck-title-text">
-                {" "}
-                Dogs of this breed:{" "}
-              </p>
-              <CardDeck>
-                <div class="card-deck">{dogCards}</div>
-              </CardDeck>
+              <InstanceSlider
+                title="Adoptable dogs of this breed:"
+                cards={dogCards}
+              />
             </div>
           ) : (
             <p align="left" class="deck-title-text">
-              {" "}
               Dogs of this breed: None
             </p>
           )}
           {shelterCards.length > 0 ? (
             <div>
-              <p align="left" class="deck-title-text">
-                {" "}
-                Shelters that have this breed:{" "}
-              </p>
-              <CardDeck>
-                <div class="card-deck">{shelterCards}</div>
-              </CardDeck>
+              <InstanceSlider
+                title="Shelters that have this breed:"
+                cards={shelterCards}
+              />
             </div>
           ) : (
             <p align="left" class="deck-title-text">
@@ -209,17 +207,13 @@ class BreedInstance extends Component {
           )}
           {activityCards.length > 0 ? (
             <div>
-              <p align="left" class="deck-title-text">
-                {" "}
-                Activities suitable for this breed:{" "}
-              </p>
-              <CardDeck>
-                <div class="card-deck">{activityCards}</div>
-              </CardDeck>
+              <InstanceSlider
+                title="Activities suitable for this breed:"
+                cards={activityCards}
+              />
             </div>
           ) : (
             <p align="left" class="deck-title-text">
-              {" "}
               Activities suitable for this breed: None
             </p>
           )}

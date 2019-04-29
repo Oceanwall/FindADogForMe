@@ -7,9 +7,9 @@ import "../styles/Instance.css";
 import DogCard from "./DogCard";
 import ShelterCard from "./ShelterCard";
 import BreedCard from "./BreedCard";
-import CardDeck from "react-bootstrap/CardDeck";
 import MapContainer from "./Map";
 import Button from "react-bootstrap/Button";
+import InstanceSlider from "./InstanceSlider";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -183,117 +183,114 @@ class ActivityInstance extends Component {
       });
     }
     return (
-      <div>
-        <Container>
-          <br />
-          <Row>
-            <Col>
-              <h1> {this.state.name}</h1>
-              <div class="info-text">
-                <p align="left" className="mt-4">
-                  URL: <a href={this.state.url}>Learn more about this event</a>
-                </p>
+      <Container>
+        <br />
+        <Row>
+          <Col>
+            <h1> {this.state.name}</h1>
+            <div class="info-text">
+              <p align="left" className="mt-4">
+                URL: <a href={this.state.url}>Learn more about this event</a>
+              </p>
 
-                {this.state.date != null ? (
-                  <div>
-                    <p align="left">Date: {this.state.date}</p>
-                  </div>
-                ) : (
-                  <div>
-                    <p align="left">Designation: {this.state.designation}</p>
-                  </div>
-                )}
-                <p align="left" className="capitalize">
-                  {" "}
-                  Type: {this.state.type.toLowerCase() == "eventbrite" ? "Event" : this.state.type}
-                </p>
+              {this.state.date != null ? (
+                <div>
+                  <p align="left">Date: {this.state.date}</p>
+                </div>
+              ) : (
+                <div>
+                  <p align="left">Designation: {this.state.designation}</p>
+                </div>
+              )}
+              <p align="left" className="capitalize">
+                {" "}
+                Type:{" "}
+                {this.state.type.toLowerCase() == "eventbrite"
+                  ? "Event"
+                  : this.state.type}
+              </p>
 
-                <p align="left">
-                  {" "}
-                  Cost: {this.state.is_free ? "Free" : "Paid"}
-                </p>
-                <p align="left">
-                  {" "}
-                  Level of Activity:{" "}
-                  {this.state.is_active ? "Active" : "Casual"}
-                </p>
-                <p align="left"> Location: {this.state.location}</p>
-              </div>
-            </Col>
-            <Col xs={12} md={7} lg={6}>
-              <InstanceCarousel images={this.state.images} />
-            </Col>
-          </Row>
-          <Row className="mt-2">
-            <Col xs={12} md={6}>
-              <Container>
-                <div class="desc-text">
-                  {this.state.description != undefined ? (
-                    this.state.description.length > 750 ? (
-                      this.state.collapse ? (
-                        [
-                          <p align="left">{this.state.description}</p>,
-                          <Button
-                            color="primary"
-                            onClick={this.toggle}
-                            style={{ marginBottom: "1rem" }}
-                          >
-                            Read Less
-                          </Button>
-                        ]
-                      ) : (
-                        [
-                          <p align="left">
-                            {this.state.description.substring(0, 750)}...
-                          </p>,
-                          <Button
-                            color="primary"
-                            onClick={this.toggle}
-                            style={{ marginBottom: "1rem" }}
-                          >
-                            Read More
-                          </Button>
-                        ]
-                      )
+              <p align="left"> Cost: {this.state.is_free ? "Free" : "Paid"}</p>
+              <p align="left">
+                {" "}
+                Level of Activity: {this.state.is_active ? "Active" : "Casual"}
+              </p>
+              <p align="left"> Location: {this.state.location}</p>
+            </div>
+          </Col>
+          <Col xs={12} md={7} lg={6}>
+            <InstanceCarousel images={this.state.images} />
+          </Col>
+        </Row>
+        <Row className="mt-2">
+          <Col xs={12} md={6}>
+            <Container>
+              <div class="desc-text">
+                {this.state.description != undefined ? (
+                  this.state.description.length > 750 ? (
+                    this.state.collapse ? (
+                      [
+                        <p align="left">{this.state.description}</p>,
+                        <Button
+                          color="primary"
+                          onClick={this.toggle}
+                          style={{ marginBottom: "1rem" }}
+                        >
+                          Read Less
+                        </Button>
+                      ]
                     ) : (
-                      <p align="left">{this.state.description}</p>
+                      [
+                        <p align="left">
+                          {this.state.description.substring(0, 750)}...
+                        </p>,
+                        <Button
+                          color="primary"
+                          onClick={this.toggle}
+                          style={{ marginBottom: "1rem" }}
+                        >
+                          Read More
+                        </Button>
+                      ]
                     )
                   ) : (
-                    <p align="left">Description: None</p>
-                  )}
-                </div>
-              </Container>
+                    <p align="left">{this.state.description}</p>
+                  )
+                ) : (
+                  <p align="left">Description: None</p>
+                )}
+              </div>
+            </Container>
+          </Col>
+          {this.state.latitude && this.isLoaded() && (
+            <Col
+              xs={12}
+              md={6}
+              className="mt-2 mb-1"
+              id="google-map"
+              style={{ height: "50vh", paddingLeft: "0px" }}
+            >
+              <h4 className="ml-1 mr-1 mb-3">Activity Location:</h4>
+              <MapContainer
+                location_objects={[
+                  {
+                    latitude: this.state.latitude,
+                    longitude: this.state.longitude,
+                    name: this.state.name
+                  }
+                ]}
+              />
             </Col>
-            {this.state.latitude && this.isLoaded() && (
-              <Col
-                xs={12}
-                md={6}
-                className="mt-2 mb-1"
-                id="google-map"
-                style={{ height: "50vh", paddingLeft: "0px" }}
-              >
-                <h4 className="ml-1 mr-1 mb-3">Activity Location:</h4>
-                <MapContainer
-                  location_objects={[
-                    {
-                      latitude: this.state.latitude,
-                      longitude: this.state.longitude,
-                      name: this.state.name
-                    }
-                  ]}
-                />
-              </Col>
-            )}
-          </Row>
+          )}
+        </Row>
 
+        <div class="slider-container">
           {dogCards.length > 0 ? (
             <div>
-              <p align="left" class="deck-title-text">
-                Suitable dogs near this activity:
-              </p>
-              <CardDeck>
-                <div class="card-deck">{dogCards}</div>
-              </CardDeck>
+              <InstanceSlider
+                title="Suitable dogs near this activity:"
+                cards={dogCards}
+              />
             </div>
           ) : (
             <p align="left" class="deck-title-text">
@@ -303,12 +300,10 @@ class ActivityInstance extends Component {
 
           {shelterCards.length > 0 ? (
             <div>
-              <p align="left" class="deck-title-text">
-                Shelters near this activity:
-              </p>
-              <CardDeck>
-                <div class="card-deck">{shelterCards}</div>
-              </CardDeck>
+              <InstanceSlider
+                title="Shelters near this activity:"
+                cards={shelterCards}
+              />
             </div>
           ) : (
             <p align="left" class="deck-title-text">
@@ -318,20 +313,18 @@ class ActivityInstance extends Component {
 
           {breedCards.length > 0 ? (
             <div>
-              <p align="left" class="deck-title-text">
-                Breeds suitable for this activity:
-              </p>
-              <CardDeck>
-                <div class="card-deck">{breedCards}</div>
-              </CardDeck>
+              <InstanceSlider
+                title="Breeds suitable for this activity:"
+                cards={breedCards}
+              />
             </div>
           ) : (
             <p align="left" class="deck-title-text">
               Breeds suitable for this activity: None
             </p>
           )}
-        </Container>
-      </div>
+        </div>
+      </Container>
     );
   }
 }
