@@ -6,7 +6,6 @@ import ShelterCard from "./ShelterCard";
 import ShelterInstance from "./ShelterInstance";
 import { Route } from "react-router-dom";
 import { VALID_CITIES } from "../valid_options.jsx";
-import { Typeahead } from "react-bootstrap-typeahead";
 import Select from "react-select";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -16,6 +15,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
 import NotFound from "./NotFound";
 import LoadingImage from "./LoadingImage";
+import "../styles/DropdownButton.css";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -237,7 +237,7 @@ class Shelters extends Component {
 
     this.zipcodeRef.value = "";
     this.phoneRef.value = "";
-    this.cityRef.select.clearValue(); 
+    this.cityRef.select.clearValue();
     this.searchParamRef.value = "";
   }
 
@@ -264,7 +264,7 @@ class Shelters extends Component {
           <Container>
             <Form>
               <Row className="mt-2 justify-content-md-center">
-                <Col md={1} xs={2} className="mt-2">
+                <Col lg={1} xs={3} className="mt-2">
                   <Button
                     variant="danger"
                     id="reset-button"
@@ -274,7 +274,7 @@ class Shelters extends Component {
                   </Button>
                 </Col>
 
-                <Col md="auto" xs={4} className="mt-2">
+                <Col lg="auto" xs={3} className="mt-2">
                   <DropdownButton
                     title={this.state.sortButtonName}
                     id="sort-select"
@@ -312,7 +312,7 @@ class Shelters extends Component {
                   </DropdownButton>
                 </Col>
 
-                <Col md={2} xs={6} className="mt-2">
+                <Col lg="auto" xs={6} className="mt-2">
                   <Form.Control
                     id="zipcode-filter"
                     placeholder="Filter by zipcode..."
@@ -324,7 +324,7 @@ class Shelters extends Component {
                   />
                 </Col>
 
-                <Col md="auto" xs={6} className="mt-2">
+                <Col lg="auto" xs={6} className="mt-2">
                   <Form.Control
                     id="areacode-filter"
                     placeholder="Filter by phone area code..."
@@ -336,9 +336,9 @@ class Shelters extends Component {
                   />
                 </Col>
 
-                <Col md={2} xs={6} className="mt-2">
+                <Col lg={3} xs={6} className="mt-2">
                   <Select
-                    name="city-filter"
+                    id="city-filter"
                     isClearable
                     placeholder="Filter by city..."
                     ref={ref => {
@@ -349,7 +349,7 @@ class Shelters extends Component {
                   />
                 </Col>
 
-                <Col md="auto" xs={6} className="mt-2">
+                <Col lg="auto" xs={6} className="mt-2">
                   <Form.Control
                     id="shelter-search"
                     type="text"
@@ -366,7 +366,7 @@ class Shelters extends Component {
                   />
                 </Col>
 
-                <Col md={1} xs={6} className="mt-2">
+                <Col lg={2} xs={6} className="mt-2">
                   <Button onClick={this.modelSearch} id="search-button">
                     Search
                   </Button>

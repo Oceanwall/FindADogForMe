@@ -17,6 +17,7 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 import { VALID_BREEDS } from "../valid_options.jsx";
 import NotFound from "./NotFound";
 import LoadingImage from "./LoadingImage";
+import "../styles/DropdownButton.css";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -246,7 +247,7 @@ class Dogs extends Component {
           </div>
           <Container>
             <Row className="search-bar mt-2">
-              <Col md={1} xs={2} className="mt-2">
+              <Col lg={1} xs={3} className="mt-2">
                 <Button
                   id="reset-button"
                   variant="danger"
@@ -256,7 +257,7 @@ class Dogs extends Component {
                 </Button>
               </Col>
 
-              <Col md="auto" xs={4} className="mt-2">
+              <Col lg="auto" xs={3} className="mt-2">
                 <DropdownButton
                   id="sort-select"
                   title={this.state.sortButtonName}
@@ -294,7 +295,7 @@ class Dogs extends Component {
                 </DropdownButton>
               </Col>
 
-              <Col md="auto" xs={6} className="mt-2">
+              <Col lg="auto" xs={6} className="mt-2">
                 <DropdownButton
                   id="age-filter"
                   title={this.state.ageButtonName}
@@ -326,7 +327,7 @@ class Dogs extends Component {
                 </DropdownButton>
               </Col>
 
-              <Col md="auto" xs={6} className="mt-2">
+              <Col lg="auto" xs={6} className="mt-2">
                 <DropdownButton
                   id="size-filter"
                   title={this.state.sizeButtonName}
@@ -358,9 +359,9 @@ class Dogs extends Component {
                 </DropdownButton>
               </Col>
 
-              <Col md={3} xs={6} className="mt-2">
+              <Col lg={3} xs={6} className="mt-2">
                 <Select
-                  name="breed-filter"
+                  id="breed-filter"
                   isClearable
                   placeholder="Filter by breed..."
                   ref={ref => {
@@ -371,7 +372,7 @@ class Dogs extends Component {
                 />
               </Col>
 
-              <Col md="auto" xs={8} className="mt-2">
+              <Col lg={3} xs={6} className="mt-2">
                 <Form.Control
                   id="dog-search"
                   type="text"
@@ -388,7 +389,7 @@ class Dogs extends Component {
                 />
               </Col>
 
-              <Col md={1} xs={4} className="mt-2">
+              <Col lg={2} xs={6} className="mt-2">
                 <Button id="search-button" onClick={this.modelSearch}>
                   Search
                 </Button>

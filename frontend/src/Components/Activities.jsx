@@ -13,6 +13,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { Route } from "react-router-dom";
 import NotFound from "./NotFound";
 import LoadingImage from "./LoadingImage";
+import "../styles/DropdownButton.css";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -25,7 +26,7 @@ class Activities extends Component {
       active: undefined,
       free: undefined,
       type: "",
-      activeButtonName: "Filter by intensity",
+      activeButtonName: "Filter by action",
       freeButtonName: "Filter by cost",
       typeButtonName: "Filter by type",
       sortButtonName: "Sort",
@@ -170,7 +171,7 @@ class Activities extends Component {
           </div>
           <Container>
             <Row className="mt-2 justify-content-md-center">
-              <Col md={1} xs={2} className="mt-2">
+              <Col lg={1} xs={3} className="mt-2">
                 <Button
                   id="reset-button"
                   variant="danger"
@@ -197,12 +198,13 @@ class Activities extends Component {
                 </Button>
               </Col>
 
-              <Col md="auto" xs={4} className="mt-2">
+              <Col md="auto" xs={3} className="mt-2">
                 <DropdownButton
                   title={this.state.sortButtonName}
                   id="sort-select"
                 >
                   <Dropdown.Item
+                    className="sort_button_custom"
                     eventKey="A-Z"
                     onSelect={eventKey =>
                       this.setSort("alphabetical", eventKey)
@@ -322,7 +324,7 @@ class Activities extends Component {
                 />
               </Col>
 
-              <Col md={1} xs={6} className="mt-2">
+              <Col lg={2} xs={6} className="mt-2">
                 <Button onClick={this.modelSearch} id="search-button">
                   Search
                 </Button>

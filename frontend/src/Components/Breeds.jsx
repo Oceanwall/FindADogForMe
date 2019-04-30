@@ -19,6 +19,7 @@ import {
 } from "../valid_options.jsx";
 import NotFound from "./NotFound";
 import LoadingImage from "./LoadingImage";
+import "../styles/DropdownButton.css";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -227,17 +228,17 @@ class Breeds extends Component {
           <Container>
             <Form>
               <Row className="mt-2 justify-content-md-center">
-                <Col md={1} xs={2} className="mt-2">
-                  <Button
-                    id="reset-button"
-                    variant="danger"
-                    onClick={() => this.reset()}
-                  >
+                <Col
+                  lg="auto"
+                  xs={3}
+                  className="mt-2"
+                >
+                  <Button id="reset-button" variant="danger" onClick={() => this.reset()}>
                     Reset
                   </Button>
                 </Col>
 
-                <Col md="auto" xs={4} className="mt-2">
+                <Col lg="auto" xs={3} className="mt-2">
                   <DropdownButton
                     title={this.state.sortButtonName}
                     id="sort-select"
@@ -275,9 +276,9 @@ class Breeds extends Component {
                   </DropdownButton>
                 </Col>
 
-                <Col md={2} xs={6} className="mt-2">
+                <Col lg={3} xs={6} className="mt-2">
                   <Select
-                    name="group-filter"
+                    id="group-filter"
                     isClearable
                     placeholder="Group filter..."
                     ref={ref => {
@@ -288,9 +289,9 @@ class Breeds extends Component {
                   />
                 </Col>
 
-                <Col md={2} xs={6} className="mt-2">
+                <Col lg={3} xs={6} className="mt-2">
                   <Select
-                    name="lifespan-filter"
+                    id="lifespan-filter"
                     isClearable
                     placeholder="Lifespan filter..."
                     ref={ref => {
@@ -301,9 +302,9 @@ class Breeds extends Component {
                   />
                 </Col>
 
-                <Col md={2} xs={6} className="mt-2">
+                <Col lg={3} xs={6} className="mt-2">
                   <Select
-                    name="height-filter"
+                    id="height-filter"
                     isClearable
                     placeholder="Height filter..."
                     ref={ref => {
@@ -314,7 +315,7 @@ class Breeds extends Component {
                   />
                 </Col>
 
-                <Col md="auto" xs={6} className="mt-2">
+                <Col lg={3} xs={6} className="mt-2">
                   <Form.Control
                     id="breed-search"
                     type="text"
@@ -331,7 +332,7 @@ class Breeds extends Component {
                   />
                 </Col>
 
-                <Col md={1} xs={6} className="mt-2">
+                <Col lg={2} xs={6} className="mt-2">
                   <Button onClick={this.modelSearch} id="search-button">
                     Search
                   </Button>
