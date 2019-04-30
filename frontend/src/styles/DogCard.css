@@ -50,3 +50,12 @@ img {
 .box:hover::after {
   opacity: 1;
 }
+
+.card-link {
+  color: black;
+}
+
+.card-link:hover {
+  color: black;
+  text-decoration: underline;
+}

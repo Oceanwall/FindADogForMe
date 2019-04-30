@@ -5,8 +5,8 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import DefaultImage from "./DefaultImage";
-import Button from "react-bootstrap/Button";
 import Highlighter from "react-highlight-words";
+import { Link } from "react-router-dom";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -42,126 +42,119 @@ class DogCard extends Component {
     }
 
     return (
-      <Card
-        style={{ width: "20rem", height: "40rem" }}
-        className="box mt-4 custom-card"
-      >
-        {card_image}
-        <Card.Body>
-          <Card.Title>
-            {
-              <Highlighter
-                highlightClassName="search-highlight"
-                searchWords={[this.props.highlight]}
-                textToHighlight={this.props.dog.name}
-                highlightStyle={{
-                  padding: "0px",
-                  "background-color": "#fdff32"
-                }}
-              />
-            }
-          </Card.Title>
-          <Card.Text>
-            <Container>
-              <Row>
-                <Col>
-                  <p align="left">
-                    <b>Shelter:</b>
-                  </p>
-                </Col>
-                <Col xs="auto">
-                  <p align="right" className="cutoff">
-                    {
+      <Link className="card-link" to={`/dogs/${this.props.dog.id}`}>
+        <Card
+          style={{ width: "20rem", height: "40rem" }}
+          className="box mt-4 custom-card"
+        >
+          {card_image}
+          <Card.Body>
+            <Card.Title>
+              {
+                <Highlighter
+                  highlightClassName="search-highlight"
+                  searchWords={[this.props.highlight]}
+                  textToHighlight={this.props.dog.name}
+                  highlightStyle={{
+                    padding: "0px",
+                    "background-color": "#fdff32"
+                  }}
+                />
+              }
+            </Card.Title>
+            <Card.Text>
+              <Container>
+                <Row>
+                  <Col>
+                    <p align="left">
+                      <b>Shelter:</b>
+                    </p>
+                  </Col>
+                  <Col xs="auto">
+                    <p align="right" className="cutoff">
+                      {
+                        <Highlighter
+                          highlightClassName="search-highlight"
+                          searchWords={[this.props.highlight]}
+                          textToHighlight={this.state.shelter_name}
+                          highlightStyle={{
+                            padding: "0px",
+                            "background-color": "#fdff32"
+                          }}
+                        />
+                      }
+                    </p>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <p align="left">
+                      <b>Breed:</b>
+                    </p>
+                  </Col>
+                  <Col xs="auto">
+                    <p align="right" className="capitalize cutoff">
                       <Highlighter
                         highlightClassName="search-highlight"
                         searchWords={[this.props.highlight]}
-                        textToHighlight={this.state.shelter_name}
+                        textToHighlight={this.props.dog.breed}
                         highlightStyle={{
                           padding: "0px",
                           "background-color": "#fdff32"
                         }}
                       />
-                    }
-                  </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <p align="left">
-                    <b>Breed:</b>
-                  </p>
-                </Col>
-                <Col xs="auto">
-                  <p align="right" className="capitalize cutoff">
-                    <Highlighter
-                      highlightClassName="search-highlight"
-                      searchWords={[this.props.highlight]}
-                      textToHighlight={this.props.dog.breed}
-                      highlightStyle={{
-                        padding: "0px",
-                        "background-color": "#fdff32"
-                      }}
-                    />
-                  </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <p align="left">
-                    <b>Age:</b>
-                  </p>
-                </Col>
-                <Col xs="auto">
-                  <p align="right">
-                    {
-                      <Highlighter
-                        highlightClassName="search-highlight"
-                        searchWords={[this.props.highlight]}
-                        textToHighlight={this.props.dog.age}
-                        highlightStyle={{
-                          padding: "0px",
-                          "background-color": "#fdff32"
-                        }}
-                      />
-                    }
-                  </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <p align="left">
-                    <b>Size:</b>
-                  </p>
-                </Col>
-                <Col xs="auto">
-                  <p align="right">
-                    {
-                      <Highlighter
-                        highlightClassName="search-highlight"
-                        searchWords={[this.props.highlight]}
-                        textToHighlight={this.props.dog.size}
-                        highlightStyle={{
-                          padding: "0px",
-                          "background-color": "#fdff32"
-                        }}
-                      />
-                    }
-                  </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <div class="button">
-                    <Button href={`/dogs/${this.props.dog.id}`}>
-                      Learn More
-                    </Button>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
-          </Card.Text>
-        </Card.Body>
-      </Card>
+                    </p>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <p align="left">
+                      <b>Age:</b>
+                    </p>
+                  </Col>
+                  <Col xs="auto">
+                    <p align="right">
+                      {
+                        <Highlighter
+                          highlightClassName="search-highlight"
+                          searchWords={[this.props.highlight]}
+                          textToHighlight={this.props.dog.age}
+                          highlightStyle={{
+                            padding: "0px",
+                            "background-color": "#fdff32"
+                          }}
+                        />
+                      }
+                    </p>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <p align="left">
+                      <b>Size:</b>
+                    </p>
+                  </Col>
+                  <Col xs="auto">
+                    <p align="right">
+                      {
+                        <Highlighter
+                          highlightClassName="search-highlight"
+                          searchWords={[this.props.highlight]}
+                          textToHighlight={this.props.dog.size}
+                          highlightStyle={{
+                            padding: "0px",
+                            "background-color": "#fdff32"
+                          }}
+                        />
+                      }
+                    </p>
+                  </Col>
+                </Row>
+              </Container>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Link>
     );
   }
 }
