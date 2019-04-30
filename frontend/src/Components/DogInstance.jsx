@@ -122,19 +122,19 @@ class DogInstance extends Component {
               <h1> {this.state.name}</h1>
               <div className="mt-4 info-text">
                 <p align="left" className="mt-5">
-                  Shelter:{" "}
+                  <span className="info-bold">Shelter:</span>{" "}
                   <Link to={`/shelters/${this.state.shelter_id}`}>
                     {this.state.shelter}
                   </Link>
                 </p>
                 <p align="left" className="capitalize">
-                  Breed:{" "}
+                  <span className="info-bold">Breed:</span>{" "}
                   <Link to={`/breeds/${this.state.breed}`}>
                     {this.state.breed}
                   </Link>
                 </p>
-                <p align="left"> Age: {this.state.age}</p>
-                <p align="left"> Size: {this.state.size}</p>
+                <p align="left"> <span className="info-bold">Age:</span> {this.state.age}</p>
+                <p align="left"> <span className="info-bold">Size:</span> {this.state.size}</p>
               </div>
             </Col>
             <Col xs={12} md={7} lg={6}>
@@ -190,7 +190,7 @@ class DogInstance extends Component {
                 className="mt-2 mb-1"
                 style={{ height: "50vh", paddingLeft: "0px" }}
               >
-                <h4 className="ml-1 mr-1 mb-3">Location of Hosting Shelter:</h4>
+                <h4 className="ml-1 mr-1 mb-3 info-bold">Location of Hosting Shelter:</h4>
                 <MapContainer
                   location_objects={[
                     {

@@ -15,7 +15,6 @@ class MapContainer extends Component {
   }
 
   onMarkerClick (props, marker, e) {
-    console.log(props);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -24,7 +23,6 @@ class MapContainer extends Component {
   }
 
   onMapClicked (props) {
-    console.log("ssdsdDADADAD");
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
@@ -34,9 +32,7 @@ class MapContainer extends Component {
   };
 
   render() {
-    console.log(this.props.location_objects);
     if (!this.props.location_objects || this.props.location_objects.length === 0 || !this.props.location_objects[0]["latitude"] || !this.props.location_objects[0]["longitude"] || !this.props.location_objects[0]["name"]) {
-      console.log(this.props.location_objects);
       return (
         <div></div>
       );
@@ -47,12 +43,11 @@ class MapContainer extends Component {
       markers.push(<Marker position={{lat: location_object.latitude, lng: location_object.longitude}} name={location_object.name} onClick={this.onMarkerClick}/>);
     }
 
-    console.log(markers);
     return (
       <div>
         <Map
             google={this.props.google}
-            zoom={this.props.zoom ? this.props.zoom : 14}
+            zoom={this.props.zoom ? this.props.zoom : 6}
             style={{"width": "100%", "marginBottom": "30px"}}
             initialCenter={{
             lat: this.props.location_objects[0]["latitude"],

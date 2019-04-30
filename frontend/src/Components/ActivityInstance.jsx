@@ -190,32 +190,32 @@ class ActivityInstance extends Component {
             <h1> {this.state.name}</h1>
             <div class="info-text">
               <p align="left" className="mt-4">
-                URL: <a href={this.state.url}>Learn more about this event</a>
+                <span className="info-bold">URL:</span> <a href={this.state.url}>Learn more about this event</a>
               </p>
 
               {this.state.date != null ? (
                 <div>
-                  <p align="left">Date: {this.state.date}</p>
+                  <p align="left"><span className="info-bold">Date:</span> {this.state.date}</p>
                 </div>
               ) : (
                 <div>
-                  <p align="left">Designation: {this.state.designation}</p>
+                  <p align="left"><span className="info-bold">Designation:</span> {this.state.designation}</p>
                 </div>
               )}
               <p align="left" className="capitalize">
                 {" "}
-                Type:{" "}
+                <span className="info-bold">Type:</span>{" "}
                 {this.state.type.toLowerCase() === "eventbrite"
                   ? "Event"
                   : this.state.type}
               </p>
 
-              <p align="left"> Cost: {this.state.is_free ? "Free" : "Paid"}</p>
+              <p align="left"> <span className="info-bold">Cost:</span> {this.state.is_free ? "Free" : "Paid"}</p>
               <p align="left">
                 {" "}
-                Level of Activity: {this.state.is_active ? "Active" : "Casual"}
+                <span className="info-bold">Level of Activity:</span> {this.state.is_active ? "Active" : "Casual"}
               </p>
-              <p align="left"> Location: {this.state.location}</p>
+              <p align="left"> <span className="info-bold">Location:</span> {this.state.location}</p>
             </div>
           </Col>
           <Col xs={12} md={7} lg={6}>
@@ -270,7 +270,7 @@ class ActivityInstance extends Component {
               id="google-map"
               style={{ height: "50vh", paddingLeft: "0px" }}
             >
-              <h4 className="ml-1 mr-1 mb-3">Activity Location:</h4>
+              <h4 className="ml-1 mr-1 mb-3 info-bold">Activity Location:</h4>
               <MapContainer
                 location_objects={[
                   {

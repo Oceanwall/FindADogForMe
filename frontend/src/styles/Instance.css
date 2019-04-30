@@ -1,5 +1,5 @@
 .info-text {
-  font-size: calc(0.75em + 1.5vmin);
+  font-size: calc(0.7em + 1.20vmin);
 }
 
 .desc-text {
@@ -19,4 +19,8 @@
 
 .slider-container {
   padding-bottom: 50px;
+}
+
+.info-bold {
+  font-weight: bold;
 }
