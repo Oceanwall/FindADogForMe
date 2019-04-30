@@ -15,8 +15,6 @@ import "../styles/Dogs.css";
 import Select from "react-select";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { VALID_BREEDS } from "../valid_options.jsx";
-import NotFound from "./NotFound";
-import LoadingImage from "./LoadingImage";
 import "../styles/DropdownButton.css";
 import ModelCardDeck from "./ModelCardDeck";
 
@@ -145,7 +143,10 @@ class Dogs extends Component {
 
   // sets breed filter
   setBreedFilter(new_breed) {
-    new_breed = (new_breed === null || new_breed.length === 0) ? undefined : new_breed.value;
+    new_breed =
+      new_breed === null || new_breed.length === 0
+        ? undefined
+        : new_breed.value;
     let filter =
       new_breed !== "" ||
       this.state.age !== "" ||
@@ -205,7 +206,7 @@ class Dogs extends Component {
       () => this.updateDog(1)
     );
 
-    this.breedRef.select.clearValue()
+    this.breedRef.select.clearValue();
     this.searchParamRef.value = "";
   }
 
@@ -398,8 +399,8 @@ class Dogs extends Component {
             </Row>
             <ModelCardDeck
               info_loaded={this.state.info_loaded}
-              list={dogCards}>
-            </ModelCardDeck>
+              list={dogCards}
+            />
           </Container>
           <PageComp
             currentPage={this.state.currentPage}

@@ -108,6 +108,7 @@ class BreedInstance extends Component {
   async componentDidMount() {
     this.updateBreed();
   }
+
   render() {
     let dogCards = [];
     if (this.state.loaded) {
@@ -147,17 +148,20 @@ class BreedInstance extends Component {
             <Col>
               <h1 className="capitalize"> {this.state.name}</h1>
               <div className="mt-4 info-text">
-                <p align="left"> <span className="info-bold">Group:</span> {this.state.group}</p>
-                <p align="left"> <span className="info-bold">Temperament:</span> {this.state.temperament}</p>
                 <p align="left">
-                  {" "}
-                  <span className="info-bold">Lifespan:</span> {this.state.min_lifespan} -{" "}
-                  {this.state.max_lifespan} years
+                  <span className="info-bold">Group:</span> {this.state.group}
                 </p>
                 <p align="left">
-                  {" "}
-                  <span className="info-bold">Height:</span> {this.state.min_height} - {this.state.max_height}{" "}
-                  inches
+                  <span className="info-bold">Temperament:</span>{" "}
+                  {this.state.temperament}
+                </p>
+                <p align="left">
+                  <span className="info-bold">Lifespan:</span>{" "}
+                  {this.state.min_lifespan} - {this.state.max_lifespan} years
+                </p>
+                <p align="left">
+                  <span className="info-bold">Height:</span>{" "}
+                  {this.state.min_height} - {this.state.max_height} inches
                 </p>
               </div>
             </Col>
@@ -174,7 +178,9 @@ class BreedInstance extends Component {
                 className="mt-2 mb-1"
                 style={{ height: "50vh", paddingLeft: "0px" }}
               >
-                <h4 className="ml-1 mr-1 mb-3 info-bold">Locations of Shelters hosting this Breed:</h4>
+                <h4 className="ml-1 mr-1 mb-3 info-bold">
+                  Locations of Shelters hosting this Breed:
+                </h4>
                 <MapContainer
                   zoom={6}
                   location_objects={this.state.shelter_list}

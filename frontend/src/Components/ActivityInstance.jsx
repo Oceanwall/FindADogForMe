@@ -130,14 +130,6 @@ class ActivityInstance extends Component {
     );
   }
 
-  shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
   render() {
     let dogCards = [];
     if (this.isLoaded()) {
@@ -160,21 +152,8 @@ class ActivityInstance extends Component {
       });
     }
     let breedCards = [];
-    let randList = [];
-    let breeds = [];
     if (this.isLoaded()) {
-      if (this.state.breed_list.length > 12) {
-        for (let i = 0; i < this.state.breed_list.length; i++) {
-          randList.push(i);
-        }
-        randList = this.shuffle(randList);
-        for (let i = 0; i < 12; i++) {
-          breeds.push(this.state.breed_list[randList[i]]);
-        }
-      } else {
-        breeds = this.state.breed_list;
-      }
-      breedCards = breeds.map(breed => {
+      breedCards = this.state.breed_list.map(breed => {
         return (
           <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
             <BreedCard breed={breed} />
@@ -190,16 +169,22 @@ class ActivityInstance extends Component {
             <h1> {this.state.name}</h1>
             <div class="info-text">
               <p align="left" className="mt-4">
-                <span className="info-bold">URL:</span> <a href={this.state.url}>Learn more about this event</a>
+                <span className="info-bold">URL:</span>{" "}
+                <a href={this.state.url}>Learn more about this event</a>
               </p>
 
               {this.state.date != null ? (
                 <div>
-                  <p align="left"><span className="info-bold">Date:</span> {this.state.date}</p>
+                  <p align="left">
+                    <span className="info-bold">Date:</span> {this.state.date}
+                  </p>
                 </div>
               ) : (
                 <div>
-                  <p align="left"><span className="info-bold">Designation:</span> {this.state.designation}</p>
+                  <p align="left">
+                    <span className="info-bold">Designation:</span>{" "}
+                    {this.state.designation}
+                  </p>
                 </div>
               )}
               <p align="left" className="capitalize">
@@ -210,12 +195,21 @@ class ActivityInstance extends Component {
                   : this.state.type}
               </p>
 
-              <p align="left"> <span className="info-bold">Cost:</span> {this.state.is_free ? "Free" : "Paid"}</p>
               <p align="left">
                 {" "}
-                <span className="info-bold">Level of Activity:</span> {this.state.is_active ? "Active" : "Casual"}
+                <span className="info-bold">Cost:</span>{" "}
+                {this.state.is_free ? "Free" : "Paid"}
               </p>
-              <p align="left"> <span className="info-bold">Location:</span> {this.state.location}</p>
+              <p align="left">
+                {" "}
+                <span className="info-bold">Level of Activity:</span>{" "}
+                {this.state.is_active ? "Active" : "Casual"}
+              </p>
+              <p align="left">
+                {" "}
+                <span className="info-bold">Location:</span>{" "}
+                {this.state.location}
+              </p>
             </div>
           </Col>
           <Col xs={12} md={7} lg={6}>

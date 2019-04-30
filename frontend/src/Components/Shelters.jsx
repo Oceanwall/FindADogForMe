@@ -92,7 +92,6 @@ class Shelters extends Component {
         pageNum
       )
       .then(response => {
-        console.log(response);
         this.setState({
           shelterList: response["objects"],
           maxPage: response["total_pages"],
@@ -138,7 +137,6 @@ class Shelters extends Component {
   }
 
   setPhoneFilter(area_code) {
-    console.log(area_code);
     if (area_code.length === 3) {
       this.setState(
         {

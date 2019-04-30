@@ -9,7 +9,7 @@ class InstanceSlider extends Component {
       dots: true,
       infinite: this.props.cards.length >= 3 ? true : false,
       slidesToShow: 3,
-      slidesToScroll: 1,
+      slidesToScroll: 3,
       arrows: true,
       responsive: [
         {
@@ -28,7 +28,7 @@ class InstanceSlider extends Component {
             slidesToScroll: 1,
             initialSlide: 1
           }
-        },
+        }
       ]
     };
     return (

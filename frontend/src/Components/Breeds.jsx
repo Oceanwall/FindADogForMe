@@ -17,8 +17,6 @@ import {
   VALID_LIFESPANS,
   VALID_HEIGHTS
 } from "../valid_options.jsx";
-import NotFound from "./NotFound";
-import LoadingImage from "./LoadingImage";
 import "../styles/DropdownButton.css";
 import ModelCardDeck from "./ModelCardDeck";
 
@@ -101,7 +99,6 @@ class Breeds extends Component {
         pageNum
       )
       .then(response => {
-        console.log(response);
         this.setState({
           breedList: response["objects"],
           maxPage:
@@ -115,7 +112,6 @@ class Breeds extends Component {
   }
 
   setGroupFilter(group) {
-    console.log("Group:", group);
     group = group === null || group.length === 0 ? undefined : group.value;
     this.setState({ group: group, groupButtonName: group }, () =>
       this.filter()
@@ -148,7 +144,7 @@ class Breeds extends Component {
       {
         searchParam: this.searchParamRef.value
       },
-      this.filter
+      this.filter()
     );
   }
 
