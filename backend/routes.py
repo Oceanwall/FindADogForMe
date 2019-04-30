@@ -57,7 +57,6 @@ def activity_query():
     type_filter = request.args.get("type")
     search_param = request.args.get("search")
     sort_param = request.args.get("sort")
-    description_param = request.args.get("include_description")
     page_num = request.args.get("page")
 
     if page_num is None:
@@ -104,36 +103,7 @@ def activity_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            if (
-                (item["name"] is not None and search_param in item["name"].lower())
-                or (item["date"] is not None and search_param in item["date"].lower())
-                or (
-                    item["designation"] is not None
-                    and search_param in item["designation"].lower()
-                )
-                or (
-                    item["is_free_string"] is not None
-                    and search_param in item["is_free_string"].lower()
-                )
-                or (
-                    item["is_active_string"] is not None
-                    and search_param in item["is_active_string"].lower()
-                )
-                or (
-                    item["location"] is not None
-                    and search_param in item["location"].lower()
-                )
-                or (item["type"] is not None and search_param in item["type"].lower())
-            ):
-                search_items.append(object)
-                # Use of continue to avoid adding duplicate items
-                continue
-
-            if (
-                description_param
-                and item["description"] is not None
-                and search_param in item["description"].lower()
-            ):
+            if search_param_in_item(search_param, item):
                 search_items.append(object)
 
     return control_pagination(search_items, page_num, 12)
@@ -199,30 +169,7 @@ def breed_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            if (
-                (item["name"] is not None and search_param in item["name"].lower())
-                or (item["group"] is not None and search_param in item["group"].lower())
-                or (
-                    item["temperament"] is not None
-                    and search_param in item["temperament"].lower()
-                )
-                or (
-                    item["min_lifespan"] is not None
-                    and search_param in str(item["min_lifespan"])
-                )
-                or (
-                    item["max_lifespan"] is not None
-                    and search_param in str(item["max_lifespan"])
-                )
-                or (
-                    item["min_height"] is not None
-                    and search_param in str(item["min_height"])
-                )
-                or (
-                    item["max_height"] is not None
-                    and search_param in str(item["max_height"])
-                )
-            ):
+            if search_param_in_item(search_param, item):
                 search_items.append(object)
 
     message = {
@@ -251,7 +198,6 @@ def dog_query():
     size_filter = request.args.get("size")
     search_param = request.args.get("search")
     sort_param = request.args.get("sort")
-    description_param = request.args.get("include_description")
     page_num = request.args.get("page")
 
     if page_num is None:
@@ -318,25 +264,7 @@ def dog_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            if (
-                (item["name"] is not None and search_param in item["name"].lower())
-                or (
-                    item["shelter_name"] is not None
-                    and search_param in item["shelter_name"].lower()
-                )
-                or (item["breed"] is not None and search_param in item["breed"].lower())
-                or (item["age"] is not None and search_param in item["age"].lower())
-                or (item["size"] is not None and search_param in item["size"].lower())
-            ):
-                search_items.append(object)
-                # Use of continue to avoid adding duplicate items
-                continue
-
-            if (
-                description_param
-                and item["description"] is not None
-                and search_param in item["description"].lower()
-            ):
+            if search_param_in_item(search_param, item):
                 search_items.append(object)
 
     return control_pagination(search_items, page_num, 20)
@@ -398,18 +326,7 @@ def shelter_query():
         search_items = []
         for object in valid_items:
             item = object.serialize()
-            if (
-                (item["name"] is not None and search_param in item["name"].lower())
-                or (item["city"] is not None and search_param in item["city"].lower())
-                or (
-                    item["zipcode"] is not None and search_param in str(item["zipcode"])
-                )
-                or (item["phone"] is not None and search_param in str(item["phone"]))
-                or (
-                    item["address"] is not None
-                    and search_param in item["address"].lower()
-                )
-            ):
+            if search_param_in_item(search_param, item):
                 search_items.append(object)
 
     return control_pagination(search_items, page_num, 12)

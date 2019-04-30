@@ -265,7 +265,12 @@ def build_meetup(info, commit=False):
     # No way to discern categories in returned data, so only requesting active categories.
 
     # Checks to ensure that the meetup has a description and is in Texas.
-    if "plain_text_description" not in info or "group" not in info or "state" not in info["group"] or info["group"]["state"] != "TX":
+    if (
+        "plain_text_description" not in info
+        or "group" not in info
+        or "state" not in info["group"]
+        or info["group"]["state"] != "TX"
+    ):
         return
 
     meetup = Activity(
