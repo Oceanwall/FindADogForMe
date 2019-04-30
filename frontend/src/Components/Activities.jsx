@@ -14,6 +14,7 @@ import { Route } from "react-router-dom";
 import NotFound from "./NotFound";
 import LoadingImage from "./LoadingImage";
 import "../styles/DropdownButton.css";
+import ModelCardDeck from "./ModelCardDeck";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -330,17 +331,10 @@ class Activities extends Component {
                 </Button>
               </Col>
             </Row>
-            {this.state.info_loaded ? (
-              this.state.activityList.length > 0 ? (
-                <CardDeck>
-                  <div class="card-deck">{activityCards}</div>
-                </CardDeck>
-                ) : (
-                  <NotFound/>
-                )
-              ) : (
-                <LoadingImage></LoadingImage>
-            )}
+            <ModelCardDeck
+              info_loaded={this.state.info_loaded}
+              list={activityCards}>
+            </ModelCardDeck>
           </Container>
           <PageComp
             currentPage={this.state.currentPage}

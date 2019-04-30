@@ -16,6 +16,7 @@ import Button from "react-bootstrap/Button";
 import NotFound from "./NotFound";
 import LoadingImage from "./LoadingImage";
 import "../styles/DropdownButton.css";
+import ModelCardDeck from "./ModelCardDeck";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -373,17 +374,10 @@ class Shelters extends Component {
                 </Col>
               </Row>
             </Form>
-            {this.state.info_loaded ? (
-              this.state.shelterList.length > 0 ? (
-                <CardDeck>
-                  <div class="card-deck">{shelterCards}</div>
-                </CardDeck>
-                ) : (
-                  <NotFound/>
-                )
-              ) : (
-                <LoadingImage></LoadingImage>
-            )}
+            <ModelCardDeck
+              info_loaded={this.state.info_loaded}
+              list={shelterCards}>
+            </ModelCardDeck>
           </Container>
           <PageComp
             currentPage={this.state.currentPage}

@@ -18,6 +18,7 @@ import { VALID_BREEDS } from "../valid_options.jsx";
 import NotFound from "./NotFound";
 import LoadingImage from "./LoadingImage";
 import "../styles/DropdownButton.css";
+import ModelCardDeck from "./ModelCardDeck";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -395,17 +396,10 @@ class Dogs extends Component {
                 </Button>
               </Col>
             </Row>
-            {this.state.info_loaded ? (
-              this.state.dogList.length > 0 ? (
-                <CardDeck>
-                  <div class="card-deck">{dogCards}</div>
-                </CardDeck>
-                ) : (
-                  <NotFound/>
-                )
-              ) : (
-                <LoadingImage></LoadingImage>
-            )}
+            <ModelCardDeck
+              info_loaded={this.state.info_loaded}
+              list={dogCards}>
+            </ModelCardDeck>
           </Container>
           <PageComp
             currentPage={this.state.currentPage}

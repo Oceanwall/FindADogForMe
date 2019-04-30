@@ -20,6 +20,7 @@ import {
 import NotFound from "./NotFound";
 import LoadingImage from "./LoadingImage";
 import "../styles/DropdownButton.css";
+import ModelCardDeck from "./ModelCardDeck";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -339,17 +340,10 @@ class Breeds extends Component {
                 </Col>
               </Row>
             </Form>
-            {this.state.info_loaded ? (
-              this.state.breedList.length > 0 ? (
-                <CardDeck>
-                  <div class="card-deck">{breedCards}</div>
-                </CardDeck>
-              ) : (
-                <NotFound />
-              )
-            ) : (
-              <LoadingImage />
-            )}
+            <ModelCardDeck
+              info_loaded={this.state.info_loaded}
+              list={breedCards}>
+            </ModelCardDeck>
           </Container>
           <PageComp
             currentPage={this.state.currentPage}
