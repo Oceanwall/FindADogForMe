@@ -26,6 +26,8 @@ class TestBackend(TestCase):
         assert True
 
     # Begin testing dog seeding scripts
+
+    # Test count parameter for get_shelters 
     def test2(self):
         result = get_shelters(count=10)
         assert len(result) == 10
@@ -34,6 +36,7 @@ class TestBackend(TestCase):
         result = get_shelters()
         assert len(result) == 500
 
+    # Ensure that build_shelters creates complete objects
     def test4(self):
         shelter_list = get_shelters()
         shelter_ids = set()
@@ -47,6 +50,7 @@ class TestBackend(TestCase):
                 assert result.city != None
                 assert result.state != None
 
+    # Ensure that build_shelters builds objects with correctly typed attributes
     def test5(self):
         shelter_list = get_shelters()
         shelter_ids = set()
@@ -60,6 +64,7 @@ class TestBackend(TestCase):
                 assert type(result.city) == str
                 assert type(result.state) == str
 
+    # Ensure that get_dogs returns the correct number of results 
     def test6(self):
         result = get_dogs("TX1399", count=10)
         assert len(result) == 10
@@ -68,6 +73,7 @@ class TestBackend(TestCase):
         result = get_dogs("TX1399")
         assert len(result) == 30
 
+    # Ensure that build_dog builds objects with all required attributes
     def test8(self):
         dog_list = get_dogs("TX1399")
         for dog in dog_list:
@@ -81,6 +87,7 @@ class TestBackend(TestCase):
                 assert result.name != None
                 assert result.sex != None
 
+    # Ensure that build_dog builds objects with correctly typed attributes 
     def test9(self):
         dog_list = get_dogs("TX1399")
         for dog in dog_list:
@@ -100,13 +107,15 @@ class TestBackend(TestCase):
         assert type(breed_images) == type([])
         assert len(breed_images) > 0
 
+    # Make sure get_all_breeds returns a populated list of values 
     def test11(self):
         breed_list = get_all_breeds()
         breed_one = breed_list[0]
         assert breed_list != []
         assert len(breed_list) > 0
         assert breed_one != None
-
+    
+    # Ensures that build_breed correctly builds breed objcets 
     def test12(self):
         breed_list = get_all_breeds()
         test_breed = build_breed(breed_list[0])
@@ -126,6 +135,7 @@ class TestBackend(TestCase):
         assert parks != []
         assert len(parks) > 0
 
+    # Check if build_park correctly builds objects with all required attributes
     def test14(self):
         parks = get_all_parks()
         for park in parks:
@@ -149,15 +159,18 @@ class TestBackend(TestCase):
                 assert test_park.weather != None
                 assert test_park.directions != None
 
+    # Check if get_all_eventbrites returns a non - None value
     def test15(self):
         eventbrites = get_all_eventbrites()
-        assert eventbrites != None
+        assert eventbrites != None        
 
+    # Check if get_eventbrite_venue can return a non-None value given a venue
     def test16(self):
         eventbrites = get_all_eventbrites()
         eventbrite_venue = get_eventbrite_venue(eventbrites[0]["venue_id"])
         assert eventbrite_venue != None
 
+    # Check if build_event returns an object with all required attributes
     def test17(self):
         eventbrites = get_all_eventbrites()
         test_event = eventbrites[0]
@@ -173,11 +186,13 @@ class TestBackend(TestCase):
         assert result.is_free != None
         assert result.date != None
 
+    # Check if get_all_meetups returns a non-None value 
     def test18(self):
         meetups = get_all_meetups()
         assert type(meetups) == type([])
         assert len(meetups) > 0
 
+    # Check if build_meetup returns an object with all required attributes
     def test19(self):
         meetups = get_all_meetups()
         test_meetup = meetups[0]
@@ -194,10 +209,12 @@ class TestBackend(TestCase):
         assert result.is_free != None
         assert result.date != None
 
+    # Test if get_shelters returns the correct number of shelters
     def test20(self):
         result = get_shelters(count=20)
         assert len(result) == 20
 
+    # Tests 21 - 23 test the get_dogs method and its count paramater
     def test21(self):
         result = get_dogs("TX1399", count=20)
         assert len(result) == 20
@@ -210,6 +227,7 @@ class TestBackend(TestCase):
         result = get_dogs("TX1399")
         assert len(result) == 30
 
+    # Tests 24 - 30 test get_breed_images with different breeds 
     def test24(self):
         breed_images = get_breed_images("border collie")
         assert type(breed_images) == type([])
