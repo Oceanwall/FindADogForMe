@@ -215,9 +215,6 @@ async function getActivityDogs(id, range) {
 Filtering, Searching, and Sorting Queries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
-// TODO: Add checks to force compliance with permitted sort params / filter values?
-
 async function getActivityQuery(active_filter, free_filter, type_filter, search_param, sort_param, page_num = 1, include_description = false) {
     let url = `${API_URL}activity/query?`;
 

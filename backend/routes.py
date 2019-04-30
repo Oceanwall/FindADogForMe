@@ -514,6 +514,7 @@ def breed_shelters():
 
     return response
 
+
 # Flask-Restless default API calls.
 manager = APIManager(application, flask_sqlalchemy_db=db)
 manager.create_api(Activity, methods=["Get"], results_per_page=12)

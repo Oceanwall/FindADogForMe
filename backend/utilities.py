@@ -1,8 +1,16 @@
 from application.models import Activity, Breed, Dog, Shelter
 from flask import Flask, jsonify, request
 
+"""
+Utility functions used by the API routes in routes.py.
+Allows for code reuse and reduction of code redundancy.
+"""
+
 
 def control_pagination(search_items, page_num, items_per_page):
+    """
+    Given a desired page and a list of all model instances to respond with, provides pagination of the instances.
+    """
     num_pages = len(search_items) // items_per_page
     if len(search_items) % items_per_page != 0:
         num_pages += 1
@@ -30,6 +38,9 @@ def control_pagination(search_items, page_num, items_per_page):
 
 
 def page_number_error():
+    """
+    Produces an error response if the provided page number is negative.
+    """
     message = {"status": 400, "note": "The page number must be positive."}
     response = jsonify(message)
     response.status_code = 400
@@ -37,6 +48,9 @@ def page_number_error():
 
 
 def extract_website_search_param(request):
+    """
+    Gets the search parameter from the query, and standardizes it.
+    """
     search_param = request.args.get("search")
 
     if search_param is not None:
@@ -46,6 +60,10 @@ def extract_website_search_param(request):
 
 
 def search_param_in_item(search_param, item):
+    """
+    Given a search parameter and a model instance, returns whether or not
+    the search parameter is present in any of the model instance's attributes.
+    """
     return (
         (
             "name" in item
@@ -67,10 +85,7 @@ def search_param_in_item(search_param, item):
             and item["description"] is not None
             and search_param in item["description"].lower()
         )
-        or
-        # ("latitude" in item and item["latitude"] is not None and search_param in str(item["latitude"]).lower()) or
-        # ("longitude" in item and item["longitude"] is not None and search_param in str(item["longitude"]).lower()) or
-        (
+        or (
             "location" in item
             and item["location"] is not None
             and search_param in item["location"].lower()

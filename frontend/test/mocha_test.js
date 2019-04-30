@@ -4,7 +4,7 @@ const expect = require("chai").expect;
 
 const assert = require("chai").assert;
 
-const wrapper = require('./wrapper.js').default; // TODO: Add additional tests for function failures, different parameters.
+const wrapper = require('./wrapper.js').default;
 
 
 describe("FindADogForMe API Wrapper Functions", function () {

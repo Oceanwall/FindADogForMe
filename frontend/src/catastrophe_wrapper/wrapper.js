@@ -28,30 +28,6 @@ function get_specific_organization(organization_number){
     return utilities.perform_api_call(API_URL + "organizations/" + organization_number);
 }
 
-// get_states_models("West").then((response) => {
-//     //console.log(response);
-// });
-//
-// get_natural_disasters("Flood").then((response) => {
-//     //console.log(response);
-// });
-//
-// get_organizations(4).then((response) => {
-//     //console.log(response);
-// });
-//
-// get_specific_state("TX").then((response) => {
-//     //console.log(response);
-// });
-//
-// get_specific_disaster(3392).then((response) => {
-//     //console.log(response);
-// });
-//
-// get_specific_organization(311185975).then((response) => {
-//     console.log(response);
-// });
-
 export default {
     get_states_models,
     get_natural_disasters,
