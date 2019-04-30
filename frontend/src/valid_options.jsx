@@ -236,7 +236,7 @@ const VALID_BREEDS = [
   {value: "affenpinscher", label: "Affenpinscher"},
   {value: "pharaoh hound", label: "Pharaoh Hound"},
   {value: "scottish deerhound", label: "Scottish Deerhound"},
-  {value: "cocker spaniel (american)", label: "Cocker Spaniel (american)"},
+  {value: "cocker spaniel (american)", label: "Cocker Spaniel (American)"},
   {value: "welsh springer spaniel", label: "Welsh Springer Spaniel"},
   {value: "rottweiler", label: "Rottweiler"},
   {value: "australian kelpie", label: "Australian Kelpie"},
