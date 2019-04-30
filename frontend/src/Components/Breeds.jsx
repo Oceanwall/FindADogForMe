@@ -141,14 +141,14 @@ class Breeds extends Component {
   }
 
   setLifespanFilter(lifespan) {
-    if (lifespan.length === 0) lifespan = undefined;
+    lifespan = (lifespan === null || lifespan.length === 0) ? undefined : lifespan.value;
     this.setState({ lifespan: lifespan, lifespanButtonName: lifespan }, () =>
       this.filter()
     );
   }
 
   setHeightFilter(height) {
-    if (height.length === 0) height = undefined;
+    height = (height === null || height.length === 0) ? undefined : height.value;
     this.setState({ height: height, heightButtonName: height }, () =>
       this.filter()
     );
@@ -198,8 +198,8 @@ class Breeds extends Component {
     );
 
     this.groupRef.select.clearValue();
-    this.lifespanRef.getInstance().clear();
-    this.heightRef.getInstance().clear();
+    this.lifespanRef.select.clearValue();
+    this.heightRef.select.clearValue();
     this.searchParamRef.value = "";
   }
 
@@ -283,11 +283,10 @@ class Breeds extends Component {
                 </Col>
 
                 <Col md={2} xs={6} className="mt-2">
-                  <Typeahead
-                    className="lifespan-filter"
-                    clearButton
+                  <Select
+                    name="lifespan-filter"
+                    isClearable
                     placeholder="Filter by lifespan..."
-                    selectHintOnEnter={true}
                     ref={ref => {
                       this.lifespanRef = ref;
                     }}
@@ -297,11 +296,10 @@ class Breeds extends Component {
                 </Col>
 
                 <Col md={2} xs={6} className="mt-2">
-                  <Typeahead
-                    className="height-filter"
-                    clearButton
+                  <Select
+                    name="height-filter"
+                    isClearable
                     placeholder="Filter by height..."
-                    selectHintOnEnter={true}
                     ref={ref => {
                       this.heightRef = ref;
                     }}
