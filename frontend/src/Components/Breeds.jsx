@@ -5,8 +5,6 @@ import Container from "react-bootstrap/Container";
 import BreedCard from "./BreedCard";
 import BreedInstance from "./BreedInstance";
 import { Route } from "react-router-dom";
-import { Typeahead } from "react-bootstrap-typeahead";
-import "react-bootstrap-typeahead/css/Typeahead.css";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -227,14 +225,14 @@ class Breeds extends Component {
           </div>
           <Container>
             <Form>
-              <Row className="mt-2">
+              <Row className="mt-2 justify-content-md-center">
                 <Col md={1} xs={2} className="mt-2">
                   <Button id="reset-button" variant="danger" onClick={() => this.reset()}>
                     Reset
                   </Button>
                 </Col>
 
-                <Col md={2} xs={4} className="mt-2">
+                <Col md="auto" xs={4} className="mt-2">
                   <DropdownButton title={this.state.sortButtonName} id="sort-select">
                     <Dropdown.Item
                       eventKey="A-Z"
@@ -273,7 +271,7 @@ class Breeds extends Component {
                   <Select
                     name="group-filter"
                     isClearable
-                    placeholder="Filter by group..."
+                    placeholder="Group filter..."
                     ref={ref => {
                       this.groupRef = ref;
                     }}
@@ -286,7 +284,7 @@ class Breeds extends Component {
                   <Select
                     name="lifespan-filter"
                     isClearable
-                    placeholder="Filter by lifespan..."
+                    placeholder="Lifespan filter..."
                     ref={ref => {
                       this.lifespanRef = ref;
                     }}
@@ -299,7 +297,7 @@ class Breeds extends Component {
                   <Select
                     name="height-filter"
                     isClearable
-                    placeholder="Filter by height..."
+                    placeholder="Height filter..."
                     ref={ref => {
                       this.heightRef = ref;
                     }}
@@ -308,7 +306,7 @@ class Breeds extends Component {
                   />
                 </Col>
 
-                <Col md={2} xs={6} className="mt-2">
+                <Col md="auto" xs={6} className="mt-2">
                   <Form.Control
                     id="breed-search"
                     type="text"

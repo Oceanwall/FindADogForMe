@@ -7,7 +7,7 @@ import ShelterInstance from "./ShelterInstance";
 import { Route } from "react-router-dom";
 import { VALID_CITIES } from "../valid_options.jsx";
 import { Typeahead } from "react-bootstrap-typeahead";
-import "react-bootstrap-typeahead/css/Typeahead.css";
+import Select from "react-select";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -117,7 +117,7 @@ class Shelters extends Component {
   }
 
   setCityFilter(city) {
-    if (city.length === 0) city = "";
+    city = (city === null || city.length === 0) ? undefined : city.value;
     let filter =
       city !== "" ||
       this.state.zipcode !== "" ||
@@ -237,7 +237,7 @@ class Shelters extends Component {
 
     this.zipcodeRef.value = "";
     this.phoneRef.value = "";
-    this.cityRef.getInstance().clear();
+    this.cityRef.select.clearValue(); 
     this.searchParamRef.value = "";
   }
 
@@ -263,7 +263,7 @@ class Shelters extends Component {
           </div>
           <Container>
             <Form>
-              <Row className="mt-2">
+              <Row className="mt-2 justify-content-md-center">
                 <Col md={1} xs={2} className="mt-2">
                   <Button
                     variant="danger"
@@ -274,7 +274,7 @@ class Shelters extends Component {
                   </Button>
                 </Col>
 
-                <Col md={2} xs={4} className="mt-2">
+                <Col md="auto" xs={4} className="mt-2">
                   <DropdownButton
                     title={this.state.sortButtonName}
                     id="sort-select"
@@ -324,7 +324,7 @@ class Shelters extends Component {
                   />
                 </Col>
 
-                <Col md={2} xs={6} className="mt-2">
+                <Col md="auto" xs={6} className="mt-2">
                   <Form.Control
                     id="areacode-filter"
                     placeholder="Filter by phone area code..."
@@ -337,11 +337,10 @@ class Shelters extends Component {
                 </Col>
 
                 <Col md={2} xs={6} className="mt-2">
-                  <Typeahead
-                    className="city-filter"
-                    clearButton
+                  <Select
+                    name="city-filter"
+                    isClearable
                     placeholder="Filter by city..."
-                    selectHintOnEnter={true}
                     ref={ref => {
                       this.cityRef = ref;
                     }}
@@ -350,7 +349,7 @@ class Shelters extends Component {
                   />
                 </Col>
 
-                <Col md={2} xs={6} className="mt-2">
+                <Col md="auto" xs={6} className="mt-2">
                   <Form.Control
                     id="shelter-search"
                     type="text"

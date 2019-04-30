@@ -12,7 +12,7 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "../styles/Dogs.css";
-import { Typeahead } from "react-bootstrap-typeahead";
+import Select from "react-select";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { VALID_BREEDS } from "../valid_options.jsx";
 import NotFound from "./NotFound";
@@ -143,7 +143,7 @@ class Dogs extends Component {
 
   // sets breed filter
   setBreedFilter(new_breed) {
-    if (new_breed.length === 0) new_breed = "";
+    new_breed = (new_breed === null || new_breed.length === 0) ? undefined : new_breed.value;
     let filter =
       new_breed !== "" ||
       this.state.age !== "" ||
@@ -203,7 +203,7 @@ class Dogs extends Component {
       () => this.updateDog(1)
     );
 
-    this.breedRef.getInstance().clear();
+    this.breedRef.select.clearValue()
     this.searchParamRef.value = "";
   }
 
@@ -256,7 +256,7 @@ class Dogs extends Component {
                 </Button>
               </Col>
 
-              <Col md={2} xs={4} className="mt-2">
+              <Col md="auto" xs={4} className="mt-2">
                 <DropdownButton
                   id="sort-select"
                   title={this.state.sortButtonName}
@@ -294,7 +294,7 @@ class Dogs extends Component {
                 </DropdownButton>
               </Col>
 
-              <Col md={2} xs={6} className="mt-2">
+              <Col md="auto" xs={6} className="mt-2">
                 <DropdownButton
                   id="age-filter"
                   title={this.state.ageButtonName}
@@ -326,7 +326,7 @@ class Dogs extends Component {
                 </DropdownButton>
               </Col>
 
-              <Col md={2} xs={6} className="mt-2">
+              <Col md="auto" xs={6} className="mt-2">
                 <DropdownButton
                   id="size-filter"
                   title={this.state.sizeButtonName}
@@ -358,12 +358,11 @@ class Dogs extends Component {
                 </DropdownButton>
               </Col>
 
-              <Col md={2} xs={6} className="mt-2">
-                <Typeahead
-                  className="breed-filter"
-                  clearButton
+              <Col md={3} xs={6} className="mt-2">
+                <Select
+                  name="breed-filter"
+                  isClearable
                   placeholder="Filter by breed..."
-                  selectHintOnEnter={true}
                   ref={ref => {
                     this.breedRef = ref;
                   }}
@@ -372,7 +371,7 @@ class Dogs extends Component {
                 />
               </Col>
 
-              <Col md={2} xs={8} className="mt-2">
+              <Col md="auto" xs={8} className="mt-2">
                 <Form.Control
                   id="dog-search"
                   type="text"

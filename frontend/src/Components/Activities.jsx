@@ -169,7 +169,7 @@ class Activities extends Component {
             <h1> Activities</h1>
           </div>
           <Container>
-            <Row>
+            <Row className="mt-2 justify-content-md-center">
               <Col md={1} xs={2} className="mt-2">
                 <Button
                   id="reset-button"
@@ -197,7 +197,7 @@ class Activities extends Component {
                 </Button>
               </Col>
 
-              <Col md={2} xs={4} className="mt-2">
+              <Col md="auto" xs={4} className="mt-2">
                 <DropdownButton
                   title={this.state.sortButtonName}
                   id="sort-select"
@@ -235,7 +235,7 @@ class Activities extends Component {
                 </DropdownButton>
               </Col>
 
-              <Col md={2} xs={6} className="mt-2">
+              <Col md="auto" xs={6} className="mt-2">
                 <DropdownButton
                   title={this.state.activeButtonName}
                   id="active-filter"
@@ -255,7 +255,7 @@ class Activities extends Component {
                 </DropdownButton>
               </Col>
 
-              <Col md={2} xs={6} className="mt-2">
+              <Col md="auto" xs={6} className="mt-2">
                 <DropdownButton
                   title={this.state.freeButtonName}
                   id="cost-filter"
@@ -275,7 +275,7 @@ class Activities extends Component {
                 </DropdownButton>
               </Col>
 
-              <Col md={2} xs={6} className="mt-2">
+              <Col md="auto" xs={6} className="mt-2">
                 <DropdownButton
                   title={this.state.typeButtonName}
                   id="type-filter"
@@ -305,7 +305,7 @@ class Activities extends Component {
                 </DropdownButton>
               </Col>
 
-              <Col md={2} xs={6} className="mt-2">
+              <Col md="auto" xs={6} className="mt-2">
                 <Form.Control
                   id="activity-search"
                   type="text"
