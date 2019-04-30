@@ -132,21 +132,22 @@ class Breeds extends Component {
 
   setGroupFilter(group) {
     console.log("Group:", group);
-    group = (group === null || group.length === 0) ? undefined : group.value;
+    group = group === null || group.length === 0 ? undefined : group.value;
     this.setState({ group: group, groupButtonName: group }, () =>
       this.filter()
     );
   }
 
   setLifespanFilter(lifespan) {
-    lifespan = (lifespan === null || lifespan.length === 0) ? undefined : lifespan.value;
+    lifespan =
+      lifespan === null || lifespan.length === 0 ? undefined : lifespan.value;
     this.setState({ lifespan: lifespan, lifespanButtonName: lifespan }, () =>
       this.filter()
     );
   }
 
   setHeightFilter(height) {
-    height = (height === null || height.length === 0) ? undefined : height.value;
+    height = height === null || height.length === 0 ? undefined : height.value;
     this.setState({ height: height, heightButtonName: height }, () =>
       this.filter()
     );
@@ -213,7 +214,7 @@ class Breeds extends Component {
         breedCards = this.state.breedList.slice(start, end).map(breed => {
           return (
             <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <BreedCard breed={breed} highlight={this.state.searchParam}/>
+              <BreedCard breed={breed} highlight={this.state.searchParam} />
             </div>
           );
         });
@@ -227,13 +228,20 @@ class Breeds extends Component {
             <Form>
               <Row className="mt-2 justify-content-md-center">
                 <Col md={1} xs={2} className="mt-2">
-                  <Button id="reset-button" variant="danger" onClick={() => this.reset()}>
+                  <Button
+                    id="reset-button"
+                    variant="danger"
+                    onClick={() => this.reset()}
+                  >
                     Reset
                   </Button>
                 </Col>
 
                 <Col md="auto" xs={4} className="mt-2">
-                  <DropdownButton title={this.state.sortButtonName} id="sort-select">
+                  <DropdownButton
+                    title={this.state.sortButtonName}
+                    id="sort-select"
+                  >
                     <Dropdown.Item
                       eventKey="A-Z"
                       onSelect={eventKey =>
@@ -324,7 +332,9 @@ class Breeds extends Component {
                 </Col>
 
                 <Col md={1} xs={6} className="mt-2">
-                  <Button onClick={this.modelSearch} id="search-button">Search</Button>
+                  <Button onClick={this.modelSearch} id="search-button">
+                    Search
+                  </Button>
                 </Col>
               </Row>
             </Form>
@@ -333,11 +343,11 @@ class Breeds extends Component {
                 <CardDeck>
                   <div class="card-deck">{breedCards}</div>
                 </CardDeck>
-                ) : (
-                  <NotFound/>
-                )
               ) : (
-                <LoadingImage></LoadingImage>
+                <NotFound />
+              )
+            ) : (
+              <LoadingImage />
             )}
           </Container>
           <PageComp
