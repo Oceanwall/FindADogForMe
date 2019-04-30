@@ -58,48 +58,30 @@ class Breeds extends Component {
     this.searchParamRef = React.createRef();
   }
 
-  //change page. pretty much copy paste this around
   changePage(pageNum) {
-    this.setState(state => ({
-      currentPage: pageNum,
-      info_loaded: false
-    }));
-    this.updateBreed();
+    this.setState(
+      {
+        currentPage: pageNum,
+        info_loaded: false
+      },
+      () => this.updateBreed()
+    );
   }
 
   //server request method. called everytime page change, and on initial mount
   async updateBreed() {
-    console.log("Filtered:", this.state.filtered);
     if (!this.state.filtered) {
       wrapper.getBreed().then(response => {
-        this.setState(state => ({
+        this.setState({
           maxPage:
             Math.floor(response["num_results"] / 20) +
             (response["num_results"] % 20 ? 1 : 0),
           breedList: response["objects"],
           info_loaded: true
-        }));
+        });
       });
     } else {
-      wrapper
-        .getBreedQuery(
-          this.state.group,
-          this.state.lifespan,
-          this.state.height,
-          this.state.searchParam,
-          this.state.sortParam,
-          this.state.currentPage
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({
-            breedList: response["objects"],
-            maxPage:
-              Math.floor(response["num_results"] / 20) +
-              (response["num_results"] % 20 ? 1 : 0),
-            info_loaded: true
-          });
-        });
+      this.filter(this.state.currentPage);
     }
   }
 
@@ -107,16 +89,16 @@ class Breeds extends Component {
     this.changePage(1);
   }
 
-  filter() {
+  filter(pageNum = 1) {
     let filter = this.checkFiltered();
-    console.log("Filtered: ", filter);
     wrapper
       .getBreedQuery(
         this.state.group,
         this.state.lifespan,
         this.state.height,
         this.state.searchParam,
-        this.state.sortParam
+        this.state.sortParam,
+        pageNum
       )
       .then(response => {
         console.log(response);
@@ -127,7 +109,7 @@ class Breeds extends Component {
             (response["num_results"] % 20 ? 1 : 0),
           filtered: filter,
           info_loaded: true,
-          currentPage: 1
+          currentPage: pageNum
         });
       });
   }
@@ -170,7 +152,7 @@ class Breeds extends Component {
     );
   }
 
-  // return true if filtered, false otherwise
+  // return true if page is filtered, false otherwise
   checkFiltered() {
     return (
       typeof this.state.group !== "undefined" ||
@@ -195,7 +177,7 @@ class Breeds extends Component {
         sortParam: undefined,
         filtered: false
       },
-      () => this.updateBreed(1)
+      () => this.updateBreed()
     );
 
     this.groupRef.select.clearValue();
@@ -229,12 +211,12 @@ class Breeds extends Component {
           <Container>
             <Form>
               <Row className="mt-2 justify-content-md-center">
-                <Col
-                  lg="auto"
-                  xs={3}
-                  className="mt-2"
-                >
-                  <Button id="reset-button" variant="danger" onClick={() => this.reset()}>
+                <Col lg="auto" xs={3} className="mt-2">
+                  <Button
+                    id="reset-button"
+                    variant="danger"
+                    onClick={() => this.reset()}
+                  >
                     Reset
                   </Button>
                 </Col>
@@ -342,8 +324,8 @@ class Breeds extends Component {
             </Form>
             <ModelCardDeck
               info_loaded={this.state.info_loaded}
-              list={breedCards}>
-            </ModelCardDeck>
+              list={breedCards}
+            />
           </Container>
           <PageComp
             currentPage={this.state.currentPage}

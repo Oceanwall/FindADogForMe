@@ -13,8 +13,6 @@ import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
-import NotFound from "./NotFound";
-import LoadingImage from "./LoadingImage";
 import "../styles/DropdownButton.css";
 import ModelCardDeck from "./ModelCardDeck";
 
@@ -32,7 +30,8 @@ class Shelters extends Component {
       searchParam: undefined,
       sortParam: undefined,
       filtered: false,
-      sortButtonName: "Sort"
+      sortButtonName: "Sort",
+      currentPage: 1
     };
     this.changePage = this.changePage.bind(this);
     this.updateShelter = this.updateShelter.bind(this);
@@ -52,42 +51,28 @@ class Shelters extends Component {
 
   //change page. pretty much copy paste this around
   changePage(pageNum) {
-    this.setState(state => ({
-      info_loaded: false
-    }));
-    this.updateShelter(pageNum);
+    this.setState(
+      {
+        info_loaded: false,
+        currentPage: pageNum
+      },
+      () => this.updateShelter(pageNum)
+    );
   }
 
   //server request method. called everytime page change, and on initial mount
   async updateShelter(pageNum) {
     if (!this.state.filtered) {
       wrapper.getShelter(undefined, pageNum).then(response => {
-        this.setState(state => ({
+        this.setState({
           currentPage: pageNum,
           maxPage: response["total_pages"],
           shelterList: response["objects"],
           info_loaded: true
-        }));
+        });
       });
     } else {
-      wrapper
-        .getShelterQuery(
-          this.state.city,
-          this.state.zipcode,
-          this.state.phone,
-          this.state.searchParam,
-          this.state.sortParam,
-          pageNum
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({
-            shelterList: response["objects"],
-            currentPage: pageNum,
-            maxPage: response["total_pages"],
-            info_loaded: true
-          });
-        });
+      this.filter(pageNum);
     }
   }
   //update page on initial mount to load information
@@ -95,7 +80,7 @@ class Shelters extends Component {
     this.changePage(1);
   }
 
-  filter() {
+  filter(pageNum = 1) {
     let filter = this.checkFiltered();
     wrapper
       .getShelterQuery(
@@ -103,7 +88,8 @@ class Shelters extends Component {
         this.state.zipcode,
         this.state.phone,
         this.state.searchParam,
-        this.state.sortParam
+        this.state.sortParam,
+        pageNum
       )
       .then(response => {
         console.log(response);
@@ -112,27 +98,15 @@ class Shelters extends Component {
           maxPage: response["total_pages"],
           info_loaded: true,
           filtered: filter,
-          currentPage: 1
+          currentPage: pageNum
         });
       });
   }
 
   setCityFilter(city) {
-    city = (city === null || city.length === 0) ? undefined : city.value;
-    let filter =
-      city !== "" ||
-      this.state.zipcode !== "" ||
-      this.state.phone !== "" ||
-      this.state.sortParam !== undefined ||
-      this.state.searchParam !== undefined;
-    this.setState({ city: city, filtered: filter }, () => {
-      console.log(this.state.city);
-      console.log(this.state.zipcode);
-      console.log(this.state.phone);
-      console.log(this.state.sortParam);
-      console.log(this.state.searchParam);
-      console.log(this.state.filtered);
-      if (filter) {
+    city = city === null || city.length === 0 ? undefined : city.value;
+    this.setState({ city: city, filtered: this.checkFiltered() }, () => {
+      if (this.checkFiltered()) {
         this.filter();
       } else {
         this.changePage(1);
@@ -147,7 +121,6 @@ class Shelters extends Component {
           zipcode: zipcode
         },
         () => {
-          console.log(this.state.phone);
           this.filter();
         }
       );
@@ -376,8 +349,8 @@ class Shelters extends Component {
             </Form>
             <ModelCardDeck
               info_loaded={this.state.info_loaded}
-              list={shelterCards}>
-            </ModelCardDeck>
+              list={shelterCards}
+            />
           </Container>
           <PageComp
             currentPage={this.state.currentPage}
