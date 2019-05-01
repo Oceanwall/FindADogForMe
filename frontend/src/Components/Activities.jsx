@@ -151,20 +151,6 @@ class Activities extends Component {
 
   render() {
     if (this.props.match.isExact) {
-      let activityCards = null;
-      if (this.state.info_loaded) {
-        activityCards = this.state.activityList.map(activity => {
-          return (
-            <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <ActivityCard
-                activity={activity}
-                highlight={this.state.searchParam}
-              />
-            </div>
-          );
-        });
-        console.log(this.state.activityList);
-      }
       return (
         <div>
           <div class="text-center mt-3">
@@ -333,7 +319,9 @@ class Activities extends Component {
             </Row>
             <ModelCardDeck
               info_loaded={this.state.info_loaded}
-              list={activityCards}>
+              activityList={this.state.activityList}
+              type="Activities"
+              searchParam={this.state.searchParam}>
             </ModelCardDeck>
           </Container>
           <PageComp

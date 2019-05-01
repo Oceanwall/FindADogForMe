@@ -228,20 +228,6 @@ class Dogs extends Component {
 
   render() {
     if (this.props.match.isExact) {
-      let dogCards = null;
-      if (this.state.info_loaded) {
-        dogCards = this.state.dogList.map(dog => {
-          return (
-            <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <DogCard
-                dog={dog}
-                key={dog.name}
-                highlight={this.state.searchParam}
-              />
-            </div>
-          );
-        });
-      }
       return (
         <div>
           <div class="text-center mt-3">
@@ -399,8 +385,11 @@ class Dogs extends Component {
             </Row>
             <ModelCardDeck
               info_loaded={this.state.info_loaded}
-              list={dogCards}
-            />
+              type="Dog"
+              dogList={this.state.dogList}
+              searchParam={this.state.searchParam}
+            >
+            </ModelCardDeck>
           </Container>
           <PageComp
             currentPage={this.state.currentPage}

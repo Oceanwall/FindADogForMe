@@ -185,20 +185,7 @@ class Breeds extends Component {
   render() {
     if (this.props.match.isExact) {
       let breedCards = [];
-      if (this.state.info_loaded) {
-        let start = (this.state.currentPage - 1) * 20;
-        let end =
-          start + 20 < this.state.breedList.length
-            ? start + 20
-            : this.state.breedList.length;
-        breedCards = this.state.breedList.slice(start, end).map(breed => {
-          return (
-            <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-              <BreedCard breed={breed} highlight={this.state.searchParam} />
-            </div>
-          );
-        });
-      }
+      let start = (this.state.currentPage - 1) * 20;
       return (
         <div>
           <div class="text-center mt-3">
@@ -320,8 +307,11 @@ class Breeds extends Component {
             </Form>
             <ModelCardDeck
               info_loaded={this.state.info_loaded}
-              list={breedCards}
-            />
+              breedList={this.state.breedList}
+              start={start}
+              type="Breed"
+              searchParam={this.state.searchParam}>
+            </ModelCardDeck>
           </Container>
           <PageComp
             currentPage={this.state.currentPage}

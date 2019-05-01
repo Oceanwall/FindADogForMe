@@ -3,7 +3,7 @@ import { CardDeck, Container } from "react-bootstrap";
 import { Tabs } from "@yazanaabed/react-tabs";
 import PageComp from "./PageComp";
 import ShelterCard from "./ShelterCard"
-import DogCard from "./DogCard"
+import DogCard from "./DogCard";
 import BreedCard from "./BreedCard"
 import ActivityCard from "./ActivityCard"
 import NotFound from "./NotFound";
@@ -156,61 +156,14 @@ class GlobalSearch extends Component {
   }
 
   render() {
-    let shelterCards = null;
-    if (this.state.shelters_loaded) {
-      shelterCards = this.state.shelterList.map(shelter => {
-        return (
-          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-            <ShelterCard shelter={shelter} highlight={this.state.searchParam}/>
-          </div>
-        );
-      });
-    }
-
-    let dogCards = null;
-    if (this.state.dogs_loaded) {
-      dogCards = this.state.dogList.map(dog => {
-        return (
-          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-            <DogCard dog={dog} key={dog.name} highlight={this.state.searchParam}/>
-          </div>
-        );
-      });
-    }
-
-    let breedCards = [];
-    if (this.state.breeds_loaded) {
-      let start = (this.state.breedCurrentPage - 1) * 20;
-      let end =
-        start + 20 < this.state.breedList.length
-          ? start + 20
-          : this.state.breedList.length;
-      breedCards = this.state.breedList.slice(start, end).map(breed => {
-        return (
-          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-            <BreedCard breed={breed} highlight={this.state.searchParam}/>
-          </div>
-        );
-      });
-    }
-
-    let activityCards = null;
-    if (this.state.activities_loaded) {
-      activityCards = this.state.activityList.map(activity => {
-        return (
-          <div class="mx-auto col-md-auto offset-md-0 col-auto offset-1 mt-2">
-            <ActivityCard activity={activity} highlight={this.state.searchParam} />
-          </div>
-        );
-      });
-    }
-
     let shelters = (
       <div>
         <Container>
           <ModelCardDeck
-            info_loaded={this.state.shelters_loaded}
-            list={shelterCards}>
+              info_loaded={this.state.shelters_loaded}
+              shelterList={this.state.shelterList}
+              type="Shelters"
+              searchParam={this.state.searchParam}>
           </ModelCardDeck>
         </Container>
         <PageComp
@@ -226,7 +179,10 @@ class GlobalSearch extends Component {
         <Container>
           <ModelCardDeck
             info_loaded={this.state.dogs_loaded}
-            list={dogCards}>
+            type="Dog"
+            dogList={this.state.dogList}
+            searchParam={this.state.searchParam}
+          >
           </ModelCardDeck>
         </Container>
         <PageComp
@@ -236,13 +192,17 @@ class GlobalSearch extends Component {
         />
       </div>
     );
-
+    
+    let start = (this.state.breedCurrentPage - 1) * 20;
     let breeds = (
       <div>
         <Container>
           <ModelCardDeck
-            info_loaded={this.state.breeds_loaded}
-            list={breedCards}>
+              info_loaded={this.state.breeds_loaded}
+              breedList={this.state.breedList}
+              start={start}
+              type="Breed"
+              searchParam={this.state.searchParam}>
           </ModelCardDeck>
         </Container>
         <PageComp
@@ -257,8 +217,10 @@ class GlobalSearch extends Component {
       <div>
         <Container>
           <ModelCardDeck
-            info_loaded={this.state.activities_loaded}
-            list={activityCards}>
+              info_loaded={this.state.activities_loaded}
+              activityList={this.state.activityList}
+              type="Activities"
+              searchParam={this.state.searchParam}>
           </ModelCardDeck>
         </Container>
         <PageComp
