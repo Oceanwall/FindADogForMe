@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PageComp from "./PageComp";
-import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
-import ActivityCard from "./ActivityCard";
 import ActivityInstance from "./ActivityInstance";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -11,8 +9,6 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Route } from "react-router-dom";
-import NotFound from "./NotFound";
-import LoadingImage from "./LoadingImage";
 import "../styles/DropdownButton.css";
 import ModelCardDeck from "./ModelCardDeck";
 

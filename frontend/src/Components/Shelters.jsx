@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PageComp from "./PageComp";
-import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
-import ShelterCard from "./ShelterCard";
 import ShelterInstance from "./ShelterInstance";
 import { Route } from "react-router-dom";
 import { VALID_CITIES } from "../valid_options.jsx";
