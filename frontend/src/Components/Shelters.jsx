@@ -62,8 +62,10 @@ class Shelters extends Component {
 
   //server request method. called everytime page change, and on initial mount
   async updateShelter(pageNum) {
+    console.log("Filter Status: ", this.state.filtered);
     if (!this.state.filtered) {
       wrapper.getShelter(undefined, pageNum).then(response => {
+        console.log("getShelter called");
         this.setState({
           currentPage: pageNum,
           maxPage: response["total_pages"],
@@ -72,6 +74,7 @@ class Shelters extends Component {
         });
       });
     } else {
+      console.log("Filter called in update shelter");
       this.filter(pageNum);
     }
   }
@@ -82,6 +85,7 @@ class Shelters extends Component {
 
   filter(pageNum = 1) {
     let filter = this.checkFiltered();
+    console.log("Filter changed to: ", filter);
     wrapper
       .getShelterQuery(
         this.state.city,
@@ -103,13 +107,18 @@ class Shelters extends Component {
   }
 
   setCityFilter(city) {
-    city = city === null || city.length === 0 ? undefined : city.value;
-    this.setState({ city: city, filtered: this.checkFiltered() }, () => {
-      if (this.checkFiltered()) {
-        this.filter();
-      } else {
-        this.changePage(1);
-      }
+    city = city === null || city.length === 0 ? "" : city.value;
+    this.setState({ city: city }, () => {
+      this.setState({ filtered: this.checkFiltered() }, () => {
+        console.log("City is ", this.state.city);
+        console.log("Filtered is ", this.state.filtered);
+        if (this.state.filtered) {
+          console.log("Filter called in setCityFilter");
+          this.filter();
+        } else {
+          this.changePage(1);
+        }
+      });
     });
   }
 
@@ -120,6 +129,7 @@ class Shelters extends Component {
           zipcode: zipcode
         },
         () => {
+          console.log("Filter called in setZipFilter");
           this.filter();
         }
       );
@@ -130,6 +140,7 @@ class Shelters extends Component {
           zipcode: ""
         },
         () => {
+          console.log("Filter called in setZipFilter");
           this.filter();
         }
       );
@@ -142,7 +153,10 @@ class Shelters extends Component {
         {
           phone: area_code
         },
-        () => this.filter()
+        () => {
+          console.log("Filter called in setPhoneFilter");
+          this.filter();
+        }
       );
     }
     if (area_code.length === 0) {
@@ -152,6 +166,7 @@ class Shelters extends Component {
         },
         () => {
           if (this.state.filtered) {
+            console.log("Filter called in setPhoneFilter");
             this.filter();
           } else {
             this.changePage(1);
@@ -163,6 +178,7 @@ class Shelters extends Component {
 
   setSort(sort, label) {
     this.setState({ sortParam: sort, sortButtonName: label }, () => {
+      console.log("Filter called in setSort");
       this.filter();
     });
   }
@@ -175,6 +191,7 @@ class Shelters extends Component {
       },
       () => {
         if (this.state.filtered) {
+          console.log("Filter called in modelSearch");
           this.filter();
         } else {
           this.updateShelter(1);
@@ -204,13 +221,16 @@ class Shelters extends Component {
         searchParam: undefined,
         filtered: false
       },
-      () => this.updateShelter(1)
+      () => {
+        this.changePage(1);
+        this.zipcodeRef.value = "";
+        this.phoneRef.value = "";
+        this.cityRef.select.clearValue();
+        this.searchParamRef.value = "";
+      }
     );
 
-    this.zipcodeRef.value = "";
-    this.phoneRef.value = "";
-    this.cityRef.select.clearValue();
-    this.searchParamRef.value = "";
+    console.log("Reset called, filtered is: ", this.state.filtered);
   }
 
   render() {
@@ -336,8 +356,8 @@ class Shelters extends Component {
               info_loaded={this.state.info_loaded}
               shelterList={this.state.shelterList}
               type="Shelters"
-              searchParam={this.state.searchParam}>
-            </ModelCardDeck>
+              searchParam={this.state.searchParam}
+            />
           </Container>
           <PageComp
             currentPage={this.state.currentPage}

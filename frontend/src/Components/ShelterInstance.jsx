@@ -158,21 +158,35 @@ class ShelterInstance extends Component {
             <Col>
               <h1> {this.state.name}</h1>
               <div className="mt-4 info-text">
-                <p align="left"> <span className="info-bold">Contact Information:</span> {phone_number}</p>
-                <p align="left"> <span className="info-bold">Address:</span> {this.state.address} </p>
                 <p align="left">
-                  <span className="info-bold">Location:</span> {this.state.city}, {this.state.state}
+                  {" "}
+                  <span className="info-bold">Contact Information:</span>{" "}
+                  {phone_number}
+                </p>
+                <p align="left">
+                  {" "}
+                  <span className="info-bold">Address:</span>{" "}
+                  {this.state.address}{" "}
+                </p>
+                <p align="left">
+                  <span className="info-bold">Location:</span> {this.state.city}
+                  , {this.state.state}
                 </p>
                 {breeds.length > 0 ? (
                   <div>
                     <p align="left" className="capitalize">
                       {" "}
-                      <span className="info-bold">Shelter Breeds:</span> {" " + breeds}
+                      <span className="info-bold">Shelter Breeds:</span>{" "}
+                      {" " + breeds}
                     </p>
                   </div>
                 ) : (
                   <div>
-                    <p align="left"> <span className="info-bold">Shelter Breeds:</span> None listed</p>
+                    <p align="left">
+                      {" "}
+                      <span className="info-bold">Shelter Breeds:</span> None
+                      listed
+                    </p>
                   </div>
                 )}
               </div>
@@ -190,7 +204,9 @@ class ShelterInstance extends Component {
                 id="google-map"
                 style={{ height: "50vh", paddingLeft: "0px" }}
               >
-                <h4 className="ml-1 mr-1 mb-3 info-bold">Location of Shelter:</h4>
+                <h4 className="ml-1 mr-1 mb-3 info-bold">
+                  Location of Shelter:
+                </h4>
                 <MapContainer
                   location_objects={[
                     {

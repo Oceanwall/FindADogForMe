@@ -38,6 +38,7 @@ class DogInstance extends Component {
     this.isLoaded = this.isLoaded.bind(this);
     this.toggle = this.toggle.bind(this);
   }
+
   async updateDog() {
     wrapper.getDogShelter(this.state.dogId).then(response => {
       this.setState(state => ({
@@ -49,7 +50,6 @@ class DogInstance extends Component {
       }));
     });
     wrapper.getDog(this.state.dogId, undefined).then(response => {
-      //console.log(response);
       this.setState(state => ({
         description: response["description"],
         breed: response["breed"],
@@ -133,8 +133,14 @@ class DogInstance extends Component {
                     {this.state.breed}
                   </Link>
                 </p>
-                <p align="left"> <span className="info-bold">Age:</span> {this.state.age}</p>
-                <p align="left"> <span className="info-bold">Size:</span> {this.state.size}</p>
+                <p align="left">
+                  {" "}
+                  <span className="info-bold">Age:</span> {this.state.age}
+                </p>
+                <p align="left">
+                  {" "}
+                  <span className="info-bold">Size:</span> {this.state.size}
+                </p>
               </div>
             </Col>
             <Col xs={12} md={7} lg={6}>
@@ -190,7 +196,9 @@ class DogInstance extends Component {
                 className="mt-2 mb-1"
                 style={{ height: "50vh", paddingLeft: "0px" }}
               >
-                <h4 className="ml-1 mr-1 mb-3 info-bold">Location of Hosting Shelter:</h4>
+                <h4 className="ml-1 mr-1 mb-3 info-bold">
+                  Location of Hosting Shelter:
+                </h4>
                 <MapContainer
                   location_objects={[
                     {
