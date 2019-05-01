@@ -117,6 +117,8 @@ class CustomerVisual extends Component {
         state_organization_pairings[key]["fillKey"] = "defaultFill";
     }
 
+    console.log(disaster_data);
+
     // Visualization 3
     let disaster_funding_pairings = {"$0 Funding": 0,
                                      "$1 - $10,000 Funding": 0,
@@ -138,8 +140,10 @@ class CustomerVisual extends Component {
                                      "$1,000,000,001+ Funding": 0,
                                    };
     // Map funding level of each disaster to appropriate tier.
+    // obligatedfunding property is a string, but using <= to implict cast to number.
+    // Exception is with "0" due to use of strict equality checking with ===.
     for (let disaster of disaster_data) {
-      if (disaster.obligatedfunding === 0)
+      if (disaster.obligatedfunding === "0")
         disaster_funding_pairings["$0 Funding"] += 1;
       else if (disaster.obligatedfunding <= 10000)
         disaster_funding_pairings["$1 - $10,000 Funding"] += 1;
