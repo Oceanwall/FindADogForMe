@@ -220,7 +220,7 @@ class ActivityInstance extends Component {
           <Col xs={12} md={6}>
             <Container>
               <div class="desc-text">
-                {typeof this.state.description !== "undefined" ? (
+                {this.state.description ? (
                   this.state.description.length > 750 ? (
                     this.state.collapse ? (
                       [
