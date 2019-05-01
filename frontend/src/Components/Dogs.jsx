@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PageComp from "./PageComp";
-import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
-import DogCard from "./DogCard";
 import DogInstance from "./DogInstance";
 import { Route } from "react-router-dom";
 import Row from "react-bootstrap/Row";

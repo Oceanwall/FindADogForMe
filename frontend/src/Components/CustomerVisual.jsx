@@ -13,7 +13,6 @@ class CustomerVisual extends Component {
 
   constructor(props) {
     super(props);
-    //initialize initial state to not loaded
     this.state = {
       info_loaded: false,
       width: 0,
@@ -24,7 +23,6 @@ class CustomerVisual extends Component {
   }
 
   async componentDidMount() {
-
     // Natural disaster frequency per state (map)
     // Organization frequency per state (map)
     // Disaster funding frequency (bubble)
@@ -48,12 +46,6 @@ class CustomerVisual extends Component {
       disaster_data = data.disaster_data;
       organization_data = data.organization_data;
     }
-
-    // NOTE: Use this while the catastrophe_world API suffers from CORS errors.
-    // let state_data = data.state_data;
-    // let disaster_data = data.disaster_data;
-    // let organization_data = data.organization_data;
-    // console.log(state_data);
 
     // Visualization 1
 
@@ -125,7 +117,7 @@ class CustomerVisual extends Component {
         state_organization_pairings[key]["fillKey"] = "defaultFill";
     }
 
-    console.log(state_organization_pairings);
+    console.log(disaster_data);
 
     // Visualization 3
     let disaster_funding_pairings = {"$0 Funding": 0,
@@ -148,8 +140,10 @@ class CustomerVisual extends Component {
                                      "$1,000,000,001+ Funding": 0,
                                    };
     // Map funding level of each disaster to appropriate tier.
+    // obligatedfunding property is a string, but using <= to implict cast to number.
+    // Exception is with "0" due to use of strict equality checking with ===.
     for (let disaster of disaster_data) {
-      if (disaster.obligatedfunding === 0)
+      if (disaster.obligatedfunding === "0")
         disaster_funding_pairings["$0 Funding"] += 1;
       else if (disaster.obligatedfunding <= 10000)
         disaster_funding_pairings["$1 - $10,000 Funding"] += 1;
@@ -191,9 +185,6 @@ class CustomerVisual extends Component {
     for (const key of Object.keys(disaster_funding_pairings)) {
       disaster_fund_pairs.push({label: key, value: disaster_funding_pairings[key]});
     }
-
-    console.log(disaster_fund_pairs);
-
 
     this.setState({
       info_loaded: true,

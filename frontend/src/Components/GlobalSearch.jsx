@@ -1,13 +1,7 @@
 import React, { Component } from "react";
-import { CardDeck, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Tabs } from "@yazanaabed/react-tabs";
 import PageComp from "./PageComp";
-import ShelterCard from "./ShelterCard"
-import DogCard from "./DogCard";
-import BreedCard from "./BreedCard"
-import ActivityCard from "./ActivityCard"
-import NotFound from "./NotFound";
-import LoadingImage from "./LoadingImage";
 import ModelCardDeck from "./ModelCardDeck";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
@@ -192,7 +186,7 @@ class GlobalSearch extends Component {
         />
       </div>
     );
-    
+
     let start = (this.state.breedCurrentPage - 1) * 20;
     let breeds = (
       <div>

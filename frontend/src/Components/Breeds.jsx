@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PageComp from "./PageComp";
-import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
-import BreedCard from "./BreedCard";
 import BreedInstance from "./BreedInstance";
 import { Route } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -184,7 +182,6 @@ class Breeds extends Component {
 
   render() {
     if (this.props.match.isExact) {
-      let breedCards = [];
       let start = (this.state.currentPage - 1) * 20;
       return (
         <div>

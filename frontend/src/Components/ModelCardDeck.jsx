@@ -72,7 +72,9 @@ class ModelCardDeck extends Component {
                 case "Activities":
                     list = this.construct_activityCards(); break;
                 case "Shelters":
-                    list = this.construct_shelterCards();
+                    list = this.construct_shelterCards(); break;
+                default:
+                    console.log("Error when rendering Model Card Deck: invalid type provided");
             }
         }
         return (this.props.info_loaded ? (

@@ -11,7 +11,6 @@ class DeveloperVisual extends Component {
 
   constructor(props) {
     super(props);
-    //initialize initial state to not loaded
     this.state = {
       info_loaded: false,
       information: undefined,
@@ -24,40 +23,10 @@ class DeveloperVisual extends Component {
 
   // Get all necessary information on mount
   async componentDidMount() {
-    // TODO: Colors for bar graph (which I spent an hour on and couldn't get working :()
-    // TODO: Separate out visualizations into different methods so that visualizations 2 and 3 can load before visualizations 1?
     let info = await wrapper.getWebsiteQuery(" ");
 
     // Visualization 1
-    // let city_dog_pairings = new Map();
-    // let shelter_cities = [];
-    // let shelter_promises = [];
-    // for (let shelter of info.shelters) {
-    //   shelter_promises.push(wrapper.getShelterDogs(shelter.id));
-    //   shelter_cities.push(shelter.city);
-    // }
-    //
-    // // WARNING: 500 API calls. Is this too slow / a risk to my AWS billing?
-    // let shelter_dogs = await Promise.all(shelter_promises);
-    //
-    // for (let i = 0; i < shelter_dogs.length; ++i) {
-    //   let num_dogs = shelter_dogs[i].num_results;
-    //   let city = shelter_cities[i];
-    //
-    //   if (city_dog_pairings.has(city)) {
-    //     city_dog_pairings.set(city, city_dog_pairings.get(city) + num_dogs);
-    //   }
-    //   else city_dog_pairings.set(city, num_dogs);
-    // }
-    //
-    // let city_dog_pairs = [];
-    // for (let entry of city_dog_pairings.entries()) {
-    //   // Readability purposes
-    //   if (entry[1] > 4)
-    //     city_dog_pairs.push({label: entry[0], value: entry[1]});
-    // }
 
-    // Alternate Visualization 1 (city_shelter pairings)
     let city_dog_pairings = new Map();
     for (let shelter of info.shelters) {
       let city = shelter.city;
@@ -70,12 +39,13 @@ class DeveloperVisual extends Component {
 
     let city_dog_pairs = [];
     for (let entry of city_dog_pairings.entries()) {
-      // Readability purposes
+      // Readability purposes, avoids spamming small bubbles.
       if (entry[1] > 2)
         city_dog_pairs.push({label: entry[0], value: entry[1]});
     }
 
     // Visualization 2
+
     let group_breed_pairings = new Map();
     for (let breed of info.breeds) {
       let group = breed.group;
@@ -99,6 +69,7 @@ class DeveloperVisual extends Component {
     }];
 
     // Visualization 3
+    
     let dog_attribute_pairings = new Map();
     for (let dog of info.dogs) {
       let size_name = "";
