@@ -182,13 +182,14 @@ class Breeds extends Component {
         sortParam: undefined,
         filtered: false
       },
-      () => this.updateBreed()
+      () => {
+        this.updateBreed();
+        this.groupRef.select.clearValue();
+        this.lifespanRef.select.clearValue();
+        this.heightRef.select.clearValue();
+        this.searchParamRef.value = "";
+      }
     );
-
-    this.groupRef.select.clearValue();
-    this.lifespanRef.select.clearValue();
-    this.heightRef.select.clearValue();
-    this.searchParamRef.value = "";
   }
 
   render() {
