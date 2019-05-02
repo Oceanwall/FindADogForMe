@@ -59,28 +59,11 @@ class Activities extends Component {
         });
       });
     } else {
-      wrapper
-        .getActivityQuery(
-          this.state.active,
-          this.state.free,
-          this.state.type,
-          this.state.searchParam,
-          this.state.sortParam,
-          pageNum
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({
-            activityList: response["objects"],
-            currentPage: pageNum,
-            maxPage: response["total_pages"],
-            info_loaded: true
-          });
-        });
+      this.filter(pageNum);
     }
   }
 
-  filter() {
+  filter(pageNum = 1) {
     wrapper
       .getActivityQuery(
         this.state.active,
@@ -95,7 +78,7 @@ class Activities extends Component {
           activityList: response["objects"],
           maxPage: response["total_pages"],
           info_loaded: true,
-          currentPage: 1
+          currentPage: pageNum
         });
       });
   }

@@ -106,11 +106,6 @@ class Dogs extends Component {
     this.setState(
       { sortParam: sort, sortButtonName: label, filtered: true },
       () => {
-        console.log(this.state.age);
-        console.log(this.state.size);
-        console.log(this.state.breed);
-        console.log(this.state.sortParam);
-        console.log(this.state.searchParam);
         this.filter();
       }
     );
@@ -121,11 +116,6 @@ class Dogs extends Component {
     this.setState(
       { age: new_age, ageButtonName: new_age, filtered: true },
       () => {
-        console.log(this.state.age);
-        console.log(this.state.size);
-        console.log(this.state.breed);
-        console.log(this.state.sortParam);
-        console.log(this.state.searchParam);
         this.filter();
       }
     );
@@ -136,11 +126,6 @@ class Dogs extends Component {
     this.setState(
       { size: new_size, sizeButtonName: label, filtered: true },
       () => {
-        console.log(this.state.age);
-        console.log(this.state.size);
-        console.log(this.state.breed);
-        console.log(this.state.sortParam);
-        console.log(this.state.searchParam);
         this.filter();
       }
     );
