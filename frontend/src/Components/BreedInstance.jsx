@@ -40,7 +40,6 @@ class BreedInstance extends Component {
 
   async updateBreed() {
     wrapper.getBreed(this.state.breedId).then(response => {
-      console.log(response);
       let breed = response["objects"][0];
       this.setState(
         {
@@ -60,14 +59,12 @@ class BreedInstance extends Component {
         },
         async () =>
           wrapper.getBreedDogs(this.state.name, undefined).then(response => {
-            console.log(response);
             this.setState(
               {
                 dog_list: response["objects"]
               },
               async () =>
                 wrapper.getBreedActivities(this.state.name).then(response => {
-                  console.log(response);
                   this.setState(
                     {
                       activity_list: response["objects"]

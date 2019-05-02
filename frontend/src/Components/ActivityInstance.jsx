@@ -47,7 +47,6 @@ class ActivityInstance extends Component {
   }
   async updateActivity() {
     wrapper.getActivity(this.state.activityId).then(response => {
-      console.log(response["location"]);
       let comma = response["location"].substring(0, 2);
       if (comma === ", ") {
         this.setState({
@@ -106,7 +105,6 @@ class ActivityInstance extends Component {
       }));
     });
     wrapper.getActivityBreeds(this.state.activityId).then(response => {
-      console.log("Activity breeds: ", response);
       this.setState({
         breed_list: response["objects"],
         loaded_dog: true

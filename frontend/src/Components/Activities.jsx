@@ -76,7 +76,6 @@ class Activities extends Component {
         this.state.sortParam
       )
       .then(response => {
-        console.log(response);
         this.setState({
           activityList: response["objects"],
           maxPage: response["total_pages"],

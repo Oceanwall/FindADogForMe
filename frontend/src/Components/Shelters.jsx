@@ -60,10 +60,8 @@ class Shelters extends Component {
 
   //server request method. called everytime page change, and on initial mount
   async updateShelter(pageNum) {
-    console.log("Filter Status: ", this.state.filtered);
     if (!this.state.filtered) {
       wrapper.getShelter(undefined, pageNum).then(response => {
-        console.log("getShelter called");
         this.setState({
           currentPage: pageNum,
           maxPage: response["total_pages"],
@@ -72,7 +70,6 @@ class Shelters extends Component {
         });
       });
     } else {
-      console.log("Filter called in update shelter");
       this.filter(pageNum);
     }
   }
@@ -83,7 +80,7 @@ class Shelters extends Component {
 
   filter(pageNum = 1) {
     let filter = this.checkFiltered();
-    console.log("Filter changed to: ", filter);
+
     wrapper
       .getShelterQuery(
         this.state.city,
@@ -108,10 +105,7 @@ class Shelters extends Component {
     city = city === null || city.length === 0 ? "" : city.value;
     this.setState({ city: city }, () => {
       this.setState({ filtered: this.checkFiltered() }, () => {
-        console.log("City is ", this.state.city);
-        console.log("Filtered is ", this.state.filtered);
         if (this.state.filtered) {
-          console.log("Filter called in setCityFilter");
           this.filter();
         } else {
           this.changePage(1);
@@ -127,7 +121,6 @@ class Shelters extends Component {
           zipcode: zipcode
         },
         () => {
-          console.log("Filter called in setZipFilter");
           this.filter();
         }
       );
@@ -138,7 +131,6 @@ class Shelters extends Component {
           zipcode: ""
         },
         () => {
-          console.log("Filter called in setZipFilter");
           this.filter();
         }
       );
@@ -152,7 +144,6 @@ class Shelters extends Component {
           phone: area_code
         },
         () => {
-          console.log("Filter called in setPhoneFilter");
           this.filter();
         }
       );
@@ -164,7 +155,6 @@ class Shelters extends Component {
         },
         () => {
           if (this.state.filtered) {
-            console.log("Filter called in setPhoneFilter");
             this.filter();
           } else {
             this.changePage(1);
@@ -176,7 +166,6 @@ class Shelters extends Component {
 
   setSort(sort, label) {
     this.setState({ sortParam: sort, sortButtonName: label }, () => {
-      console.log("Filter called in setSort");
       this.filter();
     });
   }
@@ -228,8 +217,6 @@ class Shelters extends Component {
         this.searchParamRef.value = "";
       }
     );
-
-    console.log("Reset called, filtered is: ", this.state.filtered);
   }
 
   render() {

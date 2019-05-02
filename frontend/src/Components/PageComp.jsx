@@ -30,33 +30,33 @@ class PageComp extends Component {
   render() {
     return (
       <div class="page-comp">
-      {this.props.maxPage > 0 &&
-        <Pagination>
-          {this.props.currentPage > 1 && [
-            <Pagination.First onClick={this.handleFirst} />,
-            <Pagination.Prev onClick={this.handlePrev} />,
-            <Pagination.Item
-              onClick={evt =>
-                this.handleCustom(this.props.currentPage - 1, evt)
-              }
-            >
-              {this.props.currentPage - 1}
-            </Pagination.Item>
-          ]}
-          <Pagination.Item active>{this.props.currentPage}</Pagination.Item>
-          {this.props.maxPage > this.props.currentPage && [
-            <Pagination.Item
-              onClick={evt =>
-                this.handleCustom(this.props.currentPage + 1, evt)
-              }
-            >
-              {this.props.currentPage + 1}
-            </Pagination.Item>,
-            <Pagination.Next onClick={this.handleNext} />,
-            <Pagination.Last onClick={this.handleLast} />
-          ]}
-        </Pagination>
-      }
+        {this.props.maxPage > 0 && (
+          <Pagination>
+            {this.props.currentPage > 1 && [
+              <Pagination.First onClick={this.handleFirst} />,
+              <Pagination.Prev onClick={this.handlePrev} />,
+              <Pagination.Item
+                onClick={evt =>
+                  this.handleCustom(this.props.currentPage - 1, evt)
+                }
+              >
+                {this.props.currentPage - 1}
+              </Pagination.Item>
+            ]}
+            <Pagination.Item active>{this.props.currentPage}</Pagination.Item>
+            {this.props.maxPage > this.props.currentPage && [
+              <Pagination.Item
+                onClick={evt =>
+                  this.handleCustom(this.props.currentPage + 1, evt)
+                }
+              >
+                {this.props.currentPage + 1}
+              </Pagination.Item>,
+              <Pagination.Next onClick={this.handleNext} />,
+              <Pagination.Last onClick={this.handleLast} />
+            ]}
+          </Pagination>
+        )}
       </div>
     );
   }

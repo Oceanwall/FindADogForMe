@@ -35,7 +35,6 @@ class ShelterInstance extends Component {
 
   async updateShelter() {
     wrapper.getShelter(this.state.shelterId).then(response => {
-      console.log(response);
       let shelter = response;
       this.setState(
         {
@@ -49,14 +48,12 @@ class ShelterInstance extends Component {
         },
         () =>
           wrapper.getShelterBreeds(this.state.shelterId).then(response => {
-            console.log(response);
             this.setState(
               {
                 breed_list: response
               },
               () =>
                 wrapper.getShelterDogs(this.state.shelterId).then(response => {
-                  console.log(response);
                   this.setState(
                     {
                       dog_list: response["objects"]
@@ -65,7 +62,6 @@ class ShelterInstance extends Component {
                       wrapper
                         .getShelterActivities(this.state.shelterId)
                         .then(response => {
-                          console.log(response);
                           this.setState(
                             {
                               activity_list: response["objects"]

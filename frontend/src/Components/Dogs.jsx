@@ -60,7 +60,6 @@ class Dogs extends Component {
 
   //server request method. called everytime page change, and on initial mount
   async updateDog(pageNum) {
-    console.log("updateDog called, filter is", this.state.filtered);
     if (!this.state.filtered) {
       wrapper.getDog(undefined, pageNum).then(response => {
         this.setState({
@@ -90,7 +89,6 @@ class Dogs extends Component {
           this.state.sortParam
         )
         .then(response => {
-          console.log(response);
           this.setState({
             dogList: response["objects"],
             maxPage: response["total_pages"],

@@ -38,7 +38,6 @@ class InstanceCarousel extends Component {
   };
 
   render() {
-    console.log(this.props.images);
     let { leftIcon, rightIcon } = this.state;
     let imagesArray = this.props.images.map(image => {
       return (
