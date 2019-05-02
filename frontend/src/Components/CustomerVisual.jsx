@@ -41,7 +41,7 @@ class CustomerVisual extends Component {
       organization_data = data_loaded[2];
     }
     catch {
-      console.log("Loading catastrophe_world data through API failed, falling back to data file.");
+      console.log("Loading catastrophe_world data through API failed due to their API's CORS error, falling back to data file.");
       state_data = data.state_data;
       disaster_data = data.disaster_data;
       organization_data = data.organization_data;

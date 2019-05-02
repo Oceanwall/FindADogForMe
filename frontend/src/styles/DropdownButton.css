@@ -3,21 +3,31 @@
   background-color: white !important;
   border: 1px solid #ced4da;
   width: 100% !important;
+  max-width: 100% !important;
   height: calc(2.25rem + 2px) !important;
+  max-height: calc(2.25rem + 2px) !important;
+  overflow: hidden;
 }
 #sort-select {
   color: #495057 !important;
   background-color: white !important;
   border: 1px solid #ced4da;
   height: calc(2.25rem + 2px) !important;
+  max-height: calc(2.25rem + 2px) !important;
+  overflow: hidden;
 }
 #search-button {
   height: calc(2.25rem + 2px) !important;
+  max-height: calc(2.25rem + 2px) !important;
   width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden;
 }
 
 @media (max-width: 992px) {
   #sort-select, #reset-button {
     width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
   }
 }
