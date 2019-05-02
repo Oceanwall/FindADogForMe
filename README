@@ -75,4 +75,8 @@ Link to API website: https://api.findadogfor.me/
 Main Backend File: backend/application.py
 Main Frontend File: frontend/src/index.js
 
+Our Visualizations: frontend/src/Components/DeveloperVisual.jsx
+Provider Visualizations: frontend/src/Components/CustomerVisual.jsx
+Visualizations on the website can be found under the navigation tabs "Our Visuals" and "Provider Visuals".
+
 Comments:
