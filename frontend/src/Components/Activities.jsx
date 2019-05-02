@@ -37,6 +37,7 @@ class Activities extends Component {
     this.filter = this.filter.bind(this);
     this.modelSearch = this.modelSearch.bind(this);
     this.checkFiltered = this.checkFiltered.bind(this);
+    this.reset = this.reset.bind(this);
 
     this.searchParamRef = React.createRef();
   }
@@ -143,6 +144,27 @@ class Activities extends Component {
     );
   }
 
+  reset() {
+    this.setState(
+      {
+        activeButtonName: "Filter by intensity",
+        freeButtonName: "Filter by cost",
+        typeButtonName: "Filter by type",
+        sortButtonName: "Sort",
+        active: undefined,
+        free: undefined,
+        type: "",
+        filtered: false,
+        sortParam: undefined,
+        searchParam: undefined
+      },
+      () => {
+        this.updateDog(1);
+        this.searchParamRef.value = "";
+      }
+    );
+  }
+
   //update page on initial mount to load information
   async componentDidMount() {
     this.changePage(1);
@@ -162,22 +184,7 @@ class Activities extends Component {
                   id="reset-button"
                   variant="danger"
                   onClick={() => {
-                    this.setState(
-                      {
-                        activeButtonName: "Filter by intensity",
-                        freeButtonName: "Filter by cost",
-                        typeButtonName: "Filter by type",
-                        sortButtonName: "Sort",
-                        active: undefined,
-                        free: undefined,
-                        type: "",
-                        filtered: false,
-                        sortParam: undefined,
-                        searchParam: undefined
-                      },
-                      () => this.updateDog(1)
-                    );
-                    this.searchParamRef.value = "";
+                    this.reset();
                   }}
                 >
                   Reset
