@@ -131,7 +131,7 @@ class Activities extends Component {
     this.setState(
       {
         searchParam: this.searchParamRef.value,
-        filtered: true
+        filtered: this.searchParamRef.value == "" ? false : true
       },
       () => {
         if (this.state.filtered) this.filter();
@@ -317,8 +317,8 @@ class Activities extends Component {
               info_loaded={this.state.info_loaded}
               activityList={this.state.activityList}
               type="Activities"
-              searchParam={this.state.searchParam}>
-            </ModelCardDeck>
+              searchParam={this.state.searchParam}
+            />
           </Container>
           <PageComp
             currentPage={this.state.currentPage}

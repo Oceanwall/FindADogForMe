@@ -44,6 +44,7 @@ class Dogs extends Component {
     this.filter = this.filter.bind(this);
     this.modelSearch = this.modelSearch.bind(this);
     this.reset = this.reset.bind(this);
+    this.checkFiltered = this.checkFiltered.bind(this);
 
     this.breedRef = React.createRef();
     this.searchParamRef = React.createRef();
@@ -59,6 +60,7 @@ class Dogs extends Component {
 
   //server request method. called everytime page change, and on initial mount
   async updateDog(pageNum) {
+    console.log("updateDog called, filter is", this.state.filtered);
     if (!this.state.filtered) {
       wrapper.getDog(undefined, pageNum).then(response => {
         this.setState({
@@ -69,29 +71,34 @@ class Dogs extends Component {
         });
       });
     } else {
+      this.filter(pageNum);
+    }
+  }
+  //update page on initial mount to load information
+  async componentDidMount() {
+    this.changePage(1);
+  }
+
+  filter(pageNum = 1) {
+    if (this.state.filtered) {
       wrapper
         .getDogQuery(
           this.state.breed,
           this.state.age,
           this.state.size,
           this.state.searchParam,
-          this.state.sortParam,
-          pageNum
+          this.state.sortParam
         )
         .then(response => {
           console.log(response);
           this.setState({
             dogList: response["objects"],
-            currentPage: pageNum,
             maxPage: response["total_pages"],
-            info_loaded: true
+            info_loaded: true,
+            currentPage: pageNum
           });
         });
     }
-  }
-  //update page on initial mount to load information
-  async componentDidMount() {
-    this.changePage(1);
   }
 
   // sets sort criteria then updates the dogs to show
@@ -142,50 +149,26 @@ class Dogs extends Component {
   // sets breed filter
   setBreedFilter(new_breed) {
     new_breed =
-      new_breed === null || new_breed.length === 0
-        ? undefined
-        : new_breed.value;
-    let filter =
-      new_breed !== "" ||
-      this.state.age !== "" ||
-      this.state.size !== "" ||
-      typeof this.state.sortParam !== "undefined" ||
-      typeof this.state.searchParam !== "undefined";
-    this.setState({ breed: new_breed, filtered: filter }, () => {
-      console.log(this.state.age);
-      console.log(this.state.size);
-      console.log(this.state.breed);
-      console.log(this.state.sortParam);
-      console.log(this.state.searchParam);
-      console.log(this.state.filtered);
-      if (filter) {
-        this.filter();
-      } else {
-        this.changePage(1);
-      }
+      new_breed === null || new_breed.length === 0 ? "" : new_breed.value;
+    this.setState({ breed: new_breed }, () => {
+      this.setState({ filtered: this.checkFiltered() }, () => {
+        if (this.state.filtered) {
+          this.filter();
+        } else {
+          this.changePage(1);
+        }
+      });
     });
   }
 
-  filter() {
-    if (this.state.filtered) {
-      wrapper
-        .getDogQuery(
-          this.state.breed,
-          this.state.age,
-          this.state.size,
-          this.state.searchParam,
-          this.state.sortParam
-        )
-        .then(response => {
-          console.log(response);
-          this.setState({
-            dogList: response["objects"],
-            maxPage: response["total_pages"],
-            info_loaded: true,
-            currentPage: 1
-          });
-        });
-    }
+  checkFiltered() {
+    return (
+      this.state.breed !== "" ||
+      this.state.age !== "" ||
+      this.state.size !== "" ||
+      this.state.sortParam !== undefined ||
+      this.state.searchParam !== undefined
+    );
   }
 
   reset() {
@@ -201,18 +184,19 @@ class Dogs extends Component {
         searchParam: undefined,
         filtered: false
       },
-      () => this.updateDog(1)
+      () => {
+        this.updateDog(1);
+        this.breedRef.select.clearValue();
+        this.searchParamRef.value = "";
+      }
     );
-
-    this.breedRef.select.clearValue();
-    this.searchParamRef.value = "";
   }
 
   modelSearch() {
     this.setState(
       {
         searchParam: this.searchParamRef.value,
-        filtered: true
+        filtered: this.searchParamRef.value == "" ? false : true
       },
       () => {
         if (this.state.filtered) {
@@ -386,8 +370,7 @@ class Dogs extends Component {
               type="Dog"
               dogList={this.state.dogList}
               searchParam={this.state.searchParam}
-            >
-            </ModelCardDeck>
+            />
           </Container>
           <PageComp
             currentPage={this.state.currentPage}
