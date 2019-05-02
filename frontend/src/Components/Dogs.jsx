@@ -180,15 +180,19 @@ class Dogs extends Component {
   modelSearch() {
     this.setState(
       {
-        searchParam: this.searchParamRef.value,
-        filtered: this.searchParamRef.value == "" ? false : true
+        searchParam:
+          this.searchParamRef.value.length == 0
+            ? undefined
+            : this.searchParamRef.value
       },
       () => {
-        if (this.state.filtered) {
-          this.filter();
-        } else {
-          this.updateDog(1);
-        }
+        this.setState({ filtered: this.checkFiltered() }, () => {
+          if (this.state.filtered) {
+            this.filter();
+          } else {
+            this.updateDog(1);
+          }
+        });
       }
     );
   }

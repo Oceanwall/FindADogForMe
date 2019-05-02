@@ -11,6 +11,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { Route } from "react-router-dom";
 import "../styles/DropdownButton.css";
 import ModelCardDeck from "./ModelCardDeck";
+import { timingSafeEqual } from "crypto";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
@@ -35,6 +36,7 @@ class Activities extends Component {
     this.updateDog = this.updateActivity.bind(this);
     this.filter = this.filter.bind(this);
     this.modelSearch = this.modelSearch.bind(this);
+    this.checkFiltered = this.checkFiltered.bind(this);
 
     this.searchParamRef = React.createRef();
   }
@@ -64,6 +66,7 @@ class Activities extends Component {
   }
 
   filter(pageNum = 1) {
+    let filter = this.checkFiltered();
     wrapper
       .getActivityQuery(
         this.state.active,
@@ -78,7 +81,8 @@ class Activities extends Component {
           activityList: response["objects"],
           maxPage: response["total_pages"],
           info_loaded: true,
-          currentPage: pageNum
+          currentPage: pageNum,
+          filtered: filter
         });
       });
   }
@@ -110,15 +114,32 @@ class Activities extends Component {
     );
   }
 
+  checkFiltered() {
+    return (
+      this.state.active !== undefined ||
+      this.state.free !== undefined ||
+      this.state.type !== "" ||
+      this.state.sortParam !== undefined ||
+      this.state.searchParam !== undefined
+    );
+  }
+
   modelSearch() {
     this.setState(
       {
-        searchParam: this.searchParamRef.value,
-        filtered: this.searchParamRef.value == "" ? false : true
+        searchParam:
+          this.searchParamRef.value.length == 0
+            ? undefined
+            : this.searchParamRef.value
       },
       () => {
-        if (this.state.filtered) this.filter();
-        else this.updateActivity(1);
+        this.setState({ filtered: this.checkFiltered() }, () => {
+          if (this.state.filtered) {
+            this.filter();
+          } else {
+            this.updateActivity(1);
+          }
+        });
       }
     );
   }

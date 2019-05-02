@@ -184,16 +184,17 @@ class Shelters extends Component {
   modelSearch() {
     this.setState(
       {
-        searchParam: this.searchParamRef.value,
-        filtered: true
+        searchParam:
+          this.searchParamRef.value.length == 0
+            ? undefined
+            : this.searchParamRef.value
       },
       () => {
-        if (this.state.filtered) {
-          console.log("Filter called in modelSearch");
-          this.filter();
-        } else {
-          this.updateShelter(1);
-        }
+        this.setState({ filtered: this.checkFiltered() });
+      },
+      () => {
+        if (this.state.filtered) this.filter();
+        else this.updateShelter(1);
       }
     );
   }

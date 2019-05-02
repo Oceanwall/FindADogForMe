@@ -140,9 +140,20 @@ class Breeds extends Component {
   modelSearch() {
     this.setState(
       {
-        searchParam: this.searchParamRef.value
+        searchParam:
+          this.searchParamRef.value.length == 0
+            ? undefined
+            : this.searchParamRef.value
       },
-      this.filter()
+      () => {
+        this.setState({ filtered: this.checkFiltered() }, () => {
+          if (this.state.filtered) {
+            this.filter();
+          } else {
+            this.updateBreed(1);
+          }
+        });
+      }
     );
   }
 
@@ -307,8 +318,8 @@ class Breeds extends Component {
               breedList={this.state.breedList}
               start={start}
               type="Breed"
-              searchParam={this.state.searchParam}>
-            </ModelCardDeck>
+              searchParam={this.state.searchParam}
+            />
           </Container>
           <PageComp
             currentPage={this.state.currentPage}
