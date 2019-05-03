@@ -11,7 +11,6 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { Route } from "react-router-dom";
 import "../styles/DropdownButton.css";
 import ModelCardDeck from "./ModelCardDeck";
-import { timingSafeEqual } from "crypto";
 
 const wrapper = require("../api_wrapper_functions/wrapper.js").default;
 
