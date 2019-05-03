@@ -179,11 +179,10 @@ class Shelters extends Component {
             : this.searchParamRef.value
       },
       () => {
-        this.setState({ filtered: this.checkFiltered() });
-      },
-      () => {
-        if (this.state.filtered) this.filter();
-        else this.updateShelter(1);
+        this.setState({ filtered: this.checkFiltered() }, () => {
+          if (this.state.filtered) this.filter();
+          else this.updateShelter(1);
+        });
       }
     );
   }
