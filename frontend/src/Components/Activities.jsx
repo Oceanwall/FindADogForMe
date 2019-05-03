@@ -73,7 +73,8 @@ class Activities extends Component {
         this.state.free,
         this.state.type,
         this.state.searchParam,
-        this.state.sortParam
+        this.state.sortParam,
+        pageNum,
       )
       .then(response => {
         this.setState({

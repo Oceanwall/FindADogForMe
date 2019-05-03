@@ -86,7 +86,8 @@ class Dogs extends Component {
           this.state.age,
           this.state.size,
           this.state.searchParam,
-          this.state.sortParam
+          this.state.sortParam,
+          pageNum,
         )
         .then(response => {
           this.setState({
