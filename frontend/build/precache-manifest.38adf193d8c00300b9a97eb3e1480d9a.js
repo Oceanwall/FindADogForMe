@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/static/media/react-bootstrap-carousel.f7448c04.ttf"
   },
   {
-    "revision": "562e27b478de4932adaa",
-    "url": "/static/css/main.6788288b.chunk.css"
+    "revision": "bdb2407fc1d5470e3c3e",
+    "url": "/static/css/main.97e36522.chunk.css"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -28,8 +28,8 @@ self.__precacheManifest = [
     "url": "/static/media/react-bootstrap-carousel.c746c488.woff"
   },
   {
-    "revision": "562e27b478de4932adaa",
-    "url": "/static/js/main.2a664f05.chunk.js"
+    "revision": "bdb2407fc1d5470e3c3e",
+    "url": "/static/js/main.56222ad9.chunk.js"
   },
   {
     "revision": "2fe6d179ea5aa1ceab26113e77e13da4",
@@ -52,7 +52,7 @@ self.__precacheManifest = [
     "url": "/static/css/2.1c8d0470.chunk.css"
   },
   {
-    "revision": "109aa68d6625cf87a804cb084d417942",
+    "revision": "de3dd43bc2556752b565d089e80c5bdc",
     "url": "/index.html"
   }
 ];

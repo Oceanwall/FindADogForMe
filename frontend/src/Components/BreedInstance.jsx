@@ -71,10 +71,14 @@ class BreedInstance extends Component {
                     },
                     async () => {
                       let shelters = [];
+                      let shelter_ids = new Set();
                       for (let dog of this.state.dog_list) {
-                        shelters.push(
-                          await wrapper.getShelter(dog["shelter_id"])
-                        );
+                        if (!shelter_ids.has(dog["shelter_id"])) {
+                          shelter_ids.add(dog["shelter_id"]);
+                          shelters.push(
+                            await wrapper.getShelter(dog["shelter_id"])
+                          );
+                        }
                       }
                       this.setState({
                         shelter_list: shelters

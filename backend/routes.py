@@ -408,15 +408,15 @@ def breed_shelters():
 
         return response
 
-    good_shelters = []
-    shelters = Shelter.query.limit(100).all()
+    good_shelters = set()
+    shelters = Shelter.query.all()
     dogs = []
     # Find shelters that have dogs that are of the desired breed.
     for shelter in shelters:
-        dogs += Dog.query.filter_by(shelter_id=shelter.id).limit(20).all()
+        dogs += Dog.query.filter_by(shelter_id=shelter.id).all()
         for dog in dogs:
             if dog.breed == breed:
-                good_shelters.append(shelter)
+                good_shelters.add(shelter)
                 break
         if len(good_shelters) >= 6:
             break
