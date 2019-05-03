@@ -18,7 +18,7 @@ class About extends Component {
         responsibility: "Front-end engineer",
         commits: 0,
         issues: 0,
-        tests: 0,
+        tests: 6,
         img: "/images/bryan.jpg"
       },
       samarthdesai01: {
@@ -37,7 +37,7 @@ class About extends Component {
         responsibility: "Front-end",
         commits: 0,
         issues: 0,
-        tests: 0,
+        tests: 4,
         img: "/images/daniel.png"
       },
       wc9245: {
@@ -46,7 +46,7 @@ class About extends Component {
         responsibility: " I work on frontend stuff.",
         commits: 0,
         issues: 0,
-        tests: 0,
+        tests: 10,
         img: "/images/keven.jpg"
       },
       oceanwall: {
@@ -241,7 +241,7 @@ class About extends Component {
             <tr class="text-center">
               <td id="Total-Commits">{this.state.total_commits}</td>
               <td id="Total-Issues">{this.state.total_issues}</td>
-              <td id="Total-UT">309</td>
+              <td id="Total-UT">329</td>
             </tr>
           </tbody>
         </table>
