@@ -265,6 +265,19 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(breed["objects"][0]).to.have.property("group");
     expect(breed["objects"][0]["name"]).to.equal("border collie");
   });
+  it("should get information about one other breed", async function () {
+    let breed = await wrapper.getBreed("great dane");
+    expect(breed).to.be.an("object");
+    expect(breed).to.have.property("num_results");
+    expect(breed).to.have.property("objects");
+    expect(breed["objects"]).to.be.an("array");
+    expect(breed["objects"][0]).to.be.an("object");
+    expect(breed["objects"][0]).to.have.property("name");
+    expect(breed["objects"][0]).to.have.property("temperament");
+    expect(breed["objects"][0]).to.have.property("is_active");
+    expect(breed["objects"][0]).to.have.property("group");
+    expect(breed["objects"][0]["name"]).to.equal("great dane");
+  });
   it("should get activities suitable for a breed", async function () {
     let activities = await wrapper.getBreedActivities("bull terrier");
     expect(activities).to.be.an("object");
@@ -277,6 +290,16 @@ describe("FindADogForMe API Wrapper Functions", function () {
   });
   it("should get activities suitable for another breed", async function () {
     let activities = await wrapper.getBreedActivities("border collie");
+    expect(activities).to.be.an("object");
+    expect(activities).to.have.property("num_results");
+    expect(activities).to.have.property("objects");
+    expect(activities["objects"]).to.be.an("array");
+    expect(activities["objects"][0]).to.be.an("object");
+    expect(activities["objects"][0]).to.have.property("type");
+    expect(activities["objects"][0]).to.have.property("id");
+  });
+  it("should get activities suitable for one other breed", async function () {
+    let activities = await wrapper.getBreedActivities("great dane");
     expect(activities).to.be.an("object");
     expect(activities).to.have.property("num_results");
     expect(activities).to.have.property("objects");
@@ -305,6 +328,16 @@ describe("FindADogForMe API Wrapper Functions", function () {
     expect(dogs["objects"][0]).to.have.property("shelter_id");
     expect(dogs["objects"][0]).to.have.property("image_1");
   });
+  it("should get dogs of another breed", async function () {
+    let dogs = await wrapper.getBreedDogs("great dane");
+    expect(dogs).to.be.an("object");
+    expect(dogs).to.have.property("num_results");
+    expect(dogs).to.have.property("objects");
+    expect(dogs["objects"][0]).to.have.property("breed");
+    expect(dogs["objects"][0]).to.have.property("age");
+    expect(dogs["objects"][0]).to.have.property("shelter_id");
+    expect(dogs["objects"][0]).to.have.property("image_1");
+  });
   it("should get shelters hosting the breed", async function () {
     let shelters = await wrapper.getBreedShelters("akita");
     expect(shelters).to.be.an("object");
@@ -315,6 +348,14 @@ describe("FindADogForMe API Wrapper Functions", function () {
   });
   it("should get shelters hosting the other breed", async function () {
     let shelters = await wrapper.getBreedShelters("border collie");
+    expect(shelters).to.be.an("object");
+    expect(shelters.objects[0]).to.have.property("name");
+    expect(shelters.objects[0]).to.have.property("address");
+    expect(shelters.objects[0]).to.have.property("phone");
+    expect(shelters.objects[0]).to.have.property("state");
+  });
+  it("should get shelters hosting another breed", async function () {
+    let shelters = await wrapper.getBreedShelters("great dane");
     expect(shelters).to.be.an("object");
     expect(shelters.objects[0]).to.have.property("name");
     expect(shelters.objects[0]).to.have.property("address");
