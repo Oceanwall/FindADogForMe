@@ -13,6 +13,7 @@ require("geckodriver");
 // Currently: 27 tests
 
 const serverUri = "http://localhost:3000/";
+// const serverUri = "https://findadogfor.me/";
 const appTitle = "Find a Dog for Me";
 
 
@@ -232,12 +233,12 @@ describe("Dogs Page", function() {
       .catch(() => reject(new Error("No item with the ID size-filter was found.")));
 
       browser
-      .findElements(By.className("breed-filter"))
+      .findElements(By.id("breed-filter"))
         .then((items) => {
           assert.equal(Number(items.length), 1);
         })
-        .catch(() => reject(new Error("Found more than one / no items with the class name breed-filter.")))
-      .catch(() => reject(new Error("No item with the class name breed-filter was found.")));
+        .catch(() => reject(new Error("Found more than one / no items with the id breed-filter.")))
+      .catch(() => reject(new Error("No item with the id breed-filter was found.")));
 
       browser
       .findElement(By.id('dog-search'))
@@ -259,7 +260,7 @@ describe("Dogs Page", function() {
         .sendKeys("happy", Key.ENTER)
         .then(() => {
           browser
-          .wait(browser.sleep(4000), 5000)
+          .wait(browser.sleep(8000), 9000)
           .then(() => {
             browser
               .findElements(By.className("card"))
@@ -386,7 +387,7 @@ describe("Activities Page", function() {
         .sendKeys("dog", Key.ENTER)
         .then(() => {
           browser
-          .wait(browser.sleep(4000), 5000)
+          .wait(browser.sleep(8000), 9000)
           .then(() => {
             browser
               .findElements(By.className("card"))
@@ -482,28 +483,28 @@ describe("Breeds Page", function() {
        .catch(() => reject(new Error("No item with the ID sort-select was found.")));
 
        browser
-       .findElements(By.className("group-filter"))
+       .findElements(By.id("group-filter"))
          .then((items) => {
            assert.equal(Number(items.length), 1);
          })
-         .catch(() => reject(new Error("Found more than one / no items with the class name group-filter.")))
-       .catch(() => reject(new Error("No item with the class name group-filter was found.")));
+         .catch(() => reject(new Error("Found more than one / no items with the id group-filter.")))
+       .catch(() => reject(new Error("No item with the id group-filter was found.")));
 
        browser
-       .findElements(By.className("lifespan-filter"))
+       .findElements(By.id("lifespan-filter"))
          .then((items) => {
            assert.equal(Number(items.length), 1);
          })
-         .catch(() => reject(new Error("Found more than one / no items with the class name lifespan-filter.")))
-       .catch(() => reject(new Error("No item with the class name lifespan-filter was found.")));
+         .catch(() => reject(new Error("Found more than one / no items with the id lifespan-filter.")))
+       .catch(() => reject(new Error("No item with the id lifespan-filter was found.")));
 
        browser
-       .findElements(By.className("height-filter"))
+       .findElements(By.id("height-filter"))
          .then((items) => {
            assert.equal(Number(items.length), 1);
          })
-         .catch(() => reject(new Error("Found more than one / no items with the class name height-filter.")))
-       .catch(() => reject(new Error("No item with the class name height-filter was found.")));
+         .catch(() => reject(new Error("Found more than one / no items with the id height-filter.")))
+       .catch(() => reject(new Error("No item with the id height-filter was found.")));
 
        browser
        .findElement(By.id('breed-search'))
@@ -629,12 +630,12 @@ describe("Shelters Page", function() {
        .catch(() => reject(new Error("No item with the ID areacode-filter was found.")));
 
        browser
-       .findElements(By.className("city-filter"))
+       .findElements(By.id("city-filter"))
          .then((items) => {
            assert.equal(Number(items.length), 1);
          })
-         .catch(() => reject(new Error("Found more than one / no items with the class name city-filter.")))
-       .catch(() => reject(new Error("No item with the class name city-filter was found.")));
+         .catch(() => reject(new Error("Found more than one / no items with the id city-filter.")))
+       .catch(() => reject(new Error("No item with the id city-filter was found.")));
 
        browser
        .findElement(By.id('shelter-search'))
